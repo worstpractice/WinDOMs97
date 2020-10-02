@@ -1,0 +1,32 @@
+{
+  "extends": "stylelint-config-standard",
+  "plugins": [
+    "stylelint-order",
+    "stylelint-css-modules",
+    "stylelint-declaration-block-no-ignored-properties"
+  ],
+  "rules": {
+    "css-modules/css-variables": [
+      true,
+      {
+        "resolve": {
+          "modules": [
+            "!**/node_modules/**",
+            "**"
+          ]
+        }
+      }
+    ],
+    "order/order": [
+      "custom-properties",
+      "dollar-variables",
+      "at-variables",
+      "declarations",
+      "rules",
+      "at-rules",
+      "less-mixins"
+    ],
+    "order/properties-alphabetical-order": true,
+    "plugin/declaration-block-no-ignored-properties": true
+  }
+}
