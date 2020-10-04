@@ -1,0 +1,12 @@
+.StartMenuItem {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 10px;
+  padding: 5px;
+}
+
+.StartMenuItem:hover {
+  background-color: rgb(0, 0, 128);
+  color: white;
+}

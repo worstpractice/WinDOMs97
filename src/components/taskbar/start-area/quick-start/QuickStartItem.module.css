@@ -1,0 +1,8 @@
+.QuickStartItem {
+  cursor: pointer;
+}
+
+.QuickStartItem > img {
+  object-fit: "contain";
+  width: 24px;
+}

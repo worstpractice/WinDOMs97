@@ -1,0 +1,15 @@
+.Taskbar {
+  background-color: rgb(192, 192, 192);
+  bottom: 0;
+  display: flex;
+  gap: 7px;
+  height: 30px;
+  left: 0;
+  outline-color: rgb(248, 248, 248);
+  outline-style: outset;
+  outline-width: 2px;
+  padding: 5px;
+  position: absolute;
+  right: 0;
+  z-index: 100;
+}

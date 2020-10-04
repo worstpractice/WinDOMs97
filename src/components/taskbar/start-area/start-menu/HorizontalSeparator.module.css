@@ -1,0 +1,12 @@
+:root {
+  --min-width: 250px;
+}
+
+.HorizontalSeparator {
+  margin-left: 1px;
+  margin-right: 1px;
+  min-width: var(--min-width);
+  outline-color: rgb(248, 248, 248);
+  outline-style: inset;
+  outline-width: 2px;
+}

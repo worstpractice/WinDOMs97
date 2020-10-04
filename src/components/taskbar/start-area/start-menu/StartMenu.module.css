@@ -1,0 +1,21 @@
+.StartMenu {
+  background-color: rgb(192, 192, 192);
+  bottom: 30px;
+  bottom: 29px;
+  display: flex;
+  left: 5px;
+  max-height: 50vh;
+  max-width: 225px;
+  outline-color: rgb(248, 248, 248);
+  outline-style: outset;
+  outline-width: 2px;
+  position: absolute;
+  width: 100%;
+  z-index: 200;
+}
+
+.ContentList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

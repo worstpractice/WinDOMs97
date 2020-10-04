@@ -2,7 +2,3 @@
   font-family: "W95FA";
   src: url(../assets/fonts/w95fa.woff2) format("woff2"), url(../assets/fonts/w95fa.woff) format("woff");
 }
-
-body {
-  font-family: "W95FA", Arial, Helvetica, sans-serif;
-}

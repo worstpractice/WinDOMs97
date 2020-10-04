@@ -1,0 +1,7 @@
+.QuickStart {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  padding-top: 4px;
+}

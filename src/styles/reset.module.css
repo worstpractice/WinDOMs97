@@ -1,0 +1,22 @@
+@import url(./fonts.module.css);
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  user-select: none;
+}
+
+html,
+body {
+  height: 100vh;
+  overflow: hidden;
+  width: 100vw;
+}
+
+body {
+  background-color: rgb(0, 117, 130);
+  font-family: "W95FA", Arial, Helvetica, sans-serif;
+  font-size: large;
+  font-weight: 100;
+}
