@@ -1,5 +1,7 @@
-.QuickStartItem {
+.QuickStartItem,
+.QuickStartItem:-moz-focusring {
   cursor: pointer;
+  outline-style: none;
 }
 
 .Icon {

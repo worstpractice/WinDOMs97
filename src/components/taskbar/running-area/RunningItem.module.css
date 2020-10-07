@@ -6,7 +6,8 @@
   pointer-events: none;
 }
 
-.RunningItem {
+.RunningItem,
+.RunningItem:-moz-focusring {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -25,6 +26,7 @@
 }
 
 /*** WARN: Must come last ***/
-.Active {
+.Active,
+.Active:-moz-focusring {
   outline-style: inset;
 }

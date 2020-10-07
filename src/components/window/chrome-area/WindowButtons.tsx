@@ -1,5 +1,4 @@
-import type { FC, MouseEventHandler } from "react";
-import React from "react";
+import React, { FC, MouseEventHandler } from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import styles from "./WindowButtons.module.css";
@@ -11,28 +10,29 @@ type Props = {
 export const WindowButtons: FC<Props> = ({ process }) => {
   const { endProcess, setActiveWidget } = useStore();
 
+  const handleMouseDown: MouseEventHandler = (e) => {
+    e.stopPropagation();
+  };
+
   const handleExit: MouseEventHandler = (e) => {
-    setActiveWidget("Desktop");
     endProcess(process);
+    setActiveWidget("Desktop");
     e.stopPropagation();
   };
 
   return (
     <section className={styles.WindowButtons}>
-      <button className={styles.Button} onMouseDown={() => console.log("minimize")} type="button">
-        <p>
-          <strong>_</strong>
-        </p>
+      {/* minimize */}
+      <button className={styles.Button} type="button">
+        _
       </button>
-      <button className={styles.Button} onMouseDown={() => console.log("maximize or restore down")} type="button">
-        <p>
-          <strong>#</strong>
-        </p>
+      {/* maximize or restore down */}
+      <button className={styles.Button} type="button">
+        #
       </button>
-      <button className={styles.Button} onMouseDown={handleExit} type="button">
-        <p>
-          <strong>X</strong>
-        </p>
+      {/* exit */}
+      <button className={styles.Button} onMouseDown={handleMouseDown} onMouseUp={handleExit} type="button">
+        X
       </button>
     </section>
   );

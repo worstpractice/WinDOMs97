@@ -1,4 +1,4 @@
-import { useOnMove } from "hooks/useOnMove";
+import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
 import type { FC, MouseEventHandler } from "react";
 import React, { useRef } from "react";
 import { useStore } from "store";
@@ -14,15 +14,18 @@ type Props = {
 export const Shortcut: FC<Props> = ({ binary }) => {
   const { activeWidget, executeBinary, setActiveWidget } = useStore();
   const shortcutRef = useRef<HTMLDivElement | null>(null);
-  const handleMove = useOnMove(shortcutRef);
+  const handleMove = useOnMoveShortcut(shortcutRef);
 
   const handleActive: MouseEventHandler = (e) => {
     setActiveWidget("Shortcut");
     handleMove(e);
+    e.stopPropagation();
   };
 
-  const handleLaunch = () => {
+  const handleLaunch: MouseEventHandler = (e) => {
     executeBinary(binary);
+    setActiveWidget("Window");
+    e.stopPropagation();
   };
 
   const style = activeWidget === "Shortcut" ? css(styles.Shortcut, styles.Active) : styles.Shortcut;

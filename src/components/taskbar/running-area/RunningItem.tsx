@@ -22,9 +22,9 @@ export const RunningItem: FC<Props> = ({ process }) => {
   const style = activeWidget === "Window" ? css(styles.RunningItem, styles.Active) : styles.RunningItem;
 
   return (
-    <article className={style} onMouseDown={handleActive}>
+    <button className={style} onMouseDown={handleActive} type="button">
       <img alt={name} className={styles.Icon} src={icon} />
       <p className={styles.Title}>{name}</p>
-    </article>
+    </button>
   );
 };

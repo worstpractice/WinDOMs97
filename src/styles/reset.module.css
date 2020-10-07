@@ -22,8 +22,8 @@ button {
   align-items: unset;
   background-color: transparent;
   border-color: unset;
-  border-image: unset;
-  border-style: unset;
+  border-image: none;
+  border-style: none;
   border-width: unset;
   cursor: pointer;
   display: block;

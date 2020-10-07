@@ -25,5 +25,7 @@
 /*** WARN: Must come last ***/
 .Active {
   background-color: var(--selected-transparent-blue);
-  opacity: 50%;
+  outline-color: rgba(255, 255, 255, 50%);
+  outline-style: dotted;
+  outline-width: 1px;
 }

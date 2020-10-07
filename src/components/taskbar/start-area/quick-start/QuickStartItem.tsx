@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
@@ -9,17 +9,19 @@ type Props = {
 };
 
 export const QuickStartItem: FC<Props> = ({ binary }) => {
-  const { executeBinary } = useStore();
+  const { executeBinary, setActiveWidget } = useStore();
 
-  const handleLaunch = () => {
+  const handleLaunch: MouseEventHandler = (e) => {
     executeBinary(binary);
+    setActiveWidget("Window");
+    e.stopPropagation();
   };
 
   const { fileName, icon } = binary;
 
   return (
-    <article className={styles.QuickStartItem} onMouseDown={handleLaunch}>
+    <button className={styles.QuickStartItem} onMouseDown={handleLaunch} type="button">
       <img alt={fileName} className={styles.Icon} src={icon} />
-    </article>
+    </button>
   );
 };

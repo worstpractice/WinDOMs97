@@ -2,7 +2,7 @@ import { ChromeArea } from "components/window/chrome-area/ChromeArea";
 import { WindowButtons } from "components/window/chrome-area/WindowButtons";
 import { WindowTitle } from "components/window/chrome-area/WindowTitle";
 import { ProgramArea } from "components/window/program-area/ProgramArea";
-import { useOnMove } from "hooks/useOnMove";
+import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import type { FC, MouseEventHandler } from "react";
 import React, { useRef } from "react";
 import { useStore } from "store";
@@ -17,7 +17,7 @@ type Props = {
 export const Window: FC<Props> = ({ process }) => {
   const { activeWidget, setActiveWidget } = useStore();
   const windowRef = useRef<HTMLDivElement | null>(null);
-  const handleMove = useOnMove(windowRef);
+  const handleMove = useOnMoveWindow(windowRef);
 
   const handleActive: MouseEventHandler = (e) => {
     setActiveWidget("Window");

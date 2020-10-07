@@ -5,13 +5,11 @@
   cursor: pointer;
   display: flex;
   gap: 10px;
-  height: 100%;
   justify-content: center;
 }
 
 .Button {
   background-color: var(--background-gray);
-  height: 18px;
   outline-color: var(--outline-white);
   outline-style: outset;
   outline-width: 2px;

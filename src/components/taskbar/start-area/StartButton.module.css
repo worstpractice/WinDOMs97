@@ -1,6 +1,7 @@
 @import "../../../styles/colors.module.css";
 
-.StartButton {
+.StartButton,
+.StartButton:-moz-focusring {
   align-content: center;
   cursor: pointer;
   display: flex;
@@ -17,6 +18,8 @@
   justify-content: center;
 }
 
-.Depressed {
+.Depressed,
+.Depressed:-moz-focusring {
   outline-style: inset;
+  outline-width: 2px;
 }
