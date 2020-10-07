@@ -2,7 +2,8 @@
   cursor: pointer;
 }
 
-.QuickStartItem > img {
-  object-fit: "contain";
-  width: 24px;
+.Icon {
+  height: 24px;
+  object-fit: contain;
+  pointer-events: none;
 }

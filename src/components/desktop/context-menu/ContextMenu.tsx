@@ -1,20 +1,22 @@
-import { useOnMouseDownOutside } from "hooks/useOnMouseDownOutside";
-import type { CSSProperties, FC } from "react";
-import React, { useRef } from "react";
+import type { FC } from "react";
+import React from "react";
+import { useStore } from "store";
 import styles from "./ContextMenu.module.css";
 
-type Props = {
-  coordinates: { x: number; y: number };
-  onMouseDownOutside: EventListener;
-};
+type Props = {};
 
-export const ContextMenu: FC<Props> = ({ children, coordinates, onMouseDownOutside }) => {
-  const contextMenuRef = useRef<HTMLDivElement | null>(null);
-  useOnMouseDownOutside(contextMenuRef, onMouseDownOutside);
+export const ContextMenu: FC<Props> = ({ children }) => {
+  const { lastClick, setActiveWidget } = useStore();
+
+  const handleActive = () => {
+    setActiveWidget("ContextMenu");
+  };
+
+  const { x, y } = lastClick;
 
   return (
-    <div className={styles.ContextMenu} style={{ left: coordinates.x, top: coordinates.y }} ref={contextMenuRef}>
-      <div className={styles.ContentList}>{children}</div>
-    </div>
+    <section className={styles.ContextMenu} onMouseDown={handleActive} style={{ left: x, top: y }}>
+      <ul className={styles.ContentList}>{children}</ul>
+    </section>
   );
 };

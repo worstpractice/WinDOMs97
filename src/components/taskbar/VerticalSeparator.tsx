@@ -5,5 +5,5 @@ import styles from "./VerticalSeparator.module.css";
 type Props = {};
 
 export const VerticalSeparator: FC<Props> = () => {
-  return <div className={styles.VerticalSeparator}></div>;
+  return <aside className={styles.VerticalSeparator}></aside>;
 };

@@ -1,9 +1,30 @@
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 import React from "react";
+import { useStore } from "store";
+import type { Process } from "typings/Process";
+import { css } from "utils/css";
 import styles from "./RunningItem.module.css";
 
-type Props = {};
+type Props = {
+  process: Process;
+};
 
-export const RunningItem: FC<Props> = ({ children }) => {
-  return <div className={styles.RunningItem}>{children}</div>;
+export const RunningItem: FC<Props> = ({ process }) => {
+  const { activeWidget, setActiveWidget } = useStore();
+
+  const handleActive: MouseEventHandler = (e) => {
+    setActiveWidget("Window");
+    e.stopPropagation();
+  };
+
+  const { icon, name } = process;
+
+  const style = activeWidget === "Window" ? css(styles.RunningItem, styles.Active) : styles.RunningItem;
+
+  return (
+    <article className={style} onMouseDown={handleActive}>
+      <img alt={name} className={styles.Icon} src={icon} />
+      <p className={styles.Title}>{name}</p>
+    </article>
+  );
 };

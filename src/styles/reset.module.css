@@ -1,22 +1,42 @@
-@import url(./fonts.module.css);
+@import "./fonts.module.css";
+@import "./colors.module.css";
 
 * {
   box-sizing: border-box;
+  font-family: "W95FA", Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
   user-select: none;
 }
 
-html,
 body {
+  background-color: var(--wallpaper-teal);
+  font-size: large;
+  font-weight: 100;
   height: 100vh;
   overflow: hidden;
   width: 100vw;
 }
 
-body {
-  background-color: rgb(0, 117, 130);
-  font-family: "W95FA", Arial, Helvetica, sans-serif;
-  font-size: large;
-  font-weight: 100;
+button {
+  align-items: unset;
+  background-color: transparent;
+  border-color: unset;
+  border-image: unset;
+  border-style: unset;
+  border-width: unset;
+  cursor: pointer;
+  display: block;
+  font: unset;
+  padding: unset;
+}
+
+h1 {
+  margin: 0;
+  padding: 0;
+}
+
+ul,
+ol {
+  list-style: none;
 }

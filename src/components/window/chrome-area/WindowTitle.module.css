@@ -1,0 +1,23 @@
+@import "../../../styles/colors.module.css";
+
+.ProgramIcon {
+  object-fit: contain;
+}
+
+.ProgramName {
+  color: var(--background-gray);
+  font-size: 16px;
+  font-weight: 900;
+  padding-top: 4px;
+}
+
+.WindowTitle {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+}
+
+/*** WARN: Must come last ***/
+.Active {
+  color: white;
+}

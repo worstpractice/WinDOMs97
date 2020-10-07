@@ -1,18 +1,24 @@
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
+import { useStore } from "store";
+import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 
-type Props = {
-  isDepressed: boolean;
-  onMouseDown: MouseEventHandler;
-};
+type Props = {};
 
-export const StartButton: FC<Props> = ({ isDepressed, onMouseDown }) => {
-  const style = isDepressed ? `${styles.StartButton} ${styles.Depressed}` : styles.StartButton;
+export const StartButton: FC<Props> = () => {
+  const { activeWidget, setActiveWidget } = useStore();
+
+  const toggleActive: MouseEventHandler = (e) => {
+    activeWidget === "StartMenu" ? setActiveWidget("Desktop") : setActiveWidget("StartMenu");
+    e.stopPropagation();
+  };
+
+  const style = activeWidget === "StartMenu" ? css(styles.StartButton, styles.Depressed) : styles.StartButton;
 
   return (
-    <div className={style} id="StartButton" onMouseDown={onMouseDown}>
-      <strong className={styles.Title}>Start</strong>
-    </div>
+    <button className={style} id="StartButton" onMouseDown={toggleActive} type="button">
+      <p className={styles.Title}>Start</p>
+    </button>
   );
 };

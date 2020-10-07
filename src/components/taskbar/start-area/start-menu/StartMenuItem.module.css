@@ -1,3 +1,5 @@
+@import "../../../../styles/colors.module.css";
+
 .StartMenuItem {
   align-items: center;
   cursor: pointer;
@@ -7,6 +9,6 @@
 }
 
 .StartMenuItem:hover {
-  background-color: rgb(0, 0, 128);
+  background-color: var(--start-menu-dim-blue);
   color: white;
 }

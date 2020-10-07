@@ -9,7 +9,7 @@ export const QuickStart: FC<Props> = ({ children }) => {
   return (
     <>
       <VerticalSeparator />
-      <div className={styles.QuickStart}>{children}</div>
+      <section className={styles.QuickStart}>{children}</section>
       <VerticalSeparator />
     </>
   );

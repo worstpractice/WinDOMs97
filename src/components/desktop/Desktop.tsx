@@ -1,21 +1,25 @@
-import { useOnMouseDownOutside } from "hooks/useOnMouseDownOutside";
 import type { FC, MouseEventHandler } from "react";
-import React, { useRef } from "react";
+import React from "react";
+import { useStore } from "store";
 import styles from "./Desktop.module.css";
 
-type Props = {
-  onMouseDown: MouseEventHandler;
-  onMouseDownOutside: EventListener;
-  onContextMenu: MouseEventHandler;
-};
+type Props = {};
 
-export const Desktop: FC<Props> = ({ children, onContextMenu, onMouseDown, onMouseDownOutside }) => {
-  const desktopRef = useRef<HTMLDivElement | null>(null);
-  useOnMouseDownOutside(desktopRef, onMouseDownOutside);
+export const Desktop: FC<Props> = ({ children }) => {
+  const { setActiveWidget, setLastClick } = useStore();
+
+  const handleActive = () => {
+    setActiveWidget("Desktop");
+  };
+
+  const handleContextMenu: MouseEventHandler = (e) => {
+    setLastClick({ x: e.clientX, y: e.clientY });
+    setActiveWidget("ContextMenu");
+  };
 
   return (
-    <div className={styles.Desktop} id="Desktop" onContextMenu={onContextMenu} onMouseDown={onMouseDown} ref={desktopRef}>
+    <main className={styles.Desktop} onContextMenu={handleContextMenu} onMouseDownCapture={handleActive}>
       {children}
-    </div>
+    </main>
   );
 };

@@ -14,9 +14,10 @@ import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
-import { programs } from "data/programs";
-import type { FC, MouseEventHandler } from "react";
-import React, { useState } from "react";
+import { Window } from "components/window/Window";
+import type { FC } from "react";
+import React from "react";
+import { useStore } from "store";
 import { Desktop } from "./desktop/Desktop";
 import { Shortcut } from "./desktop/Shortcut";
 import { Taskbar } from "./taskbar/Taskbar";
@@ -24,79 +25,70 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const App: FC<Props> = () => {
-  const [isStartMenuOpen, setIsStartMenuOpen] = useState<boolean>(false);
-  const [isContextMenuOpen, setIsContextMenuOpen] = useState<boolean>(false);
-  const [coordinates, setCoordinates] = useState({ x: 0, y: 0 });
-
-  const openContextMenu: MouseEventHandler = (e) => {
-    console.log("Opened context menu");
-    console.log(e);
-    const { clientX, clientY } = e;
-    setCoordinates({ x: clientX, y: clientY });
-    setIsContextMenuOpen(true);
-  };
-
-  const closeContextMenu = () => {
-    console.log("Closed context menu");
-    setIsContextMenuOpen(false);
-  };
-
-  const closeStartMenu = () => {
-    setIsStartMenuOpen(false);
-  };
-
-  const toggleStartMenu = () => {
-    setIsStartMenuOpen(!isStartMenuOpen);
-  };
+  const { activeWidget, installed, running } = useStore();
 
   return (
     <>
-      <Desktop onContextMenu={openContextMenu} onMouseDown={closeContextMenu} onMouseDownOutside={closeContextMenu}>
-        {isContextMenuOpen && (
-          <ContextMenu coordinates={coordinates} onMouseDownOutside={closeContextMenu}>
+      <Desktop>
+        {activeWidget === "ContextMenu" && (
+          <ContextMenu>
             <ContextMenuItem>New folder...</ContextMenuItem>
             <ContextMenuItem>New file</ContextMenuItem>
             <ContextMenuItem>Command Prompt</ContextMenuItem>
           </ContextMenu>
         )}
-        {programs.map(({ icon, name }) => {
-          return <Shortcut icon={icon} key={name} name={name} />;
-        })}
+        {!!installed.length &&
+          installed.map((binary) => {
+            const { name } = binary;
+
+            return <Shortcut binary={binary} key={name} />;
+          })}
       </Desktop>
-      {isStartMenuOpen && (
-        <StartMenu onMouseDownOutside={closeStartMenu}>
+      {!!running.length &&
+        installed.map((binary) => {
+          const { name } = binary;
+
+          return <Window process={{ ...binary, pid: running.length }} key={name} />;
+        })}
+      {activeWidget === "StartMenu" && (
+        <StartMenu>
           <StartMenuItem>
-            <img alt="CD-ROM" src={cdRomDrive} />
+            <img alt="" src={cdRomDrive} />
             CD-ROM
           </StartMenuItem>
           <StartMenuItem>
-            <img alt="Folder" src={folder} />
+            <img alt="" src={folder} />
             Junk Drawer
           </StartMenuItem>
           <StartMenuItem>
-            <img alt="Paint" src={paint} />
+            <img alt="" src={paint} />
             Paint
           </StartMenuItem>
         </StartMenu>
       )}
       <Taskbar>
         <StartArea>
-          <StartButton isDepressed={isStartMenuOpen} onMouseDown={toggleStartMenu} />
+          <StartButton />
           <QuickStart>
-            <QuickStartItem>
-              <img alt="Plug" src={plug} />
-            </QuickStartItem>
-            <QuickStartItem>
-              <img alt="Mine" src={mine} />
-            </QuickStartItem>
+            {!!installed.length &&
+              installed.map((binary) => {
+                const { name } = binary;
+
+                return <QuickStartItem binary={binary} key={name} />;
+              })}
           </QuickStart>
         </StartArea>
         <RunningArea>
-          <RunningItem>Hello</RunningItem>
+          {!!running.length &&
+            installed.map((binary) => {
+              const { name } = binary;
+
+              return <RunningItem key={name} process={{ ...binary, pid: running.length }} />;
+            })}
         </RunningArea>
         <NotificationArea>
-          <img alt="Plug" src={plug} style={{ objectFit: "contain", width: "24px" }} />
-          <img alt="Mine" src={mine} style={{ objectFit: "contain", width: "24px" }} />
+          <img alt="" src={plug} style={{ objectFit: "contain", width: "24px" }} />
+          <img alt="" src={mine} style={{ objectFit: "contain", width: "24px" }} />
         </NotificationArea>
       </Taskbar>
     </>

@@ -1,0 +1,18 @@
+@import "../../../styles/colors.module.css";
+
+.ProgramArea {
+  height: 100%;
+  outline-color: var(--outline-white);
+  outline-style: outset;
+  outline-width: 2px;
+  padding: 4px;
+  width: 100%;
+}
+
+.ProgramContent {
+  height: 100%;
+  outline-color: var(--outline-white);
+  outline-style: inset;
+  outline-width: 2px;
+  width: 100%;
+}

@@ -5,5 +5,5 @@ import styles from "./HorizontalSeparator.module.css";
 type Props = {};
 
 export const HorizontalSeparator: FC<Props> = () => {
-  return <div className={styles.HorizontalSeparator}></div>;
+  return <aside className={styles.HorizontalSeparator}></aside>;
 };

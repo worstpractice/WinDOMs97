@@ -1,10 +1,12 @@
+@import "../../../../styles/colors.module.css";
+
 .Bold {
   font-weight: 900;
 }
 
 .Spine {
   align-items: flex-end;
-  background: linear-gradient(0deg, rgba(0, 0, 128, 1) 55%, rgba(0, 0, 255, 1) 90%, rgba(0, 0, 128, 1) 100%);
+  background: linear-gradient(0deg, var(--start-menu-dim-blue) 55%, var(--start-menu-bright-blue) 90%, var(--start-menu-dim-blue) 100%);
   display: flex;
   flex-shrink: 0;
   transform: rotate(180deg);
@@ -16,5 +18,5 @@
   font-size: xx-large;
   font-weight: 100;
   min-height: 90%;
-  writing-mode: vertical-rl;
+  writing-mode: vertical-lr;
 }

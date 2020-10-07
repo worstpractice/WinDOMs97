@@ -7,12 +7,12 @@ type Props = {};
 
 export const NotificationArea: FC<Props> = ({ children }) => {
   return (
-    <div className={styles.Wrapper}>
+    <section className={styles.Wrapper}>
       <VerticalSeparator />
-      <div className={styles.NotificationArea}>
+      <section className={styles.NotificationArea}>
         <p>13:37</p>
         {children}
-      </div>
-    </div>
+      </section>
+    </section>
   );
 };

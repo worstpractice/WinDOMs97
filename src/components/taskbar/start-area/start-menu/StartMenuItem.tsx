@@ -7,10 +7,12 @@ type Props = {};
 export const StartMenuItem: FC<Props> = ({ children }) => {
   return (
     <>
-      <div className={styles.StartMenuItem}>
+      <li className={styles.StartMenuItem}>
         {children}
-        <span style={{ fontSize: "8px" }}>►</span>
-      </div>
+        <div aria-hidden="true" style={{ fontSize: "8px" }}>
+          ►
+        </div>
+      </li>
     </>
   );
 };

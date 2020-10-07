@@ -1,64 +1,44 @@
-import type { DragEventHandler, FC, MouseEventHandler } from "react";
-import React, { useRef, useState } from "react";
+import { useOnMove } from "hooks/useOnMove";
+import type { FC, MouseEventHandler } from "react";
+import React, { useRef } from "react";
+import { useStore } from "store";
+import type { Binary } from "typings/Binary";
+import { css } from "utils/css";
+import { handleDragStart } from "utils/handleDragStart";
 import styles from "./Shortcut.module.css";
 
 type Props = {
-  icon: string;
-  name: string;
+  binary: Binary;
 };
 
-const LMB = 0 as const;
-// MMB = 1
-// RMB = 2
-
-export const Shortcut: FC<Props> = ({ icon, name }) => {
+export const Shortcut: FC<Props> = ({ binary }) => {
+  const { activeWidget, executeBinary, setActiveWidget } = useStore();
   const shortcutRef = useRef<HTMLDivElement | null>(null);
-  // Determines if transparent
-  const [isHeld, setIsHeld] = useState<boolean>(false);
+  const handleMove = useOnMove(shortcutRef);
 
-  const handleMouseDown: MouseEventHandler = ({ button, clientX, clientY }) => {
-    if (button !== LMB) return;
-
-    const shortcut = shortcutRef.current;
-
-    if (!shortcut) return;
-
-    let shiftX = clientX - shortcut.getBoundingClientRect().left;
-    let shiftY = clientY - shortcut.getBoundingClientRect().top;
-
-    /** `Document`-level event listener. */
-    const onMouseMove = ({ button, pageX, pageY }: { button: number; pageX: number; pageY: number }) => {
-      if (button !== LMB) return;
-
-      shortcut.style.left = `${pageX - shiftX}px`;
-      shortcut.style.top = `${pageY - shiftY}px`;
-    };
-
-    /** `Document`-level event listener. */
-    const onMouseUp = ({ button }: { button: number }) => {
-      if (button !== LMB) return;
-
-      document.removeEventListener("mousemove", onMouseMove);
-      document.removeEventListener("mouseup", onMouseUp);
-      setIsHeld(false);
-    };
-
-    document.addEventListener("mousemove", onMouseMove);
-    document.addEventListener("mouseup", onMouseUp);
-    setIsHeld(true);
+  const handleActive: MouseEventHandler = (e) => {
+    setActiveWidget("Shortcut");
+    handleMove(e);
   };
 
-  const handleDragStart: DragEventHandler = (e) => {
-    e.preventDefault();
-    return false;
+  const handleLaunch = () => {
+    executeBinary(binary);
   };
 
-  const style = isHeld ? `${styles.Shortcut} ${styles.Transparent}` : styles.Shortcut;
+  const style = activeWidget === "Shortcut" ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
+
+  const { fileName, icon } = binary;
 
   return (
-    <span className={style} onDragStart={handleDragStart} onMouseDown={handleMouseDown} ref={shortcutRef}>
-      <img alt={name} className={styles.Icon} src={icon} />
-      <span className={styles.Name}>{name}</span>
-    </span>
+    <article
+      className={style}
+      onDoubleClick={handleLaunch}
+      onDragStart={handleDragStart}
+      onMouseDown={handleActive}
+      ref={shortcutRef}
+    >
+      <img alt={fileName} className={styles.Icon} src={icon} />
+      <p className={styles.Name}>{fileName}</p>
+    </article>
   );
 };

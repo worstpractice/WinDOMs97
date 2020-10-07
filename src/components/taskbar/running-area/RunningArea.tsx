@@ -5,5 +5,5 @@ import styles from "./RunningArea.module.css";
 type Props = {};
 
 export const RunningArea: FC<Props> = ({ children }) => {
-  return <div className={styles.RunningArea}>{children}</div>;
+  return <section className={styles.RunningArea}>{children}</section>;
 };

@@ -1,0 +1,17 @@
+@import "../../../styles/colors.module.css";
+
+.ChromeArea {
+  align-items: center;
+  background: linear-gradient(90deg, var(--titlebar-dim-gray), var(--background-gray));
+  cursor: grab;
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+/*** WARN: Must come last ***/
+.Active {
+  background: linear-gradient(90deg, var(--titlebar-dim-blue), var(--titlebar-bright-blue));
+}

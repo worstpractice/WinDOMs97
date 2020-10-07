@@ -5,5 +5,5 @@ import styles from "./StartArea.module.css";
 type Props = {};
 
 export const StartArea: FC<Props> = ({ children }) => {
-  return <span className={styles.StartArea}>{children}</span>;
+  return <section className={styles.StartArea}>{children}</section>;
 };
