@@ -15,7 +15,7 @@ export const ContextMenu: FC<Props> = ({ children }) => {
   const { x, y } = lastClickPosition;
 
   return (
-    <section className={styles.ContextMenu} onMouseDown={handleActive} style={{ left: x, top: y }}>
+    <section className={styles.ContextMenu} id="ContextMenu" onMouseDown={handleActive} style={{ left: x, top: y }}>
       <ul className={styles.ContentList}>{children}</ul>
     </section>
   );

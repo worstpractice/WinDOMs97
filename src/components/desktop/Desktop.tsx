@@ -18,7 +18,7 @@ export const Desktop: FC<Props> = ({ children }) => {
   };
 
   return (
-    <main className={styles.Desktop} onContextMenu={handleContextMenu} onMouseDown={handleActive}>
+    <main className={styles.Desktop} id="Desktop" onContextMenu={handleContextMenu} onMouseDown={handleActive}>
       {children}
     </main>
   );

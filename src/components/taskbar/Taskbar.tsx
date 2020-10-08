@@ -14,7 +14,7 @@ export const Taskbar: FC<Props> = ({ children }) => {
   };
 
   return (
-    <footer className={styles.Taskbar} onMouseDown={handleActive}>
+    <footer className={styles.Taskbar} id="Taskbar" onMouseDown={handleActive}>
       {children}
     </footer>
   );

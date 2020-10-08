@@ -11,6 +11,7 @@ type Data = {
   installedBinaries: readonly Binary[];
   lastClickPosition: MousePosition;
   runningProcesses: readonly Process[];
+
 };
 
 type Actions = {
@@ -18,6 +19,7 @@ type Actions = {
   executeBinary: (binary: Binary) => void;
   setActiveWidget: (to: Widget) => void;
   setLastClick: (to: MousePosition) => void;
+
 };
 
 type State = Data & Actions;

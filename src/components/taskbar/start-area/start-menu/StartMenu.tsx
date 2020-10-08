@@ -7,7 +7,7 @@ type Props = {};
 
 export const StartMenu: FC<Props> = ({ children }) => {
   return (
-    <section className={styles.StartMenu}>
+    <section className={styles.StartMenu} id="StartMenu">
       <Spine />
       <ul className={styles.ContentList}>{children}</ul>
     </section>
