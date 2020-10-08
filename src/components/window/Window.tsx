@@ -20,11 +20,14 @@ export const Window: FC<Props> = ({ process }) => {
   const handleMove = useOnMoveWindow(windowRef);
 
   const handleActive: MouseEventHandler = (e) => {
-    setActiveWidget("Window");
     e.stopPropagation();
+    setActiveWidget("Window");
+    // Places the most recently moved Window "on top" of all the Windows
+    windowRef.current?.parentElement?.lastElementChild?.after(windowRef.current);
   };
 
   const handleChromeDrag: MouseEventHandler = (e) => {
+    e.stopPropagation();
     setActiveWidget("Window");
     handleMove(e);
   };

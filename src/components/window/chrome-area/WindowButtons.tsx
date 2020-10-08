@@ -1,4 +1,6 @@
-import React, { FC, MouseEventHandler } from "react";
+import { WindowButton } from "components/window/chrome-area/WindowButton";
+import type { FC } from "react";
+import React from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import styles from "./WindowButtons.module.css";
@@ -10,30 +12,16 @@ type Props = {
 export const WindowButtons: FC<Props> = ({ process }) => {
   const { endProcess, setActiveWidget } = useStore();
 
-  const handleMouseDown: MouseEventHandler = (e) => {
-    e.stopPropagation();
-  };
-
-  const handleExit: MouseEventHandler = (e) => {
+  const handleExit = () => {
     endProcess(process);
     setActiveWidget("Desktop");
-    e.stopPropagation();
   };
 
   return (
     <section className={styles.WindowButtons}>
-      {/* minimize */}
-      <button className={styles.Button} type="button">
-        _
-      </button>
-      {/* maximize or restore down */}
-      <button className={styles.Button} type="button">
-        #
-      </button>
-      {/* exit */}
-      <button className={styles.Button} onMouseDown={handleMouseDown} onMouseUp={handleExit} type="button">
-        X
-      </button>
+      <WindowButton kind={"minimize"}></WindowButton>
+      <WindowButton kind={"maximizeOrRestore"}></WindowButton>
+      <WindowButton kind={"exit"} onExit={handleExit}></WindowButton>
     </section>
   );
 };

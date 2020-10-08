@@ -13,8 +13,8 @@ export const RunningItem: FC<Props> = ({ process }) => {
   const { activeWidget, setActiveWidget } = useStore();
 
   const handleActive: MouseEventHandler = (e) => {
-    setActiveWidget("Window");
     e.stopPropagation();
+    setActiveWidget("Window");
   };
 
   const { icon, name } = process;

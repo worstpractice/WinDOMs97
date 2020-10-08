@@ -19,7 +19,9 @@
 
 .Name {
   color: white;
+  overflow-wrap: break-word;
   text-align: center;
+  width: 100%;
 }
 
 /*** WARN: Must come last ***/

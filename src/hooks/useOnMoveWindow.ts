@@ -18,6 +18,9 @@ export const useOnMoveWindow = <T extends MutableRefObject<HTMLDivElement | null
 
     let cleanup: () => void;
 
+    // Places the most recently moved OsWindow "on top" of all the OsWindows
+    OsWindow.parentElement?.lastElementChild?.after(OsWindow);
+
     /** `Document`-level event listener. */
     const onMouseMove: MouseEventHandler = ({ button, pageX, pageY }) => {
       if (button !== LMB) return;

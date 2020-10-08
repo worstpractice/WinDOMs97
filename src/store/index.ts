@@ -1,12 +1,10 @@
-import { calc } from "programs/calc";
+import { programs } from "programs";
 import type { Binary } from "typings/Binary";
 import type { MousePosition } from "typings/MousePosition";
 import type { Process } from "typings/Process";
-// import type { Program } from "typings/Program";
 import type { Widget } from "typings/Widget";
 import create from "zustand";
-import { combine } from "zustand/middleware";
-import { devtools } from "zustand/middleware";
+import { combine, devtools } from "zustand/middleware";
 
 type Data = {
   activeWidget: Widget;
@@ -29,7 +27,7 @@ export const useStore = create<State>(
     combine<Data, Actions>(
       {
         activeWidget: "Desktop",
-        installed: [calc],
+        installed: programs,
         lastClick: { x: 0, y: 0 },
         running: [],
       } as const,

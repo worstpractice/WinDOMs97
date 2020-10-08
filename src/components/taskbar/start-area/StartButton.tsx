@@ -10,8 +10,8 @@ export const StartButton: FC<Props> = () => {
   const { activeWidget, setActiveWidget } = useStore();
 
   const toggleActive: MouseEventHandler = (e) => {
-    activeWidget === "StartMenu" ? setActiveWidget("Desktop") : setActiveWidget("StartMenu");
     e.stopPropagation();
+    activeWidget === "StartMenu" ? setActiveWidget("Desktop") : setActiveWidget("StartMenu");
   };
 
   const style = activeWidget === "StartMenu" ? css(styles.StartButton, styles.Depressed) : styles.StartButton;

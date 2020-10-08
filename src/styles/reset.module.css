@@ -6,6 +6,7 @@
   font-family: "W95FA", Arial, Helvetica, sans-serif;
   margin: 0;
   padding: 0;
+  text-rendering: optimizeLegibility;
   user-select: none;
 }
 
@@ -36,7 +37,6 @@ h1 {
   padding: 0;
 }
 
-ul,
-ol {
+li {
   list-style: none;
 }

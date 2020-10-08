@@ -6,7 +6,19 @@
   pointer-events: none;
 }
 
-.RunningItem,
+.RunningItem {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  gap: 3px;
+  outline-color: var(--outline-white);
+  outline-style: outset;
+  outline-width: 2px;
+  padding-left: 5px;
+  padding-right: 5px;
+  width: 120px;
+}
+
 .RunningItem:-moz-focusring {
   align-items: center;
   cursor: pointer;
@@ -26,7 +38,10 @@
 }
 
 /*** WARN: Must come last ***/
-.Active,
+.Active {
+  outline-style: inset;
+}
+
 .Active:-moz-focusring {
   outline-style: inset;
 }

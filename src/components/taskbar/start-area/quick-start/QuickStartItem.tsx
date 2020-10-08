@@ -12,9 +12,9 @@ export const QuickStartItem: FC<Props> = ({ binary }) => {
   const { executeBinary, setActiveWidget } = useStore();
 
   const handleLaunch: MouseEventHandler = (e) => {
+    e.stopPropagation();
     executeBinary(binary);
     setActiveWidget("Window");
-    e.stopPropagation();
   };
 
   const { fileName, icon } = binary;

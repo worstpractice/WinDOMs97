@@ -9,8 +9,8 @@ export const Taskbar: FC<Props> = ({ children }) => {
   const { setActiveWidget } = useStore();
 
   const handleActive: MouseEventHandler = (e) => {
-    setActiveWidget("Taskbar");
     e.stopPropagation();
+    setActiveWidget("Taskbar");
   };
 
   return (

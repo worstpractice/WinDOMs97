@@ -3,11 +3,13 @@
 .NotificationArea {
   display: flex;
   flex-direction: row-reverse;
-  height: 100%;
+  gap: 2px;
+  justify-content: center;
   outline-color: var(--outline-white);
   outline-style: inset;
   outline-width: 2px;
-  padding: 2px;
+  padding-left: 2px;
+  padding-right: 2px;
 }
 
 .Wrapper {

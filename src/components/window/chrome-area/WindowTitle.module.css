@@ -1,14 +1,17 @@
 @import "../../../styles/colors.module.css";
 
 .ProgramIcon {
+  max-height: 30px;
   object-fit: contain;
+  padding-bottom: 4px;
+  padding-top: 4px;
 }
 
 .ProgramName {
   color: var(--background-gray);
   font-size: 16px;
   font-weight: 900;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
 .WindowTitle {

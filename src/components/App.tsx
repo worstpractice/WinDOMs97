@@ -1,11 +1,7 @@
-import plug from "assets/icons/ac_plug-0.png";
-import cdRomDrive from "assets/icons/cd_drive-0.png";
-import folder from "assets/icons/directory_closed_cool-0.png";
-import mine from "assets/icons/game_mine_1-0.png";
-import paint from "assets/icons/paint_file-5.png";
 import { ContextMenu } from "components/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "components/desktop/context-menu/ContextMenuItem";
 import { NotificationArea } from "components/taskbar/notifications-area/NotificationArea";
+import { NotificationItem } from "components/taskbar/notifications-area/NotificationItem";
 import { RunningArea } from "components/taskbar/running-area/RunningArea";
 import { RunningItem } from "components/taskbar/running-area/RunningItem";
 import { QuickStart } from "components/taskbar/start-area/quick-start/QuickStart";
@@ -52,18 +48,12 @@ export const App: FC<Props> = () => {
         })}
       {activeWidget === "StartMenu" && (
         <StartMenu>
-          <StartMenuItem>
-            <img alt="" src={cdRomDrive} />
-            CD-ROM
-          </StartMenuItem>
-          <StartMenuItem>
-            <img alt="" src={folder} />
-            Junk Drawer
-          </StartMenuItem>
-          <StartMenuItem>
-            <img alt="" src={paint} />
-            Paint
-          </StartMenuItem>
+          {!!installed.length &&
+            installed.map((binary) => {
+              const { name } = binary;
+
+              return <StartMenuItem binary={binary} key={name} />;
+            })}
         </StartMenu>
       )}
       <Taskbar>
@@ -87,8 +77,12 @@ export const App: FC<Props> = () => {
             })}
         </RunningArea>
         <NotificationArea>
-          <img alt="" src={plug} style={{ objectFit: "contain", width: "24px" }} />
-          <img alt="" src={mine} style={{ objectFit: "contain", width: "24px" }} />
+          {!!running.length &&
+            installed.map((binary) => {
+              const { name } = binary;
+
+              return <NotificationItem key={name} binary={binary} />;
+            })}
         </NotificationArea>
       </Taskbar>
     </>

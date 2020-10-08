@@ -19,8 +19,12 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
 
     let cleanup: () => void;
 
+    // Places the most recently moved shortcut "on top" of all the shortcuts
+    shortcut.parentElement?.lastElementChild?.after(shortcut);
+
     const clone = shortcut.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);
+    // Places the transparent clone topmost of all
     shortcut.after(clone);
 
     shortcut.classList.add(styles.Original);

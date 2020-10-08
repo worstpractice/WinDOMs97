@@ -17,15 +17,15 @@ export const Shortcut: FC<Props> = ({ binary }) => {
   const handleMove = useOnMoveShortcut(shortcutRef);
 
   const handleActive: MouseEventHandler = (e) => {
+    e.stopPropagation();
     setActiveWidget("Shortcut");
     handleMove(e);
-    e.stopPropagation();
   };
 
   const handleLaunch: MouseEventHandler = (e) => {
+    e.stopPropagation();
     executeBinary(binary);
     setActiveWidget("Window");
-    e.stopPropagation();
   };
 
   const style = activeWidget === "Shortcut" ? css(styles.Shortcut, styles.Active) : styles.Shortcut;

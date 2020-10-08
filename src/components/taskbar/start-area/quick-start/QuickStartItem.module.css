@@ -1,11 +1,22 @@
-.QuickStartItem,
-.QuickStartItem:-moz-focusring {
+.QuickStartItem {
+  align-items: center;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  outline-style: none;
+}
+
+.QuickStartItem:-moz-focusring {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
   outline-style: none;
 }
 
 .Icon {
-  height: 24px;
   object-fit: contain;
+  padding-bottom: 4px;
   pointer-events: none;
+  width: 16px;
 }

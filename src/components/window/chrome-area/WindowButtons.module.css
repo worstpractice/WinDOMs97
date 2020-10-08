@@ -7,11 +7,3 @@
   gap: 10px;
   justify-content: center;
 }
-
-.Button {
-  background-color: var(--background-gray);
-  outline-color: var(--outline-white);
-  outline-style: outset;
-  outline-width: 2px;
-  width: 18px;
-}
