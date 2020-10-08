@@ -21,35 +21,38 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const App: FC<Props> = () => {
-  const { activeWidget, installed, running } = useStore();
+  const { activeWidget, installedBinaries, runningProcesses } = useStore();
 
   return (
     <>
       <Desktop>
         {activeWidget === "ContextMenu" && (
           <ContextMenu>
-            <ContextMenuItem>New folder...</ContextMenuItem>
-            <ContextMenuItem>New file</ContextMenuItem>
-            <ContextMenuItem>Command Prompt</ContextMenuItem>
+            {!!installedBinaries.length &&
+              installedBinaries.map((binary) => {
+                const { name } = binary;
+
+                return <ContextMenuItem binary={binary} key={name} />;
+              })}
           </ContextMenu>
         )}
-        {!!installed.length &&
-          installed.map((binary) => {
+        {!!installedBinaries.length &&
+          installedBinaries.map((binary) => {
             const { name } = binary;
 
             return <Shortcut binary={binary} key={name} />;
           })}
       </Desktop>
-      {!!running.length &&
-        installed.map((binary) => {
+      {!!runningProcesses.length &&
+        installedBinaries.map((binary) => {
           const { name } = binary;
 
-          return <Window process={{ ...binary, pid: running.length }} key={name} />;
+          return <Window key={name} process={{ ...binary, pid: runningProcesses.length }} />;
         })}
       {activeWidget === "StartMenu" && (
         <StartMenu>
-          {!!installed.length &&
-            installed.map((binary) => {
+          {!!installedBinaries.length &&
+            installedBinaries.map((binary) => {
               const { name } = binary;
 
               return <StartMenuItem binary={binary} key={name} />;
@@ -60,8 +63,8 @@ export const App: FC<Props> = () => {
         <StartArea>
           <StartButton />
           <QuickStart>
-            {!!installed.length &&
-              installed.map((binary) => {
+            {!!installedBinaries.length &&
+              installedBinaries.map((binary) => {
                 const { name } = binary;
 
                 return <QuickStartItem binary={binary} key={name} />;
@@ -69,16 +72,16 @@ export const App: FC<Props> = () => {
           </QuickStart>
         </StartArea>
         <RunningArea>
-          {!!running.length &&
-            installed.map((binary) => {
+          {!!runningProcesses.length &&
+            installedBinaries.map((binary) => {
               const { name } = binary;
 
-              return <RunningItem key={name} process={{ ...binary, pid: running.length }} />;
+              return <RunningItem key={name} process={{ ...binary, pid: runningProcesses.length }} />;
             })}
         </RunningArea>
         <NotificationArea>
-          {!!running.length &&
-            installed.map((binary) => {
+          {!!runningProcesses.length &&
+            installedBinaries.map((binary) => {
               const { name } = binary;
 
               return <NotificationItem key={name} binary={binary} />;

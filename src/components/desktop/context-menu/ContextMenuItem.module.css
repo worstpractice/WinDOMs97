@@ -5,11 +5,15 @@
   cursor: pointer;
   display: flex;
   gap: 10px;
-  padding: 5px;
-  padding-left: 10px;
+  padding-left: 4px;
 }
 
 .ContextMenuItem:hover {
   background-color: var(--start-menu-dim-blue);
   color: white;
+}
+
+.Icon {
+  object-fit: contain;
+  width: 16px;
 }

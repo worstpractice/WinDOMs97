@@ -6,13 +6,13 @@ import styles from "./ContextMenu.module.css";
 type Props = {};
 
 export const ContextMenu: FC<Props> = ({ children }) => {
-  const { lastClick, setActiveWidget } = useStore();
+  const { lastClickPosition, setActiveWidget } = useStore();
 
   const handleActive = () => {
     setActiveWidget("ContextMenu");
   };
 
-  const { x, y } = lastClick;
+  const { x, y } = lastClickPosition;
 
   return (
     <section className={styles.ContextMenu} onMouseDown={handleActive} style={{ left: x, top: y }}>

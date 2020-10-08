@@ -8,9 +8,9 @@ import { combine, devtools } from "zustand/middleware";
 
 type Data = {
   activeWidget: Widget;
-  installed: readonly Binary[];
-  lastClick: MousePosition;
-  running: readonly Process[];
+  installedBinaries: readonly Binary[];
+  lastClickPosition: MousePosition;
+  runningProcesses: readonly Process[];
 };
 
 type Actions = {
@@ -27,25 +27,46 @@ export const useStore = create<State>(
     combine<Data, Actions>(
       {
         activeWidget: "Desktop",
-        installed: programs,
-        lastClick: { x: 0, y: 0 },
-        running: [],
+        installedBinaries: programs,
+        lastClickPosition: { x: 0, y: 0 },
+        runningProcesses: [],
       } as const,
 
       (set) =>
         ({
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           endProcess(process: Process) {
-            set(({ running }) => ({ running: running.filter((p) => Object.is(p, process)) } as const));
+            set(({ runningProcesses }) => {
+              const oneProcessFewer = runningProcesses.filter((p) => {
+                return Object.is(p, process);
+              });
+
+              return { runningProcesses: oneProcessFewer } as const;
+            });
           },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary(binary: Binary) {
-            set(({ running }) => ({ running: [...running, { ...binary, pid: running.length }] } as const));
+            set(({ runningProcesses }) => {
+              const pid = runningProcesses.length;
+
+              const oneAdditionalProcess = [...runningProcesses, { ...binary, pid }] as const;
+
+              return { runningProcesses: oneAdditionalProcess } as const;
+            });
           },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           setActiveWidget(to: Widget) {
-            set(() => ({ activeWidget: to } as const));
+            set(() => {
+              return { activeWidget: to } as const;
+            });
           },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           setLastClick(to: MousePosition) {
-            set(() => ({ lastClick: to } as const));
+            set(() => {
+              return { lastClickPosition: to } as const;
+            });
           },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } as const),
     ),
   ),

@@ -2,10 +2,10 @@
   align-items: center;
   display: flex;
   justify-content: center;
-  max-width: 18px;
+  max-width: 16px;
 }
 
 .Icon {
-  max-width: 18px;
+  max-width: 16px;
   object-fit: contain;
 }
