@@ -20,6 +20,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useStore();
   const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
+  // NOTE: For React reasons, this call depends on `Desktop` (the parent component) calling `useActivateOnMount()` to work properly.
   useDesktopLayoutOnMount(shortcutRef.current);
 
   const handleActive = onLMB((e) => {
