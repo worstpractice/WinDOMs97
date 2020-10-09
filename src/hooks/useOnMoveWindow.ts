@@ -1,7 +1,7 @@
 import type { MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
-import { moveToForeground } from "utils/moveToForeground";
+import { moveInFront } from "utils/moveInFront";
 import { onLMB } from "utils/onLMB";
 
 export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
@@ -15,7 +15,7 @@ export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | nul
 
     let cleanup: () => void;
 
-    moveToForeground(osWindow);
+    moveInFront(osWindow);
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB(({ pageX, pageY }) => {

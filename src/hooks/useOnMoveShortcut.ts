@@ -1,7 +1,7 @@
 import type { MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
-import { moveToForeground } from "utils/moveToForeground";
+import { moveInFront } from "utils/moveInFront";
 import { onLMB } from "utils/onLMB";
 import styles from "./useOnMoveShortcut.module.css";
 
@@ -16,7 +16,7 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
 
     let cleanup: () => void;
 
-    moveToForeground(shortcut);
+    moveInFront(shortcut);
 
     const clone = shortcut.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);

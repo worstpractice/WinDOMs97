@@ -10,7 +10,7 @@ import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { handleDragStart } from "utils/handleDragStart";
 import { is } from "utils/is";
-import { moveToForeground } from "utils/moveToForeground";
+import { moveInFront } from "utils/moveInFront";
 import styles from "./Window.module.css";
 
 type Props = {
@@ -26,7 +26,7 @@ export const Window: FC<Props> = ({ onMouseDown, process }) => {
 
   const handleActive = () => {
     activate(windowRef);
-    moveToForeground(windowRef);
+    moveInFront(windowRef);
     onMouseDown();
   };
 
