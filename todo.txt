@@ -1,6 +1,3 @@
-* Shortcuts
- Make the icons line up properly instead of all on top of each other (just so they START in a decent grid, no need to maintain it)
-
 * Windows
  Make the windows resizable by pulling on the various corners
  Make minimize work
@@ -15,8 +12,8 @@
 
 * Everywhere
  Make right click (potentially) do something relevant depending on what you actually rightclicked on
- Add more layers to the outlines, or soft shadows maybe
- Implement phony filesystem (philesystem)
+ Add more layers to the outlines (for a retro gradient effect), or soft shadows maybe
+ Implement phony filesystem (phoilesystem)
  Add fullscreen support
  Skin mouse pointer 
 
@@ -28,4 +25,8 @@
 * Folders
  Make them
 
-* Papperskorgen
+* Desktop
+ Implement dropzones (dragging and dropping an icon onto a folder moves it there, onto the wastebin deletes it, etc)
+
+* Wastebin
+ The cake is a lie

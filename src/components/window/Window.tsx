@@ -24,7 +24,7 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
   const handleMove = useOnMoveWindow(windowRef);
   useActivateOnMount(windowRef);
 
-  // NOTE: This is vital. This is the line where each process is provided with its own window handle.
+  // NOTE: This is vital. This is the line where each process is given its very own window handle.
   process.windowRef = windowRef;
 
   const handleActive = () => {

@@ -22,7 +22,9 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   // NOTE: For React reasons, this call depends on `Desktop` (the parent component) calling `useActivateOnMount()` to work properly.
   useDesktopLayoutOnMount(shortcutRef.current);
 
-  /** Wrapping this in `onLMB()` prevents momentary highlighting of the shortcut. The flash provides useful interaction feedback however. */
+  /** Wrapping this in `onLMB()` prevents momentary highlighting of the shortcut.
+   *
+   * The flash provides useful interaction feedback however. */
   const handleActive: MouseEventHandler = (e) => {
     // NOTE: This makes shortcut selection sticky, which we want.
     e.stopPropagation();
