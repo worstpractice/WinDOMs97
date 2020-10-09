@@ -1,0 +1,31 @@
+* Shortcuts
+ Make the icons line up properly instead of all on top of each other (just so they START in a decent grid, no need to maintain it)
+
+* Windows
+ Make the windows resizable by pulling on the various corners
+ Make minimize work
+ Make maximize/restore work
+ Make doubleclick on the chromearea maximize the window
+
+* Taskbar
+ Make the runningItems draggable and droppable within the Taskbar
+ Make the Taskbar draggable
+ Expose a right-click menu to lock or unlock the Taskbar position
+ Add a date picker for the clock
+
+* Everywhere
+ Make right click (potentially) do something relevant depending on what you actually rightclicked on
+ Add more layers to the outlines, or soft shadows maybe
+ Implement phony filesystem (philesystem)
+ Add fullscreen support
+ Skin mouse pointer 
+
+* Programs
+ Make calc
+ Make CMD
+ Make Minesweeper
+
+* Folders
+ Make them
+
+* Papperskorgen
