@@ -1,14 +1,14 @@
 import type { FC } from "react";
 import React from "react";
-import type { Binary } from "typings/Binary";
+import type { Process } from "typings/Process";
 import styles from "./NotificationItem.module.css";
 
 type Props = {
-  binary: Binary;
+  process: Process;
 };
 
-export const NotificationItem: FC<Props> = ({ binary }) => {
-  const { icon, name } = binary;
+export const NotificationItem: FC<Props> = ({ process }) => {
+  const { icon, name } = process;
 
   return (
     <li className={styles.NotificationItem}>

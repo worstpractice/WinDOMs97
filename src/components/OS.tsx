@@ -77,10 +77,10 @@ export const OS: FC<Props> = () => {
           })}
         </RunningArea>
         <NotificationArea>
-          {installedBinaries.map((binary) => {
-            const { fileName, name } = binary;
+          {runningProcesses.map((process) => {
+            const { name, pid } = process;
 
-            return <NotificationItem binary={binary} key={`${fileName}-${name}`} />;
+            return <NotificationItem process={process} key={`${pid}-${name}`} />;
           })}
         </NotificationArea>
       </Taskbar>
