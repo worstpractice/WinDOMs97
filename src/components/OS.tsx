@@ -37,12 +37,11 @@ export const OS: FC<Props> = () => {
             })}
           </ContextMenu>
         )}
-        {!!installedBinaries.length &&
-          installedBinaries.map((binary) => {
-            const { fileName, name } = binary;
+        {installedBinaries.map((binary) => {
+          const { fileName, name } = binary;
 
-            return <Shortcut binary={binary} key={`${fileName}-${name}`} />;
-          })}
+          return <Shortcut binary={binary} key={`${fileName}-${name}`} />;
+        })}
       </Desktop>
       {runningProcesses.map((process) => {
         const { name, pid } = process;
