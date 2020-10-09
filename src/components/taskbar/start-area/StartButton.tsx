@@ -22,7 +22,6 @@ export const StartButton: FC<Props> = ({ onMouseDown }) => {
     onMouseDown();
   });
 
-  console.log(activeRef);
   const style = is(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
 
   return (

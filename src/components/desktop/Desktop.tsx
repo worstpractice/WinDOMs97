@@ -1,6 +1,6 @@
+import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
-import type { FC, MouseEventHandler } from "react";
-import React from "react";
+import React, { FC, MouseEventHandler } from "react";
 import { useStore } from "store";
 import styles from "./Desktop.module.css";
 
@@ -12,6 +12,7 @@ type Props = {
 export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useStore();
   const desktopRef = useMutableRef();
+  useActivateOnMount(desktopRef);
 
   const handleContextMenu: MouseEventHandler = (e) => {
     setLastClickPosition({ x: e.clientX, y: e.clientY });

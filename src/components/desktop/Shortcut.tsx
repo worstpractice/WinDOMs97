@@ -1,3 +1,4 @@
+import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
 import type { FC } from "react";
@@ -19,6 +20,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useStore();
   const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
+  useDesktopLayoutOnMount(shortcutRef.current);
 
   const handleActive = onLMB((e) => {
     // NOTE: This makes shortcut selection sticky, which we want.
