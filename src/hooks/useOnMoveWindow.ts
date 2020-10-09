@@ -1,13 +1,11 @@
-import type { MouseEventHandler, MutableRefObject } from "react";
+import type { MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
-import { LMB } from "utils/constants";
 import { moveToForeground } from "utils/moveToForeground";
+import { onLMB } from "utils/onLMB";
 
 export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
-  const handleMouseDown: MouseEventHandler = ({ button, clientX, clientY }) => {
-    if (button !== LMB) return;
-
+  const handleMouseDown = onLMB(({ clientX, clientY }) => {
     const osWindow = windowRef.current;
 
     if (!osWindow) return;
@@ -20,22 +18,18 @@ export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | nul
     moveToForeground(osWindow);
 
     /** `Document`-level event listener. */
-    const onMouseMove: MouseEventHandler = ({ button, pageX, pageY }) => {
-      if (button !== LMB) return;
-
+    const onMouseMove = onLMB(({ pageX, pageY }) => {
       osWindow.style.left = `${pageX - shiftX}px`;
       osWindow.style.top = `${pageY - shiftY}px`;
-    };
+    });
 
     /** `Document`-level event listener. */
-    const onMouseUp: MouseEventHandler = ({ button }) => {
-      if (button !== LMB) return;
-
+    const onMouseUp = onLMB(() => {
       cleanup();
-    };
+    });
 
     cleanup = compose(addEventListener("mousemove", onMouseMove), addEventListener("mouseup", onMouseUp));
-  };
+  });
 
   return handleMouseDown;
 };

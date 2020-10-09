@@ -2,6 +2,7 @@ import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
+import { onLMB } from "utils/onLMB";
 import styles from "./QuickStartItem.module.css";
 
 type Props = {
@@ -12,10 +13,10 @@ type Props = {
 export const QuickStartItem: FC<Props> = ({ binary, onMouseDown }) => {
   const { executeBinary } = useStore();
 
-  const handleLaunch = () => {
+  const handleLaunch = onLMB(() => {
     executeBinary(binary);
     onMouseDown();
-  };
+  });
 
   const { fileName, icon } = binary;
 
