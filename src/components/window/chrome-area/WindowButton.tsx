@@ -1,7 +1,13 @@
-import type { FC, MouseEventHandler } from "react";
+import type { FC } from "react";
 import React, { useState } from "react";
 import { css } from "utils/css";
 import styles from "./WindowButton.module.css";
+
+const buttonKindsMap = {
+  exit: "X",
+  maximizeOrRestore: "#",
+  minimize: "_",
+} as const;
 
 type Props =
   | {
@@ -16,28 +22,18 @@ type Props =
 export const WindowButton: FC<Props> = ({ kind, onExit }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
-  const handleMouseDown: MouseEventHandler = (e) => {
-    e.stopPropagation();
+  const handleMouseDown = () => {
     setIsPressed(true);
   };
 
-  const handleMouseLeave: MouseEventHandler = (e) => {
-    e.stopPropagation();
+  const handleMouseLeave = () => {
     setIsPressed(false);
   };
 
-  const handleMouseUp: MouseEventHandler = (e) => {
-    e.stopPropagation();
+  const handleMouseUp = () => {
     setIsPressed(false);
     onExit?.();
   };
-
-  // prettier-ignore
-  const pictogram = kind === "minimize"
-    ? "_"
-    : kind === "maximizeOrRestore"
-      ? "#"
-      : "X";
 
   const style = isPressed ? css(styles.WindowButton, styles.Pressed) : styles.WindowButton;
 
@@ -49,7 +45,7 @@ export const WindowButton: FC<Props> = ({ kind, onExit }) => {
       onMouseUp={handleMouseUp}
       type="button"
     >
-      {pictogram}
+      {buttonKindsMap[kind]}
     </button>
   );
 };

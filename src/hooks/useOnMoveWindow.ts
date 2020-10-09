@@ -1,32 +1,30 @@
-import { MouseEventHandler, MutableRefObject } from "react";
+import type { MouseEventHandler, MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
+import { LMB } from "utils/constants";
+import { moveToForeground } from "utils/moveToForeground";
 
-// MMB = 1, RMB = 2
-const LMB = 0 as const;
-
-export const useOnMoveWindow = <T extends MutableRefObject<HTMLDivElement | null>>(elementRef: T) => {
+export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
   const handleMouseDown: MouseEventHandler = ({ button, clientX, clientY }) => {
     if (button !== LMB) return;
 
-    const OsWindow = elementRef.current;
+    const osWindow = windowRef.current;
 
-    if (!OsWindow) return;
+    if (!osWindow) return;
 
-    const shiftX = clientX - OsWindow.getBoundingClientRect().left;
-    const shiftY = clientY - OsWindow.getBoundingClientRect().top;
+    const shiftX = clientX - osWindow.getBoundingClientRect().left;
+    const shiftY = clientY - osWindow.getBoundingClientRect().top;
 
     let cleanup: () => void;
 
-    // Places the most recently moved OsWindow "on top" of all the OsWindows
-    OsWindow.parentElement?.lastElementChild?.after(OsWindow);
+    moveToForeground(osWindow);
 
     /** `Document`-level event listener. */
     const onMouseMove: MouseEventHandler = ({ button, pageX, pageY }) => {
       if (button !== LMB) return;
 
-      OsWindow.style.left = `${pageX - shiftX}px`;
-      OsWindow.style.top = `${pageY - shiftY}px`;
+      osWindow.style.left = `${pageX - shiftX}px`;
+      osWindow.style.top = `${pageY - shiftY}px`;
     };
 
     /** `Document`-level event listener. */

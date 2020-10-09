@@ -8,7 +8,6 @@ type Props = {
 };
 
 export const ChromeArea: FC<Props> = ({ children, isActive }) => {
-  
   const style = isActive ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
 
   return <header className={style}>{children}</header>;

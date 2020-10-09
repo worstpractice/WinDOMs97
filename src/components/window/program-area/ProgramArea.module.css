@@ -2,7 +2,7 @@
 
 .ProgramArea {
   height: 100%;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   padding: 4px;
@@ -11,7 +11,7 @@
 
 .ProgramContent {
   height: 100%;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: inset;
   outline-width: 2px;
   width: 100%;

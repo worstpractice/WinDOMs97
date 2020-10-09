@@ -6,8 +6,8 @@
 }
 
 .Original {
-  background-color: var(--selected-transparent-blue);
-  outline-color: rgba(255, 255, 255, 50%);
+  background-color: var(--shortcut-background-blue);
+  outline-color: var(--shortcut-outline-white);
   outline-style: dotted;
   outline-width: 1px;
 }

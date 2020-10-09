@@ -1,13 +1,4 @@
-// prettier-ignore
-export type Widget =
-  | "ContextMenu"
-  | "Desktop" // `Desktop` represents the null variant
-  | "Shortcut"
-  | "StartMenu"
-  | "Taskbar"
-  | "Window";
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // ContextMenu:   singleton        kommer och går
 // Desktop:       singleton        alltid där
@@ -34,5 +25,3 @@ export type Widget =
 // ContextMenu:                    kommer och går
 // StartMenu:                      kommer och går
 // Window:                         kommer och går
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////

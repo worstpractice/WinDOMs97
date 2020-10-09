@@ -5,7 +5,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   width: 65px;
@@ -16,24 +16,20 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   width: 65px;
+}
+
+.Pressed {
+  outline-color: var(--window-outline-white);
+  outline-style: inset;
+  outline-width: 2px;
 }
 
 .Title {
   align-content: center;
   display: flex;
   justify-content: center;
-}
-
-.Depressed {
-  outline-style: inset;
-  outline-width: 2px;
-}
-
-.Depressed:-moz-focusring {
-  outline-style: inset;
-  outline-width: 2px;
 }

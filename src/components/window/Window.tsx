@@ -2,37 +2,40 @@ import { ChromeArea } from "components/window/chrome-area/ChromeArea";
 import { WindowButtons } from "components/window/chrome-area/WindowButtons";
 import { WindowTitle } from "components/window/chrome-area/WindowTitle";
 import { ProgramArea } from "components/window/program-area/ProgramArea";
+import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import type { FC, MouseEventHandler } from "react";
-import React, { useRef } from "react";
+import React from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { handleDragStart } from "utils/handleDragStart";
+import { is } from "utils/is";
+import { moveToForeground } from "utils/moveToForeground";
 import styles from "./Window.module.css";
 
 type Props = {
+  onMouseDown: () => void;
   process: Process;
 };
 
-export const Window: FC<Props> = ({ process }) => {
-  const { activeWidget, setActiveWidget } = useStore();
-  const windowRef = useRef<HTMLDivElement | null>(null);
+export const Window: FC<Props> = ({ onMouseDown, process }) => {
+  const { activeRef, activate } = useStore();
+  const windowRef = useMutableRef();
   const handleMove = useOnMoveWindow(windowRef);
+  process.windowRef = windowRef;
 
-  const handleActive: MouseEventHandler = (e) => {
-    e.stopPropagation();
-    setActiveWidget("Window");
-    // Places the most recently moved Window "on top" of all the Windows
-    windowRef.current?.parentElement?.lastElementChild?.after(windowRef.current);
+  const handleActive = () => {
+    activate(windowRef);
+    moveToForeground(windowRef);
+    onMouseDown();
   };
 
   const handleChromeDrag: MouseEventHandler = (e) => {
-    e.stopPropagation();
-    setActiveWidget("Window");
+    activate(windowRef);
     handleMove(e);
   };
 
-  const isActive = activeWidget === "Window";
+  const isActive = is(activeRef, windowRef);
 
   const { icon, name } = process;
 

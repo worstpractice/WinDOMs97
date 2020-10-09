@@ -5,7 +5,7 @@
   flex-direction: row-reverse;
   gap: 4px;
   justify-content: center;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: inset;
   outline-width: 2px;
   padding-left: 3px;

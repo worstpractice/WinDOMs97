@@ -10,18 +10,17 @@ type Props = {
 };
 
 export const WindowButtons: FC<Props> = ({ process }) => {
-  const { endProcess, setActiveWidget } = useStore();
+  const { endProcess } = useStore();
 
   const handleExit = () => {
     endProcess(process);
-    setActiveWidget("Desktop");
   };
 
   return (
     <section className={styles.WindowButtons}>
-      <WindowButton kind={"minimize"}></WindowButton>
-      <WindowButton kind={"maximizeOrRestore"}></WindowButton>
-      <WindowButton kind={"exit"} onExit={handleExit}></WindowButton>
+      <WindowButton kind="minimize" />
+      <WindowButton kind="maximizeOrRestore" />
+      <WindowButton kind="exit" onExit={handleExit} />
     </section>
   );
 };

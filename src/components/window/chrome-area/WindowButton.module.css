@@ -1,29 +1,29 @@
 @import "../../../styles/colors.module.css";
 
 .WindowButton {
-  background-color: var(--background-gray);
-  outline-color: var(--outline-white);
+  background-color: var(--window-background-gray);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   width: 18px;
 }
 
 .WindowButton:-moz-focusring {
-  background-color: var(--background-gray);
-  outline-color: var(--outline-white);
+  background-color: var(--window-background-gray);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   width: 18px;
 }
 
 .Pressed:hover {
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: inset;
   outline-width: 2px;
 }
 
 .Pressed:not(:hover) {
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
 }

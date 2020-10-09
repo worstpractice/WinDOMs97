@@ -1,16 +1,15 @@
-import { MouseEventHandler, MutableRefObject } from "react";
+import type { MouseEventHandler, MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
+import { LMB } from "utils/constants";
+import { moveToForeground } from "utils/moveToForeground";
 import styles from "./useOnMoveShortcut.module.css";
 
-// MMB = 1, RMB = 2
-const LMB = 0 as const;
-
-export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | null>>(elementRef: T) => {
+export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | null>>(shortcutRef: T) => {
   const handleMouseDown: MouseEventHandler = ({ button, clientX, clientY }) => {
     if (button !== LMB) return;
 
-    const shortcut = elementRef.current;
+    const shortcut = shortcutRef.current;
 
     if (!shortcut) return;
 
@@ -19,12 +18,11 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
 
     let cleanup: () => void;
 
-    // Places the most recently moved shortcut "on top" of all the shortcuts
-    shortcut.parentElement?.lastElementChild?.after(shortcut);
+    moveToForeground(shortcut);
 
     const clone = shortcut.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);
-    // Places the transparent clone topmost of all
+    // Places the transparent clone "in front of" all
     shortcut.after(clone);
 
     shortcut.classList.add(styles.Original);

@@ -1,10 +1,12 @@
+import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
 import type { FC, MouseEventHandler } from "react";
-import React, { useRef } from "react";
+import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
 import { css } from "utils/css";
 import { handleDragStart } from "utils/handleDragStart";
+import { is } from "utils/is";
 import styles from "./Shortcut.module.css";
 
 type Props = {
@@ -12,23 +14,20 @@ type Props = {
 };
 
 export const Shortcut: FC<Props> = ({ binary }) => {
-  const { activeWidget, executeBinary, setActiveWidget } = useStore();
-  const shortcutRef = useRef<HTMLDivElement | null>(null);
+  const { activate, activeRef, executeBinary } = useStore();
+  const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
 
   const handleActive: MouseEventHandler = (e) => {
-    e.stopPropagation();
-    setActiveWidget("Shortcut");
+    activate(shortcutRef);
     handleMove(e);
   };
 
-  const handleLaunch: MouseEventHandler = (e) => {
-    e.stopPropagation();
+  const handleLaunch = () => {
     executeBinary(binary);
-    setActiveWidget("Window");
   };
 
-  const style = activeWidget === "Shortcut" ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
+  const style = is(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
 
   const { fileName, icon } = binary;
 

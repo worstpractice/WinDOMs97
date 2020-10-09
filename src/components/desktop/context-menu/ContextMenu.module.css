@@ -1,8 +1,8 @@
 @import "../../../styles/colors.module.css";
 
 .ContextMenu {
-  background-color: var(--background-gray);
-  outline-color: var(--outline-white);
+  background-color: var(--window-background-gray);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   position: absolute;

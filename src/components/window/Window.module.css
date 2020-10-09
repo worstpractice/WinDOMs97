@@ -1,15 +1,15 @@
 @import "../../styles/colors.module.css";
 
 .Window {
-  background-color: var(--background-gray);
+  background-color: var(--window-background-gray);
   display: flex;
   flex-direction: column;
   height: 300px;
   left: 20vw;
-  outline-color: var(--outline-white);
+  outline-color: var(--window-outline-white);
   outline-style: outset;
   outline-width: 2px;
   position: absolute;
-  top: 20vh;
+  top: 200px;
   width: 400px;
 }

@@ -8,7 +8,7 @@
 }
 
 .ProgramName {
-  color: var(--background-gray);
+  color: var(--window-background-gray);
   font-size: 16px;
   font-weight: 900;
   padding-top: 2px;

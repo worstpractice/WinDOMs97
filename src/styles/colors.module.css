@@ -1,11 +1,12 @@
 :root {
-  --background-gray: rgb(192, 192, 192);
-  --outline-white: rgb(248, 248, 248);
-  --selected-transparent-blue: rgba(0, 0, 255, 0.1);
+  --desktop-wallpaper-teal: rgb(0, 117, 130);
+  --shortcut-background-blue: rgba(0, 0, 255, 0.1);
+  --shortcut-outline-white: rgba(255, 255, 255, 50%);
   --start-menu-bright-blue: rgb(0, 0, 255);
   --start-menu-dim-blue: rgb(0, 0, 128);
+  --titlebar-bright-blue: rgb(16, 129, 205);
   --titlebar-dim-blue: rgb(2, 0, 128);
   --titlebar-dim-gray: rgb(128, 128, 128);
-  --titlebar-bright-blue: rgb(16, 129, 205);
-  --wallpaper-teal: rgb(0, 117, 130);
+  --window-background-gray: rgb(192, 192, 192);
+  --window-outline-white: rgb(248, 248, 248);
 }

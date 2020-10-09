@@ -1,25 +1,27 @@
-import { programs } from "programs";
+import { programs } from "binaries";
+import { Pids } from "kernel/Pids";
+import type { MutableRefObject } from "react";
 import type { Binary } from "typings/Binary";
 import type { MousePosition } from "typings/MousePosition";
 import type { Process } from "typings/Process";
-import type { Widget } from "typings/Widget";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
 type Data = {
-  activeWidget: Widget;
+  activeRef: MutableRefObject<HTMLDivElement | null>;
+  /////////////////////////////////////
+  availablePids: readonly number[];
   installedBinaries: readonly Binary[];
-  lastClickPosition: MousePosition;
   runningProcesses: readonly Process[];
-
+  /////////////////////////////////////
+  lastClickPosition: MousePosition;
 };
 
 type Actions = {
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  setActiveWidget: (to: Widget) => void;
-  setLastClick: (to: MousePosition) => void;
-
+  activate: (to: MutableRefObject<HTMLDivElement | null>) => void;
+  setLastClickPosition: (to: MousePosition) => void;
 };
 
 type State = Data & Actions;
@@ -28,42 +30,52 @@ export const useStore = create<State>(
   devtools(
     combine<Data, Actions>(
       {
-        activeWidget: "Desktop",
+        activeRef: { current: null },
+        /////////////////////////////////////
         installedBinaries: programs,
-        lastClickPosition: { x: 0, y: 0 },
+        availablePids: Pids.available,
         runningProcesses: [],
+        /////////////////////////////////////
+        lastClickPosition: { x: 0, y: 0 },
       } as const,
 
       (set) =>
         ({
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          endProcess(process: Process) {
+          endProcess({ pid: targetPid }: Process) {
             set(({ runningProcesses }) => {
-              const oneProcessFewer = runningProcesses.filter((p) => {
-                return Object.is(p, process);
+              const sparedProcesses = runningProcesses.filter(({ pid }) => {
+                // We spare every process whose `pid` is NOT the `targetPid`.
+                return pid !== targetPid;
               });
 
-              return { runningProcesses: oneProcessFewer } as const;
+              // Just like in C, thou shalt remember to free.
+              Pids.free(targetPid);
+
+              return { runningProcesses: sparedProcesses } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary(binary: Binary) {
             set(({ runningProcesses }) => {
-              const pid = runningProcesses.length;
+              const pid = Pids.use();
 
-              const oneAdditionalProcess = [...runningProcesses, { ...binary, pid }] as const;
+              const windowRef = { current: null };
 
-              return { runningProcesses: oneAdditionalProcess } as const;
+              const spawnedProcess = { ...binary, pid, windowRef } as const;
+
+              return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setActiveWidget(to: Widget) {
+          activate(to: MutableRefObject<HTMLDivElement | null>) {
             set(() => {
-              return { activeWidget: to } as const;
+              console.debug("activeRef:", to.current);
+              return { activeRef: { ...to } } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClick(to: MousePosition) {
+          setLastClickPosition(to: MousePosition) {
             set(() => {
               return { lastClickPosition: to } as const;
             });
