@@ -8,6 +8,7 @@ import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
 type Data = {
+  /////////////////////////////////////
   activeRef: MutableRefObject<HTMLDivElement | null>;
   /////////////////////////////////////
   availablePids: readonly number[];
@@ -15,12 +16,13 @@ type Data = {
   runningProcesses: readonly Process[];
   /////////////////////////////////////
   lastClickPosition: MousePosition;
+  /////////////////////////////////////
 };
 
 type Actions = {
+  activate: (to: MutableRefObject<HTMLDivElement | null>) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  activate: (to: MutableRefObject<HTMLDivElement | null>) => void;
   setLastClickPosition: (to: MousePosition) => void;
 };
 
@@ -30,17 +32,27 @@ export const useStore = create<State>(
   devtools(
     combine<Data, Actions>(
       {
+        /////////////////////////////////////
         activeRef: { current: null },
         /////////////////////////////////////
-        installedBinaries: programs,
         availablePids: Pids.available,
+        installedBinaries: programs,
         runningProcesses: [],
         /////////////////////////////////////
         lastClickPosition: { x: 0, y: 0 },
+        /////////////////////////////////////
       } as const,
 
       (set) =>
         ({
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          activate(to: MutableRefObject<HTMLDivElement | null>) {
+            set(() => {
+              console.debug("activeRef:", to.current);
+
+              return { activeRef: { ...to } } as const;
+            });
+          },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           endProcess({ pid: targetPid }: Process) {
             set(({ runningProcesses }) => {
@@ -65,13 +77,6 @@ export const useStore = create<State>(
               const spawnedProcess = { ...binary, pid, windowRef } as const;
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
-            });
-          },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          activate(to: MutableRefObject<HTMLDivElement | null>) {
-            set(() => {
-              console.debug("activeRef:", to.current);
-              return { activeRef: { ...to } } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
