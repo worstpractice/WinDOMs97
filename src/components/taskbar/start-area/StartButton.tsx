@@ -16,7 +16,7 @@ export const StartButton: FC<Props> = ({ onMouseDown }) => {
   const startButtonRef = useMutableRef();
 
   const handleActive = onLMB((e) => {
-    // NOTE: Since the Taskbar below us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
+    // NOTE: Since the Taskbar under us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
     e.stopPropagation();
     activate(startButtonRef);
     onMouseDown();

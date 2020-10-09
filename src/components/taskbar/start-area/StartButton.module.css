@@ -28,6 +28,12 @@
   outline-width: 2px;
 }
 
+.Pressed:-moz-focusring {
+  outline-color: var(--window-outline-white);
+  outline-style: inset;
+  outline-width: 2px;
+}
+
 .Title {
   align-content: center;
   display: flex;
