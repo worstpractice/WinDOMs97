@@ -1,27 +1,32 @@
 import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
-import type { FC, MouseEventHandler } from "react";
+import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
 import { css } from "utils/css";
 import { handleDragStart } from "utils/handleDragStart";
 import { is } from "utils/is";
+import { onLMB } from "utils/onLMB";
 import styles from "./Shortcut.module.css";
 
 type Props = {
   binary: Binary;
+  closeMenus: () => void;
 };
 
-export const Shortcut: FC<Props> = ({ binary }) => {
+export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useStore();
   const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
 
-  const handleActive: MouseEventHandler = (e) => {
+  const handleActive = onLMB((e) => {
+    // NOTE: This makes shortcut selection sticky, which we want.
+    e.stopPropagation();
+    closeMenus();
     activate(shortcutRef);
     handleMove(e);
-  };
+  });
 
   const handleLaunch = () => {
     executeBinary(binary);

@@ -7,15 +7,15 @@ import styles from "./QuickStartItem.module.css";
 
 type Props = {
   binary: Binary;
-  onMouseDown: () => void;
+  closeMenus: () => void;
 };
 
-export const QuickStartItem: FC<Props> = ({ binary, onMouseDown }) => {
+export const QuickStartItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useStore();
 
   const handleLaunch = onLMB(() => {
     executeBinary(binary);
-    onMouseDown();
+    closeMenus();
   });
 
   const { fileName, icon } = binary;

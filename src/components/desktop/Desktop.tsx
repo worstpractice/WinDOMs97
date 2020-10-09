@@ -5,22 +5,22 @@ import { useStore } from "store";
 import styles from "./Desktop.module.css";
 
 type Props = {
+  closeMenus: () => void;
   onContextMenu: () => void;
-  onMouseDown: () => void;
 };
 
-export const Desktop: FC<Props> = ({ children, onContextMenu, onMouseDown }) => {
+export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useStore();
   const desktopRef = useMutableRef();
 
-  const handleContextMenu: MouseEventHandler = (e) => { 
+  const handleContextMenu: MouseEventHandler = (e) => {
     setLastClickPosition({ x: e.clientX, y: e.clientY });
     onContextMenu();
   };
 
   const handleMouseDown = () => {
+    closeMenus();
     activate(desktopRef);
-    onMouseDown();
   };
 
   return (

@@ -14,11 +14,11 @@ import { moveInFront } from "utils/moveInFront";
 import styles from "./Window.module.css";
 
 type Props = {
-  onMouseDown: () => void;
+  closeMenus: () => void;
   process: Process;
 };
 
-export const Window: FC<Props> = ({ onMouseDown, process }) => {
+export const Window: FC<Props> = ({ closeMenus, process }) => {
   const { activeRef, activate } = useStore();
   const windowRef = useMutableRef();
   const handleMove = useOnMoveWindow(windowRef);
@@ -27,7 +27,7 @@ export const Window: FC<Props> = ({ onMouseDown, process }) => {
   const handleActive = () => {
     activate(windowRef);
     moveInFront(windowRef);
-    onMouseDown();
+    closeMenus();
   };
 
   const handleChromeDrag: MouseEventHandler = (e) => {

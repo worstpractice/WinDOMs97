@@ -6,13 +6,15 @@ import styles from "./StartMenuItem.module.css";
 
 type Props = {
   binary: Binary;
+  closeMenus: () => void;
 };
 
-export const StartMenuItem: FC<Props> = ({ binary }) => {
+export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useStore();
 
   const handleLaunch = () => {
     executeBinary(binary);
+    closeMenus();
   };
 
   const { fileName, icon, name } = binary;

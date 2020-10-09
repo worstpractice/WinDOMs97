@@ -27,7 +27,7 @@ export const OS: FC<Props> = () => {
 
   return (
     <>
-      <Desktop onContextMenu={openContextMenu} onMouseDown={closeMenus}>
+      <Desktop closeMenus={closeMenus} onContextMenu={openContextMenu}>
         {openMenu === "ContextMenu" && (
           <ContextMenu>
             {installedBinaries.map((binary) => {
@@ -40,31 +40,31 @@ export const OS: FC<Props> = () => {
         {installedBinaries.map((binary) => {
           const { fileName, name } = binary;
 
-          return <Shortcut binary={binary} key={`${fileName}-${name}`} />;
+          return <Shortcut binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return <Window key={`${pid}-${name}`} onMouseDown={closeMenus} process={process} />;
+        return <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
       })}
       {openMenu === "StartMenu" && (
-        <StartMenu openMenu={openMenu}>
+        <StartMenu>
           {installedBinaries.map((binary) => {
             const { fileName, name } = binary;
 
-            return <StartMenuItem binary={binary} key={`${fileName}-${name}`} />;
+            return <StartMenuItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
           })}
         </StartMenu>
       )}
-      <Taskbar>
+      <Taskbar closeMenus={closeMenus}>
         <StartArea>
-          <StartButton isPressed={openMenu === "StartMenu"} onMouseDown={toggleStartMenu} />
+          <StartButton onMouseDown={toggleStartMenu} />
           <QuickStart>
             {installedBinaries.map((binary) => {
               const { fileName, name } = binary;
 
-              return <QuickStartItem binary={binary} onMouseDown={closeMenus} key={`${fileName}-${name}`} />;
+              return <QuickStartItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
             })}
           </QuickStart>
         </StartArea>

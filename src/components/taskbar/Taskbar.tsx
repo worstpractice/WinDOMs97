@@ -1,9 +1,25 @@
+import { useMutableRef } from "hooks/useMutableRef";
 import type { FC } from "react";
 import React from "react";
+import { useStore } from "store";
 import styles from "./Taskbar.module.css";
 
-type Props = {};
+type Props = {
+  closeMenus: () => void;
+};
 
-export const Taskbar: FC<Props> = ({ children }) => {
-  return <footer className={styles.Taskbar}>{children}</footer>;
+export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
+  const { activate } = useStore();
+  const taskbarRef = useMutableRef();
+
+  const handleActive = () => {
+    activate(taskbarRef);
+    closeMenus();
+  };
+
+  return (
+    <footer className={styles.Taskbar} onMouseDown={handleActive} ref={taskbarRef}>
+      {children}
+    </footer>
+  );
 };
