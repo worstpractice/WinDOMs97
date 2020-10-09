@@ -12,6 +12,7 @@ import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
 import { Window } from "components/window/Window";
 import { useMenu } from "hooks/useMenu";
+import { Program } from "components/window/program-area/Program";
 import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
@@ -46,7 +47,11 @@ export const OS: FC<Props> = () => {
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
+        return (
+          <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process}>
+            <Program />
+          </Window>
+        );
       })}
       {openMenu === "StartMenu" && (
         <StartMenu>

@@ -12,6 +12,7 @@ type Props = {
 
 export const WindowTitle: FC<Props> = ({ process }) => {
   const { activeRef } = useStore();
+  
   const style = is(activeRef, process.windowRef) ? css(styles.ProgramName, styles.Active) : styles.ProgramName;
 
   const { icon, name } = process;
