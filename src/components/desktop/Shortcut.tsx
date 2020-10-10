@@ -44,6 +44,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   return (
     <article
       className={style}
+      // TODO: OnDoubleClick not supported in Chrome? It works in firefox!
       onDoubleClick={handleLaunch}
       onDragStart={handleDragStart}
       onMouseDown={handleActive}

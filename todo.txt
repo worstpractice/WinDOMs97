@@ -30,3 +30,5 @@
 
 * Wastebin
  The cake is a lie
+
+// TODO: OnDoubleClick not supported in Chrome? It works in firefox!
