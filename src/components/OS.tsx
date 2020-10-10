@@ -77,14 +77,14 @@ export const OS: FC<Props> = () => {
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return <RunningItem key={`${pid}-${name}`} process={process} />;
+            return <RunningItem closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
           })}
         </RunningArea>
         <NotificationArea>
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return <NotificationItem process={process} key={`${pid}-${name}`} />;
+            return <NotificationItem closeMenus={closeMenus} process={process} key={`${pid}-${name}`} />;
           })}
         </NotificationArea>
       </Taskbar>

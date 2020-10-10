@@ -9,10 +9,11 @@ import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningItem.module.css";
 
 type Props = {
+  closeMenus: () => void;
   process: Process;
 };
 
-export const RunningItem: FC<Props> = ({ process }) => {
+export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate, activeRef } = useStore();
   const runningItemRef = useMutableRef();
 
@@ -22,6 +23,7 @@ export const RunningItem: FC<Props> = ({ process }) => {
   const handleActive: MouseEventHandler = (e) => {
     // NOTE: This event should not reach the Taskbar below, or it will become active instead of the window we meant to activate.
     e.stopPropagation();
+    closeMenus();
     activate(process.windowRef);
     moveInFront(process.windowRef);
   };

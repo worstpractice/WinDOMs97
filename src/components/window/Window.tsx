@@ -69,6 +69,7 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={windowRef}
+      style={{ left: `${30 * process.pid}px`, top: `${20 * process.pid}px` }}
     >
       <span className={styles.Outline} onMouseDown={handleChromeDrag}>
         <ChromeArea process={process}>

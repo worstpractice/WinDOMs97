@@ -8,10 +8,11 @@ import { onLMB } from "utils/onLMB";
 import styles from "./NotificationItem.module.css";
 
 type Props = {
+  closeMenus: () => void;
   process: Process;
 };
 
-export const NotificationItem: FC<Props> = ({ process }) => {
+export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate } = useStore();
   const notificationItemRef = useMutableRef();
 
@@ -22,6 +23,7 @@ export const NotificationItem: FC<Props> = ({ process }) => {
   const handleActiveCapture: MouseEventHandler = onLMB((e) => {
     // NOTE: This is required since after the capture phase, the event would bubble and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
+    closeMenus();
     activate(process.windowRef);
     moveInFront(process.windowRef);
   });
