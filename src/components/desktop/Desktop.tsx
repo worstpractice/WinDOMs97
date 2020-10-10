@@ -15,8 +15,8 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   // NOTE: For React reasons, this call is what allows the child components calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);
 
-  const handleContextMenu: MouseEventHandler = (e) => {
-    setLastClickPosition({ x: e.clientX, y: e.clientY });
+  const handleContextMenu: MouseEventHandler = ({ clientX, clientY }) => {
+    setLastClickPosition({ x: clientX, y: clientY });
     onContextMenu();
   };
 

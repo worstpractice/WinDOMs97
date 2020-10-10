@@ -3,7 +3,7 @@ import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
 import { css } from "utils/css";
-import { is } from "utils/is";
+import { isRef } from "utils/isRef";
 import { onLMB } from "utils/onLMB";
 import styles from "./StartButton.module.css";
 
@@ -22,7 +22,7 @@ export const StartButton: FC<Props> = ({ onMouseDown }) => {
     onMouseDown();
   });
 
-  const style = is(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
+  const style = isRef(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
 
   return (
     <button className={style} id="StartButton" onMouseDown={handleActive} type="button" ref={startButtonRef as any}>

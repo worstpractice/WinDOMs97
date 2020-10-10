@@ -1,13 +1,15 @@
+@import "../../styles/animations.module.css";
 @import "../../styles/colors.module.css";
 
 .Window {
+  animation: Maximized 500ms;
   background-color: transparent;
   display: flex;
   flex-direction: column;
   height: 300px;
   left: 20vw;
-  min-height: 200px;
-  min-width: 400px;
+  min-height: 250px;
+  min-width: 350px;
   padding: 3px;
   position: absolute;
   top: 200px;
@@ -15,7 +17,7 @@
 }
 
 .Resizable {
-  cursor: move !important;
+  cursor: move;
 }
 
 .Outline {

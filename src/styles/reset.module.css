@@ -4,9 +4,14 @@
 * {
   box-sizing: border-box;
   font-family: "W95FA", Arial, Helvetica, sans-serif;
+
+  /* Chrome & Co */
+  image-rendering: pixelated;
+
+  /* FireFox */
+  image-rendering: crisp-edges;
   margin: 0;
   padding: 0;
-  text-rendering: optimizeLegibility;
   user-select: none;
 }
 

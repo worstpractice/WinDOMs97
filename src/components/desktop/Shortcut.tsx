@@ -7,7 +7,7 @@ import { useStore } from "store";
 import type { Binary } from "typings/Binary";
 import { css } from "utils/css";
 import { handleDragStart } from "utils/handleDragStart";
-import { is } from "utils/is";
+import { isRef } from "utils/isRef";
 import styles from "./Shortcut.module.css";
 
 type Props = {
@@ -37,7 +37,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
     executeBinary(binary);
   };
 
-  const style = is(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
+  const style = isRef(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
 
   const { fileName, icon } = binary;
 

@@ -15,6 +15,9 @@ export const NotificationItem: FC<Props> = ({ process }) => {
   const { activate } = useStore();
   const notificationItemRef = useMutableRef();
 
+  // NOTE: This is vital. This is the line where each process is given its very own `notificationItem` handle.
+  process.notificationItemRef = notificationItemRef;
+
   /** We must use capture here because the notificationItem is nested deep inside the taskbar. */
   const handleActiveCapture: MouseEventHandler = onLMB((e) => {
     // NOTE: This is required since after the capture phase, the event would bubble and hand control back over to the taskbar (which we don't want).

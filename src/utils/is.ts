@@ -1,6 +1,3 @@
-import type { MutableRefObject } from "react";
-
-// prettier-ignore
-export const is = <T extends MutableRefObject<HTMLDivElement | null>>({ current: a }: T, { current: b }: T): boolean => {
+export const is = (a: unknown, b: unknown): a is typeof b => {
   return (!!a || !!b) && Object.is(a, b);
 };

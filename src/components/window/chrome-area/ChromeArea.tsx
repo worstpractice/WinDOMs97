@@ -3,7 +3,7 @@ import React from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import { is } from "utils/is";
+import { isRef } from "utils/isRef";
 import styles from "./ChromeArea.module.css";
 
 type Props = {
@@ -13,7 +13,7 @@ type Props = {
 export const ChromeArea: FC<Props> = ({ children, process }) => {
   const { activeRef } = useStore();
 
-  const style = is(activeRef, process.windowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
+  const style = isRef(activeRef, process.windowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
 
   return <header className={style}>{children}</header>;
 };

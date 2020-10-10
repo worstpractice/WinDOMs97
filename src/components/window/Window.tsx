@@ -11,6 +11,7 @@ import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
 import { handleDragStart } from "utils/handleDragStart";
+import { is } from "utils/is";
 import { moveInFront } from "utils/moveInFront";
 import { onLMB } from "utils/onLMB";
 import styles from "./Window.module.css";
@@ -35,12 +36,13 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
     closeMenus();
     activate(windowRef);
     moveInFront(windowRef);
-    if (isResizable) {
-      if (Object.is(e.target, windowRef.current)) {
-        console.log("We now branch into resize logic");
-        handleResize(e);
-      }
-    }
+
+    if (!isResizable) return;
+
+    // Abort resizing if the click was unrelated to the current window
+    if (!is(e.target, windowRef.current)) return;
+
+    handleResize(e);
   });
 
   const handleChromeDrag = onLMB((e) => {

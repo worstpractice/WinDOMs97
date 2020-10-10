@@ -11,15 +11,22 @@ const buttonKindsMap = {
 
 type Props =
   | {
-      kind: "minimize" | "maximizeOrRestore";
+      kind: "maximizeOrRestore";
       onExit?: never;
+      onMinimize?: never;
+    }
+  | {
+      kind: "minimize";
+      onExit?: never;
+      onMinimize: () => void;
     }
   | {
       kind: "exit";
       onExit: () => void;
+      onMinimize?: never;
     };
 
-export const WindowButton: FC<Props> = ({ kind, onExit }) => {
+export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
   const handleMouseDown = () => {
@@ -33,6 +40,7 @@ export const WindowButton: FC<Props> = ({ kind, onExit }) => {
   const handleMouseUp = () => {
     setIsPressed(false);
     onExit?.();
+    onMinimize?.();
   };
 
   const style = isPressed ? css(styles.WindowButton, styles.Pressed) : styles.WindowButton;

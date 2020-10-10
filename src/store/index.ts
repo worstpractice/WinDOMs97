@@ -2,7 +2,7 @@ import { programs } from "binaries";
 import { Pids } from "kernel/Pids";
 import type { MutableRefObject } from "react";
 import type { Binary } from "typings/Binary";
-import type { MousePosition } from "typings/MousePosition";
+import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
@@ -15,7 +15,7 @@ type Data = {
   installedBinaries: readonly Binary[];
   runningProcesses: readonly Process[];
   /////////////////////////////////////
-  lastClickPosition: MousePosition;
+  lastClickPosition: Position;
   /////////////////////////////////////
 };
 
@@ -23,10 +23,12 @@ type Actions = {
   activate: (to: MutableRefObject<HTMLDivElement | null>) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  setLastClickPosition: (to: MousePosition) => void;
+  setLastClickPosition: (to: Position) => void;
 };
 
 type State = Data & Actions;
+
+let debugLogCounter = 0;
 
 export const useStore = create<State>(
   devtools(
@@ -46,11 +48,14 @@ export const useStore = create<State>(
       (set) =>
         ({
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          activate(to: MutableRefObject<HTMLDivElement | null>) {
-            set(() => {
-              console.debug("activeRef:", to.current);
+          activate({ current }: MutableRefObject<HTMLDivElement | null>) {
+            set(({ activeRef }) => {
+              console.groupCollapsed(`${debugLogCounter++}. State Changed `);
+              console.debug("FROM:", activeRef.current);
+              console.debug("TO:", current);
+              console.groupEnd();
 
-              return { activeRef: { ...to } } as const;
+              return { activeRef: { current } } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -70,17 +75,23 @@ export const useStore = create<State>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary(binary: Binary) {
             set(({ runningProcesses }) => {
-              const pid = Pids.use();
+              const spawnedProcess = {
+                ...binary,
 
-              const windowRef = { current: null };
+                pid: Pids.use(),
 
-              const spawnedProcess = { ...binary, pid, windowRef } as const;
+                notificationItemRef: { current: null },
+
+                runningItemRef: { current: null },
+
+                windowRef: { current: null },
+              } as const;
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClickPosition(to: MousePosition) {
+          setLastClickPosition(to: Position) {
             set(() => {
               return { lastClickPosition: to } as const;
             });
