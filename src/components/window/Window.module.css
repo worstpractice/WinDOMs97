@@ -1,15 +1,23 @@
 @import "../../styles/colors.module.css";
 
 .Window {
-  background-color: var(--window-background-gray);
+  background-color: transparent;
   display: flex;
   flex-direction: column;
   height: 300px;
   left: 20vw;
-  outline-color: var(--window-outline-white);
-  outline-style: outset;
-  outline-width: 2px;
+  padding: 3px;
   position: absolute;
   top: 200px;
   width: 400px;
+}
+
+.Resizable {
+  cursor: move !important;
+}
+
+.Outline {
+  outline-color: var(--window-outline-white);
+  outline-style: outset;
+  outline-width: 2px;
 }

@@ -1,6 +1,8 @@
 @import "../../../styles/colors.module.css";
 
 .ProgramArea {
+  background-color: var(--window-background-gray);
+  cursor: auto;
   height: 100%;
   outline-color: var(--window-outline-white);
   outline-style: outset;
