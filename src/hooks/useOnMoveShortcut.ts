@@ -14,8 +14,6 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
     const shiftX = clientX - shortcut.getBoundingClientRect().left;
     const shiftY = clientY - shortcut.getBoundingClientRect().top;
 
-    let cleanup: () => void;
-
     moveInFront(shortcut);
 
     const clone = shortcut.cloneNode(true) as HTMLDivElement;
@@ -30,6 +28,8 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
       clone.style.left = `${pageX - shiftX}px`;
       clone.style.top = `${pageY - shiftY}px`;
     });
+
+    let cleanup: () => void;
 
     /** `Document`-level event listener. */
     const onMouseUp = onLMB(({ pageX, pageY }) => {

@@ -4,21 +4,21 @@ import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 import { onLMB } from "utils/onLMB";
 
-export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
-  const handleMouseDown = onLMB(({ clientX, clientY }) => {
+export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
+  const handleMouseDown = onLMB(() => {
     const osWindow = windowRef.current;
 
     if (!osWindow) return;
-
-    const shiftX = clientX - osWindow.getBoundingClientRect().left;
-    const shiftY = clientY - osWindow.getBoundingClientRect().top;
 
     moveInFront(osWindow);
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB(({ pageX, pageY }) => {
-      osWindow.style.left = `${pageX - shiftX}px`;
-      osWindow.style.top = `${pageY - shiftY}px`;
+      const shiftX = pageX - osWindow.getBoundingClientRect().left;
+      const shiftY = pageY - osWindow.getBoundingClientRect().top;
+
+      osWindow.style.width = `${shiftX}px`;
+      osWindow.style.height = `${shiftY}px`;
     });
 
     let cleanup: () => void;
