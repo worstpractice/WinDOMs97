@@ -6,6 +6,8 @@ type Data = {
   name: string;
   pid: number;
   ////////////////////////////////////////////////////////
+  isMinimized: boolean;
+  ////////////////////////////////////////////////////////
   notificationItemRef: MutableRefObject<HTMLDivElement | null>;
   runningItemRef: MutableRefObject<HTMLDivElement | null>;
   windowRef: MutableRefObject<HTMLDivElement | null>;

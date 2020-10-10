@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC, MouseEventHandler } from "react";
 import React, { useState } from "react";
 import { css } from "utils/css";
 import styles from "./WindowButton.module.css";
@@ -29,7 +29,9 @@ type Props =
 export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
   const [isPressed, setIsPressed] = useState<boolean>(false);
 
-  const handleMouseDown = () => {
+  const handleMouseDown: MouseEventHandler = (e) => {
+    // NOTE: This is necessary to stop the window from starting to move.
+    e.stopPropagation();
     setIsPressed(true);
   };
 

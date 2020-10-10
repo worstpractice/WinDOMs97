@@ -78,9 +78,11 @@ export const useStore = create<State>(
               const spawnedProcess = {
                 ...binary,
 
-                pid: Pids.use(),
+                isMinimized: false,
 
                 notificationItemRef: { current: null },
+
+                pid: Pids.use(),
 
                 runningItemRef: { current: null },
 
