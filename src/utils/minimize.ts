@@ -16,15 +16,15 @@ export const minimize = (process: Process) => {
 
   const old = osWindow.style.display;
 
-  const embiggenFromNotificationItem: EventListener = ({ target }) => {
+  const reEmbiggenBackAgain: EventListener = ({ target }) => {
     if (is(target, notificationItem)) {
       console.log("notificationItem");
-      runningItem.removeEventListener("mousedown", embiggenFromNotificationItem);
+      runningItem.removeEventListener("mousedown", reEmbiggenBackAgain);
     }
 
     if (is(target, runningItem)) {
       console.log("runningItem");
-      notificationItem.removeEventListener("mousedown", embiggenFromNotificationItem);
+      notificationItem.removeEventListener("mousedown", reEmbiggenBackAgain);
     }
 
     osWindow.style.display = old;
@@ -34,6 +34,6 @@ export const minimize = (process: Process) => {
   osWindow.style.display = `none`;
   process.isMinimized = true;
 
-  notificationItem.addEventListener("mousedown", embiggenFromNotificationItem, { once: true });
-  runningItem.addEventListener("mousedown", embiggenFromNotificationItem, { once: true });
+  notificationItem.addEventListener("mousedown", reEmbiggenBackAgain, { once: true });
+  runningItem.addEventListener("mousedown", reEmbiggenBackAgain, { once: true });
 };
