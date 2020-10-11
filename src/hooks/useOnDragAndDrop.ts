@@ -4,25 +4,27 @@ import type { OsRef } from "typings/OsRef";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./useOnMoveShortcut.module.css";
+import styles from "./useOnDragAndDrop.module.css";
 
-export const useOnDragAndDrop = ({ current: shortcut }: OsRef) => {
+export const useOnDragAndDrop = (desktopItemRef: OsRef) => {
   const [isMoving, setIsMoving] = useState<boolean>(false);
 
   const handleMouseDown = onLMB(({ clientX, clientY }) => {
-    if (!shortcut) return;
+    const { current: desktopItem } = desktopItemRef;
 
-    const shiftX = clientX - shortcut.getBoundingClientRect().left;
-    const shiftY = clientY - shortcut.getBoundingClientRect().top;
+    if (!desktopItem) return;
 
-    moveInFront(shortcut);
+    const shiftX = clientX - desktopItem.getBoundingClientRect().left;
+    const shiftY = clientY - desktopItem.getBoundingClientRect().top;
 
-    const clone = shortcut.cloneNode(true) as HTMLDivElement;
+    moveInFront(desktopItem);
+
+    const clone = desktopItem.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);
     // Places the transparent clone "in front of" all
-    shortcut.after(clone);
+    desktopItem.after(clone);
 
-    shortcut.classList.add(styles.Original);
+    desktopItem.classList.add(styles.Original);
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB(({ pageX, pageY }) => {
@@ -37,10 +39,10 @@ export const useOnDragAndDrop = ({ current: shortcut }: OsRef) => {
       clone.classList.remove(styles.Moving);
       clone.remove();
 
-      shortcut.classList.remove(styles.Original);
+      desktopItem.classList.remove(styles.Original);
 
-      shortcut.style.left = `${pageX - shiftX}px`;
-      shortcut.style.top = `${pageY - shiftY}px`;
+      desktopItem.style.left = `${pageX - shiftX}px`;
+      desktopItem.style.top = `${pageY - shiftY}px`;
 
       cleanup();
 

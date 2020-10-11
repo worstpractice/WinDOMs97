@@ -6,8 +6,8 @@
 }
 
 .Original {
-  background-color: var(--shortcut-background-blue);
-  outline-color: var(--shortcut-outline-white);
+  background-color: var(--desktopitem-background-blue);
+  outline-color: var(--desktopitem-outline-white);
   outline-style: dotted;
   outline-width: 1px;
 }

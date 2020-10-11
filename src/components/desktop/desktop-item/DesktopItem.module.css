@@ -1,6 +1,6 @@
-@import "../../styles/colors.module.css";
+@import "../../../styles/colors.module.css";
 
-.Shortcut {
+.DesktopItem {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -12,21 +12,9 @@
   width: 100px;
 }
 
-.Icon {
-  height: 50px;
-  width: 50px;
-}
-
-.Name {
-  color: white;
-  overflow-wrap: break-word;
-  text-align: center;
-  width: 100%;
-}
-
 /*** WARN: Must come last ***/
 .Active {
-  background-color: var(--shortcut-background-blue);
+  background-color: var(--desktopitem-background-blue);
   outline-color: rgba(255, 255, 255, 50%);
   outline-style: dotted;
   outline-width: 1px;

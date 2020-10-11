@@ -17,7 +17,7 @@ import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
 import { Desktop } from "./desktop/Desktop";
-import { Shortcut } from "./desktop/Shortcut";
+import { DesktopItem } from "./desktop/desktop-item/DesktopItem";
 import { Taskbar } from "./taskbar/Taskbar";
 
 type Props = {};
@@ -41,7 +41,7 @@ export const OS: FC<Props> = () => {
         {installedBinaries.map((binary) => {
           const { fileName, name } = binary;
 
-          return <Shortcut binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
+          return <DesktopItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {

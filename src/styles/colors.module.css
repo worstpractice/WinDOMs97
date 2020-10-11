@@ -1,7 +1,7 @@
 :root {
   --desktop-wallpaper-teal: rgb(0, 117, 130);
-  --shortcut-background-blue: rgba(0, 0, 255, 0.1);
-  --shortcut-outline-white: rgba(255, 255, 255, 50%);
+  --desktopitem-background-blue: rgba(0, 0, 255, 0.1);
+  --desktopitem-outline-white: rgba(255, 255, 255, 50%);
   --start-menu-bright-blue: rgb(0, 0, 255);
   --start-menu-dim-blue: rgb(0, 0, 128);
   --titlebar-bright-blue: rgb(16, 129, 205);
