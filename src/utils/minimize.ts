@@ -16,15 +16,15 @@ export const minimize = (process: Process) => {
 
   const old = osWindow.style.display;
 
-  const reEmbiggenBackAgain: EventListener = ({ target }) => {
+  const reEmbiggenBackUpAgain: EventListener = ({ target }) => {
     if (is(target, notificationItem)) {
       console.log("notificationItem");
-      runningItem.removeEventListener("mousedown", reEmbiggenBackAgain);
+      runningItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
     }
 
     if (is(target, runningItem)) {
       console.log("runningItem");
-      notificationItem.removeEventListener("mousedown", reEmbiggenBackAgain);
+      notificationItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
     }
 
     osWindow.style.display = old;
@@ -34,6 +34,6 @@ export const minimize = (process: Process) => {
   osWindow.style.display = `none`;
   process.isMinimized = true;
 
-  notificationItem.addEventListener("mousedown", reEmbiggenBackAgain, { once: true });
-  runningItem.addEventListener("mousedown", reEmbiggenBackAgain, { once: true });
+  notificationItem.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
+  runningItem.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
 };
