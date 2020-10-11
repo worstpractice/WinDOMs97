@@ -1,9 +1,9 @@
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
+import { isRef } from "type-predicates/isRef";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import { isRef } from "type-predicates/isRef";
 import styles from "./WindowTitle.module.css";
 
 type Props = {
@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const WindowTitle: FC<Props> = ({ process }) => {
-  const { activeRef } = useStore();
-  
+  const { activeRef } = useKernel();
+
   const style = isRef(activeRef, process.windowRef) ? css(styles.ProgramName, styles.Active) : styles.ProgramName;
 
   const { icon, name } = process;

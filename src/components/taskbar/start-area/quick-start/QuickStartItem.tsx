@@ -1,8 +1,8 @@
+import { onLMB } from "event-filters/onLMB";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
 import type { Binary } from "typings/Binary";
-import { onLMB } from "event-filters/onLMB";
 import styles from "./QuickStartItem.module.css";
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const QuickStartItem: FC<Props> = ({ binary, closeMenus }) => {
-  const { executeBinary } = useStore();
+  const { executeBinary } = useKernel();
 
   const handleLaunch = onLMB(() => {
     executeBinary(binary);

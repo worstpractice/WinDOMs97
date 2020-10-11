@@ -2,13 +2,13 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
+import { useKernel } from "kernel";
 import styles from "./ContextMenu.module.css";
 
 type Props = {};
 
 export const ContextMenu: FC<Props> = ({ children }) => {
-  const { lastClickPosition, activate } = useStore();
+  const { lastClickPosition, activate } = useKernel();
   const contextMenuRef = useMutableRef();
   useActivateOnMount(contextMenuRef);
 

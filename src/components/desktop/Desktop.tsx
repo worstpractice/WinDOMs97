@@ -1,7 +1,7 @@
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
+import { useKernel } from "kernel";
 import React, { FC, MouseEventHandler } from "react";
-import { useStore } from "store";
 import styles from "./Desktop.module.css";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
-  const { activate, setLastClickPosition } = useStore();
+  const { activate, setLastClickPosition } = useKernel();
   const desktopRef = useMutableRef();
   // NOTE: For React reasons, this call is what allows the child components calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);

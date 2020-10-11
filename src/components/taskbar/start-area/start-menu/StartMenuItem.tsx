@@ -1,6 +1,6 @@
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
 import type { Binary } from "typings/Binary";
 import styles from "./StartMenuItem.module.css";
 
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
-  const { executeBinary } = useStore();
+  const { executeBinary } = useKernel();
 
   const handleLaunch = () => {
     executeBinary(binary);

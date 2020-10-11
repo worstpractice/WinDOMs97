@@ -10,12 +10,12 @@ import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
-import { Window } from "components/window/Window";
-import { useMenu } from "hooks/useMenu";
 import { Program } from "components/window/program-area/Program";
+import { Window } from "components/window/Window";
+import { useOsMenus } from "hooks/usOsMenus";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
 import { Desktop } from "./desktop/Desktop";
 import { Shortcut } from "./desktop/Shortcut";
 import { Taskbar } from "./taskbar/Taskbar";
@@ -23,8 +23,8 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { installedBinaries, runningProcesses } = useStore();
-  const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useMenu();
+  const { installedBinaries, runningProcesses } = useKernel();
+  const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenus();
 
   return (
     <>

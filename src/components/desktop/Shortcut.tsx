@@ -1,14 +1,14 @@
+import { onLMB } from "event-filters/onLMB";
 import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
+import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
-import { useStore } from "store";
+import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
-import { isRef } from "type-predicates/isRef";
-import { onLMB } from "event-filters/onLMB";
 import styles from "./Shortcut.module.css";
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
-  const { activate, activeRef, executeBinary } = useStore();
+  const { activate, activeRef, executeBinary } = useKernel();
   const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
   // NOTE: For React reasons, this call depends on `Desktop` (the parent component) calling `useActivateOnMount()` to work properly.
@@ -29,12 +29,15 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
     closeMenus();
     activate(shortcutRef);
     handleMove(e);
-    console.log(e);
   };
 
   const handleLaunch = onLMB((e) => {
     executeBinary(binary);
+  });
+
+  const handleDropZone = onLMB((e) => {
     console.log(e);
+    console.log("Dropzone:", shortcutRef.current);
   });
 
   const style = isRef(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
@@ -48,6 +51,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
       onDoubleClick={handleLaunch}
       onDragStart={blockNativeDrag}
       onMouseDown={handleActive}
+      onMouseUp={handleDropZone}
       ref={shortcutRef}
     >
       <img alt={fileName} className={styles.Icon} src={icon} />

@@ -1,7 +1,7 @@
 import { WindowButton } from "components/window/chrome-area/WindowButton";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { minimize } from "utils/minimize";
 import styles from "./WindowButtons.module.css";
@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const WindowButtons: FC<Props> = ({ process }) => {
-  const { endProcess } = useStore();
+  const { endProcess } = useKernel();
 
   const handleExit = () => {
     endProcess(process);

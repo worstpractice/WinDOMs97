@@ -1,6 +1,4 @@
-const formatTimeString = (time: number) => {
-  return time > 9 ? `${time}` : `0${time}`;
-};
+import { formatTimeString } from "./formatTimeString";
 
 export const timestamp = () => {
   const now = new Date();

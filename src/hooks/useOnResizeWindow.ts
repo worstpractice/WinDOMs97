@@ -1,9 +1,9 @@
+import { onLMB } from "event-filters/onLMB";
 import type { MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
 import { moveInFront } from "utils/moveInFront";
-import { onLMB } from "event-filters/onLMB";
 
 export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
   /** Drag start event. */

@@ -1,7 +1,7 @@
 import { useMutableRef } from "hooks/useMutableRef";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useStore } from "store";
 import styles from "./Taskbar.module.css";
 
 type Props = {
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
-  const { activate } = useStore();
+  const { activate } = useKernel();
   const taskbarRef = useMutableRef();
 
   const handleActive = () => {

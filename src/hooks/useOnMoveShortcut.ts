@@ -1,8 +1,8 @@
+import { onLMB } from "event-filters/onLMB";
 import type { MutableRefObject } from "react";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
-import { onLMB } from "event-filters/onLMB";
 import styles from "./useOnMoveShortcut.module.css";
 
 export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | null>>(shortcutRef: T) => {

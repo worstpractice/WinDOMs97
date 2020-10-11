@@ -1,10 +1,10 @@
 import { useMutableRef } from "hooks/useMutableRef";
+import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
-import { useStore } from "store";
+import { isRef } from "type-predicates/isRef";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import { isRef } from "type-predicates/isRef";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningItem.module.css";
 
@@ -14,7 +14,7 @@ type Props = {
 };
 
 export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
-  const { activate, activeRef } = useStore();
+  const { activate, activeRef } = useKernel();
   const runningItemRef = useMutableRef();
 
   // NOTE: This is vital. This is the line where each process is given its very own `runningItem` handle.

@@ -30,7 +30,7 @@ type State = Data & Actions;
 
 let debugLogCounter = 0;
 
-export const useStore = create<State>(
+export const useKernel = create<State>(
   devtools(
     combine<Data, Actions>(
       {
