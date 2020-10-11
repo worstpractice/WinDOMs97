@@ -12,7 +12,8 @@ type Props = {
 export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useKernel();
   const desktopRef = useMutableRef();
-  // NOTE: For React reasons, this call is what allows the child components calling `useActivateOnMount()` to work properly.
+
+  // NOTE: this call is what allows the child components calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);
 
   const handleContextMenu: MouseEventHandler = ({ clientX, clientY }) => {

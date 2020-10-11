@@ -20,7 +20,8 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useKernel();
   const shortcutRef = useMutableRef();
   const handleMove = useOnMoveShortcut(shortcutRef);
-  // NOTE: For React reasons, this call depends on `Desktop` (the parent component) calling `useActivateOnMount()` to work properly.
+
+  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(shortcutRef.current);
 
   const handleActive: MouseEventHandler = (e) => {
