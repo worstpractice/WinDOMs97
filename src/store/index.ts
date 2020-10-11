@@ -50,7 +50,7 @@ export const useStore = create<State>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           activate({ current }: MutableRefObject<HTMLDivElement | null>) {
             set(({ activeRef }) => {
-              console.groupCollapsed(`${debugLogCounter++}. State Changed `);
+              console.groupCollapsed(`${++debugLogCounter}. State Changed `);
               console.debug("FROM:", activeRef.current);
               console.debug("TO:", current);
               console.groupEnd();

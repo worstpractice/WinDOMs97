@@ -2,7 +2,7 @@ import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
-import { onLMB } from "utils/onLMB";
+import { onLMB } from "event-filters/onLMB";
 import styles from "./QuickStartItem.module.css";
 
 type Props = {

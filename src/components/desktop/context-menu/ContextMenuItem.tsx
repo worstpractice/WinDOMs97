@@ -1,4 +1,4 @@
-import { onLMB } from "utils/onLMB";
+import { onLMB } from "event-filters/onLMB";
 import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";

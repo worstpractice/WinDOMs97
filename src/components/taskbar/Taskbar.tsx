@@ -13,8 +13,8 @@ export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
   const taskbarRef = useMutableRef();
 
   const handleActive = () => {
-    activate(taskbarRef);
     closeMenus();
+    activate(taskbarRef);
   };
 
   return (

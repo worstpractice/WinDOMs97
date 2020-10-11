@@ -3,7 +3,7 @@ import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
 import { moveInFront } from "utils/moveInFront";
-import { onLMB } from "utils/onLMB";
+import { onLMB } from "event-filters/onLMB";
 
 export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
   /** Drag start event. */
@@ -15,8 +15,6 @@ export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | n
     moveInFront(osWindow);
 
     const latitude = getResizeLatitude(osWindow, e);
-
-    console.log(latitude);
 
     const { clientX, clientY } = e;
 
@@ -35,7 +33,7 @@ export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | n
       const currentTop = osWindow.getBoundingClientRect().top;
 
       // TODO: Why are these not being used? Highly suspicious.
-      // const currentWidth = osWindow.getBoundingClientRect().width;
+      const currentWidth = osWindow.getBoundingClientRect().width;
       // const currentHeight = osWindow.getBoundingClientRect().height;
 
       let left = "";
@@ -119,6 +117,8 @@ export const useOnResizeWindow = (windowRef: MutableRefObject<HTMLDivElement | n
 
       if (width) osWindow.style.width = width;
       if (height) osWindow.style.height = height;
+
+      console.log(startingWidth - currentWidth < 0);
     });
 
     let cleanup: () => void;

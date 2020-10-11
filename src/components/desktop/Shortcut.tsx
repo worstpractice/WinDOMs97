@@ -5,9 +5,10 @@ import type { FC, MouseEventHandler } from "react";
 import React from "react";
 import { useStore } from "store";
 import type { Binary } from "typings/Binary";
+import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
-import { handleDragStart } from "utils/handleDragStart";
-import { isRef } from "utils/isRef";
+import { isRef } from "type-predicates/isRef";
+import { onLMB } from "event-filters/onLMB";
 import styles from "./Shortcut.module.css";
 
 type Props = {
@@ -22,20 +23,19 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   // NOTE: For React reasons, this call depends on `Desktop` (the parent component) calling `useActivateOnMount()` to work properly.
   useDesktopLayoutOnMount(shortcutRef.current);
 
-  /** Wrapping this in `onLMB()` prevents momentary highlighting of the shortcut.
-   *
-   * The flash provides useful interaction feedback however. */
   const handleActive: MouseEventHandler = (e) => {
     // NOTE: This makes shortcut selection sticky, which we want.
     e.stopPropagation();
     closeMenus();
     activate(shortcutRef);
     handleMove(e);
+    console.log(e);
   };
 
-  const handleLaunch = () => {
+  const handleLaunch = onLMB((e) => {
     executeBinary(binary);
-  };
+    console.log(e);
+  });
 
   const style = isRef(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
 
@@ -46,7 +46,7 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
       className={style}
       // TODO: OnDoubleClick not supported in Chrome? It works in firefox!
       onDoubleClick={handleLaunch}
-      onDragStart={handleDragStart}
+      onDragStart={blockNativeDrag}
       onMouseDown={handleActive}
       ref={shortcutRef}
     >

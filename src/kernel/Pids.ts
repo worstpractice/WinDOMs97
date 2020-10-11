@@ -1,4 +1,4 @@
-import { isUndefined } from "utils/isUndefined";
+import { isUndefined } from "type-predicates/isUndefined";
 import { from } from "utils/range";
 
 /** Inclusive. */

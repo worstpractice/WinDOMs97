@@ -1,5 +1,5 @@
 import type { Process } from "typings/Process";
-import { is } from "utils/is";
+import { is } from "type-predicates/is";
 
 export const minimize = (process: Process) => {
   const { isMinimized, notificationItemRef, runningItemRef, windowRef } = process;

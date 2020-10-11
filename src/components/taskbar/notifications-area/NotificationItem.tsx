@@ -4,7 +4,7 @@ import React from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
-import { onLMB } from "utils/onLMB";
+import { onLMB } from "event-filters/onLMB";
 import styles from "./NotificationItem.module.css";
 
 type Props = {

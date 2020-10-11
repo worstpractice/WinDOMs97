@@ -6,14 +6,14 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
 import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/useOnResizeWindow";
-import React, { FC, MouseEventHandler, useState } from "react";
+import React, { FC, useState } from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import { handleDragStart } from "utils/handleDragStart";
-import { is } from "utils/is";
+import { blockNativeDrag } from "utils/blockNativeDrag";
+import { is } from "type-predicates/is";
 import { moveInFront } from "utils/moveInFront";
-import { onLMB } from "utils/onLMB";
+import { onLMB } from "event-filters/onLMB";
 import styles from "./Window.module.css";
 
 type Props = {
@@ -32,22 +32,23 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
   // NOTE: This is vital. This is the line where each process is given its very own window handle.
   process.windowRef = windowRef;
 
-  const handleActive: MouseEventHandler = onLMB((e) => {
+  const handleActive = onLMB((e) => {
     closeMenus();
     activate(windowRef);
     moveInFront(windowRef);
 
     if (!isResizable) return;
 
+    const { current } = windowRef;
+    const { target } = e;
+
     // Abort resizing if the click was unrelated to the current window
-    if (!is(e.target, windowRef.current)) return;
+    if (!is(target, current)) return;
 
     handleResize(e);
   });
 
   const handleChromeDrag = onLMB((e) => {
-    activate(windowRef);
-    moveInFront(windowRef);
     handleMove(e);
   });
 
@@ -64,7 +65,7 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
   return (
     <article
       className={style}
-      onDragStart={handleDragStart}
+      onDragStart={blockNativeDrag}
       onMouseDown={handleActive}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}

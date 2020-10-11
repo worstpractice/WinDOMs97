@@ -3,8 +3,8 @@ import type { FC } from "react";
 import React from "react";
 import { useStore } from "store";
 import { css } from "utils/css";
-import { isRef } from "utils/isRef";
-import { onLMB } from "utils/onLMB";
+import { isRef } from "type-predicates/isRef";
+import { onLMB } from "event-filters/onLMB";
 import styles from "./StartButton.module.css";
 
 type Props = {

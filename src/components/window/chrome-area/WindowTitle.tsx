@@ -3,7 +3,7 @@ import React from "react";
 import { useStore } from "store";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import { isRef } from "utils/isRef";
+import { isRef } from "type-predicates/isRef";
 import styles from "./WindowTitle.module.css";
 
 type Props = {
