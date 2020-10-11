@@ -1,14 +1,15 @@
 import { onLMB } from "event-filters/onLMB";
-import type { MutableRefObject } from "react";
+import { useState } from "react";
+import type { OsRef } from "typings/OsRef";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnMoveShortcut.module.css";
 
-export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | null>>(shortcutRef: T) => {
-  const handleMouseDown = onLMB(({ clientX, clientY }) => {
-    const shortcut = shortcutRef.current;
+export const useOnDragAndDrop = ({ current: shortcut }: OsRef) => {
+  const [isMoving, setIsMoving] = useState<boolean>(false);
 
+  const handleMouseDown = onLMB(({ clientX, clientY }) => {
     if (!shortcut) return;
 
     const shiftX = clientX - shortcut.getBoundingClientRect().left;
@@ -42,10 +43,14 @@ export const useOnMoveShortcut = <T extends MutableRefObject<HTMLDivElement | nu
       shortcut.style.top = `${pageY - shiftY}px`;
 
       cleanup();
+
+      setIsMoving(false);
     });
 
     cleanup = compose(addEventListener("mousemove", onMouseMove), addEventListener("mouseup", onMouseUp));
+
+    setIsMoving(true);
   });
 
-  return handleMouseDown;
+  return [isMoving, handleMouseDown] as const;
 };

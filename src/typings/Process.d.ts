@@ -1,4 +1,4 @@
-import type { MutableRefObject } from "react";
+import type { OsRef } from "typings/OsRef";
 
 type Data = {
   ////////////////////////////////////////////////////////
@@ -8,9 +8,9 @@ type Data = {
   ////////////////////////////////////////////////////////
   isMinimized: boolean;
   ////////////////////////////////////////////////////////
-  notificationItemRef: MutableRefObject<HTMLDivElement | null>;
-  runningItemRef: MutableRefObject<HTMLDivElement | null>;
-  windowRef: MutableRefObject<HTMLDivElement | null>;
+  notificationItemRef: OsRef;
+  runningItemRef: OsRef;
+  windowRef: OsRef;
   ////////////////////////////////////////////////////////
 };
 

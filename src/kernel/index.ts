@@ -1,7 +1,7 @@
 import { programs } from "binaries";
 import { Pids } from "kernel/Pids";
-import type { MutableRefObject } from "react";
 import type { Binary } from "typings/Binary";
+import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import create from "zustand";
@@ -9,7 +9,7 @@ import { combine, devtools } from "zustand/middleware";
 
 type Data = {
   /////////////////////////////////////
-  activeRef: MutableRefObject<HTMLDivElement | null>;
+  activeRef: OsRef;
   /////////////////////////////////////
   availablePids: readonly number[];
   installedBinaries: readonly Binary[];
@@ -20,7 +20,7 @@ type Data = {
 };
 
 type Actions = {
-  activate: (to: MutableRefObject<HTMLDivElement | null>) => void;
+  activate: (to: OsRef) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   setLastClickPosition: (to: Position) => void;
@@ -48,7 +48,7 @@ export const useKernel = create<State>(
       (set) =>
         ({
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          activate({ current }: MutableRefObject<HTMLDivElement | null>) {
+          activate({ current }: OsRef) {
             set(({ activeRef }) => {
               console.groupCollapsed(`${++debugLogCounter}. State Changed `);
               console.debug("FROM:", activeRef.current);

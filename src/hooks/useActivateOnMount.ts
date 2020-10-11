@@ -1,9 +1,9 @@
 import { useKernel } from "kernel";
-import type { MutableRefObject } from "react";
 import { useLayoutEffect } from "react";
+import type { OsRef } from "typings/OsRef";
 import { moveInFront } from "utils/moveInFront";
 
-export const useActivateOnMount = (ref: MutableRefObject<HTMLDivElement | null>) => {
+export const useActivateOnMount = (ref: OsRef) => {
   const { activate } = useKernel();
 
   useLayoutEffect(() => {

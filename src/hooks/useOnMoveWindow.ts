@@ -1,10 +1,10 @@
 import { onLMB } from "event-filters/onLMB";
-import type { MutableRefObject } from "react";
+import type { OsRef } from "typings/OsRef";
 import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 
-export const useOnMoveWindow = (windowRef: MutableRefObject<HTMLDivElement | null>) => {
+export const useOnMoveWindow = (windowRef: OsRef) => {
   const handleMouseDown = onLMB(({ clientX, clientY }) => {
     const osWindow = windowRef.current;
 

@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useMutableRef } from "hooks/useMutableRef";
-import { useOnMoveShortcut } from "hooks/useOnMoveShortcut";
+import { useOnDragAndDrop } from "hooks/useOnDragAndDrop";
 import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
@@ -19,7 +19,9 @@ type Props = {
 export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useKernel();
   const shortcutRef = useMutableRef();
-  const handleMove = useOnMoveShortcut(shortcutRef);
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isMoving, handleMove] = useOnDragAndDrop(shortcutRef);
 
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(shortcutRef.current);
@@ -32,13 +34,8 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
     handleMove(e);
   };
 
-  const handleLaunch = onLMB((e) => {
+  const handleLaunch = onLMB(() => {
     executeBinary(binary);
-  });
-
-  const handleDropZone = onLMB((e) => {
-    console.log(e);
-    console.log("Dropzone:", shortcutRef.current);
   });
 
   const style = isRef(activeRef, shortcutRef) ? css(styles.Shortcut, styles.Active) : styles.Shortcut;
@@ -52,7 +49,6 @@ export const Shortcut: FC<Props> = ({ binary, closeMenus }) => {
       onDoubleClick={handleLaunch}
       onDragStart={blockNativeDrag}
       onMouseDown={handleActive}
-      onMouseUp={handleDropZone}
       ref={shortcutRef}
     >
       <img alt={fileName} className={styles.Icon} src={icon} />
