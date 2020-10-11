@@ -20,7 +20,7 @@ export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
   process.notificationItemRef = notificationItemRef;
 
   const handleActive: MouseEventHandler = onLMB((e) => {
-    // NOTE: This is required since after the capture phase, the event would bubble and hand control back over to the taskbar (which we don't want).
+    // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
     activate(process.windowRef);

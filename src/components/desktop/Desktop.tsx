@@ -14,7 +14,7 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useKernel();
   const desktopRef = useMutableRef();
 
-  // NOTE: this call is what allows the child components calling `useActivateOnMount()` to work properly.
+  // NOTE: this call allows the children calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);
 
   const handleContextMenu: MouseEventHandler = ({ clientX, clientY }) => {
@@ -33,6 +33,7 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
       id="Desktop"
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
+      onDoubleClickCapture={console.log}
       ref={desktopRef}
     >
       {children}
