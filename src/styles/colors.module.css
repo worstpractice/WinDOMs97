@@ -17,16 +17,24 @@
   --blue-transparent: rgba(0, 0, 255, 0.1);
   --white-transparent: rgba(248, 248, 248, 0.5);
 
-  /** Uses */
+  /** Contexts */
+
+  /* Desktop */
   --desktop-wallpaper: var(--teal);
   --desktopitem-background: var(--blue-transparent);
   --desktopitem-outline: var(--white-transparent);
+
+  /* Start Menu */
   --startmenu-spine-dim: var(--blue-transparent);
   --startmenu-spine-bright: var(--blue-dim);
+
+  /* Titlebar */
   --titlebar-active-dim: var(--blue-dim);
   --titlebar-active-bright: var(--blue-bright);
   --titlebar-passive-dim: var(--gray-dim);
   --titlebar-passive-bright: var(--gray-dim);
+
+  /* Window */
   --window-background: var(--gray);
   --window-outline: var(--white);
 }
