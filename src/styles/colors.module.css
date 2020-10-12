@@ -1,12 +1,32 @@
 :root {
-  --desktop-wallpaper-teal: rgb(0, 117, 130);
-  --desktopitem-background-blue: rgba(0, 0, 255, 0.1);
-  --desktopitem-outline-white: rgba(255, 255, 255, 50%);
-  --start-menu-bright-blue: rgb(0, 0, 255);
-  --start-menu-dim-blue: rgb(0, 0, 128);
-  --titlebar-bright-blue: rgb(16, 129, 205);
-  --titlebar-dim-blue: rgb(2, 0, 128);
-  --titlebar-dim-gray: rgb(128, 128, 128);
-  --window-background-gray: rgb(192, 192, 192);
-  --window-outline-white: rgb(248, 248, 248);
+  /** Colors */
+
+  /* Base */
+  --gray: rgb(192, 192, 192);
+  --teal: rgb(0, 117, 130);
+  --white: rgb(248, 248, 248);
+
+  /* Bright */
+  --blue-bright: rgb(16, 129, 205);
+
+  /* Dim */
+  --blue-dim: rgb(0, 0, 128);
+  --gray-dim: rgb(128, 128, 128);
+
+  /* Transparent */
+  --blue-transparent: rgba(0, 0, 255, 0.1);
+  --white-transparent: rgba(248, 248, 248, 0.5);
+
+  /** Uses */
+  --desktop-wallpaper: var(--teal);
+  --desktopitem-background: var(--blue-transparent);
+  --desktopitem-outline: var(--white-transparent);
+  --startmenu-spine-dim: var(--blue-transparent);
+  --startmenu-spine-bright: var(--blue-dim);
+  --titlebar-active-dim: var(--blue-dim);
+  --titlebar-active-bright: var(--blue-bright);
+  --titlebar-passive-dim: var(--gray-dim);
+  --titlebar-passive-bright: var(--gray-dim);
+  --window-background: var(--gray);
+  --window-outline: var(--white);
 }

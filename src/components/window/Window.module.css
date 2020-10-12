@@ -21,7 +21,7 @@
 }
 
 .Outline {
-  outline-color: var(--window-outline-white);
+  outline-color: var(--window-outline);
   outline-style: outset;
   outline-width: 2px;
 }

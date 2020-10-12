@@ -9,7 +9,7 @@
 }
 
 .ContextMenuItem:hover {
-  background-color: var(--start-menu-dim-blue);
+  background-color: var(--startmenu-spine-bright);
   color: white;
 }
 

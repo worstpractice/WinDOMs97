@@ -4,7 +4,7 @@
   margin-left: 1px;
   margin-right: 1px;
   min-height: 100%;
-  outline-color: var(--window-outline-white);
+  outline-color: var(--window-outline);
   outline-style: inset;
   outline-width: 2px;
 }

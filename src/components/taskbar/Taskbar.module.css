@@ -1,13 +1,13 @@
 @import "../../styles/colors.module.css";
 
 .Taskbar {
-  background-color: var(--window-background-gray);
+  background-color: var(--window-background);
   bottom: 0;
   display: flex;
   gap: 7px;
   height: 30px;
   left: 0;
-  outline-color: var(--window-outline-white);
+  outline-color: var(--window-outline);
   outline-style: outset;
   outline-width: 2px;
   padding: 5px;

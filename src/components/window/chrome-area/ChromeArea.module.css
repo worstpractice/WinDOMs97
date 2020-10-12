@@ -2,7 +2,7 @@
 
 .ChromeArea {
   align-items: center;
-  background: linear-gradient(90deg, var(--titlebar-dim-gray), var(--window-background-gray));
+  background: linear-gradient(90deg, var(--titlebar-passive-dim), var(--window-background));
   cursor: grab;
   display: flex;
   gap: 5px;
@@ -14,5 +14,5 @@
 
 /*** WARN: Must come last ***/
 .Active {
-  background: linear-gradient(90deg, var(--titlebar-dim-blue), var(--titlebar-bright-blue));
+  background: linear-gradient(90deg, var(--titlebar-active-dim), var(--titlebar-active-bright));
 }
