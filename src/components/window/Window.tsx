@@ -2,9 +2,10 @@ import { ChromeArea } from "components/window/chrome-area/ChromeArea";
 import { WindowButtons } from "components/window/chrome-area/WindowButtons";
 import { WindowTitle } from "components/window/chrome-area/WindowTitle";
 import { ProgramArea } from "components/window/program-area/ProgramArea";
+import { ProgramContent } from "components/window/program-area/ProgramContent";
 import { onLMB } from "event-filters/onLMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/useOnResizeWindow";
 import { useKernel } from "kernel";
@@ -24,27 +25,26 @@ type Props = {
 
 export const Window: FC<Props> = ({ children, closeMenus, process }) => {
   const { activate } = useKernel();
-  const windowRef = useMutableRef();
+  const windowRef = useDomRef<HTMLElement>();
   const handleMove = useOnMoveWindow(windowRef);
   const handleResize = useOnResizeWindow(windowRef);
-  const [isResizable, setIsResizable] = useState<boolean>(false);
+  const [isResizable, setIsResizable] = useState(false);
   useActivateOnMount(windowRef);
 
   // NOTE: This is vital. This is the line where each process is given its very own window handle.
   process.windowRef = windowRef;
 
-  const handleActive = onLMB((e) => {
+  const handleActive = onLMB<HTMLElement>((e) => {
     closeMenus();
     activate(windowRef);
     moveInFront(windowRef);
 
     if (!isResizable) return;
 
-    const { current } = windowRef;
     const { target } = e;
 
     // Abort resizing if the click was unrelated to the current window
-    if (!is(target, current)) return;
+    if (!is(target, windowRef.current)) return;
 
     handleResize(e);
   });
@@ -79,7 +79,9 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
           <WindowButtons process={process} />
         </ChromeArea>
       </span>
-      <ProgramArea>{children}</ProgramArea>
+      <ProgramArea>
+        <ProgramContent>{children}</ProgramContent>
+      </ProgramArea>
     </article>
   );
 };

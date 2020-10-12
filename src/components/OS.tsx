@@ -10,10 +10,10 @@ import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
-import { Program } from "components/window/program-area/Program";
 import { Window } from "components/window/Window";
 import { useOsMenus } from "hooks/usOsMenus";
 import { useKernel } from "kernel";
+import { Paint } from "programs/paint/Paint";
 import type { FC } from "react";
 import React from "react";
 import { Desktop } from "./desktop/Desktop";
@@ -49,7 +49,7 @@ export const OS: FC<Props> = () => {
 
         return (
           <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process}>
-            <Program />
+            <Paint />
           </Window>
         );
       })}

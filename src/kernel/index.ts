@@ -9,7 +9,7 @@ import { combine, devtools } from "zustand/middleware";
 
 type Data = {
   /////////////////////////////////////
-  activeRef: OsRef;
+  activeRef: OsRef<HTMLElement>;
   /////////////////////////////////////
   availablePids: readonly number[];
   installedBinaries: readonly Binary[];
@@ -20,7 +20,7 @@ type Data = {
 };
 
 type Actions = {
-  activate: (to: OsRef) => void;
+  activate: <T extends OsRef<HTMLElement>>(to: T) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   setLastClickPosition: (to: Position) => void;
@@ -48,7 +48,7 @@ export const useKernel = create<State>(
       (set) =>
         ({
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          activate({ current }: OsRef) {
+          activate<T extends OsRef<HTMLElement>>({ current }: T) {
             set(({ activeRef }) => {
               console.groupCollapsed(`${++debugLogCounter}. State Changed `);
               console.debug("FROM:", activeRef.current);

@@ -4,7 +4,7 @@ import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 
-export const useOnMoveWindow = (windowRef: OsRef) => {
+export const useOnMoveWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
   const handleMouseDown = onLMB(({ clientX, clientY }) => {
     const osWindow = windowRef.current;
 
@@ -13,7 +13,7 @@ export const useOnMoveWindow = (windowRef: OsRef) => {
     const shiftX = clientX - osWindow.getBoundingClientRect().left;
     const shiftY = clientY - osWindow.getBoundingClientRect().top;
 
-    moveInFront(osWindow);
+    moveInFront({ current: osWindow });
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB(({ pageX, pageY }) => {

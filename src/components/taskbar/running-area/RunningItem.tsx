@@ -1,4 +1,4 @@
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
@@ -15,7 +15,7 @@ type Props = {
 
 export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate, activeRef } = useKernel();
-  const runningItemRef = useMutableRef();
+  const runningItemRef = useDomRef();
 
   // NOTE: This is vital. This is the line where each process is given its very own `runningItem` handle.
   process.runningItemRef = runningItemRef;

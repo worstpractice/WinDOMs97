@@ -1,4 +1,4 @@
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
@@ -10,7 +10,7 @@ type Props = {
 
 export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
   const { activate } = useKernel();
-  const taskbarRef = useMutableRef();
+  const taskbarRef = useDomRef<HTMLElement>();
 
   const handleActive = () => {
     closeMenus();

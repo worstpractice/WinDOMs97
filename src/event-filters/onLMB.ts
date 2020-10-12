@@ -1,7 +1,7 @@
 import type { MouseEventHandler } from "react";
 
-export const onLMB = (fn: MouseEventHandler) => {
-  const inner: MouseEventHandler = (e) => {
+export const onLMB = <T extends NonNullable<HTMLElement>>(fn: MouseEventHandler<T>) => {
+  const inner: MouseEventHandler<T> = (e) => {
     if (e.button === 0) {
       fn(e);
     }

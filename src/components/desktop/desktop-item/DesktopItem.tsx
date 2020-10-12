@@ -2,10 +2,10 @@ import { DesktopItemIcon } from "components/desktop/desktop-item/DesktopItemIcon
 import { DesktopItemTitle } from "components/desktop/desktop-item/DesktopItemTitle";
 import { onLMB } from "event-filters/onLMB";
 import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useOnDragAndDrop } from "hooks/useOnDragAndDrop";
 import { useKernel } from "kernel";
-import type { FC, MouseEventHandler } from "react";
+import type { FC } from "react";
 import React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
@@ -20,23 +20,23 @@ type Props = {
 
 export const DesktopItem: FC<Props> = ({ binary, closeMenus }) => {
   const { activate, activeRef, executeBinary } = useKernel();
-  const desktopitemRef = useMutableRef();
+  const desktopitemRef = useDomRef<HTMLElement>();
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isMoving, handleMove] = useOnDragAndDrop(desktopitemRef);
 
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
-  useDesktopLayoutOnMount(desktopitemRef.current);
+  useDesktopLayoutOnMount(desktopitemRef);
 
-  const handleActive: MouseEventHandler = (e) => {
+  const handleActive = onLMB<HTMLElement>((e) => {
     // NOTE: This makes desktopitem selection sticky, which we want.
     e.stopPropagation();
     closeMenus();
     activate(desktopitemRef);
     handleMove(e);
-  };
+  });
 
-  const handleLaunch = onLMB(() => {
+  const handleLaunch = onLMB<HTMLElement>(() => {
     executeBinary(binary);
   });
 

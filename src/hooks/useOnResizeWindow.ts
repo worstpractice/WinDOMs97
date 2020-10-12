@@ -5,14 +5,14 @@ import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
 import { moveInFront } from "utils/moveInFront";
 
-export const useOnResizeWindow = (windowRef: OsRef) => {
+export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
   /** Drag start event. */
-  const handleMouseDown = onLMB((e) => {
+  const handleMouseDown = onLMB<HTMLElement>((e) => {
     const osWindow = windowRef.current;
 
     if (!osWindow) return;
 
-    moveInFront(osWindow);
+    moveInFront({ current: osWindow });
 
     const latitude = getResizeLatitude(osWindow, e);
 
@@ -28,12 +28,12 @@ export const useOnResizeWindow = (windowRef: OsRef) => {
     const startingHeight = osWindow.getBoundingClientRect().height;
 
     /** Stream of events while dragging. */
-    const onMouseMove = onLMB(({ pageX, pageY }) => {
+    const onMouseMove = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
       const currentLeft = osWindow.getBoundingClientRect().left;
       const currentTop = osWindow.getBoundingClientRect().top;
 
       // TODO: Why are these not being used? Highly suspicious.
-      const currentWidth = osWindow.getBoundingClientRect().width;
+      // const currentWidth = osWindow.getBoundingClientRect().width;
       // const currentHeight = osWindow.getBoundingClientRect().height;
 
       let left = "";
@@ -117,14 +117,12 @@ export const useOnResizeWindow = (windowRef: OsRef) => {
 
       if (width) osWindow.style.width = width;
       if (height) osWindow.style.height = height;
-
-      console.log(startingWidth - currentWidth < 0);
     });
 
     let cleanup: () => void;
 
     /** Drag stop event. */
-    const onMouseUp = onLMB(() => {
+    const onMouseUp = onLMB<HTMLBodyElement>(() => {
       cleanup();
     });
 

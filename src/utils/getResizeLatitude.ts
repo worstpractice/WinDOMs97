@@ -3,10 +3,11 @@ import type { Latitude } from "typings/Latitude";
 import { getPixelsAlongsideOsWindow } from "utils/getPixelsAlongsideOsWindow";
 
 // prettier-ignore
-export const getResizeLatitude = (osWindow: HTMLDivElement, e: MouseEvent<Element, globalThis.MouseEvent>): Latitude => {
-  const { x, y } = getPixelsAlongsideOsWindow(osWindow, e);
+export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends MouseEvent<T>>(osWindowRef: T, e: U): Latitude => {
 
-  const { width, height } = osWindow.getBoundingClientRect();
+  const { x, y } = getPixelsAlongsideOsWindow(osWindowRef, e);
+
+  const { width, height } = osWindowRef.getBoundingClientRect();
 
   // const percentX = Math.ceil((x / width) * 100);
   // const percentY = Math.ceil((y / height) * 100);

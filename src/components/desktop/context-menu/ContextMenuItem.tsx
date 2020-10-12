@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import React from "react";
-import { useKernel } from "kernel";
 import type { Binary } from "typings/Binary";
 import styles from "./ContextMenuItem.module.css";
 
@@ -12,7 +12,7 @@ type Props = {
 export const ContextMenuItem: FC<Props> = ({ binary }) => {
   const { executeBinary } = useKernel();
 
-  const handleLaunch = onLMB(() => {
+  const handleLaunch = onLMB<HTMLLIElement>(() => {
     executeBinary(binary);
   });
 

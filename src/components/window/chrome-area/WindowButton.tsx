@@ -27,7 +27,7 @@ type Props =
     };
 
 export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
-  const [isPressed, setIsPressed] = useState<boolean>(false);
+  const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown: MouseEventHandler = (e) => {
     // NOTE: This is necessary to stop the window from starting to move.

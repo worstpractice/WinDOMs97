@@ -6,8 +6,8 @@ import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnDragAndDrop.module.css";
 
-export const useOnDragAndDrop = (desktopItemRef: OsRef) => {
-  const [isMoving, setIsMoving] = useState<boolean>(false);
+export const useOnDragAndDrop = <T extends OsRef<HTMLElement>>(desktopItemRef: T) => {
+  const [isMoving, setIsMoving] = useState(false);
 
   const handleMouseDown = onLMB(({ clientX, clientY }) => {
     const { current: desktopItem } = desktopItemRef;
@@ -17,7 +17,7 @@ export const useOnDragAndDrop = (desktopItemRef: OsRef) => {
     const shiftX = clientX - desktopItem.getBoundingClientRect().left;
     const shiftY = clientY - desktopItem.getBoundingClientRect().top;
 
-    moveInFront(desktopItem);
+    moveInFront({ current: desktopItem });
 
     const clone = desktopItem.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);

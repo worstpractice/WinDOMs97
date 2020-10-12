@@ -1,4 +1,5 @@
 import { useLayoutEffect } from "react";
+import type { OsRef } from "typings/OsRef";
 
 /** Denotes how many hundred pixels. */
 let x = 0;
@@ -8,16 +9,18 @@ let y = 0;
 /** Denotes how many hundred pixels. */
 const maxHeight = Number(document.documentElement.clientHeight.toString()[0]);
 
-export const useDesktopLayoutOnMount = (ref: HTMLDivElement | null) => {
+export const useDesktopLayoutOnMount = <T extends OsRef<HTMLElement>>(desktopItemRef: T) => {
   useLayoutEffect(() => {
-    if (!ref) return;
+    const { current } = desktopItemRef;
+
+    if (!current) return;
 
     if (x === maxHeight) {
       x = 0;
       y++;
     }
 
-    ref.style.top = `${x++}00px`;
-    ref.style.left = `${y}00px`;
-  }, [ref]);
+    current.style.top = `${x++}00px`;
+    current.style.left = `${y}00px`;
+  }, [desktopItemRef]);
 };

@@ -1,5 +1,5 @@
 import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
@@ -12,7 +12,7 @@ type Props = {
 
 export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useKernel();
-  const desktopRef = useMutableRef();
+  const desktopRef = useDomRef<HTMLElement>();
 
   // NOTE: this call allows the children calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);

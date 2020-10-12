@@ -1,5 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
-import { useMutableRef } from "hooks/useMutableRef";
+import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
 import React from "react";
@@ -14,7 +14,7 @@ type Props = {
 
 export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate } = useKernel();
-  const notificationItemRef = useMutableRef();
+  const notificationItemRef = useDomRef();
 
   // NOTE: This is vital. This is the line where each process is given its very own `notificationItem` handle.
   process.notificationItemRef = notificationItemRef;

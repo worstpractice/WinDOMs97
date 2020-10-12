@@ -1,12 +1,9 @@
 @import "../../../styles/colors.module.css";
 
-.ProgramArea {
-  background-color: var(--window-background-gray);
-  cursor: auto;
+.ProgramContent {
   height: 100%;
   outline-color: var(--window-outline-white);
-  outline-style: outset;
+  outline-style: inset;
   outline-width: 2px;
-  padding: 4px;
   width: 100%;
 }
