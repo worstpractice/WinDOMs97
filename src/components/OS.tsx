@@ -13,7 +13,6 @@ import { StartButton } from "components/taskbar/start-area/StartButton";
 import { Window } from "components/window/Window";
 import { useOsMenus } from "hooks/usOsMenus";
 import { useKernel } from "kernel";
-import { Paint } from "programs/paint/Paint";
 import type { FC } from "react";
 import React from "react";
 import { Desktop } from "./desktop/Desktop";
@@ -47,11 +46,7 @@ export const OS: FC<Props> = () => {
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return (
-          <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process}>
-            <Paint />
-          </Window>
-        );
+        return <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
       })}
       {openMenu === "StartMenu" && (
         <StartMenu>

@@ -3,46 +3,22 @@ import { useCanvasRef } from "hooks/useCanvas";
 import { useDomRef } from "hooks/useDomRef";
 import type { FC } from "react";
 import React, { useState } from "react";
-import { CanvasRef } from "typings/CanvasRef";
 import type { Position } from "typings/Position";
+import { drawLine } from "./drawLine";
 import styles from "./Paint.module.css";
 
 type Props = {};
 
-const drawLine = ({ current: ctx }: CanvasRef, moveTo: Position, lineTo: Position) => {
-  if (!ctx) return;
-
-  ctx.beginPath();
-  ctx.strokeStyle = "black";
-  ctx.lineWidth = 1;
-
-  ////////////////////////////////
-
-  const { x: mX, y: mY } = moveTo;
-
-  ctx.moveTo(mX, mY);
-
-  ////////////////////////////////
-
-  const { x: lX, y: lY } = lineTo;
-
-  ctx.lineTo(lX, lY);
-
-  ////////////////////////////////
-
-  ctx.stroke();
-  ctx.closePath();
-};
-
 export const Paint: FC<Props> = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
-  const paintRef = useDomRef<HTMLCanvasElement>();
-  const ctxRef = useCanvasRef<CanvasRenderingContext2D>();
+  const frameRef = useDomRef<HTMLElement>();
+  const canvasRef = useDomRef<HTMLCanvasElement>();
+  const ctxRef = useCanvasRef();
 
-  if (paintRef.current) {
+  if (canvasRef.current) {
     if (!ctxRef.current) {
-      ctxRef.current = paintRef.current.getContext("2d");
+      ctxRef.current = canvasRef.current.getContext("2d");
     }
   }
 
@@ -52,6 +28,10 @@ export const Paint: FC<Props> = () => {
     setPosition({ x: offsetX, y: offsetY });
     setIsDrawing(true);
   });
+
+  const handleMouseLeave = () => {
+    setIsDrawing(false);
+  };
 
   const handleMouseMove = onLMB<HTMLCanvasElement>(({ nativeEvent }) => {
     if (!isDrawing) return;
@@ -92,9 +72,23 @@ export const Paint: FC<Props> = () => {
     setIsDrawing(false);
   });
 
+  // TODO: ???
+  const width = frameRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
+  const height = frameRef.current?.getBoundingClientRect().height ?? 286; // ditto
+
   return (
-    <main className={styles.Paint}>
-      <canvas onMouseDown={handleMouseDown} onMouseMove={handleMouseMove} onMouseUp={handleMouseUp} />
+    <main className={styles.Frame} ref={frameRef}>
+      <canvas
+        // TODO: Make this not be complete bullshit
+        height={height}
+        onMouseDown={handleMouseDown}
+        onMouseLeave={handleMouseLeave}
+        onMouseMove={handleMouseMove}
+        onMouseUp={handleMouseUp}
+        ref={canvasRef}
+        // TODO: Make this not be complete bullshit
+        width={width}
+      />
     </main>
   );
 };
