@@ -25,14 +25,14 @@
   --desktopitem-outline: var(--white-transparent);
 
   /* Start Menu */
-  --startmenu-spine-dim: var(--blue-transparent);
   --startmenu-spine-bright: var(--blue-dim);
+  --startmenu-spine-dim: var(--blue-transparent);
 
   /* Titlebar */
-  --titlebar-active-dim: var(--blue-dim);
   --titlebar-active-bright: var(--blue-bright);
-  --titlebar-passive-dim: var(--gray-dim);
+  --titlebar-active-dim: var(--blue-dim);
   --titlebar-passive-bright: var(--gray-dim);
+  --titlebar-passive-dim: var(--gray-dim);
 
   /* Window */
   --window-background: var(--gray);
