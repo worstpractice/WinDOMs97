@@ -6,10 +6,10 @@ import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnDragAndDrop.module.css";
 
-export const useOnDragAndDrop = <T extends OsRef<HTMLElement>>(desktopItemRef: T) => {
+export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
   const [isMoving, setIsMoving] = useState(false);
 
-  const handleMouseDown = onLMB(({ clientX, clientY }) => {
+  const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
     const { current: desktopItem } = desktopItemRef;
 
     if (!desktopItem) return;
@@ -27,7 +27,7 @@ export const useOnDragAndDrop = <T extends OsRef<HTMLElement>>(desktopItemRef: T
     desktopItem.classList.add(styles.Original);
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB(({ pageX, pageY }) => {
+    const onMouseMove = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
       clone.style.left = `${pageX - shiftX}px`;
       clone.style.top = `${pageY - shiftY}px`;
     });
@@ -35,7 +35,7 @@ export const useOnDragAndDrop = <T extends OsRef<HTMLElement>>(desktopItemRef: T
     let cleanup: () => void;
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB(({ pageX, pageY }) => {
+    const onMouseUp = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
       clone.classList.remove(styles.Moving);
       clone.remove();
 

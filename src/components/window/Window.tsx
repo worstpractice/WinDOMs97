@@ -44,13 +44,13 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
 
     const { target } = e;
 
-    // Abort resizing if the click was unrelated to the current window
+    // Abort resizing if click target was not current window
     if (!is(target, windowRef.current)) return;
 
     handleResize(e);
   });
 
-  const handleChromeDrag = onLMB((e) => {
+  const handleChromeDrag = onLMB<HTMLSpanElement>((e) => {
     handleMove(e);
   });
 

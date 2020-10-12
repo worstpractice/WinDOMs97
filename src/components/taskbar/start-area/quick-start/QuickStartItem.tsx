@@ -13,7 +13,7 @@ type Props = {
 export const QuickStartItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useKernel();
 
-  const handleLaunch = onLMB(() => {
+  const handleLaunch = onLMB<HTMLButtonElement>(() => {
     executeBinary(binary);
     closeMenus();
   });

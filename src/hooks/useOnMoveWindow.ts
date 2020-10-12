@@ -4,8 +4,8 @@ import { addEventListener } from "utils/addEventListener";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 
-export const useOnMoveWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
-  const handleMouseDown = onLMB(({ clientX, clientY }) => {
+export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windowRef: T) => {
+  const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
     const osWindow = windowRef.current;
 
     if (!osWindow) return;
@@ -16,7 +16,7 @@ export const useOnMoveWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
     moveInFront({ current: osWindow });
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB(({ pageX, pageY }) => {
+    const onMouseMove = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
       osWindow.style.left = `${pageX - shiftX}px`;
       osWindow.style.top = `${pageY - shiftY}px`;
     });
@@ -24,7 +24,7 @@ export const useOnMoveWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
     let cleanup: () => void;
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB(() => {
+    const onMouseUp = onLMB<HTMLBodyElement>(() => {
       cleanup();
     });
 
