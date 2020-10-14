@@ -7,7 +7,6 @@ export const drawLine = ({ current: ctx }: CanvasRef, moveTo: Position, lineTo: 
   ctx.beginPath();
   ctx.strokeStyle = "black";
   ctx.lineWidth = 1;
-
   ////////////////////////////////
 
   const { x: mX, y: mY } = moveTo;
