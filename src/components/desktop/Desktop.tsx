@@ -32,8 +32,9 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
       className={styles.Desktop}
       id="Desktop"
       onContextMenu={handleContextMenu}
-      onMouseDown={handleMouseDown}
       onDoubleClickCapture={console.log}
+      onMouseDown={handleMouseDown}
+      onMouseLeave={console.log}
       ref={desktopRef}
     >
       {children}
