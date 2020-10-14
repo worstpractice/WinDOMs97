@@ -22,7 +22,7 @@ export const QuickStartItem: FC<Props> = ({ binary, closeMenus }) => {
 
   return (
     <button className={styles.QuickStartItem} onMouseDown={handleLaunch} type="button">
-      <img alt={fileName} className={styles.Icon} src={icon} />
+      <img alt={fileName} className={styles.Icon} loading="lazy" src={icon} />
     </button>
   );
 };

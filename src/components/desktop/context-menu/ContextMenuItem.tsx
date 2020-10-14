@@ -20,7 +20,7 @@ export const ContextMenuItem: FC<Props> = ({ binary }) => {
 
   return (
     <li className={styles.ContextMenuItem} onMouseDown={handleLaunch}>
-      <img alt={fileName} className={styles.Icon} src={icon} />
+      <img alt={fileName} className={styles.Icon} loading="lazy" src={icon} />
       {name}
     </li>
   );

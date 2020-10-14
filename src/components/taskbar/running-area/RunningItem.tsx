@@ -35,7 +35,7 @@ export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
 
   return (
     <button className={style} onMouseDown={handleActive} ref={runningItemRef} type="button">
-      <img alt={name} className={styles.Icon} src={icon} />
+      <img alt={name} className={styles.Icon} loading="lazy" src={icon} />
       <p className={styles.Title}>{name}</p>
     </button>
   );

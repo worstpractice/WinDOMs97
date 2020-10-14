@@ -31,7 +31,7 @@ export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
 
   return (
     <li className={styles.NotificationItem} onMouseDown={handleActive} ref={notificationItemRef}>
-      <img alt={name} className={styles.Icon} src={icon} />
+      <img alt={name} className={styles.Icon} loading="lazy" src={icon} />
     </li>
   );
 };

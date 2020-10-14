@@ -19,7 +19,7 @@ export const WindowTitle: FC<Props> = ({ process }) => {
 
   return (
     <span className={styles.WindowTitle}>
-      <img alt={name} className={styles.ProgramIcon} src={icon} />
+      <img alt={name} className={styles.ProgramIcon} loading="lazy" src={icon} />
       <h1 className={style}>{name}</h1>
     </span>
   );

@@ -8,5 +8,5 @@ type Props = {
 };
 
 export const DesktopItemIcon: FC<Props> = ({ binary: { fileName, icon } }) => {
-  return <img alt={fileName} className={styles.DesktopItemIcon} src={icon} />;
+  return <img alt={fileName} className={styles.DesktopItemIcon} loading="lazy" src={icon} />;
 };

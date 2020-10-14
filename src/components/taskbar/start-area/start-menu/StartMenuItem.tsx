@@ -21,7 +21,7 @@ export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
 
   return (
     <li className={styles.StartMenuItem} onMouseDown={handleLaunch}>
-      <img alt={fileName} src={icon} />
+      <img alt={fileName} loading="lazy" src={icon} />
       {name}
     </li>
   );
