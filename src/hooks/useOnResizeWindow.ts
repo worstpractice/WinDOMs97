@@ -128,7 +128,6 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
 
           const newHeight = startingHeight + differenceTop;
 
-          // The new height must be GREATER than the MINIMAL height.
           if (newHeight > WINDOW_MIN_HEIGHT) {
             height = `${newHeight}px`;
           }

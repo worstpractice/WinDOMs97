@@ -8,7 +8,7 @@ const backingSet = new Set<number>(from(0).to(MAX));
 
 export const Pids = {
   get available() {
-    return Array.from(backingSet.values()).sort();
+    return [...backingSet].sort();
   },
 
   free(pid: number) {
@@ -28,7 +28,7 @@ export const Pids = {
     }
 
     // NOTE: Sorting here is crucial, or else WHICH windowbuttons affect WHICH window gets jumbled!
-    const availablePids = Array.from(backingSet.values()).sort();
+    const availablePids = [...backingSet].sort();
 
     const pid = availablePids.pop();
 
