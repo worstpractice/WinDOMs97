@@ -9,7 +9,6 @@ import { useDomRef } from "hooks/useDomRef";
 import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/useOnResizeWindow";
 import { useKernel } from "kernel";
-import { Paint } from "programs/paint/Paint";
 import type { FC } from "react";
 import React, { useState } from "react";
 import { is } from "type-predicates/is";
@@ -87,7 +86,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
       </span>
       <ProgramArea>
         <ProgramContent>
-          <Paint />
+          <p>Henlo</p>
         </ProgramContent>
       </ProgramArea>
     </article>

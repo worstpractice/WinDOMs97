@@ -5,6 +5,10 @@ import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
 import { moveInFront } from "utils/moveInFront";
 
+/** In pixels. */
+const WINDOW_MIN_HEIGHT = 250 as const;
+const WINDOW_MIN_WIDTH = 350 as const;
+
 export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
   /** Drag start event. */
   const handleMouseDown = onLMB<HTMLElement>((e) => {
@@ -32,9 +36,8 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
       const currentLeft = osWindow.getBoundingClientRect().left;
       const currentTop = osWindow.getBoundingClientRect().top;
 
-      // TODO: Why are these not being used? Highly suspicious.
-      // const currentWidth = osWindow.getBoundingClientRect().width;
-      // const currentHeight = osWindow.getBoundingClientRect().height;
+      const currentWidth = osWindow.getBoundingClientRect().width;
+      const currentHeight = osWindow.getBoundingClientRect().height;
 
       let left = "";
       let top = "";
@@ -42,74 +45,105 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
       let width = "";
       let height = "";
 
+      // LEFT
       switch (latitude) {
-        // TODO: Detect when we've slammed into the min-height of the window and stop, or the shrink-drag turns into a general window move (in that direction).
-        case "N": {
-          // left
-          top = `${pageY - startingShiftY}px`;
-
-          // width
-          height = `${startingHeight + (startingTop - currentTop)}px`;
-          break;
-        }
-        case "NE": {
-          // left
-          top = `${pageY - startingShiftY}px`;
-
-          width = `${pageX - currentLeft}px`;
-          height = `${startingHeight + (startingTop - currentTop)}px`;
-          break;
-        }
-        case "E": {
-          // left
-          // top
-
-          width = `${pageX - currentLeft}px`;
-          // height
-          break;
-        }
-        case "SE": {
-          // left
-          // top
-
-          width = `${pageX - currentLeft}px`;
-          height = `${pageY - currentTop}px`;
-          break;
-        }
-        case "S": {
-          // left
-          // top
-
-          // width
-          height = `${pageY - currentTop}px`;
-          break;
-        }
+        case "W":
+        case "NW":
         case "SW": {
-          left = `${pageX - startingShiftX}px`;
-          // top
+          const availableWidth = currentWidth - WINDOW_MIN_WIDTH;
 
-          width = `${startingWidth + (startingLeft - currentLeft)}px`;
-          height = `${pageY - currentTop}px`;
+          // NOTE: We're not just asking if `availableWidth` is truthy.
+          // We're actively concerned about negative values here.
+          if (availableWidth > 0) {
+            const newLeft = pageX - startingShiftX;
+
+            // If I wanted to pretend I knew math, I would call this value "delta".
+            const differenceLeft = startingLeft + availableWidth;
+
+            if (newLeft < differenceLeft) {
+              left = `${newLeft}px`;
+            }
+          }
           break;
         }
-        case "W": {
-          left = `${pageX - startingShiftX}px`;
-          // top
+      }
 
-          width = `${startingWidth + (startingLeft - currentLeft)}px`;
-          // height
-          break;
-        }
+      // TOP
+      switch (latitude) {
+        case "N":
+        case "NE":
         case "NW": {
-          left = `${pageX - startingShiftX}px`;
-          top = `${pageY - startingShiftY}px`;
+          const availableHeight = currentHeight - WINDOW_MIN_HEIGHT;
 
-          width = `${startingWidth + (startingLeft - currentLeft)}px`;
-          height = `${startingHeight + (startingTop - currentTop)}px`;
+          // NOTE: We're not just asking if `availableHeight` is truthy.
+          // We're actively concerned about negative values here.
+          if (availableHeight > 0) {
+            const newTop = pageY - startingShiftY;
+
+            // If I wanted to pretend I knew math, I would call this value "delta".
+            const differenceTop = startingTop + availableHeight;
+
+            if (newTop < differenceTop) {
+              top = `${newTop}px`;
+            }
+          }
           break;
         }
-        default:
-          throw new RangeError("WTF");
+      }
+
+      // WIDTH
+      switch (latitude) {
+        case "E":
+        case "NE":
+        case "SE": {
+          const newWidth = pageX - currentLeft;
+
+          if (newWidth > WINDOW_MIN_WIDTH) {
+            width = `${newWidth}px`;
+          }
+          break;
+        }
+        case "W":
+        case "NW":
+        case "SW": {
+          // If I wanted to pretend I knew math, I would call this value "delta".
+          const differenceLeft = startingLeft - currentLeft;
+
+          const newWidth = startingWidth + differenceLeft;
+
+          if (newWidth > WINDOW_MIN_WIDTH) {
+            width = `${newWidth}px`;
+          }
+          break;
+        }
+      }
+
+      // HEIGHT
+      switch (latitude) {
+        case "N":
+        case "NE":
+        case "NW": {
+          // If I wanted to pretend I knew math, I would call this value "delta".
+          const differenceTop = startingTop - currentTop;
+
+          const newHeight = startingHeight + differenceTop;
+
+          // The new height must be GREATER than the MINIMAL height.
+          if (newHeight > WINDOW_MIN_HEIGHT) {
+            height = `${newHeight}px`;
+          }
+          break;
+        }
+        case "S":
+        case "SE":
+        case "SW": {
+          const newHeight = pageY - currentTop;
+
+          if (newHeight > WINDOW_MIN_HEIGHT) {
+            height = `${newHeight}px`;
+          }
+          break;
+        }
       }
 
       if (left) osWindow.style.left = left;
