@@ -27,7 +27,7 @@ export const Pids = {
       throw new ReferenceError(`All ${MAX} pids are taken!`);
     }
 
-    // NOTE: Sorting here is crucial, or else which windowbuttons affect which window gets jumbled!
+    // NOTE: Sorting here is crucial, or else WHICH windowbuttons affect WHICH window gets jumbled!
     const availablePids = Array.from(backingSet.values()).sort();
 
     const pid = availablePids.pop();
