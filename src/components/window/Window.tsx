@@ -66,6 +66,9 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
 
   const style = isResizable ? css(styles.Window, styles.Resizable) : styles.Window;
 
+  const left = `${30 * process.pid}px`;
+  const top = `${20 * process.pid}px`;
+
   return (
     <article
       className={style}
@@ -74,7 +77,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={windowRef}
-      style={{ left: `${30 * process.pid}px`, top: `${20 * process.pid}px` }}
+      style={{ left, top }}
     >
       <span className={styles.Outline} onMouseDown={handleChromeDrag}>
         <ChromeArea process={process}>
