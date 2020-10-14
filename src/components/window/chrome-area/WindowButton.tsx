@@ -1,6 +1,8 @@
 import type { FC, MouseEventHandler } from "react";
 import React, { useState } from "react";
 import { css } from "utils/css";
+import { toFalse } from "utils/toFalse";
+import { toTrue } from "utils/toTrue";
 import styles from "./WindowButton.module.css";
 
 const buttonKindsMap = {
@@ -32,15 +34,15 @@ export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
   const handleMouseDown: MouseEventHandler = (e) => {
     // NOTE: This is necessary to stop the window from starting to move.
     e.stopPropagation();
-    setIsPressed(true);
+    setIsPressed(toTrue);
   };
 
   const handleMouseLeave = () => {
-    setIsPressed(false);
+    setIsPressed(toFalse);
   };
 
   const handleMouseUp = () => {
-    setIsPressed(false);
+    setIsPressed(toFalse);
     onExit?.();
     onMinimize?.();
   };

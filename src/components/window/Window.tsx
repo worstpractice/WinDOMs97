@@ -17,6 +17,8 @@ import type { Process } from "typings/Process";
 import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
+import { toFalse } from "utils/toFalse";
+import { toTrue } from "utils/toTrue";
 import styles from "./Window.module.css";
 
 type Props = {
@@ -24,7 +26,7 @@ type Props = {
   process: Process;
 };
 
-export const Window: FC<Props> = ({ children, closeMenus, process }) => {
+export const Window: FC<Props> = ({ closeMenus, process }) => {
   const { activate } = useKernel();
   const windowRef = useDomRef<HTMLElement>();
   const handleMove = useOnMoveWindow(windowRef);
@@ -55,11 +57,11 @@ export const Window: FC<Props> = ({ children, closeMenus, process }) => {
   });
 
   const handleEnter = () => {
-    setIsResizable(true);
+    setIsResizable(toTrue);
   };
 
   const handleLeave = () => {
-    setIsResizable(false);
+    setIsResizable(toFalse);
   };
 
   const style = isResizable ? css(styles.Window, styles.Resizable) : styles.Window;
