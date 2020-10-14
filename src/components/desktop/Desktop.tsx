@@ -34,7 +34,6 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
       onContextMenu={handleContextMenu}
       onDoubleClickCapture={console.log}
       onMouseDown={handleMouseDown}
-      onMouseLeave={console.log}
       ref={desktopRef}
     >
       {children}
