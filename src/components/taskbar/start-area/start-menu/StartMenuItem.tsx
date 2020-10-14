@@ -13,8 +13,8 @@ export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useKernel();
 
   const handleLaunch = () => {
-    executeBinary(binary);
     closeMenus();
+    executeBinary(binary);
   };
 
   const { fileName, icon, name } = binary;

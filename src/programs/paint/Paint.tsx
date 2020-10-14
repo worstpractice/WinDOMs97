@@ -25,9 +25,8 @@ export const Paint: FC<Props> = () => {
     }
   }
 
-  const handleMouseDown = onLMB<HTMLCanvasElement>(({ nativeEvent }) => {
+  const handleMouseDown = onLMB<HTMLCanvasElement>(({ nativeEvent: { offsetX, offsetY } }) => {
     // Offset === from the edge of the canvas.
-    const { offsetX, offsetY } = nativeEvent;
     setPosition(() => ({ x: offsetX, y: offsetY }));
     setIsDrawing(toTrue);
   });
@@ -36,10 +35,8 @@ export const Paint: FC<Props> = () => {
     setIsDrawing(toFalse);
   };
 
-  const handleMouseMove = onLMB<HTMLCanvasElement>(({ nativeEvent }) => {
+  const handleMouseMove = onLMB<HTMLCanvasElement>(({ nativeEvent: { offsetX, offsetY } }) => {
     if (!isDrawing) return;
-
-    const { offsetX, offsetY } = nativeEvent;
 
     const lineTo = {
       x: offsetX,
@@ -55,10 +52,8 @@ export const Paint: FC<Props> = () => {
     setPosition(lineTo);
   });
 
-  const handleMouseUp = onLMB<HTMLCanvasElement>(({ nativeEvent }) => {
+  const handleMouseUp = onLMB<HTMLCanvasElement>(({ nativeEvent: { offsetX, offsetY } }) => {
     if (!isDrawing) return;
-
-    const { offsetX, offsetY } = nativeEvent;
 
     const lineTo = {
       x: offsetX,
