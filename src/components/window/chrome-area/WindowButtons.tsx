@@ -1,7 +1,7 @@
 import { WindowButton } from "components/window/chrome-area/WindowButton";
 import { useKernel } from "kernel";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import type { Process } from "typings/Process";
 import { minimize } from "utils/minimize";
 import styles from "./WindowButtons.module.css";

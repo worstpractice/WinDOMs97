@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import type { Binary } from "typings/Binary";
 import styles from "./DesktopItemIcon.module.css";
 

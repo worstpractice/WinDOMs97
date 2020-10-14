@@ -1,6 +1,6 @@
 import { Spine } from "components/taskbar/start-area/start-menu/Spine";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import styles from "./StartMenu.module.css";
 
 type Props = {};

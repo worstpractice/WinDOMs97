@@ -6,7 +6,7 @@ import { useDomRef } from "hooks/useDomRef";
 import { useOnDragAndDrop } from "hooks/useOnDragAndDrop";
 import { useKernel } from "kernel";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import { blockNativeDrag } from "utils/blockNativeDrag";

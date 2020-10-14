@@ -1,6 +1,6 @@
 import { VerticalSeparator } from "components/taskbar/VerticalSeparator";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import { timestamp } from "utils/timestamp";
 import styles from "./NotificationArea.module.css";
 

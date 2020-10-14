@@ -2,7 +2,7 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { FC, MouseEventHandler } from "react";
-import React from "react";
+import * as React from "react";
 import styles from "./Desktop.module.css";
 
 type Props = {

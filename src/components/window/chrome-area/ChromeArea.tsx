@@ -1,6 +1,6 @@
 import { useKernel } from "kernel";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";

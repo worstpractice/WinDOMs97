@@ -1,5 +1,5 @@
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import styles from "./Spine.module.css";
 
 type Props = {};

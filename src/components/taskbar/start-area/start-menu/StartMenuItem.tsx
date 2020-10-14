@@ -1,6 +1,6 @@
 import { useKernel } from "kernel";
 import type { FC } from "react";
-import React from "react";
+import * as React from "react";
 import type { Binary } from "typings/Binary";
 import styles from "./StartMenuItem.module.css";
 
