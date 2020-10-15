@@ -17,8 +17,6 @@ import type { Process } from "typings/Process";
 import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
-import { toFalse } from "setters/toFalse";
-import { toTrue } from "setters/toTrue";
 import styles from "./Window.module.css";
 
 type Props = {
@@ -57,11 +55,11 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
   });
 
   const handleEnter = () => {
-    setIsResizable(toTrue);
+    setIsResizable(true);
   };
 
   const handleLeave = () => {
-    setIsResizable(toFalse);
+    setIsResizable(false);
   };
 
   const style = isResizable ? css(styles.Window, styles.Resizable) : styles.Window;
