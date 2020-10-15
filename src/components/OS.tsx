@@ -33,27 +33,29 @@ export const OS: FC<Props> = () => {
             {installedBinaries.map((binary) => {
               const { fileName, name } = binary;
 
-              return <ContextMenuItem binary={binary} key={`${fileName}-${name}`} />;
+              return (
+                <ContextMenuItem binary={binary} closeMenus={closeMenus} key={`ContextMenuItem-${fileName}-${name}`} />
+              );
             })}
           </ContextMenu>
         )}
         {installedBinaries.map((binary) => {
           const { fileName, name } = binary;
 
-          return <DesktopItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
+          return <DesktopItem binary={binary} closeMenus={closeMenus} key={`DesktopItem-${fileName}-${name}`} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return <Window closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
+        return <Window closeMenus={closeMenus} key={`Window-${pid}-${name}`} process={process} />;
       })}
       {openMenu === "StartMenu" && (
         <StartMenu>
           {installedBinaries.map((binary) => {
             const { fileName, name } = binary;
 
-            return <StartMenuItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
+            return <StartMenuItem binary={binary} closeMenus={closeMenus} key={`StartMenuItem-${fileName}-${name}`} />;
           })}
         </StartMenu>
       )}
@@ -64,7 +66,9 @@ export const OS: FC<Props> = () => {
             {installedBinaries.map((binary) => {
               const { fileName, name } = binary;
 
-              return <QuickStartItem binary={binary} closeMenus={closeMenus} key={`${fileName}-${name}`} />;
+              return (
+                <QuickStartItem binary={binary} closeMenus={closeMenus} key={`QuickStartItem-${fileName}-${name}`} />
+              );
             })}
           </QuickStart>
         </StartArea>
@@ -72,14 +76,16 @@ export const OS: FC<Props> = () => {
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return <RunningItem closeMenus={closeMenus} key={`${pid}-${name}`} process={process} />;
+            return <RunningItem closeMenus={closeMenus} key={`RunningItem-${pid}-${name}`} process={process} />;
           })}
         </RunningArea>
         <NotificationArea>
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return <NotificationItem closeMenus={closeMenus} process={process} key={`${pid}-${name}`} />;
+            return (
+              <NotificationItem closeMenus={closeMenus} process={process} key={`NotificationItem-${pid}-${name}`} />
+            );
           })}
         </NotificationArea>
       </Taskbar>

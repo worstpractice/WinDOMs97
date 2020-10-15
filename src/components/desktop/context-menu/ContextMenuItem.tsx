@@ -7,12 +7,14 @@ import styles from "./ContextMenuItem.module.css";
 
 type Props = {
   binary: Binary;
+  closeMenus: () => void;
 };
 
-export const ContextMenuItem: FC<Props> = ({ binary }) => {
+export const ContextMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useKernel();
 
   const handleLaunch = onLMB<HTMLLIElement>(() => {
+    closeMenus();
     executeBinary(binary);
   });
 
