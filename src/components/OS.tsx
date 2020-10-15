@@ -25,13 +25,13 @@ export const OS: FC<Props> = () => {
   const { installedBinaries, runningProcesses } = useKernel();
   const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenus();
 
-  const isContextMenuOpen = openMenu === "ContextMenu";
-  const isStartMenuOpen = openMenu === "StartMenu";
+  // const isContextMenuOpen = openMenu === "ContextMenu";
+  // const isStartMenuOpen = openMenu === "StartMenu";
 
   return (
     <>
       <Desktop closeMenus={closeMenus} onContextMenu={openContextMenu}>
-        {isContextMenuOpen && (
+        {openMenu === "ContextMenu" && (
           <ContextMenu>
             {installedBinaries.map((binary) => {
               const { fileName, name } = binary;
@@ -53,7 +53,7 @@ export const OS: FC<Props> = () => {
 
         return <Window closeMenus={closeMenus} key={`Window-${pid}-${name}`} process={process} />;
       })}
-      {isStartMenuOpen && (
+      {openMenu === "StartMenu" && (
         <StartMenu>
           {installedBinaries.map((binary) => {
             const { fileName, name } = binary;
