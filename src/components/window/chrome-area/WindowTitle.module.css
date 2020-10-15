@@ -22,5 +22,5 @@
 
 /*** WARN: Must come last ***/
 .Active {
-  color: white;
+  color: var(--white);
 }

@@ -1,5 +1,6 @@
 import { programs } from "binaries";
 import { Pids } from "kernel/Pids";
+import { is } from "type-predicates/is";
 import type { Binary } from "typings/Binary";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
@@ -50,6 +51,9 @@ export const useKernel = create<State>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           activate<T extends OsRef<HTMLElement>>({ current }: T) {
             set(({ activeRef }) => {
+              if (is(activeRef.current, current)) {
+                return { activeRef };
+              }
               console.groupCollapsed(`${++debugLogCounter}. State Changed `);
               console.debug("FROM:", activeRef.current);
               console.debug("TO:", current);

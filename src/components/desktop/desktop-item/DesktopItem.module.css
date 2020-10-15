@@ -15,7 +15,7 @@
 /*** WARN: Must come last ***/
 .Active {
   background-color: var(--desktopitem-background);
-  outline-color: rgba(255, 255, 255, 50%);
+  outline-color: var(--white-transparent);
   outline-style: dotted;
   outline-width: 1px;
 }

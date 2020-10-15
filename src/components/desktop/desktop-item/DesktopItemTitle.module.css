@@ -1,5 +1,7 @@
+@import "../../../styles/colors.module.css";
+
 .DesktopItemTitle {
-  color: white;
+  color: var(--white);
   overflow-wrap: break-word;
   text-align: center;
   width: 100%;

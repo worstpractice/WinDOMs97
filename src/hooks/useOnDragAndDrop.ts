@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import { useState } from "react";
 import type { OsRef } from "typings/OsRef";
-import { addEventListener } from "utils/addEventListener";
+import { listen } from "utils/listen";
 import { compose } from "utils/compose";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnDragAndDrop.module.css";
@@ -27,30 +27,28 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     desktopItem.classList.add(styles.Original);
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
-      clone.style.left = `${pageX - shiftX}px`;
-      clone.style.top = `${pageY - shiftY}px`;
+    const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
+      clone.style.left = `${clientX - shiftX}px`;
+      clone.style.top = `${clientY - shiftY}px`;
     });
 
     let cleanup: () => void;
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
+    const onMouseUp = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
       clone.classList.remove(styles.Moving);
       clone.remove();
 
       desktopItem.classList.remove(styles.Original);
 
-      desktopItem.style.left = `${pageX - shiftX}px`;
-      desktopItem.style.top = `${pageY - shiftY}px`;
+      desktopItem.style.left = `${clientX - shiftX}px`;
+      desktopItem.style.top = `${clientY - shiftY}px`;
 
       cleanup();
-
       setIsMoving(false);
     });
 
-    cleanup = compose(addEventListener("mousemove", onMouseMove), addEventListener("mouseup", onMouseUp));
-
+    cleanup = compose(listen("mousemove", onMouseMove), listen("mouseup", onMouseUp));
     setIsMoving(true);
   });
 

@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
-import { addEventListener } from "utils/addEventListener";
+import { listen } from "utils/listen";
 import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
 import { moveInFront } from "utils/moveInFront";
@@ -9,14 +9,13 @@ import { moveInFront } from "utils/moveInFront";
 const WINDOW_MIN_HEIGHT = 250 as const;
 const WINDOW_MIN_WIDTH = 350 as const;
 
-export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) => {
+export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(windowRef: T) => {
   /** Drag start event. */
-  const handleMouseDown = onLMB<HTMLElement>((e) => {
-    const osWindow = windowRef.current;
-
+  const handleMouseDown = onLMB<U>((e) => {
+    const { current: osWindow } = windowRef;
     if (!osWindow) return;
 
-    moveInFront({ current: osWindow });
+    moveInFront(windowRef);
 
     const latitude = getResizeLatitude(osWindow, e);
 
@@ -32,7 +31,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
     const startingHeight = osWindow.getBoundingClientRect().height;
 
     /** Stream of events while dragging. */
-    const onMouseMove = onLMB<HTMLBodyElement>(({ pageX, pageY }) => {
+    const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
       const currentLeft = osWindow.getBoundingClientRect().left;
       const currentTop = osWindow.getBoundingClientRect().top;
 
@@ -55,7 +54,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
           // NOTE: We're not just asking if `availableWidth` is truthy.
           // We're actively concerned about negative values here.
           if (availableWidth > 0) {
-            const newLeft = pageX - startingShiftX;
+            const newLeft = clientX - startingShiftX;
 
             // If I wanted to pretend I knew math, I would call this value "delta".
             const differenceLeft = startingLeft + availableWidth;
@@ -78,7 +77,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
           // NOTE: We're not just asking if `availableHeight` is truthy.
           // We're actively concerned about negative values here.
           if (availableHeight > 0) {
-            const newTop = pageY - startingShiftY;
+            const newTop = clientY - startingShiftY;
 
             // If I wanted to pretend I knew math, I would call this value "delta".
             const differenceTop = startingTop + availableHeight;
@@ -96,7 +95,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
         case "E":
         case "NE":
         case "SE": {
-          const newWidth = pageX - currentLeft;
+          const newWidth = clientX - currentLeft;
 
           if (newWidth > WINDOW_MIN_WIDTH) {
             width = `${newWidth}px`;
@@ -136,7 +135,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
         case "S":
         case "SE":
         case "SW": {
-          const newHeight = pageY - currentTop;
+          const newHeight = clientY - currentTop;
 
           if (newHeight > WINDOW_MIN_HEIGHT) {
             height = `${newHeight}px`;
@@ -159,7 +158,7 @@ export const useOnResizeWindow = <T extends OsRef<HTMLElement>>(windowRef: T) =>
       cleanup();
     });
 
-    cleanup = compose(addEventListener("mousemove", onMouseMove), addEventListener("mouseup", onMouseUp));
+    cleanup = compose(listen("mousemove", onMouseMove), listen("mouseup", onMouseUp));
   });
 
   return handleMouseDown;
