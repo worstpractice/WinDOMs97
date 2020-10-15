@@ -1,7 +1,9 @@
+import { onLMB } from "event-filters/onLMB";
+import { onRMB } from "event-filters/onRMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
-import type { FC, MouseEventHandler } from "react";
+import type { FC } from "react";
 import * as React from "react";
 import styles from "./Desktop.module.css";
 
@@ -14,18 +16,18 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
   const { activate, setLastClickPosition } = useKernel();
   const desktopRef = useDomRef<HTMLElement>();
 
-  // NOTE: this call allows the children calling `useActivateOnMount()` to work properly.
+  // NOTE: this call is what allows the children calling `useActivateOnMount()` to work properly.
   useActivateOnMount(desktopRef);
 
-  const handleContextMenu: MouseEventHandler = ({ clientX, clientY }) => {
+  const handleContextMenu = onRMB<HTMLElement>(({ clientX, clientY }) => {
     setLastClickPosition({ x: clientX, y: clientY });
     onContextMenu();
-  };
+  });
 
-  const handleMouseDown = () => {
+  const handleMouseDown = onLMB<HTMLElement>(() => {
     closeMenus();
     activate(desktopRef);
-  };
+  });
 
   return (
     <main
