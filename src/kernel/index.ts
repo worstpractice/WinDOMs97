@@ -96,7 +96,6 @@ export const useKernel = create<State>(
 
               const { runningProcesses } = state;
 
-              // TODO: Spend a bunch of time designing some intricate footgun just to avoid creating this extra array on every call.
               state.runningProcesses = [...runningProcesses, spawnedProcess];
 
               return state;
