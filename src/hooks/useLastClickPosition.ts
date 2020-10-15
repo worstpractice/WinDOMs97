@@ -7,11 +7,12 @@ export const useLastClickPosition = () => {
   const { setLastClickPosition } = useKernel();
 
   useEffect(() => {
-    const handleMouseDown: MouseEventHandler = (e) => {
-      const { clientX, clientY } = e;
+    const handleMouseDown: MouseEventHandler = ({ clientX, clientY }) => {
       setLastClickPosition({ x: clientX, y: clientY });
     };
 
-    listen("mousedown", handleMouseDown, { capture: true, once: true });
+    const cleanup = listen("mousedown", handleMouseDown, { capture: true });
+
+    return cleanup;
   }, [setLastClickPosition]);
 };
