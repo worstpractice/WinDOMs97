@@ -17,8 +17,8 @@ import type { Process } from "typings/Process";
 import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
-import { toFalse } from "utils/toFalse";
-import { toTrue } from "utils/toTrue";
+import { toFalse } from "setters/toFalse";
+import { toTrue } from "setters/toTrue";
 import styles from "./Window.module.css";
 
 type Props = {

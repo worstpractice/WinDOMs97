@@ -4,9 +4,6 @@ import { useDomRef } from "hooks/useDomRef";
 import type { FC } from "react";
 import React, { useState } from "react";
 import type { Position } from "typings/Position";
-import { toFalse } from "utils/toFalse";
-import { toStartingPosition } from "utils/toStartingPosition";
-import { toTrue } from "utils/toTrue";
 import { drawLine } from "./drawLine";
 import styles from "./Paint.module.css";
 
@@ -28,11 +25,11 @@ export const Paint: FC<Props> = () => {
   const handleMouseDown = onLMB<HTMLCanvasElement>(({ nativeEvent: { offsetX, offsetY } }) => {
     // Offset === from the edge of the canvas.
     setPosition(() => ({ x: offsetX, y: offsetY }));
-    setIsDrawing(toTrue);
+    setIsDrawing(true);
   });
 
   const handleMouseLeave = () => {
-    setIsDrawing(toFalse);
+    setIsDrawing(false);
   };
 
   const handleMouseMove = onLMB<HTMLCanvasElement>(({ nativeEvent: { offsetX, offsetY } }) => {
@@ -66,8 +63,8 @@ export const Paint: FC<Props> = () => {
     };
 
     drawLine(ctxRef, moveTo, lineTo);
-    setPosition(toStartingPosition);
-    setIsDrawing(toFalse);
+    setPosition({ x: 0, y: 0 });
+    setIsDrawing(false);
   });
 
   // TODO: ???

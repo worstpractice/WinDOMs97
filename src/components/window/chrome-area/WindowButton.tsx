@@ -1,8 +1,8 @@
 import type { FC, MouseEventHandler } from "react";
 import React, { useState } from "react";
 import { css } from "utils/css";
-import { toFalse } from "utils/toFalse";
-import { toTrue } from "utils/toTrue";
+import { toFalse } from "setters/toFalse";
+import { toTrue } from "setters/toTrue";
 import styles from "./WindowButton.module.css";
 
 const buttonKindsMap = {
