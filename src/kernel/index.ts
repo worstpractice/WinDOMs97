@@ -82,6 +82,8 @@ export const useKernel = create<State>(
               const spawnedProcess: Process = {
                 ...binary,
 
+                isMaximized: false,
+
                 isMinimized: false,
 
                 notificationItemRef: { current: null },

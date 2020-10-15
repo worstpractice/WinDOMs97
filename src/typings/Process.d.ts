@@ -1,19 +1,16 @@
 import type { OsRef } from "typings/OsRef";
 
-type ProcessData = {
+export type Process = {
   ////////////////////////////////////////////////////////
   icon: string;
   name: string;
   pid: number;
   ////////////////////////////////////////////////////////
+  isMaximized: boolean;
   isMinimized: boolean;
   ////////////////////////////////////////////////////////
-  notificationItemRef: OsRef;
-  runningItemRef: OsRef;
-  windowRef: OsRef;
+  notificationItemRef: OsRef<HTMLLIElement>;
+  runningItemRef: OsRef<HTMLButtonElement>;
+  windowRef: OsRef<HTMLElement>;
   ////////////////////////////////////////////////////////
 };
-
-type ProcessActions = {};
-
-export type Process = ProcessData & ProcessActions;

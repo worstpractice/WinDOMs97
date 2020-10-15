@@ -3,6 +3,7 @@ import { useKernel } from "kernel";
 import * as React from "react";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
+import { maximizeOrRestore } from "utils/maximizeOrRestore";
 import { minimize } from "utils/minimize";
 import styles from "./WindowButtons.module.css";
 
@@ -17,6 +18,10 @@ export const WindowButtons: FC<Props> = ({ process }) => {
     endProcess(process);
   };
 
+  const handleMaximizeOrRestore = () => {
+    maximizeOrRestore(process);
+  };
+
   const handleMinimize = () => {
     minimize(process);
   };
@@ -24,7 +29,7 @@ export const WindowButtons: FC<Props> = ({ process }) => {
   return (
     <section className={styles.WindowButtons}>
       <WindowButton kind="minimize" onMinimize={handleMinimize} />
-      <WindowButton kind="maximizeOrRestore" />
+      <WindowButton kind="maximizeOrRestore" onMaximizeOrRestore={handleMaximizeOrRestore} />
       <WindowButton kind="exit" onExit={handleExit} />
     </section>
   );

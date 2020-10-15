@@ -14,20 +14,23 @@ type Props =
   | {
       kind: "maximizeOrRestore";
       onExit?: never;
+      onMaximizeOrRestore: () => void;
       onMinimize?: never;
     }
   | {
       kind: "minimize";
       onExit?: never;
+      onMaximizeOrRestore?: never;
       onMinimize: () => void;
     }
   | {
       kind: "exit";
       onExit: () => void;
+      onMaximizeOrRestore?: never;
       onMinimize?: never;
     };
 
-export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
+export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onMinimize }) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown = onLMB((e) => {
@@ -43,6 +46,7 @@ export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
   const handleMouseUp = () => {
     setIsPressed(false);
     onExit?.();
+    onMaximizeOrRestore?.();
     onMinimize?.();
   };
 
