@@ -7,7 +7,7 @@ import type { Process } from "typings/Process";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-type Data = {
+type KernelData = {
   /////////////////////////////////////
   activeRef: OsRef<HTMLElement>;
   /////////////////////////////////////
@@ -19,20 +19,20 @@ type Data = {
   /////////////////////////////////////
 };
 
-type Actions = {
+type SysCalls = {
   activate: <T extends OsRef<HTMLElement>>(to: T) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   setLastClickPosition: (to: Position) => void;
 };
 
-type State = Data & Actions;
+type State = KernelData & SysCalls;
 
 let debugLogCounter = 0;
 
 export const useKernel = create<State>(
   devtools(
-    combine<Data, Actions>(
+    combine<KernelData, SysCalls>(
       {
         /////////////////////////////////////
         activeRef: { current: null },
@@ -75,7 +75,7 @@ export const useKernel = create<State>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary(binary: Binary) {
             set(({ runningProcesses }) => {
-              const spawnedProcess = {
+              const spawnedProcess: Process = {
                 ...binary,
 
                 isMinimized: false,
@@ -93,9 +93,11 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClickPosition(to: Position) {
-            set(() => {
-              return { lastClickPosition: to } as const;
+          setLastClickPosition({ x, y }: Position) {
+            set(({ lastClickPosition }) => {
+              lastClickPosition.x = x;
+              lastClickPosition.y = y;
+              return { lastClickPosition } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

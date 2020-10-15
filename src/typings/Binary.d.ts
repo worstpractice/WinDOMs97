@@ -1,9 +1,9 @@
-type Data = {
+type BinaryData = {
   fileName: string;
   icon: string;
   name: string;
 };
 
-type Actions = {};
+type BinaryActions = {};
 
-export type Binary = Data & Actions;
+export type Binary = BinaryData & BinaryActions;

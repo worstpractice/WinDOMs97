@@ -1,6 +1,6 @@
 import type { OsRef } from "typings/OsRef";
 
-type Data = {
+type ProcessData = {
   ////////////////////////////////////////////////////////
   icon: string;
   name: string;
@@ -14,6 +14,6 @@ type Data = {
   ////////////////////////////////////////////////////////
 };
 
-type Actions = {};
+type ProcessActions = {};
 
-export type Process = Data & Actions;
+export type Process = ProcessData & ProcessActions;
