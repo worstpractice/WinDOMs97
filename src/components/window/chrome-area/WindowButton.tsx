@@ -1,4 +1,5 @@
-import type { FC, MouseEventHandler } from "react";
+import { onLMB } from "event-filters/onLMB";
+import type { FC } from "react";
 import React, { useState } from "react";
 import { css } from "utils/css";
 import styles from "./WindowButton.module.css";
@@ -29,11 +30,11 @@ type Props =
 export const WindowButton: FC<Props> = ({ kind, onExit, onMinimize }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const handleMouseDown: MouseEventHandler = (e) => {
+  const handleMouseDown = onLMB((e) => {
     // NOTE: This is necessary to stop the window from starting to move.
     e.stopPropagation();
     setIsPressed(true);
-  };
+  });
 
   const handleMouseLeave = () => {
     setIsPressed(false);
