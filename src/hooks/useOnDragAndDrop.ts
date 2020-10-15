@@ -1,8 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import { useState } from "react";
 import type { OsRef } from "typings/OsRef";
-import { listen } from "utils/listen";
 import { compose } from "utils/compose";
+import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnDragAndDrop.module.css";
 
@@ -28,8 +28,11 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
-      clone.style.left = `${clientX - shiftX}px`;
-      clone.style.top = `${clientY - shiftY}px`;
+      const newLeft = clientX - shiftX;
+      const newTop = clientY - shiftY;
+
+      clone.style.left = `${newLeft}px`;
+      clone.style.top = `${newTop}px`;
     });
 
     let cleanup: () => void;
@@ -41,8 +44,11 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
 
       desktopItem.classList.remove(styles.Original);
 
-      desktopItem.style.left = `${clientX - shiftX}px`;
-      desktopItem.style.top = `${clientY - shiftY}px`;
+      const newLeft = clientX - shiftX;
+      const newTop = clientY - shiftY;
+
+      desktopItem.style.left = `${newLeft}px`;
+      desktopItem.style.top = `${newTop}px`;
 
       cleanup();
       setIsMoving(false);

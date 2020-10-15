@@ -1,8 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import type { FC } from "typings/FC";
 import * as React from "react";
 import type { Binary } from "typings/Binary";
+import type { FC } from "typings/FC";
 import styles from "./ContextMenuItem.module.css";
 
 type Props = {

@@ -1,8 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
-import { listen } from "utils/listen";
 import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/getResizeLatitude";
+import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 
 /** In pixels. */
@@ -21,11 +21,11 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
 
     const { clientX, clientY } = e;
 
-    const startingShiftX = clientX - osWindow.getBoundingClientRect().left;
-    const startingShiftY = clientY - osWindow.getBoundingClientRect().top;
-
     const startingLeft = osWindow.getBoundingClientRect().left;
     const startingTop = osWindow.getBoundingClientRect().top;
+
+    const startingShiftX = clientX - startingLeft;
+    const startingShiftY = clientY - startingTop;
 
     const startingWidth = osWindow.getBoundingClientRect().width;
     const startingHeight = osWindow.getBoundingClientRect().height;
@@ -51,15 +51,15 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "SW": {
           const availableWidth = currentWidth - WINDOW_MIN_WIDTH;
 
-          // NOTE: We're not just asking if `availableWidth` is truthy.
           // We're actively concerned about negative values here.
-          if (availableWidth > 0) {
+          const isAvailableWidth = availableWidth > 0;
+
+          if (isAvailableWidth) {
             const newLeft = clientX - startingShiftX;
 
-            // If I wanted to pretend I knew math, I would call this value "delta".
-            const differenceLeft = startingLeft + availableWidth;
+            const deltaLeft = startingLeft + availableWidth;
 
-            if (newLeft < differenceLeft) {
+            if (newLeft < deltaLeft) {
               left = `${newLeft}px`;
             }
           }
@@ -74,15 +74,15 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "NW": {
           const availableHeight = currentHeight - WINDOW_MIN_HEIGHT;
 
-          // NOTE: We're not just asking if `availableHeight` is truthy.
           // We're actively concerned about negative values here.
-          if (availableHeight > 0) {
+          const isAvailableHeight = availableHeight > 0;
+
+          if (isAvailableHeight) {
             const newTop = clientY - startingShiftY;
 
-            // If I wanted to pretend I knew math, I would call this value "delta".
-            const differenceTop = startingTop + availableHeight;
+            const deltaTop = startingTop + availableHeight;
 
-            if (newTop < differenceTop) {
+            if (newTop < deltaTop) {
               top = `${newTop}px`;
             }
           }
@@ -105,10 +105,9 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "W":
         case "NW":
         case "SW": {
-          // If I wanted to pretend I knew math, I would call this value "delta".
-          const differenceLeft = startingLeft - currentLeft;
+          const deltaLeft = startingLeft - currentLeft;
 
-          const newWidth = startingWidth + differenceLeft;
+          const newWidth = startingWidth + deltaLeft;
 
           if (newWidth > WINDOW_MIN_WIDTH) {
             width = `${newWidth}px`;
@@ -122,10 +121,9 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "N":
         case "NE":
         case "NW": {
-          // If I wanted to pretend I knew math, I would call this value "delta".
-          const differenceTop = startingTop - currentTop;
+          const deltaTop = startingTop - currentTop;
 
-          const newHeight = startingHeight + differenceTop;
+          const newHeight = startingHeight + deltaTop;
 
           if (newHeight > WINDOW_MIN_HEIGHT) {
             height = `${newHeight}px`;

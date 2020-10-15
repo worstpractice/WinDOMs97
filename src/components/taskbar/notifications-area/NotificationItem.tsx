@@ -1,8 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
-import type { FC } from "typings/FC";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationItem.module.css";

@@ -17,10 +17,13 @@ export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windo
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
-      osWindow.style.left = `${clientX - shiftX}px`;
-      osWindow.style.top = `${clientY - shiftY}px`;
+      const newLeft = clientX - shiftX;
+      const newTop = clientY - shiftY;
+
+      osWindow.style.left = `${newLeft}px`;
+      osWindow.style.top = `${newTop}px`;
     });
-    
+
     let cleanup: () => void;
 
     /** `Document`-level event listener. */

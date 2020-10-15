@@ -97,9 +97,11 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClickPosition(to: Position) {
-            set(() => {
-              return { lastClickPosition: to } as const;
+          setLastClickPosition({ x, y }: Position) {
+            set(({ lastClickPosition }) => {
+              lastClickPosition.x = x;
+              lastClickPosition.y = y;
+              return { lastClickPosition } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

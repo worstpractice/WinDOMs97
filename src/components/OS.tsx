@@ -12,10 +12,10 @@ import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
 import { Window } from "components/window/Window";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useOsMenus } from "hooks/usOsMenus";
+import { useOsMenus } from "hooks/useOsMenus";
 import { useKernel } from "kernel";
-import type { FC } from "typings/FC";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import { Desktop } from "./desktop/Desktop";
 import { DesktopItem } from "./desktop/desktop-item/DesktopItem";
 import { Taskbar } from "./taskbar/Taskbar";
@@ -26,7 +26,6 @@ export const OS: FC<Props> = () => {
   const { installedBinaries, runningProcesses } = useKernel();
   const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenus();
 
-  // NOTE: This subscription is OS-wide and should only be called once from a single location (read: here.)
   useLastClickPosition();
 
   const isContextMenuOpen = openMenu === "ContextMenu";

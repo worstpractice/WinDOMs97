@@ -16,5 +16,10 @@ export const useOsMenus = () => {
     openMenu === "StartMenu" ? setOpenMenu("") : setOpenMenu("StartMenu");
   };
 
-  return { openMenu, closeMenus, openContextMenu, toggleStartMenu } as const;
+  return {
+    openMenu,
+    closeMenus,
+    openContextMenu,
+    toggleStartMenu,
+  } as const;
 };

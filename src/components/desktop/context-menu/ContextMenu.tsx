@@ -11,7 +11,7 @@ type Props = {
 };
 
 export const ContextMenu: FC<Props> = ({ children }) => {
-  const { lastClickPosition, activate } = useKernel();
+  const { activate, lastClickPosition } = useKernel();
   const contextMenuRef = useDomRef<HTMLElement>();
   useActivateOnMount(contextMenuRef);
 

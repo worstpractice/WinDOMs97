@@ -1,7 +1,7 @@
 import { useKernel } from "kernel";
-import type { FC } from "typings/FC";
 import * as React from "react";
 import type { Binary } from "typings/Binary";
+import type { FC } from "typings/FC";
 import styles from "./StartMenuItem.module.css";
 
 type Props = {
@@ -21,7 +21,7 @@ export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
 
   return (
     <li className={styles.StartMenuItem} onMouseDown={handleLaunch}>
-      <img alt={fileName} loading="lazy" src={icon} />
+      <img className={styles.StartMenuItemIcon} alt={fileName} loading="lazy" src={icon} />
       {name}
     </li>
   );
