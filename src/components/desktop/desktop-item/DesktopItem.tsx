@@ -5,7 +5,7 @@ import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useDomRef } from "hooks/useDomRef";
 import { useOnDragAndDrop } from "hooks/useOnDragAndDrop";
 import { useKernel } from "kernel";
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";

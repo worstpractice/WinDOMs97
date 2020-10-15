@@ -4,13 +4,15 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useDomRef } from "hooks/useDomRef";
 //import { useOnDragSelection } from "hooks/useOnDragSelection";
 import { useKernel } from "kernel";
-import type { FC } from "react";
+import type { ReactNode } from "react";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import styles from "./Desktop.module.css";
 
 type Props = {
   closeMenus: () => void;
   onContextMenu: () => void;
+  children: ReactNode;
 };
 
 export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {

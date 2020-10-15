@@ -1,10 +1,12 @@
 import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
-import type { FC } from "react";
+import type { ReactNode } from "react";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import styles from "./Taskbar.module.css";
 
 type Props = {
+  children: ReactNode;
   closeMenus: () => void;
 };
 

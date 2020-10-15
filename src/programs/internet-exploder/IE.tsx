@@ -1,4 +1,4 @@
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import * as React from "react";
 import type { Process } from "typings/Process";
 import style from "./IE.module.css";

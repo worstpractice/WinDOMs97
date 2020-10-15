@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import { css } from "utils/css";

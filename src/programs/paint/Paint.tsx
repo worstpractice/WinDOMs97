@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import { useCanvasRef } from "hooks/useCanvas";
 import { useDomRef } from "hooks/useDomRef";
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import React, { useState } from "react";
 import type { Position } from "typings/Position";
 import { drawLine } from "./drawLine";

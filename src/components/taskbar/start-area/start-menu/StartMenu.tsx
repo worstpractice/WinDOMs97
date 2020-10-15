@@ -1,9 +1,12 @@
 import { Spine } from "components/taskbar/start-area/start-menu/Spine";
-import type { FC } from "react";
+import type { ReactNode } from "react";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import styles from "./StartMenu.module.css";
 
-type Props = {};
+type Props = {
+  children: ReactNode;
+};
 
 export const StartMenu: FC<Props> = ({ children }) => {
   return (

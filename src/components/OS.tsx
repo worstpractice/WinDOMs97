@@ -14,7 +14,7 @@ import { Window } from "components/window/Window";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useOsMenus } from "hooks/usOsMenus";
 import { useKernel } from "kernel";
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import * as React from "react";
 import { Desktop } from "./desktop/Desktop";
 import { DesktopItem } from "./desktop/desktop-item/DesktopItem";

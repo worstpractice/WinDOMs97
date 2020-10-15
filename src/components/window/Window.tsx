@@ -10,7 +10,7 @@ import { useOnMoveWindow } from "hooks/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/useOnResizeWindow";
 import { useKernel } from "kernel";
 import { Cmd } from "programs/cmd/Cmd";
-import type { FC } from "react";
+import type { FC } from "typings/FC";
 import React, { useState } from "react";
 import { is } from "type-predicates/is";
 import type { Process } from "typings/Process";
