@@ -1,3 +1,4 @@
+import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { Binary } from "typings/Binary";
@@ -12,10 +13,10 @@ type Props = {
 export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useKernel();
 
-  const handleLaunch = () => {
+  const handleLaunch = onLMB(() => {
     closeMenus();
     executeBinary(binary);
-  };
+  });
 
   const { fileName, icon, name } = binary;
 

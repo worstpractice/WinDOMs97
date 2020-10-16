@@ -29,8 +29,8 @@
     "suppressExcessPropertyErrors": false,
     "suppressImplicitAnyIndexErrors": false,
     "target": "ESNext",
-    "allowJs": true,
-    "skipLibCheck": true,
+    "allowJs": false,
+    "skipLibCheck": false,
     "lib": [
       "dom",
       "dom.iterable",

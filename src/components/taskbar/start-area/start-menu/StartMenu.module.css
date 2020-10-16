@@ -12,7 +12,7 @@
   outline-width: 2px;
   position: absolute;
   width: 100%;
-  z-index: 200;
+  z-index: 40;
 }
 
 .ContentList {

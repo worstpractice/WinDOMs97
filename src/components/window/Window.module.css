@@ -14,6 +14,7 @@
   position: absolute;
   top: 200px;
   width: 400px;
+  z-index: 30;
 }
 
 .Resizable {

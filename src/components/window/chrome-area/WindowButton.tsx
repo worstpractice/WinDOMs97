@@ -1,6 +1,9 @@
 import { onLMB } from "event-filters/onLMB";
+import { useDomRef } from "hooks/useDomRef";
 import type { FC } from "react";
-import React, { useState } from "react";
+import * as React from "react";
+import { useState } from "react";
+import type { OsRef } from "typings/OsRef";
 import { css } from "utils/css";
 import styles from "./WindowButton.module.css";
 
@@ -14,7 +17,7 @@ type Props =
   | {
       kind: "maximizeOrRestore";
       onExit?: never;
-      onMaximizeOrRestore: () => void;
+      onMaximizeOrRestore: (buttonRef: OsRef<HTMLButtonElement>) => void;
       onMinimize?: never;
     }
   | {
@@ -32,6 +35,7 @@ type Props =
 
 export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onMinimize }) => {
   const [isPressed, setIsPressed] = useState(false);
+  const buttonRef = useDomRef<HTMLButtonElement>();
 
   const handleMouseDown = onLMB((e) => {
     // NOTE: This is necessary to stop the window from starting to move.
@@ -43,12 +47,12 @@ export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onM
     setIsPressed(false);
   };
 
-  const handleMouseUp = () => {
+  const handleMouseUp = onLMB(() => {
     setIsPressed(false);
     onExit?.();
-    onMaximizeOrRestore?.();
+    onMaximizeOrRestore?.(buttonRef);
     onMinimize?.();
-  };
+  });
 
   const style = isPressed ? css(styles.WindowButton, styles.Pressed) : styles.WindowButton;
 
@@ -58,6 +62,7 @@ export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onM
       onMouseDown={handleMouseDown}
       onMouseLeave={handleMouseLeave}
       onMouseUp={handleMouseUp}
+      ref={buttonRef}
       type="button"
     >
       {buttonKindsMap[kind]}

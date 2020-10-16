@@ -3,5 +3,5 @@
 .DragSelection {
   background: var(--blue-transparent);
   position: absolute;
-  z-index: 90;
+  z-index: 10;
 }
