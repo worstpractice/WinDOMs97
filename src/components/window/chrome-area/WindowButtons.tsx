@@ -4,14 +4,16 @@ import * as React from "react";
 import type { FC } from "typings/FC";
 import type { OsRef } from "typings/OsRef";
 import type { Process } from "typings/Process";
+import { minimize } from "utils/minimize";
 import styles from "./WindowButtons.module.css";
 
 type Props = {
+  closeMenus: () => void;
   process: Process;
 };
 
-export const WindowButtons: FC<Props> = ({ process }) => {
-  const { endProcess } = useKernel();
+export const WindowButtons: FC<Props> = ({ closeMenus, process }) => {
+  const { activate, endProcess } = useKernel();
 
   const handleExit = () => {
     endProcess(process);
@@ -22,14 +24,15 @@ export const WindowButtons: FC<Props> = ({ process }) => {
   };
 
   const handleMinimize = () => {
-    // minimize(process);
+    activate({ current: null });
+    minimize(process);
   };
 
   return (
     <section className={styles.WindowButtons}>
-      <WindowButton kind="minimize" onMinimize={handleMinimize} />
-      <WindowButton kind="maximizeOrRestore" onMaximizeOrRestore={handleMaximizeOrRestore} />
-      <WindowButton kind="exit" onExit={handleExit} />
+      <WindowButton closeMenus={closeMenus} kind="minimize" onMinimize={handleMinimize} />
+      <WindowButton closeMenus={closeMenus} kind="maximizeOrRestore" onMaximizeOrRestore={handleMaximizeOrRestore} />
+      <WindowButton closeMenus={closeMenus} kind="exit" onExit={handleExit} />
     </section>
   );
 };

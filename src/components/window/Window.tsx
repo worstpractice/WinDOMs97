@@ -80,7 +80,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
       <span className={styles.Outline} onMouseDown={handleChromeDrag}>
         <ChromeArea process={process}>
           <WindowTitle process={process} />
-          <WindowButtons process={process} />
+          <WindowButtons closeMenus={closeMenus} process={process} />
         </ChromeArea>
       </span>
       <ProgramArea>

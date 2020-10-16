@@ -13,7 +13,9 @@ const buttonKindsMap = {
   minimize: "_",
 } as const;
 
-type Props =
+type Props = {
+  closeMenus: () => void;
+} & (
   | {
       kind: "maximizeOrRestore";
       onExit?: never;
@@ -31,15 +33,17 @@ type Props =
       onExit: () => void;
       onMaximizeOrRestore?: never;
       onMinimize?: never;
-    };
+    }
+);
 
-export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onMinimize }) => {
+export const WindowButton: FC<Props> = ({ closeMenus, kind, onExit, onMaximizeOrRestore, onMinimize }) => {
   const [isPressed, setIsPressed] = useState(false);
   const buttonRef = useDomRef<HTMLButtonElement>();
 
   const handleMouseDown = onLMB((e) => {
     // NOTE: This is necessary to stop the window from starting to move.
     e.stopPropagation();
+    closeMenus();
     setIsPressed(true);
   });
 
@@ -48,10 +52,14 @@ export const WindowButton: FC<Props> = ({ kind, onExit, onMaximizeOrRestore, onM
   };
 
   const handleMouseUp = onLMB(() => {
-    setIsPressed(false);
-    onExit?.();
-    onMaximizeOrRestore?.(buttonRef);
-    onMinimize?.();
+    closeMenus();
+    if (isPressed) {
+      onExit?.();
+      onMaximizeOrRestore?.(buttonRef);
+      onMinimize?.();
+    } else {
+      setIsPressed(false);
+    }
   });
 
   const style = isPressed ? css(styles.WindowButton, styles.Pressed) : styles.WindowButton;

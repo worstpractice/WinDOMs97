@@ -30,9 +30,6 @@ export const minimize = (process: Process) => {
     process.isMinimized = false;
   };
 
-  const { style } = osWindow;
-  console.log(style);
-
   // Alter
   osWindow.style.display = `none`;
   process.isMinimized = true;

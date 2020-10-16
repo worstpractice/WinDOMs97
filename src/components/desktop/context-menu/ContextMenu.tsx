@@ -15,19 +15,19 @@ export const ContextMenu: FC<Props> = ({ children }) => {
   const contextMenuRef = useDomRef<HTMLElement>();
   useActivateOnMount(contextMenuRef);
 
-  const handleActive = () => {
+  const handleMouseUp = () => {
     activate(contextMenuRef);
   };
 
-  const { x, y } = lastClickPosition;
+  const { x: left, y: top } = lastClickPosition;
 
   return (
     <section
       className={styles.ContextMenu}
       id="ContextMenu"
-      onMouseDown={handleActive}
+      onMouseUp={handleMouseUp}
       ref={contextMenuRef}
-      style={{ left: x, top: y }}
+      style={{ left, top }}
     >
       <ul className={styles.ContentList}>{children}</ul>
     </section>
