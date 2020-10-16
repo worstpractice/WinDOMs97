@@ -27,7 +27,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     desktopItem.classList.add(styles.Original);
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
+    const onMouseMove = onLMB<Document>(({ clientX, clientY }) => {
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;
 
@@ -38,7 +38,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     let cleanup: () => void;
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
+    const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {
       clone.classList.remove(styles.Moving);
       clone.remove();
 
@@ -54,7 +54,10 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       setIsMoving(false);
     });
 
-    cleanup = compose(listen("mousemove", onMouseMove), listen("mouseup", onMouseUp));
+    cleanup = compose(
+      listen({ event: "mousemove", handler: onMouseMove, on: document }),
+      listen({ event: "mouseup", handler: onMouseUp, on: document }),
+    );
     setIsMoving(true);
   });
 

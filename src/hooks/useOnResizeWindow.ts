@@ -31,7 +31,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
     const startingHeight = osWindow.getBoundingClientRect().height;
 
     /** Stream of events while dragging. */
-    const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
+    const onMouseMove = onLMB<Document>(({ clientX, clientY }) => {
       const currentLeft = osWindow.getBoundingClientRect().left;
       const currentTop = osWindow.getBoundingClientRect().top;
 
@@ -152,11 +152,14 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
     let cleanup: () => void;
 
     /** Drag stop event. */
-    const onMouseUp = onLMB<HTMLBodyElement>(() => {
+    const onMouseUp = onLMB<Document>(() => {
       cleanup();
     });
 
-    cleanup = compose(listen("mousemove", onMouseMove), listen("mouseup", onMouseUp));
+    cleanup = compose(
+      listen({ event: "mousemove", handler: onMouseMove, on: document }),
+      listen({ event: "mouseup", handler: onMouseUp, on: document }),
+    );
   });
 
   return handleMouseDown;

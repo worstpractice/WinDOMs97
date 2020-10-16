@@ -11,7 +11,7 @@ export const useLastClickPosition = () => {
       setLastClickPosition({ x: clientX, y: clientY });
     };
 
-    const cleanup = listen("mousedown", handleMouseDown);
+    const cleanup = listen({ event: "mousedown", handler: handleMouseDown, on: document });
 
     return cleanup;
   }, [setLastClickPosition]);

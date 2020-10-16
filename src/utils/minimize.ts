@@ -17,10 +17,12 @@ export const minimize = (process: Process) => {
   const oldDisplayStyle = osWindow.style.display;
 
   const reEmbiggenBackUpAgain: EventListener = ({ target }) => {
+    // M.A.D. (Mutually Assured Disposal)
     if (is(target, notificationItem)) {
       runningItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
     }
 
+    // M.A.D. (Mutually Assured Disposal)
     if (is(target, runningItem)) {
       notificationItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
     }

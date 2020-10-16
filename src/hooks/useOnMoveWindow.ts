@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
-import { listen } from "utils/listen";
 import { compose } from "utils/compose";
+import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 
 export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windowRef: T) => {
@@ -16,7 +16,7 @@ export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windo
     const shiftY = clientY - osWindow.getBoundingClientRect().top;
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB<HTMLBodyElement>(({ clientX, clientY }) => {
+    const onMouseMove = onLMB<Document>(({ clientX, clientY }) => {
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;
 
@@ -27,11 +27,14 @@ export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windo
     let cleanup: () => void;
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB<HTMLBodyElement>(() => {
+    const onMouseUp = onLMB<Document>(() => {
       cleanup();
     });
 
-    cleanup = compose(listen("mousemove", onMouseMove), listen("mouseup", onMouseUp));
+    cleanup = compose(
+      listen({ event: "mousemove", handler: onMouseMove, on: document }),
+      listen({ event: "mouseup", handler: onMouseUp, on: document }),
+    );
   });
 
   return handleMouseDown;

@@ -1,16 +1,28 @@
 import type { MouseEventHandler } from "react";
 
-/** A more typesafe `addEventListener` that returns a convenient cleanup function. */
-export const listen = (type: keyof WindowEventMap, listener: MouseEventHandler, opts?: AddEventListenerOptions) => {
-  if (opts) {
-    document.addEventListener(type, (listener as unknown) as EventListener, opts);
-  } else {
-    document.addEventListener(type, (listener as unknown) as EventListener);
-  }
+type Params<T> = {
+  event: keyof WindowEventMap;
+  handler: MouseEventHandler<T>;
+  options?: AddEventListenerOptions;
+  /** Defaults to the `document` object. */
+  on: EventTarget;
+};
 
-  const unsubscribe = () => {
-    document.removeEventListener(type, (listener as unknown) as EventListener);
+type CleanupFn = {
+  (): void;
+};
+
+type Listen = {
+  <T>(params: Params<T>): CleanupFn;
+};
+
+/** A more typesafe `addEventListener` that returns a convenient cleanup function. */
+export const listen: Listen = ({ event, handler, options, on }) => {
+  on.addEventListener(event, (handler as unknown) as EventListener, options);
+
+  const cleanup = () => {
+    on.removeEventListener(event, (handler as unknown) as EventListener);
   };
 
-  return unsubscribe;
+  return cleanup;
 };
