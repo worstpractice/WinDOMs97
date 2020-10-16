@@ -39,7 +39,7 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
     //handleDragSelection(e);
   });
 
-  const handleMouseMoveCapture: MouseEventHandler<HTMLElement> = ({ clientX, clientY }) => {
+  const handleMouseMove: MouseEventHandler<HTMLElement> = ({ clientX, clientY }) => {
     setCurrentPosition({ x: clientX, y: clientY });
   };
 
@@ -54,7 +54,7 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
       onContextMenu={handleContextMenu}
       onDoubleClickCapture={console.log}
       onMouseDown={handleMouseDown}
-      onMouseMoveCapture={handleMouseMoveCapture}
+      onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
       ref={desktopRef}
     >

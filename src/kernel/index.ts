@@ -15,7 +15,6 @@ type KernelData = {
   /////////////////////////////////////
   availablePids: readonly number[];
   installedBinaries: readonly Binary[];
-  pidsToProcesses: Map<number, Process>;
   runningProcesses: readonly Process[];
   /////////////////////////////////////
   lastClickPosition: Position;
@@ -26,7 +25,6 @@ type SystemCalls = {
   activate: <T extends OsRef<HTMLElement>>(to: T) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  getProcessByPid: (pid: number, cb: (result: Process | null) => void) => void;
   setLastClickPosition: (to: Position) => void;
 };
 
@@ -43,7 +41,6 @@ export const useKernel = create<State>(
         /////////////////////////////////////
         availablePids: Pids.available,
         installedBinaries: programs,
-        pidsToProcesses: new Map<number, Process>(),
         runningProcesses: [],
         /////////////////////////////////////
         lastClickPosition: { x: 0, y: 0 },
@@ -69,13 +66,11 @@ export const useKernel = create<State>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           endProcess({ pid: targetPid }: Process) {
-            set(({ pidsToProcesses, runningProcesses }) => {
+            set(({ runningProcesses }) => {
               const sparedProcesses: Process[] = runningProcesses.filter(({ pid }) => {
                 // We spare every process whose `pid` is NOT the `targetPid`.
                 return pid !== targetPid;
               });
-
-              pidsToProcesses.delete(targetPid);
 
               // Just like in C, thou shalt remember to free.
               Pids.free(targetPid);
@@ -85,7 +80,7 @@ export const useKernel = create<State>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary(binary: Binary) {
-            set(({ pidsToProcesses, runningProcesses }) => {
+            set(({ runningProcesses }) => {
               const pid = Pids.use();
 
               if (isNull(pid)) {
@@ -96,6 +91,10 @@ export const useKernel = create<State>(
               const spawnedProcess: Process = {
                 ...binary,
 
+                isMaximized: false,
+
+                isMinimized: false,
+
                 notificationItemRef: { current: null },
 
                 pid,
@@ -105,24 +104,9 @@ export const useKernel = create<State>(
                 windowRef: { current: null },
               } as const;
 
-              pidsToProcesses.set(pid, spawnedProcess);
-
-              console.log([...pidsToProcesses].sort());
-
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
             });
           },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          getProcessByPid(pid: number, cb: (result: Process | null) => void) {
-            set(({ pidsToProcesses }) => {
-              const process = pidsToProcesses.get(pid) ?? null;
-
-              cb(process);
-
-              return { pidsToProcesses } as const;
-            });
-          },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           setLastClickPosition({ x, y }: Position) {
             set(() => {

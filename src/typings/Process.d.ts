@@ -6,6 +6,9 @@ export type Process = {
   name: string;
   pid: number;
   ////////////////////////////////////////////////////////
+  isMaximized: boolean;
+  isMinimized: boolean;
+  ////////////////////////////////////////////////////////
   notificationItemRef: OsRef<HTMLLIElement>;
   runningItemRef: OsRef<HTMLButtonElement>;
   windowRef: OsRef<HTMLElement>;
