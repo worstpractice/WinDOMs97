@@ -13,8 +13,6 @@
 .ContentList {
   display: flex;
   flex-direction: column;
-  gap: 2px;
   justify-content: center;
-  padding: 2px;
   width: 100%;
 }

@@ -13,13 +13,13 @@ type Props = {
 export const WindowTitle: FC<Props> = ({ process }) => {
   const { activeRef } = useKernel();
 
-  const style = isRef(activeRef, process.windowRef) ? css(styles.ProgramName, styles.Active) : styles.ProgramName;
+  const { icon, name, windowRef } = process;
 
-  const { icon, name } = process;
+  const style = isRef(activeRef, windowRef) ? css(styles.ProgramName, styles.Active) : styles.ProgramName;
 
   return (
     <span className={styles.WindowTitle}>
-      <img alt={name} className={styles.ProgramIcon} loading="lazy" src={icon} />
+      <img alt={name} className={styles.ProgramIcon} loading="eager" src={icon} />
       <h1 className={style}>{name}</h1>
     </span>
   );

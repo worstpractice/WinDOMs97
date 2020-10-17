@@ -21,7 +21,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
 
     const clone = desktopItem.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);
-    // Places the transparent clone "in front of" all
+    // Places the transparent clone at the VERY front
     desktopItem.after(clone);
 
     desktopItem.classList.add(styles.Original);

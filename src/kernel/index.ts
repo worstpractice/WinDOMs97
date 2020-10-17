@@ -26,6 +26,10 @@ type SystemCalls = {
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   setLastClickPosition: (to: Position) => void;
+  maximize: (process: Process) => void;
+  minimize: (process: Process) => void;
+  unMaximize: (process: Process) => void;
+  unMinimize: (process: Process) => void;
 };
 
 type State = KernelData & SystemCalls;
@@ -89,19 +93,19 @@ export const useKernel = create<State>(
               }
 
               const spawnedProcess: Process = {
+                ////////////////////////////////////////////////////////
                 ...binary,
-
-                isMaximized: false,
-
-                isMinimized: false,
-
-                notificationItemRef: { current: null },
-
+                ////////////////////////////////////////////////////////
                 pid,
-
+                ////////////////////////////////////////////////////////
+                isMaximized: false,
+                isMinimized: false,
+                ////////////////////////////////////////////////////////
+                chromeAreaRef: { current: null },
+                notificationItemRef: { current: null },
                 runningItemRef: { current: null },
-
                 windowRef: { current: null },
+                ////////////////////////////////////////////////////////
               } as const;
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
@@ -109,11 +113,45 @@ export const useKernel = create<State>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           setLastClickPosition({ x, y }: Position) {
-            set(() => {
-              return { lastClickPosition: { x, y } } as const;
+            set(({ lastClickPosition }) => {
+              lastClickPosition.x = x;
+              lastClickPosition.y = y;
+
+              return { lastClickPosition } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          maximize(process: Process) {
+            set((store) => {
+              process.isMaximized = true;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          minimize(process: Process) {
+            set((store) => {
+              process.isMinimized = true;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          unMaximize(process: Process) {
+            set((store) => {
+              process.isMaximized = false;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          unMinimize(process: Process) {
+            set((store) => {
+              process.isMinimized = false;
+
+              return store;
+            });
+          },
         } as const),
     ),
   ),

@@ -1,41 +1,43 @@
-import { is } from "type-predicates/is";
-import type { Process } from "typings/Process";
+// import { onLMB } from "event-filters/onLMB";
+// import { is } from "type-predicates/is";
+// import type { Process } from "typings/Process";
 
-export const minimize = (process: Process) => {
-  const { isMinimized, notificationItemRef, runningItemRef, windowRef } = process;
+// export const minimize = (process: Process) => {
+//   const { isMinimized, notificationItemRef, runningItemRef, windowRef } = process;
 
-  if (isMinimized) return;
+//   if (isMinimized) return;
 
-  const runningItem = runningItemRef.current;
-  const osWindow = windowRef.current;
-  const notificationItem = notificationItemRef.current;
+//   const osWindow = windowRef.current;
 
-  if (!runningItem) return;
-  if (!osWindow) return;
-  if (!notificationItem) return;
+//   if (!osWindow) return;
 
-  const oldDisplayStyle = osWindow.style.display;
+//   const runningItem = runningItemRef.current;
+//   const notificationItem = notificationItemRef.current;
 
-  const reEmbiggenBackUpAgain: EventListener = ({ target }) => {
-    // M.A.D. (Mutually Assured Disposal)
-    if (is(target, notificationItem)) {
-      runningItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
-    }
+//   const oldDisplayStyle = osWindow.style.display;
 
-    // M.A.D. (Mutually Assured Disposal)
-    if (is(target, runningItem)) {
-      notificationItem.removeEventListener("mousedown", reEmbiggenBackUpAgain);
-    }
+//   const reEmbiggenBackUpAgain = onLMB<Document>(({ target }) => {
+//     // M.A.D. (Mutually Assured Disposal)
+//     if (is(target, notificationItem)) {
+//       runningItem?.removeEventListener("mousedown", reEmbiggenBackUpAgain);
+//     }
 
-    // Restore
-    osWindow.style.display = oldDisplayStyle;
-    process.isMinimized = false;
-  };
+//     // M.A.D. (Mutually Assured Disposal)
+//     if (is(target, runningItem)) {
+//       notificationItem?.removeEventListener("mousedown", reEmbiggenBackUpAgain);
+//     }
 
-  // Alter
-  osWindow.style.display = `none`;
-  process.isMinimized = true;
+//     // Restore
+//     osWindow.style.display = oldDisplayStyle;
+//     process.isMinimized = false;
+//   }) as () => void;
 
-  notificationItem.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
-  runningItem.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
-};
+//   // Alter
+//   osWindow.style.display = `none`;
+//   process.isMinimized = true;
+
+//   notificationItem?.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
+//   runningItem?.addEventListener("mousedown", reEmbiggenBackUpAgain, { once: true });
+// };
+
+export {};

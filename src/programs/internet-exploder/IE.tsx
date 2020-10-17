@@ -14,7 +14,7 @@ export const IE: FC<Props> = ({ process }) => {
     <iframe
       className={style.IE}
       frameBorder="0"
-      loading="lazy"
+      loading="eager"
       src="page.html"
       style={{ height: "100%", width: "100%" }}
       title={name}

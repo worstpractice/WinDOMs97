@@ -1,5 +1,5 @@
 // prettier-ignore
-export type Menu =
+export type MenuState =
   | "ContextMenu"
   | "StartMenu"
   | ""; // No open menu

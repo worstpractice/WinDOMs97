@@ -1,3 +1,4 @@
+import { useDomRef } from "hooks/useDomRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
@@ -14,8 +15,18 @@ type Props = {
 
 export const ChromeArea: FC<Props> = ({ children, process }) => {
   const { activeRef } = useKernel();
+  const chromeAreaRef = useDomRef<HTMLElement>();
 
-  const style = isRef(activeRef, process.windowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
+  // NOTE: This is vital. This is the line where each process is given its very own `ChromeArea` handle.
+  process.chromeAreaRef = chromeAreaRef;
 
-  return <header className={style}>{children}</header>;
+  const { windowRef } = process;
+
+  const style = isRef(activeRef, windowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
+
+  return (
+    <header className={style} ref={chromeAreaRef}>
+      {children}
+    </header>
+  );
 };

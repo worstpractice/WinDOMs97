@@ -26,3 +26,17 @@
   outline-style: outset;
   outline-width: 2px;
 }
+
+/*** WARN: Must come last ***/
+.Maximized {
+  bottom: 0 !important;
+  height: calc(100vh - 30px) !important;
+  left: 0 !important;
+  right: 0 !important;
+  top: 0 !important;
+  width: 100vw !important;
+}
+
+.Minimized {
+  display: none;
+}

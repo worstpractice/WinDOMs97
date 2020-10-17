@@ -2,15 +2,17 @@
 
 .ContextMenuItem {
   align-items: center;
-  cursor: pointer;
   display: flex;
   gap: 10px;
+  padding-bottom: 1px;
   padding-left: 4px;
+  padding-top: 1px;
 }
 
 .ContextMenuItem:hover {
   background-color: var(--startmenu-spine-bright);
-  color: white;
+  color: var(--white);
+  cursor: pointer;
 }
 
 .Icon {

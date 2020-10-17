@@ -14,13 +14,13 @@ export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
   const { activate } = useKernel();
   const taskbarRef = useDomRef<HTMLElement>();
 
-  const handleActive = () => {
+  const handleMouseDown = () => {
     closeMenus();
     activate(taskbarRef);
   };
 
   return (
-    <footer className={styles.Taskbar} onMouseDown={handleActive} ref={taskbarRef}>
+    <footer className={styles.Taskbar} onMouseDown={handleMouseDown} ref={taskbarRef}>
       {children}
     </footer>
   );

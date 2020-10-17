@@ -24,18 +24,26 @@ type Props = {
   process: Process;
 };
 
+/** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
+const MAX_DELAY = 250 as const;
+
 export const Window: FC<Props> = ({ closeMenus, process }) => {
-  const { activate } = useKernel();
+  const { activate, maximize, unMaximize } = useKernel();
   const windowRef = useDomRef<HTMLElement>();
+  const chromeOutlineRef = useDomRef<HTMLSpanElement>();
   const handleMove = useOnMoveWindow(windowRef);
   const handleResize = useOnResizeWindow(windowRef);
   const [isResizable, setIsResizable] = useState(false);
   useActivateOnMount(windowRef);
+  const [msSinceClick, setMsSinceClick] = useState(Infinity);
+  const [is2ndClick, setIs2ndClick] = useState(false);
 
-  // NOTE: This is vital. This is the line where each process is given its very own window handle.
+  // NOTE: This is vital. This is the line where each process is given its very own `Window` handle.
   process.windowRef = windowRef;
 
-  const handleActive = onLMB<HTMLElement>((e) => {
+  const handleMouseDown = onLMB<HTMLElement>((e) => {
+    console.log(e.target);
+    console.log(process.chromeAreaRef.current);
     closeMenus();
     activate(windowRef);
     moveInFront(windowRef);
@@ -51,6 +59,11 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
   });
 
   const handleChromeDrag = onLMB<HTMLSpanElement>((e) => {
+    const { isMaximized } = process;
+
+    // Moving a maximized window? That's a paddling.
+    if (isMaximized) return;
+
     handleMove(e);
   });
 
@@ -62,22 +75,84 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
     setIsResizable(false);
   };
 
-  const style = isResizable ? css(styles.Window, styles.Resizable) : styles.Window;
+  const { isMaximized, isMinimized, pid } = process;
 
-  const left = `${30 * process.pid}px`;
-  const top = `${20 * process.pid}px`;
+  const style = css(
+    styles.Window,
+    isMaximized ? styles.Maximized : "",
+    isMinimized ? styles.Minimized : "",
+    isResizable ? styles.Resizable : "",
+  );
+
+  const left = `${30 * pid}px`;
+  const top = `${20 * pid}px`;
+
+  ////////////////////////////////////////////////////////////////////////////////////
+  // Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF)
+  ////////////////////////////////////////////////////////////////////////////////////
+
+  const handleDoubleClick = () => {
+    const { isMaximized, windowRef } = process;
+
+    activate(windowRef);
+
+    isMaximized ? unMaximize(process) : maximize(process);
+  };
+
+  const handleConsecutiveClicks = (target: EventTarget) => {
+    const { current: chromeArea } = process.chromeAreaRef;
+
+    if (!chromeArea) return;
+
+    // We only care about clicks on the `ChromeArea`.
+    if (!is(chromeArea, target)) {
+      // No consecutive clicks on the `ChromeArea` then.
+      return setIs2ndClick(false);
+    }
+    // Current click was on `ChromeArea`!
+
+    if (is2ndClick) {
+      // The last click was ALSO on `ChromeArea`?
+      return handleDoubleClick();
+    }
+
+    // Fair enough -- we'll atleast remember that THIS click was on `ChromeArea`.
+    setIs2ndClick(true);
+  };
+
+  const handleMouseDownCapture = onLMB<HTMLSpanElement>(({ target }) => {
+    setMsSinceClick(() => {
+      const now = new Date().getTime();
+
+      const elapsed = now - msSinceClick;
+
+      if (elapsed < MAX_DELAY) {
+        handleConsecutiveClicks(target);
+      }
+
+      // Make sure to return the current time since we're in a setter.
+      return now;
+    });
+  });
+
+  ////////////////////////////////////////////////////////////////////////////////////
 
   return (
     <article
       className={style}
       onDragStart={blockNativeDrag}
-      onMouseDown={handleActive}
+      onMouseDown={handleMouseDown}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={windowRef}
       style={{ left, top }}
     >
-      <span className={styles.Outline} onMouseDown={handleChromeDrag}>
+      <span
+        className={styles.Outline}
+        onMouseDownCapture={handleMouseDownCapture}
+        onMouseDown={handleChromeDrag}
+        ref={chromeOutlineRef}
+      >
         <ChromeArea process={process}>
           <WindowTitle process={process} />
           <WindowButtons closeMenus={closeMenus} process={process} />

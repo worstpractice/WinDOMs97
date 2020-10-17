@@ -1,14 +1,18 @@
-// import type { OsRef } from "typings/OsRef";
+// import { onLMB } from "event-filters/onLMB";
+// import { is } from "type-predicates/is";
 // import type { Process } from "typings/Process";
 
-// export const maximizeOrRestore = (process: Process, buttonRef: OsRef<HTMLButtonElement>) => {
-//   const { windowRef } = process;
+// export const maximizeOrRestore = (process: Process) => {
+//   const { isMaximized, notificationItemRef, runningItemRef, windowRef } = process;
 
-//   const { current: button } = buttonRef;
-//   const { current: osWindow } = windowRef;
+//   if (isMaximized) return;
 
-//   if (!button) return;
+//   const osWindow = windowRef.current;
+
 //   if (!osWindow) return;
+
+//   const runningItem = runningItemRef.current;
+//   const notificationItem = notificationItemRef.current;
 
 //   // TRBL
 //   const oldTop = osWindow.style.top;
@@ -19,7 +23,17 @@
 //   const oldWidth = osWindow.style.width;
 //   const oldHeight = osWindow.style.height;
 
-//   const reEnsmallenBackDownAgain = () => {
+//   const reEnsmallenBackDownAgain = onLMB<Document>(({ target }) => {
+//     // M.A.D. (Mutually Assured Disposal)
+//     if (is(target, notificationItem)) {
+//       runningItem?.removeEventListener("mousedown", reEnsmallenBackDownAgain);
+//     }
+
+//     // M.A.D. (Mutually Assured Disposal)
+//     if (is(target, runningItem)) {
+//       notificationItem?.removeEventListener("mousedown", reEnsmallenBackDownAgain);
+//     }
+
 //     // Restore
 //     osWindow.style.top = oldTop;
 //     osWindow.style.right = oldRight;
@@ -30,9 +44,7 @@
 //     osWindow.style.height = oldHeight;
 
 //     process.isMaximized = false;
-//   };
-
-//   button.addEventListener("mousedown", reEnsmallenBackDownAgain, { once: true });
+//   }) as () => void;
 
 //   // Alter
 //   osWindow.style.top = `0px`;
@@ -45,6 +57,9 @@
 //   osWindow.style.height = `calc(100vh - 30px)`;
 
 //   process.isMaximized = true;
+
+//   notificationItem?.addEventListener("mousedown", reEnsmallenBackDownAgain, { once: true });
+//   runningItem?.addEventListener("mousedown", reEnsmallenBackDownAgain, { once: true });
 // };
 
 export {};

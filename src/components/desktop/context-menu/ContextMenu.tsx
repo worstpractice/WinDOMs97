@@ -11,13 +11,9 @@ type Props = {
 };
 
 export const ContextMenu: FC<Props> = ({ children }) => {
-  const { activate, lastClickPosition } = useKernel();
+  const { lastClickPosition } = useKernel();
   const contextMenuRef = useDomRef<HTMLElement>();
   useActivateOnMount(contextMenuRef);
-
-  const handleMouseUp = () => {
-    activate(contextMenuRef);
-  };
 
   const { x: left, y: top } = lastClickPosition;
 
@@ -25,7 +21,6 @@ export const ContextMenu: FC<Props> = ({ children }) => {
     <section
       className={styles.ContextMenu}
       id="ContextMenu"
-      onMouseUp={handleMouseUp}
       ref={contextMenuRef}
       style={{ left, top }}
     >

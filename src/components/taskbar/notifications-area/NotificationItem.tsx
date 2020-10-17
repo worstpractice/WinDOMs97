@@ -16,10 +16,10 @@ export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate } = useKernel();
   const notificationItemRef = useDomRef<HTMLLIElement>();
 
-  // NOTE: This is vital. This is the line where each process is given its very own `notificationItem` handle.
+  // NOTE: This is vital. This is the line where each process is given its very own `NotificationItem` handle.
   process.notificationItemRef = notificationItemRef;
 
-  const handleActive = onLMB<HTMLLIElement>((e) => {
+  const handleMouseDown = onLMB<HTMLLIElement>((e) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
@@ -30,8 +30,8 @@ export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
   const { icon, name } = process;
 
   return (
-    <li className={styles.NotificationItem} onMouseDown={handleActive} ref={notificationItemRef}>
-      <img alt={name} className={styles.Icon} loading="lazy" src={icon} />
+    <li className={styles.NotificationItem} onMouseDown={handleMouseDown} ref={notificationItemRef}>
+      <img alt={name} className={styles.Icon} loading="eager" src={icon} />
     </li>
   );
 };

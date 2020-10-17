@@ -9,6 +9,7 @@ export type Process = {
   isMaximized: boolean;
   isMinimized: boolean;
   ////////////////////////////////////////////////////////
+  chromeAreaRef: OsRef<HTMLElement>;
   notificationItemRef: OsRef<HTMLLIElement>;
   runningItemRef: OsRef<HTMLButtonElement>;
   windowRef: OsRef<HTMLElement>;

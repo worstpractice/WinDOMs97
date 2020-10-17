@@ -3,7 +3,6 @@
 .Icon {
   height: 16px;
   object-fit: contain;
-  pointer-events: none;
 }
 
 .RunningItem {

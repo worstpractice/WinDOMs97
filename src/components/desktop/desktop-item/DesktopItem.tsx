@@ -28,15 +28,15 @@ export const DesktopItem: FC<Props> = ({ binary, closeMenus }) => {
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopitemRef);
 
-  const handleActive = onLMB<HTMLElement>((e) => {
-    // NOTE: This makes desktopitem selection sticky, which we want.
+  const handleMouseDown = onLMB<HTMLElement>((e) => {
+    // NOTE: This makes `DesktopItem` selection sticky, which we want.
     e.stopPropagation();
     closeMenus();
     activate(desktopitemRef);
     handleMove(e);
   });
 
-  const handleLaunch = onLMB<HTMLElement>(() => {
+  const handleDoubleClick = onLMB<HTMLElement>(() => {
     executeBinary(binary);
   });
 
@@ -46,9 +46,9 @@ export const DesktopItem: FC<Props> = ({ binary, closeMenus }) => {
     <article
       className={style}
       // TODO: onDoubleClick not supported in Chrome? It works in firefox!
-      onDoubleClick={handleLaunch}
+      onDoubleClick={handleDoubleClick}
       onDragStart={blockNativeDrag}
-      onMouseDown={handleActive}
+      onMouseDown={handleMouseDown}
       ref={desktopitemRef}
     >
       <DesktopItemIcon binary={binary} />

@@ -15,7 +15,7 @@ export const StartButton: FC<Props> = ({ onMouseDown }) => {
   const { activate, activeRef } = useKernel();
   const startButtonRef = useDomRef<HTMLButtonElement>();
 
-  const handleActive = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
     // NOTE: Since the Taskbar under us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
     e.stopPropagation();
     activate(startButtonRef);
@@ -25,7 +25,7 @@ export const StartButton: FC<Props> = ({ onMouseDown }) => {
   const style = isRef(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
 
   return (
-    <button className={style} id="StartButton" onMouseDown={handleActive} type="button" ref={startButtonRef}>
+    <button className={style} id="StartButton" onMouseDown={handleMouseDown} type="button" ref={startButtonRef}>
       <p className={styles.Title}>Start</p>
     </button>
   );
