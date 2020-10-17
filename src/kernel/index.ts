@@ -60,7 +60,7 @@ export const useKernel = create<State>(
       (set) =>
         ({
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          activate<T extends OsRef<HTMLElement>>({ current }: T) {
+          activate: <T extends OsRef<HTMLElement>>({ current }: T) => {
             set(({ activeRef }) => {
               if (is(activeRef.current, current)) {
                 return { activeRef };
@@ -75,7 +75,7 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          endProcess({ pid: targetPid }: Process) {
+          endProcess: ({ pid: targetPid }: Process) => {
             set(({ runningProcesses }) => {
               const sparedProcesses: Process[] = runningProcesses.filter(({ pid }) => {
                 // We spare every process whose `pid` is NOT the `targetPid`.
@@ -89,7 +89,7 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          executeBinary(binary: Binary) {
+          executeBinary: (binary: Binary) => {
             set(({ runningProcesses }) => {
               const pid = Pids.use();
 
@@ -118,7 +118,7 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          installProgram(program: Program) {
+          installProgram: (program: Program) => {
             set(({ installedPrograms }) => {
               console.log(`Installed program ${program.name}`);
               const executableFile: Binary = {
@@ -138,7 +138,23 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClickPosition({ x, y }: Position) {
+          maximize: (process: Process) => {
+            set((store) => {
+              process.isMaximized = true;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          minimize: (process: Process) => {
+            set((store) => {
+              process.isMinimized = true;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          setLastClickPosition: ({ x, y }: Position) => {
             set(({ lastClickPosition }) => {
               lastClickPosition.x = x;
               lastClickPosition.y = y;
@@ -147,23 +163,7 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          maximize(process: Process) {
-            set((store) => {
-              process.isMaximized = true;
-
-              return store;
-            });
-          },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          minimize(process: Process) {
-            set((store) => {
-              process.isMinimized = true;
-
-              return store;
-            });
-          },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          unMaximize(process: Process) {
+          unMaximize: (process: Process) => {
             set((store) => {
               process.isMaximized = false;
 
@@ -171,13 +171,14 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          unMinimize(process: Process) {
+          unMinimize: (process: Process) => {
             set((store) => {
               process.isMinimized = false;
 
               return store;
             });
           },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         } as const),
     ),
     "Kernel", // This names the store in the Redux DevTools.
