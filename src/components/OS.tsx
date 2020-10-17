@@ -23,20 +23,27 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { installedBinaries, runningProcesses } = useKernel();
+  const { installedPrograms, installProgram, floppyDiscs, runningProcesses } = useKernel();
   const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenus();
 
   useLastClickPosition();
 
   const isContextMenuOpen = openMenu === "ContextMenu";
+
   const isStartMenuOpen = openMenu === "StartMenu";
+
+  if (!installedPrograms.length) {
+    for (const floppy of floppyDiscs) {
+      installProgram(floppy);
+    }
+  }
 
   return (
     <>
       <Desktop closeMenus={closeMenus} onContextMenu={openContextMenu}>
         {isContextMenuOpen && (
           <ContextMenu>
-            {installedBinaries.map((binary) => {
+            {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
               return (
@@ -45,7 +52,7 @@ export const OS: FC<Props> = () => {
             })}
           </ContextMenu>
         )}
-        {installedBinaries.map((binary) => {
+        {installedPrograms.map((binary) => {
           const { fileName, name } = binary;
 
           return <DesktopItem binary={binary} closeMenus={closeMenus} key={`DesktopItem-${fileName}-${name}`} />;
@@ -58,7 +65,7 @@ export const OS: FC<Props> = () => {
       })}
       {isStartMenuOpen && (
         <StartMenu>
-          {installedBinaries.map((binary) => {
+          {installedPrograms.map((binary) => {
             const { fileName, name } = binary;
 
             return <StartMenuItem binary={binary} closeMenus={closeMenus} key={`StartMenuItem-${fileName}-${name}`} />;
@@ -69,7 +76,7 @@ export const OS: FC<Props> = () => {
         <StartArea>
           <StartButton onMouseDown={toggleStartMenu} />
           <QuickStart>
-            {installedBinaries.map((binary) => {
+            {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
               return (

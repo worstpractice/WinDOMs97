@@ -1,11 +1,12 @@
-import { programs } from "binaries";
 import { Pids } from "kernel/Pids";
+import { programs } from "programs";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
 import type { Binary } from "typings/Binary";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
+import type { Program } from "typings/Program";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -14,7 +15,8 @@ type KernelData = {
   activeRef: OsRef<HTMLElement>;
   /////////////////////////////////////
   availablePids: readonly number[];
-  installedBinaries: readonly Binary[];
+  installedPrograms: readonly Binary[];
+  floppyDiscs: readonly Program[];
   runningProcesses: readonly Process[];
   /////////////////////////////////////
   lastClickPosition: Position;
@@ -25,11 +27,14 @@ type SystemCalls = {
   activate: <T extends OsRef<HTMLElement>>(to: T) => void;
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
+  installProgram: (program: Program) => void;
   setLastClickPosition: (to: Position) => void;
+  ////////////////////////////////////////////////////////
   maximize: (process: Process) => void;
   minimize: (process: Process) => void;
   unMaximize: (process: Process) => void;
   unMinimize: (process: Process) => void;
+  ////////////////////////////////////////////////////////
 };
 
 type State = KernelData & SystemCalls;
@@ -44,7 +49,8 @@ export const useKernel = create<State>(
         activeRef: { current: null },
         /////////////////////////////////////
         availablePids: Pids.available,
-        installedBinaries: programs,
+        floppyDiscs: programs,
+        installedPrograms: [],
         runningProcesses: [],
         /////////////////////////////////////
         lastClickPosition: { x: 0, y: 0 },
@@ -109,6 +115,26 @@ export const useKernel = create<State>(
               } as const;
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          installProgram(program: Program) {
+            set(({ installedPrograms }) => {
+              console.log(`Installed program ${program.name}`);
+              const executableFile: Binary = {
+                ////////////////////////////////////////////////////////
+                ...program,
+                ////////////////////////////////////////////////////////
+                fileName: `${program.name.toLowerCase()}.exe`,
+                ////////////////////////////////////////////////////////
+                contextMenuItemRef: { current: null },
+                desktopItemRef: { current: null },
+                startMenuItemRef: { current: null },
+                quickStartItemRef: { current: null },
+                ////////////////////////////////////////////////////////
+              } as const;
+
+              return { installedPrograms: [...installedPrograms, executableFile] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

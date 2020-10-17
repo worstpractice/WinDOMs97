@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import { useCanvasRef } from "hooks/useCanvas";
-import { useDomRef } from "hooks/useDomRef";
+import { useOsRef } from "hooks/useOsRef";
 import type { FC } from "typings/FC";
 import React, { useState } from "react";
 import type { Position } from "typings/Position";
@@ -12,8 +12,8 @@ type Props = {};
 export const Paint: FC<Props> = () => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
-  const frameRef = useDomRef<HTMLElement>();
-  const canvasRef = useDomRef<HTMLCanvasElement>();
+  const frameRef = useOsRef<HTMLElement>();
+  const canvasRef = useOsRef<HTMLCanvasElement>();
   const ctxRef = useCanvasRef();
 
   if (canvasRef.current) {

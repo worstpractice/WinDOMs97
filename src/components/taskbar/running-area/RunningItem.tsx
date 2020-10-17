@@ -1,5 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
-import { useDomRef } from "hooks/useDomRef";
+import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
 import { useState } from "react";
@@ -16,10 +16,10 @@ type Props = {
 
 export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
   const { activate, minimize, unMinimize } = useKernel();
-  const runningItemRef = useDomRef<HTMLButtonElement>();
+  const runningItemRef = useOsRef<HTMLButtonElement>();
   const [isPressed, setIsPressed] = useState(false);
 
-  // NOTE: This is vital. This is the line where each process is given its very own `RunningItem` handle.
+  // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {

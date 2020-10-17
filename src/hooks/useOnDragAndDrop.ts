@@ -1,5 +1,4 @@
 import { onLMB } from "event-filters/onLMB";
-import { useState } from "react";
 import type { OsRef } from "typings/OsRef";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
@@ -7,8 +6,6 @@ import { moveInFront } from "utils/moveInFront";
 import styles from "./useOnDragAndDrop.module.css";
 
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
-  const [isMoving, setIsMoving] = useState(false);
-
   const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
     const { current: desktopItem } = desktopItemRef;
 
@@ -51,15 +48,13 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       desktopItem.style.top = `${newTop}px`;
 
       cleanup();
-      setIsMoving(false);
     });
 
     cleanup = compose(
       listen({ event: "mousemove", handler: onMouseMove, on: document }),
       listen({ event: "mouseup", handler: onMouseUp, on: document }),
     );
-    setIsMoving(true);
   });
 
-  return [isMoving, handleMouseDown] as const;
+  return handleMouseDown;
 };

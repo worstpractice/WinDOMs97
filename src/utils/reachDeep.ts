@@ -18,5 +18,5 @@ type Foo = (example: typeof computer) => void;
 
 // prettier-ignore
 export const foo: Foo = ({ hardware: { motherboard: { cpu: { manufacturer: name } } } }) => {
-  console.log(name);
+  return name;
 };

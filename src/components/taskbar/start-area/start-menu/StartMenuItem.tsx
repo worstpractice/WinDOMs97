@@ -1,4 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
+import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { Binary } from "typings/Binary";
@@ -12,6 +13,10 @@ type Props = {
 
 export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { executeBinary } = useKernel();
+  const startMenuItemRef = useOsRef<HTMLLIElement>();
+
+  // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
+  binary.startMenuItemRef = startMenuItemRef;
 
   const handleLaunch = onLMB(() => {
     closeMenus();
@@ -21,8 +26,8 @@ export const StartMenuItem: FC<Props> = ({ binary, closeMenus }) => {
   const { fileName, icon, name } = binary;
 
   return (
-    <li className={styles.StartMenuItem} onMouseDown={handleLaunch}>
-      <img className={styles.StartMenuItemIcon} alt={fileName} loading="eager" src={icon} />
+    <li className={styles.StartMenuItem} onMouseDown={handleLaunch} ref={startMenuItemRef}>
+      <img alt={fileName} className={styles.StartMenuItemIcon} loading="eager" src={icon} />
       {name}
     </li>
   );

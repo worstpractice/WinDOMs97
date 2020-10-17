@@ -1,41 +1,58 @@
 import { onLMB } from "event-filters/onLMB";
-import type { MouseEventHandler } from "react";
-import { useEffect } from "react";
+import { useState } from "react";
+import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
-import { listen } from "utils/listen";
 
-type Params<T extends HTMLElement> = {
-  ref: OsRef<T>;
-  msLatency: number;
-  onSingleClick: MouseEventHandler<T>;
-  onDoubleClick: MouseEventHandler<T>;
-};
+/** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
+const MAX_DELAY = 250 as const;
 
-type UseOnDoubleClick = {
-  <T extends HTMLElement>(params: Params<T>): void;
-};
+/** Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF) */
+export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDoubleClick: () => void) => {
+  const [lastTime, setLastTime] = useState(Infinity);
+  const [is2ndClick, setIs2ndClick] = useState(false);
 
-export const useOnDoubleClick: UseOnDoubleClick = ({ msLatency, onDoubleClick, onSingleClick, ref }) => {
-  useEffect(() => {
+  ///////////////////////////////////////////////////////////////////////////////////////////
+
+  const handleConsecutiveClicks = (target: EventTarget) => {
     const { current } = ref;
 
     if (!current) return;
 
-    let clickCount = 0;
+    // We only care about clicks on the location of interest.
+    if (!is(current, target)) {
+      // No consecutive clicks on the location of interest then.
+      return setIs2ndClick(false);
+    }
+    // Current click was on location of interest!
 
-    const handleClick = onLMB<typeof current>((e) => {
-      clickCount++;
+    if (is2ndClick) {
+      // The last click was ALSO on location of interest?
+      return handleDoubleClick();
+    }
 
-      setTimeout(() => {
-        if (clickCount === 1) onSingleClick(e);
-        else if (clickCount === 2) onDoubleClick(e);
+    // Fair enough -- we'll atleast remember that THIS click was on the location of interest.
+    setIs2ndClick(true);
+  };
 
-        clickCount = 0;
-      }, msLatency);
-    });
+  ///////////////////////////////////////////////////////////////////////////////////////////
 
-    const cleanup = listen({ on: current, event: "click", handler: handleClick, options: { capture: true } });
+  const handleMouseDownCapture = onLMB(({ target }) => {
+    const { current } = ref;
 
-    return cleanup;
-  }, [msLatency, onDoubleClick, onSingleClick, ref]);
+    if (!current) return;
+
+    const now = new Date().getTime();
+
+    const elapsed = now - lastTime;
+
+    if (elapsed < MAX_DELAY) {
+      handleConsecutiveClicks(target);
+    }
+
+    setLastTime(() => now);
+  });
+
+  ///////////////////////////////////////////////////////////////////////////////////////////
+
+  return handleMouseDownCapture;
 };

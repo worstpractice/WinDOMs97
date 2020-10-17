@@ -1,4 +1,4 @@
-import { useDomRef } from "hooks/useDomRef";
+import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
@@ -12,7 +12,7 @@ type Props = {
 
 export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
   const { activate } = useKernel();
-  const taskbarRef = useDomRef<HTMLElement>();
+  const taskbarRef = useOsRef<HTMLElement>();
 
   const handleMouseDown = () => {
     closeMenus();

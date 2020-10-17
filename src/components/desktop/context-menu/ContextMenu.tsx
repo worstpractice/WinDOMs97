@@ -1,5 +1,5 @@
 import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useDomRef } from "hooks/useDomRef";
+import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
@@ -12,7 +12,7 @@ type Props = {
 
 export const ContextMenu: FC<Props> = ({ children }) => {
   const { lastClickPosition } = useKernel();
-  const contextMenuRef = useDomRef<HTMLElement>();
+  const contextMenuRef = useOsRef<HTMLElement>();
   useActivateOnMount(contextMenuRef);
 
   const { x: left, y: top } = lastClickPosition;

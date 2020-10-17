@@ -11,7 +11,6 @@ export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends 
 
   // const percentX = Math.ceil((x / width) * 100);
   // const percentY = Math.ceil((y / height) * 100);
-  // console.log("Percent:", percentX, percentY);
   
     // N:         x >= 5 && x <= (width - 5)         y <= 5
     // NE:        x >= (width - 5)                  y <= 5
