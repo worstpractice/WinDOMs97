@@ -34,7 +34,7 @@
   --titlebar-passive-bright: var(--gray-dim);
   --titlebar-passive-dim: var(--gray-dim);
 
-  /* Window */
-  --window-background: var(--gray);
-  --window-outline: var(--white);
+  /* OsWindow */
+  --oswindow-background: var(--gray);
+  --oswindow-outline: var(--white);
 }

@@ -1,8 +1,8 @@
-import { ChromeArea } from "components/window/chrome-area/ChromeArea";
-import { WindowButtons } from "components/window/chrome-area/WindowButtons";
-import { WindowTitle } from "components/window/chrome-area/WindowTitle";
-import { ProgramArea } from "components/window/program-area/ProgramArea";
-import { ProgramContent } from "components/window/program-area/ProgramContent";
+import { ChromeArea } from "components/os-window/chrome-area/ChromeArea";
+import { OsWindowButtons } from "components/os-window/chrome-area/OsWindowButtons";
+import { OsWindowTitle } from "components/os-window/chrome-area/OsWindowTitle";
+import { ProgramArea } from "components/os-window/program-area/ProgramArea";
+import { ProgramContent } from "components/os-window/program-area/ProgramContent";
 import { onLMB } from "event-filters/onLMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
@@ -18,24 +18,24 @@ import type { Process } from "typings/Process";
 import { blockNativeDrag } from "utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./Window.module.css";
+import styles from "./OsWindow.module.css";
 
 type Props = {
   closeMenus: () => void;
   process: Process;
 };
 
-export const Window: FC<Props> = ({ closeMenus, process }) => {
+export const OsWindow: FC<Props> = ({ closeMenus, process }) => {
   const { activate, maximize, unMaximize } = useKernel();
-  const windowRef = useOsRef<HTMLElement>();
-  const handleMove = useOnMoveWindow(windowRef);
-  const handleResize = useOnResizeWindow(windowRef);
+  const osWindowRef = useOsRef<HTMLElement>();
+  const handleMove = useOnMoveWindow(osWindowRef);
+  const handleResize = useOnResizeWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
-  useActivateOnMount(windowRef);
+  useActivateOnMount(osWindowRef);
 
   const handleDoubleClick = () => {
-    const { isMaximized, windowRef } = process;
-    activate(windowRef);
+    const { isMaximized, osWindowRef } = process;
+    activate(osWindowRef);
     isMaximized ? unMaximize(process) : maximize(process);
   };
 
@@ -44,21 +44,21 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
   const handleMouseDownCapture = useOnDoubleClick(chromeAreaRef, handleDoubleClick);
 
-  // NOTE: This is vital. This is the line where each `Process` is given its very own `Window` handle.
-  process.windowRef = windowRef;
+  // NOTE: This is vital. This is the line where each `Process` is given its very own `OsWindow` handle.
+  process.osWindowRef = osWindowRef;
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     closeMenus();
-    activate(windowRef);
-    moveInFront(windowRef);
+    activate(osWindowRef);
+    moveInFront(osWindowRef);
 
     // Not resizable at the moment? That means we're done here.
     if (!isResizable) return;
 
     const { target } = e;
 
-    // Abort resizing if click target was not current window.
-    if (!is(target, windowRef.current)) return;
+    // Abort resizing if click target was not current `OsWindow`.
+    if (!is(target, osWindowRef.current)) return;
 
     handleResize(e);
   });
@@ -66,7 +66,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
   const handleChromeDrag = onLMB<HTMLSpanElement>((e) => {
     const { isMaximized } = process;
 
-    // Trying to move a maximized window? That's a paddlin'.
+    // Trying to move a maximized `OsWindow`? That's a paddling.
     if (isMaximized) return;
 
     handleMove(e);
@@ -83,7 +83,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
   const { isMaximized, isMinimized, pid } = process;
 
   const style = css(
-    styles.Window,
+    styles.OsWindow,
     isMaximized ? styles.Maximized : "",
     isMinimized ? styles.Minimized : "",
     isResizable ? styles.Resizable : "",
@@ -99,7 +99,7 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
       onMouseDown={handleMouseDown}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
-      ref={windowRef}
+      ref={osWindowRef}
       style={{ left, top }}
     >
       <span
@@ -109,8 +109,8 @@ export const Window: FC<Props> = ({ closeMenus, process }) => {
         onMouseDown={handleChromeDrag}
       >
         <ChromeArea process={process}>
-          <WindowTitle process={process} />
-          <WindowButtons closeMenus={closeMenus} process={process} />
+          <OsWindowTitle process={process} />
+          <OsWindowButtons closeMenus={closeMenus} process={process} />
         </ChromeArea>
       </span>
       <ProgramArea>

@@ -5,7 +5,7 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   width: 65px;
@@ -16,20 +16,20 @@
   cursor: pointer;
   display: flex;
   justify-content: center;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   width: 65px;
 }
 
 .Pressed {
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
 }
 
 .Pressed:-moz-focusring {
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
 }

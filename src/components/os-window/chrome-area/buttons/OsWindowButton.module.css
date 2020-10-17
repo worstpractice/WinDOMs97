@@ -1,29 +1,29 @@
 @import "../../../../styles/colors.module.css";
 
-.WindowButton {
-  background-color: var(--window-background);
-  outline-color: var(--window-outline);
+.OsWindowButton {
+  background-color: var(--oswindow-background);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   width: 18px;
 }
 
-.WindowButton:-moz-focusring {
-  background-color: var(--window-background);
-  outline-color: var(--window-outline);
+.OsWindowButton:-moz-focusring {
+  background-color: var(--oswindow-background);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   width: 18px;
 }
 
 .Pressed:hover {
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
 }
 
 .Pressed:not(:hover) {
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
 }

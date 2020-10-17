@@ -2,7 +2,7 @@
 
 .ProgramContent {
   height: 100%;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
   width: 100%;

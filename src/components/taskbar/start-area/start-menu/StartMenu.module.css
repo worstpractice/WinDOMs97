@@ -1,13 +1,13 @@
 @import "../../../../styles/colors.module.css";
 
 .StartMenu {
-  background-color: var(--window-background);
+  background-color: var(--oswindow-background);
   bottom: 30px;
   display: flex;
   left: 5px;
   max-height: 360px;
   max-width: 220px;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   position: absolute;

@@ -4,13 +4,13 @@ import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 
-export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(windowRef: T) => {
+export const useOnMoveWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
-    const { current: osWindow } = windowRef;
+    const { current: osWindow } = osWindowRef;
 
     if (!osWindow) return;
 
-    moveInFront(windowRef);
+    moveInFront(osWindowRef);
 
     const shiftX = clientX - osWindow.getBoundingClientRect().left;
     const shiftY = clientY - osWindow.getBoundingClientRect().top;

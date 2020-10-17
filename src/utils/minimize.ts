@@ -3,11 +3,11 @@
 // import type { Process } from "typings/Process";
 
 // export const minimize = (process: Process) => {
-//   const { isMinimized, notificationItemRef, runningItemRef, windowRef } = process;
+//   const { isMinimized, notificationItemRef, runningItemRef, osWindowRef } = process;
 
 //   if (isMinimized) return;
 
-//   const osWindow = windowRef.current;
+//   const osWindow = osWindowRef.current;
 
 //   if (!osWindow) return;
 

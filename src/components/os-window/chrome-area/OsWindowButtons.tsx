@@ -1,18 +1,18 @@
-import { ExitButton } from "components/window/chrome-area/buttons/ExitButton";
-import { MaximizeButton } from "components/window/chrome-area/buttons/MaximizeButton";
-import { MinimizeButton } from "components/window/chrome-area/buttons/MinimizeButton";
+import { ExitButton } from "components/os-window/chrome-area/buttons/ExitButton";
+import { MaximizeButton } from "components/os-window/chrome-area/buttons/MaximizeButton";
+import { MinimizeButton } from "components/os-window/chrome-area/buttons/MinimizeButton";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
-import styles from "./WindowButtons.module.css";
+import styles from "./OsWindowButtons.module.css";
 
 type Props = {
   closeMenus: () => void;
   process: Process;
 };
 
-export const WindowButtons: FC<Props> = ({ closeMenus, process }) => {
+export const OsWindowButtons: FC<Props> = ({ closeMenus, process }) => {
   const { activate, endProcess, maximize, minimize, unMaximize } = useKernel();
 
   const handleExit = () => {
@@ -20,8 +20,8 @@ export const WindowButtons: FC<Props> = ({ closeMenus, process }) => {
   };
 
   const handleMaximize = () => {
-    const { isMaximized, windowRef } = process;
-    activate(windowRef);
+    const { isMaximized, osWindowRef } = process;
+    activate(osWindowRef);
     isMaximized ? unMaximize(process) : maximize(process);
   };
 
@@ -31,7 +31,7 @@ export const WindowButtons: FC<Props> = ({ closeMenus, process }) => {
   };
 
   return (
-    <section className={styles.WindowButtons}>
+    <section className={styles.OsWindowButtons}>
       <MinimizeButton closeMenus={closeMenus} onMouseUp={handleMinimize} />
       <MaximizeButton closeMenus={closeMenus} onMouseUp={handleMaximize} />
       <ExitButton closeMenus={closeMenus} onMouseUp={handleExit} />

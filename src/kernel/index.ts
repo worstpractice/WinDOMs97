@@ -110,7 +110,7 @@ export const useKernel = create<State>(
                 chromeAreaRef: { current: null },
                 notificationItemRef: { current: null },
                 runningItemRef: { current: null },
-                windowRef: { current: null },
+                osWindowRef: { current: null },
                 ////////////////////////////////////////////////////////
               } as const;
 
@@ -180,5 +180,6 @@ export const useKernel = create<State>(
           },
         } as const),
     ),
+    "Kernel", // This names the store in the Redux DevTools.
   ),
 );

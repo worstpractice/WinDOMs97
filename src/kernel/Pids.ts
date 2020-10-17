@@ -27,7 +27,7 @@ export const Pids = {
 
     if (!pidsInBackingSet) return null;
 
-    // NOTE: Sorting here is crucial, or else WHICH windowbuttons affect WHICH window gets jumbled!
+    // NOTE: Sorting here is CRUCIAL, or (for starters:) random buttons start controlling random `OsWindow`s!
     const availablePids = [...backingSet].sort();
 
     const pid = availablePids.pop();

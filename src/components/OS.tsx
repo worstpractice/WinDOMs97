@@ -10,7 +10,7 @@ import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
-import { Window } from "components/window/Window";
+import { OsWindow } from "components/os-window/OsWindow";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useOsMenus } from "hooks/useOsMenus";
 import { useKernel } from "kernel";
@@ -61,7 +61,7 @@ export const OS: FC<Props> = () => {
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return <Window closeMenus={closeMenus} key={`Window-${pid}-${name}`} process={process} />;
+        return <OsWindow closeMenus={closeMenus} key={`OsWindow-${pid}-${name}`} process={process} />;
       })}
       {isStartMenuOpen && (
         <StartMenu>

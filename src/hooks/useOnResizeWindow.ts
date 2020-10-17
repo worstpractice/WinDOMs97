@@ -6,16 +6,16 @@ import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 
 /** In pixels. */
-const WINDOW_MIN_HEIGHT = 250 as const;
-const WINDOW_MIN_WIDTH = 350 as const;
+const OSWINDOW_MIN_HEIGHT = 250 as const;
+const OSWINDOW_MIN_WIDTH = 350 as const;
 
-export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(windowRef: T) => {
+export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   /** Drag start event. */
   const handleMouseDown = onLMB<U>((e) => {
-    const { current: osWindow } = windowRef;
+    const { current: osWindow } = osWindowRef;
     if (!osWindow) return;
 
-    moveInFront(windowRef);
+    moveInFront(osWindowRef);
 
     const latitude = getResizeLatitude(osWindow, e);
 
@@ -49,7 +49,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "W":
         case "NW":
         case "SW": {
-          const availableWidth = currentWidth - WINDOW_MIN_WIDTH;
+          const availableWidth = currentWidth - OSWINDOW_MIN_WIDTH;
 
           // We're actively concerned about negative values here.
           const isAvailableWidth = availableWidth > 0;
@@ -72,7 +72,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "N":
         case "NE":
         case "NW": {
-          const availableHeight = currentHeight - WINDOW_MIN_HEIGHT;
+          const availableHeight = currentHeight - OSWINDOW_MIN_HEIGHT;
 
           // We're actively concerned about negative values here.
           const isAvailableHeight = availableHeight > 0;
@@ -97,7 +97,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "SE": {
           const newWidth = clientX - currentLeft;
 
-          if (newWidth > WINDOW_MIN_WIDTH) {
+          if (newWidth > OSWINDOW_MIN_WIDTH) {
             width = `${newWidth}px`;
           }
           break;
@@ -109,7 +109,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
 
           const newWidth = startingWidth + deltaLeft;
 
-          if (newWidth > WINDOW_MIN_WIDTH) {
+          if (newWidth > OSWINDOW_MIN_WIDTH) {
             width = `${newWidth}px`;
           }
           break;
@@ -125,7 +125,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
 
           const newHeight = startingHeight + deltaTop;
 
-          if (newHeight > WINDOW_MIN_HEIGHT) {
+          if (newHeight > OSWINDOW_MIN_HEIGHT) {
             height = `${newHeight}px`;
           }
           break;
@@ -135,7 +135,7 @@ export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(win
         case "SW": {
           const newHeight = clientY - currentTop;
 
-          if (newHeight > WINDOW_MIN_HEIGHT) {
+          if (newHeight > OSWINDOW_MIN_HEIGHT) {
             height = `${newHeight}px`;
           }
           break;

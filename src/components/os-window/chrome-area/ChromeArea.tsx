@@ -20,9 +20,9 @@ export const ChromeArea: FC<Props> = ({ children, process }) => {
   // NOTE: This is vital. This is the line where each `Process` is given its very own `ChromeArea` handle.
   process.chromeAreaRef = chromeAreaRef;
 
-  const { windowRef } = process;
+  const { osWindowRef } = process;
 
-  const style = isRef(activeRef, windowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
+  const style = isRef(activeRef, osWindowRef) ? css(styles.ChromeArea, styles.Active) : styles.ChromeArea;
 
   return (
     <header className={style} ref={chromeAreaRef}>

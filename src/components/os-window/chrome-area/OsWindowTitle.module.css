@@ -1,6 +1,13 @@
 @import "../../../styles/colors.module.css";
 
-.ProgramIcon {
+.OsWindowTitle {
+  align-items: center;
+  display: flex;
+  gap: 5px;
+  pointer-events: none;
+}
+
+.ProcessIcon {
   max-height: 30px;
   object-fit: contain;
   padding-bottom: 4px;
@@ -8,18 +15,11 @@
   pointer-events: none;
 }
 
-.ProgramName {
-  color: var(--window-background);
+.ProcessName {
+  color: var(--oswindow-background);
   font-size: 16px;
   font-weight: 900;
   padding-top: 2px;
-  pointer-events: none;
-}
-
-.WindowTitle {
-  align-items: center;
-  display: flex;
-  gap: 5px;
   pointer-events: none;
 }
 

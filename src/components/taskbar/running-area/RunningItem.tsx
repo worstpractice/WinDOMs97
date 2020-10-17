@@ -23,12 +23,12 @@ export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
   process.runningItemRef = runningItemRef;
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
-    // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the window we meant to activate.
+    // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to activate.
     e.stopPropagation();
     closeMenus();
     unMinimize(process);
-    activate(process.windowRef);
-    moveInFront(process.windowRef);
+    activate(process.osWindowRef);
+    moveInFront(process.osWindowRef);
     setIsPressed(true);
   });
 
@@ -43,8 +43,8 @@ export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
 
     if (isMinimized) {
       closeMenus();
-      activate(process.windowRef);
-      moveInFront(process.windowRef);
+      activate(process.osWindowRef);
+      moveInFront(process.osWindowRef);
       unMinimize(process);
     } else {
       minimize(process);

@@ -10,7 +10,7 @@
   cursor: pointer;
   display: flex;
   gap: 3px;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   padding-left: 5px;
@@ -23,7 +23,7 @@
   cursor: pointer;
   display: flex;
   gap: 3px;
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
   padding-left: 5px;

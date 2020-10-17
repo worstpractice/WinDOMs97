@@ -1,7 +1,7 @@
 @import "../../styles/animations.module.css";
 @import "../../styles/colors.module.css";
 
-.Window {
+.OsWindow {
   animation: Maximized 500ms;
   background-color: transparent;
   display: flex;
@@ -22,7 +22,7 @@
 }
 
 .Outline {
-  outline-color: var(--window-outline);
+  outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 2px;
 }

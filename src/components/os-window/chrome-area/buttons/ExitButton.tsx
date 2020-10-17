@@ -3,20 +3,20 @@ import type { FC } from "react";
 import * as React from "react";
 import { useState } from "react";
 import { css } from "utils/css";
-import styles from "./WindowButton.module.css";
+import styles from "./OsWindowButton.module.css";
 
 type Props = {
   closeMenus: () => void;
   onMouseUp: () => void;
 };
 
-export const MinimizeButton: FC<Props> = ({ closeMenus, onMouseUp }) => {
+export const ExitButton: FC<Props> = ({ closeMenus, onMouseUp }) => {
   const [isPressed, setIsPressed] = useState(false);
 
-  const style = isPressed ? css(styles.WindowButton, styles.Pressed) : styles.WindowButton;
+  const style = isPressed ? css(styles.OsWindowButton, styles.Pressed) : styles.OsWindowButton;
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
-    // NOTE: This is necessary to stop the window from starting to move.
+    // NOTE: This is necessary to stop the `OsWindow` from starting to move.
     e.stopPropagation();
     closeMenus();
     setIsPressed(true);
@@ -40,7 +40,7 @@ export const MinimizeButton: FC<Props> = ({ closeMenus, onMouseUp }) => {
       onMouseUp={handleMouseUp}
       type="button"
     >
-      _
+      X
     </button>
   );
 };

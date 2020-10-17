@@ -12,6 +12,6 @@ export type Process = {
   chromeAreaRef: OsRef<HTMLElement>;
   notificationItemRef: OsRef<HTMLLIElement>;
   runningItemRef: OsRef<HTMLButtonElement>;
-  windowRef: OsRef<HTMLElement>;
+  osWindowRef: OsRef<HTMLElement>;
   ////////////////////////////////////////////////////////
 };

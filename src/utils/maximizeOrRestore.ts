@@ -3,11 +3,11 @@
 // import type { Process } from "typings/Process";
 
 // export const maximizeOrRestore = (process: Process) => {
-//   const { isMaximized, notificationItemRef, runningItemRef, windowRef } = process;
+//   const { isMaximized, notificationItemRef, runningItemRef, osWindowRef } = process;
 
 //   if (isMaximized) return;
 
-//   const osWindow = windowRef.current;
+//   const osWindow = osWindowRef.current;
 
 //   if (!osWindow) return;
 

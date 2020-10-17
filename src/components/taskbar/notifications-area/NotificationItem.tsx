@@ -23,8 +23,8 @@ export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
-    activate(process.windowRef);
-    moveInFront(process.windowRef);
+    activate(process.osWindowRef);
+    moveInFront(process.osWindowRef);
   });
 
   const { icon, name } = process;
