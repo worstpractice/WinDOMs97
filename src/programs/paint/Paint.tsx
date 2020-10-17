@@ -4,7 +4,7 @@ import { useOsRef } from "hooks/useOsRef";
 import type { FC } from "typings/FC";
 import React, { useState } from "react";
 import type { Position } from "typings/Position";
-import { drawLine } from "./drawLine";
+import { drawLine } from "./utils/drawLine";
 import styles from "./Paint.module.css";
 
 type Props = {};

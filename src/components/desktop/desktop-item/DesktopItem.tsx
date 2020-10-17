@@ -10,7 +10,7 @@ import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
-import { blockNativeDrag } from "utils/blockNativeDrag";
+import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { css } from "utils/css";
 import styles from "./DesktopItem.module.css";
 

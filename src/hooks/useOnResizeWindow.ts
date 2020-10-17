@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
 import { compose } from "utils/compose";
-import { getResizeLatitude } from "utils/getResizeLatitude";
+import { getResizeLatitude } from "components/os-window/utils/getResizeLatitude";
 import { listen } from "utils/listen";
 import { moveInFront } from "utils/moveInFront";
 

@@ -15,7 +15,7 @@ import React, { useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
-import { blockNativeDrag } from "utils/blockNativeDrag";
+import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./OsWindow.module.css";

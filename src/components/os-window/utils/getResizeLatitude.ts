@@ -1,11 +1,11 @@
 import type { MouseEvent } from "react";
 import type { Latitude } from "typings/Latitude";
-import { getPixelsAlongsideOsWindow } from "utils/getPixelsAlongsideOsWindow";
+import { getDistanceAlongOsWindow } from "components/os-window/utils/getDistanceAlongOsWindow";
 
 // prettier-ignore
 export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends MouseEvent<T>>(osWindowRef: T, e: U): Latitude => {
 
-  const { x, y } = getPixelsAlongsideOsWindow(osWindowRef, e);
+  const { x, y } = getDistanceAlongOsWindow(osWindowRef, e);
 
   const { width, height } = osWindowRef.getBoundingClientRect();
 
