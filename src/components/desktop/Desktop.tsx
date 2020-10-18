@@ -7,6 +7,7 @@ import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
 import { MouseEventHandler, useState } from "react";
+import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Position } from "typings/Position";
 import styles from "./Desktop.module.css";
@@ -30,7 +31,12 @@ export const Desktop: FC<Props> = ({ children, closeMenus, onContextMenu }) => {
     onContextMenu();
   });
 
-  const handleMouseDown = onLMB<HTMLElement>(() => {
+  const handleMouseDown = onLMB<HTMLElement>(({ target }) => {
+    const { current } = desktopRef;
+
+    // We're only interested in clicks on the actual desktop itself
+    if (!is(current, target)) return;
+
     setIsDragSelecting(true);
     closeMenus();
     activate(desktopRef);
