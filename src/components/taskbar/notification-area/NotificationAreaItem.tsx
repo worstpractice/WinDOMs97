@@ -6,13 +6,13 @@ import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./NotificationItem.module.css";
+import styles from "./NotificationAreaItem.module.css";
 
 type Props = {
   process: Process;
 };
 
-export const NotificationItem: FC<Props> = ({ process }) => {
+export const NotificationAreaItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
 

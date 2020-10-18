@@ -3,9 +3,10 @@
 .Icon {
   height: 16px;
   object-fit: contain;
+  pointer-events: none;
 }
 
-.RunningItem {
+.RunningAreaItem {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -18,7 +19,7 @@
   width: 120px;
 }
 
-.RunningItem:-moz-focusring {
+.RunningAreaItem:-moz-focusring {
   align-items: center;
   cursor: pointer;
   display: flex;

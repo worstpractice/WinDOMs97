@@ -8,13 +8,13 @@ import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./RunningItem.module.css";
+import styles from "./RunningAreaItem.module.css";
 
 type Props = {
   process: Process;
 };
 
-export const RunningItem: FC<Props> = ({ process }) => {
+export const RunningAreaItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
 
@@ -39,7 +39,7 @@ export const RunningItem: FC<Props> = ({ process }) => {
     }
   });
 
-  const style = isRef(activeRef, process.osWindowRef) ? css(styles.RunningItem, styles.Active) : styles.RunningItem;
+  const style = isRef(activeRef, process.osWindowRef) ? css(styles.RunningAreaItem, styles.Active) : styles.RunningAreaItem;
 
   const { icon, name } = process;
 
