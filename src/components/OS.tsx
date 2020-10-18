@@ -23,9 +23,9 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { floppyDiscs, installedPrograms, installProgram, openContextMenu, openMenu, runningProcesses } = useKernel();
+  const { floppyDiscs, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
 
-  useOnContextMenu(openContextMenu);
+  useOnContextMenu();
 
   useLastClickPosition();
 

@@ -1,13 +1,15 @@
 import { onRMB } from "event-filters/onRMB";
+import { useKernel } from "kernel";
 import { useCallback, useEffect } from "react";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
-export const useOnContextMenu = (handler: () => void) => {
+export const useOnContextMenu = () => {
+  const { openContextMenu } = useKernel();
+
   const handleContextMenu = useCallback(
-    onRMB(({ target }) => {
-      console.log(`ContextMenu:`, target);
-      handler();
+    onRMB(() => {
+      openContextMenu();
     }),
     [],
   );
