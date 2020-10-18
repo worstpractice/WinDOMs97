@@ -40,11 +40,7 @@ export const OS: FC<Props> = () => {
       <Desktop>
         {isContextMenuOpen && (
           <ContextMenu>
-            {installedPrograms.map((binary) => {
-              const { fileName, name } = binary;
-
-              return <ContextMenuItem binary={binary} key={`ContextMenuItem-${fileName}-${name}`} />;
-            })}
+            <ContextMenuItem key={`ContextMenuItem-${Math.random()}`} />
           </ContextMenu>
         )}
         {installedPrograms.map((binary) => {

@@ -153,7 +153,6 @@ export const useKernel = create<OperatingSystem>(
                 ////////////////////////////////////////////////////////
                 fileName: `${program.name.toLowerCase()}.exe`,
                 ////////////////////////////////////////////////////////
-                contextMenuItemRef: { current: null },
                 desktopItemRef: { current: null },
                 startMenuItemRef: { current: null },
                 quickStartItemRef: { current: null },
