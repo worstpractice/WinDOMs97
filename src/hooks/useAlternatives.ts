@@ -11,7 +11,5 @@ export const useAlternatives = (process: Process) => {
     { label: "Minimize", action: () => minimize(process) },
   ] as const;
 
-  // MAKE THE CONTEXT MENU GROW UPWARDS PLZ
-
   return alternatives;
 };

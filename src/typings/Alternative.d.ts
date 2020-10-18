@@ -1,6 +1,7 @@
 export type Alternative = {
   label: string;
   action: () => void;
+  icon?: string;
 };
 
 // If there's a binary related to the thing we're calling, pipe in some data from there?

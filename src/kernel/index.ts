@@ -179,8 +179,9 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           openContextMenu: (alternatives: readonly Alternative[]) => {
             set(() => {
-              console.log(alternatives);
-              // Store the alternatives in the store so it becomes available to ContextMenu from the other side
+              if (!alternatives.length) {
+                console.error("The array of alternatives was empty!");
+              }
 
               return { openMenu: "ContextMenu", alternatives: [...alternatives] } as const;
             });

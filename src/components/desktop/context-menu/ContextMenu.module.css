@@ -16,3 +16,8 @@
   justify-content: center;
   width: 100%;
 }
+
+/*** WARN: Must come last ***/
+.Outside {
+  flex-direction: column-reverse;
+}

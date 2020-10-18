@@ -1,14 +1,15 @@
 import { useKernel } from "kernel";
 import type { MouseEventHandler } from "react";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import { listen } from "utils/listen";
 
 export const useLastClickPosition = () => {
-  const { setLastClickPosition } = useKernel();
+  const { closeMenus, setLastClickPosition } = useKernel();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const handleMouseDown: MouseEventHandler = ({ clientX, clientY }) => {
       setLastClickPosition({ x: clientX, y: clientY });
+      closeMenus();
     };
 
     const cleanup = listen({
@@ -19,5 +20,5 @@ export const useLastClickPosition = () => {
     });
 
     return cleanup;
-  }, [setLastClickPosition]);
+  }, [closeMenus, setLastClickPosition]);
 };
