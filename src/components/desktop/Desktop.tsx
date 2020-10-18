@@ -8,13 +8,12 @@ import type { FC } from "typings/FC";
 import styles from "./Desktop.module.css";
 
 type Props = {
-  closeMenus: () => void;
   children: ReactNode;
 };
 
-export const Desktop: FC<Props> = ({ children, closeMenus }) => {
+export const Desktop: FC<Props> = ({ children }) => {
   const desktopRef = useOsRef<HTMLElement>();
-  const [isDragSelecting, currentPosition] = useDragSelection(desktopRef, closeMenus);
+  const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
 
   // NOTE: this call is what allows the children calling `useActivateOnMount()` to function properly.
   useActivateOnMount(desktopRef);

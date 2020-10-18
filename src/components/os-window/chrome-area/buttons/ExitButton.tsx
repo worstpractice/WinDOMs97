@@ -1,4 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
+import { useKernel } from "kernel";
 import type { FC } from "react";
 import * as React from "react";
 import { useState } from "react";
@@ -6,11 +7,11 @@ import { css } from "utils/css";
 import styles from "./OsWindowButton.module.css";
 
 type Props = {
-  closeMenus: () => void;
   onMouseUp: () => void;
 };
 
-export const ExitButton: FC<Props> = ({ closeMenus, onMouseUp }) => {
+export const ExitButton: FC<Props> = ({ onMouseUp }) => {
+  const { closeMenus } = useKernel();
   const [isPressed, setIsPressed] = useState(false);
 
   const style = isPressed ? css(styles.OsWindowButton, styles.Pressed) : styles.OsWindowButton;

@@ -8,11 +8,10 @@ import styles from "./ContextMenuItem.module.css";
 
 type Props = {
   binary: Binary;
-  closeMenus: () => void;
 };
 
-export const ContextMenuItem: FC<Props> = ({ binary, closeMenus }) => {
-  const { executeBinary } = useKernel();
+export const ContextMenuItem: FC<Props> = ({ binary }) => {
+  const { closeMenus, executeBinary } = useKernel();
   const contextMenuItemRef = useOsRef<HTMLLIElement>();
 
   // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.

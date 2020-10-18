@@ -8,11 +8,10 @@ import type { Process } from "typings/Process";
 import styles from "./OsWindowButtons.module.css";
 
 type Props = {
-  closeMenus: () => void;
   process: Process;
 };
 
-export const OsWindowButtons: FC<Props> = ({ closeMenus, process }) => {
+export const OsWindowButtons: FC<Props> = ({ process }) => {
   const { activate, endProcess, maximize, minimize, unMaximize } = useKernel();
 
   const handleExit = () => {
@@ -32,9 +31,9 @@ export const OsWindowButtons: FC<Props> = ({ closeMenus, process }) => {
 
   return (
     <section className={styles.OsWindowButtons}>
-      <MinimizeButton closeMenus={closeMenus} onMouseUp={handleMinimize} />
-      <MaximizeButton closeMenus={closeMenus} onMouseUp={handleMaximize} />
-      <ExitButton closeMenus={closeMenus} onMouseUp={handleExit} />
+      <MinimizeButton onMouseUp={handleMinimize} />
+      <MaximizeButton onMouseUp={handleMaximize} />
+      <ExitButton onMouseUp={handleExit} />
     </section>
   );
 };

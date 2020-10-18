@@ -1,25 +1,27 @@
-import { useState } from "react";
-import type { MenuState } from "typings/MenuState";
+// import { useState } from "react";
+// import type { MenuState } from "typings/MenuState";
 
-export const useOsMenu = () => {
-  const [openMenu, setOpenMenu] = useState<MenuState>("");
+// export const useOsMenu = () => {
+//   const [openMenu, setOpenMenu] = useState<MenuState>("");
 
-  const closeMenus = () => {
-    setOpenMenu("");
-  };
+//   const closeMenus = () => {
+//     setOpenMenu("");
+//   };
 
-  const openContextMenu = () => {
-    setOpenMenu("ContextMenu");
-  };
+//   const openContextMenu = () => {
+//     setOpenMenu("ContextMenu");
+//   };
 
-  const toggleStartMenu = () => {
-    openMenu === "StartMenu" ? setOpenMenu("") : setOpenMenu("StartMenu");
-  };
+//   const toggleStartMenu = () => {
+//     openMenu === "StartMenu" ? setOpenMenu("") : setOpenMenu("StartMenu");
+//   };
 
-  return {
-    openMenu,
-    closeMenus,
-    openContextMenu,
-    toggleStartMenu,
-  } as const;
-};
+//   return {
+//     openMenu,
+//     closeMenus,
+//     openContextMenu,
+//     toggleStartMenu,
+//   } as const;
+// };
+
+export {};

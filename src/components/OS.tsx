@@ -13,7 +13,6 @@ import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useOnContextMenu } from "hooks/useOnContextMenu";
-import { useOsMenu } from "hooks/useOsMenu";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { FC } from "typings/FC";
@@ -24,8 +23,15 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { installedPrograms, installProgram, floppyDiscs, runningProcesses } = useKernel();
-  const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenu();
+  const {
+    floppyDiscs,
+    installedPrograms,
+    installProgram,
+    openContextMenu,
+    openMenu,
+    runningProcesses,
+    toggleStartMenu,
+  } = useKernel();
 
   useOnContextMenu(openContextMenu);
 
@@ -43,48 +49,44 @@ export const OS: FC<Props> = () => {
 
   return (
     <>
-      <Desktop closeMenus={closeMenus}>
+      <Desktop>
         {isContextMenuOpen && (
           <ContextMenu>
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              return (
-                <ContextMenuItem binary={binary} closeMenus={closeMenus} key={`ContextMenuItem-${fileName}-${name}`} />
-              );
+              return <ContextMenuItem binary={binary} key={`ContextMenuItem-${fileName}-${name}`} />;
             })}
           </ContextMenu>
         )}
         {installedPrograms.map((binary) => {
           const { fileName, name } = binary;
 
-          return <DesktopItem binary={binary} closeMenus={closeMenus} key={`DesktopItem-${fileName}-${name}`} />;
+          return <DesktopItem binary={binary} key={`DesktopItem-${fileName}-${name}`} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
-        return <OsWindow closeMenus={closeMenus} key={`OsWindow-${pid}-${name}`} process={process} />;
+        return <OsWindow key={`OsWindow-${pid}-${name}`} process={process} />;
       })}
       {isStartMenuOpen && (
         <StartMenu>
           {installedPrograms.map((binary) => {
             const { fileName, name } = binary;
 
-            return <StartMenuItem binary={binary} closeMenus={closeMenus} key={`StartMenuItem-${fileName}-${name}`} />;
+            return <StartMenuItem binary={binary} key={`StartMenuItem-${fileName}-${name}`} />;
           })}
         </StartMenu>
       )}
-      <Taskbar closeMenus={closeMenus}>
+      <Taskbar>
         <StartArea>
           <StartButton onMouseDown={toggleStartMenu} />
           <QuickStart>
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              return (
-                <QuickStartItem binary={binary} closeMenus={closeMenus} key={`QuickStartItem-${fileName}-${name}`} />
-              );
+              return <QuickStartItem binary={binary} key={`QuickStartItem-${fileName}-${name}`} />;
             })}
           </QuickStart>
         </StartArea>
@@ -92,16 +94,14 @@ export const OS: FC<Props> = () => {
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return <RunningItem closeMenus={closeMenus} key={`RunningItem-${pid}-${name}`} process={process} />;
+            return <RunningItem key={`RunningItem-${pid}-${name}`} process={process} />;
           })}
         </RunningArea>
         <NotificationArea>
           {runningProcesses.map((process) => {
             const { name, pid } = process;
 
-            return (
-              <NotificationItem closeMenus={closeMenus} process={process} key={`NotificationItem-${pid}-${name}`} />
-            );
+            return <NotificationItem process={process} key={`NotificationItem-${pid}-${name}`} />;
           })}
         </NotificationArea>
       </Taskbar>

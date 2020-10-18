@@ -7,8 +7,8 @@ import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
-export const useDragSelection = (desktopRef: OsRef<HTMLElement>, closeMenus: () => void) => {
-  const { activate } = useKernel();
+export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
+  const { activate, closeMenus } = useKernel();
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 

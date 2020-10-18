@@ -3,6 +3,7 @@ import { programs } from "programs";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
 import type { Binary } from "typings/Binary";
+import type { MenuState } from "typings/MenuState";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
@@ -13,6 +14,7 @@ import { combine, devtools } from "zustand/middleware";
 type KernelData = {
   /////////////////////////////////////
   activeRef: OsRef<HTMLElement>;
+  openMenu: MenuState;
   /////////////////////////////////////
   availablePids: readonly number[];
   installedPrograms: readonly Binary[];
@@ -35,6 +37,10 @@ type SystemCalls = {
   unMaximize: (process: Process) => void;
   unMinimize: (process: Process) => void;
   ////////////////////////////////////////////////////////
+  closeMenus: () => void;
+  openContextMenu: () => void;
+  toggleStartMenu: () => void;
+  ////////////////////////////////////////////////////////
 };
 
 type State = KernelData & SystemCalls;
@@ -47,6 +53,7 @@ export const useKernel = create<State>(
       {
         /////////////////////////////////////
         activeRef: { current: null },
+        openMenu: "",
         /////////////////////////////////////
         availablePids: Pids.available,
         floppyDiscs: programs,
@@ -174,6 +181,30 @@ export const useKernel = create<State>(
           unMinimize: (process: Process) => {
             set((store) => {
               process.isMinimized = false;
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          closeMenus: () => {
+            set((store) => {
+              store.openMenu = "";
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          openContextMenu: () => {
+            set((store) => {
+              store.openMenu = "ContextMenu";
+
+              return store;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          toggleStartMenu: () => {
+            set((store) => {
+              store.openMenu = "StartMenu";
 
               return store;
             });

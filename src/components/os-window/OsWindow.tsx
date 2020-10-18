@@ -3,6 +3,7 @@ import { OsWindowButtons } from "components/os-window/chrome-area/OsWindowButton
 import { OsWindowTitle } from "components/os-window/chrome-area/OsWindowTitle";
 import { ProgramArea } from "components/os-window/program-area/ProgramArea";
 import { ProgramContent } from "components/os-window/program-area/ProgramContent";
+import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
@@ -15,18 +16,16 @@ import React, { useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
-import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./OsWindow.module.css";
 
 type Props = {
-  closeMenus: () => void;
   process: Process;
 };
 
-export const OsWindow: FC<Props> = ({ closeMenus, process }) => {
-  const { activate, maximize, unMaximize } = useKernel();
+export const OsWindow: FC<Props> = ({ process }) => {
+  const { activate, closeMenus, maximize, unMaximize } = useKernel();
   const osWindowRef = useOsRef<HTMLElement>();
   const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
@@ -110,7 +109,7 @@ export const OsWindow: FC<Props> = ({ closeMenus, process }) => {
       >
         <ChromeArea process={process}>
           <OsWindowTitle process={process} />
-          <OsWindowButtons closeMenus={closeMenus} process={process} />
+          <OsWindowButtons process={process} />
         </ChromeArea>
       </span>
       <ProgramArea>

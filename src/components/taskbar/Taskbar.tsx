@@ -7,11 +7,10 @@ import styles from "./Taskbar.module.css";
 
 type Props = {
   children: ReactNode;
-  closeMenus: () => void;
 };
 
-export const Taskbar: FC<Props> = ({ children, closeMenus }) => {
-  const { activate } = useKernel();
+export const Taskbar: FC<Props> = ({ children }) => {
+  const { activate, closeMenus } = useKernel();
   const taskbarRef = useOsRef<HTMLElement>();
 
   const handleMouseDown = () => {

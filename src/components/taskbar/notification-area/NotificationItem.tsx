@@ -8,12 +8,11 @@ import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationItem.module.css";
 
 type Props = {
-  closeMenus: () => void;
   process: Process;
 };
 
-export const NotificationItem: FC<Props> = ({ closeMenus, process }) => {
-  const { activate } = useKernel();
+export const NotificationItem: FC<Props> = ({ process }) => {
+  const { activate, closeMenus } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `NotificationItem` handle.

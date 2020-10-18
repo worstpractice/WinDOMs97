@@ -10,12 +10,11 @@ import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningItem.module.css";
 
 type Props = {
-  closeMenus: () => void;
   process: Process;
 };
 
-export const RunningItem: FC<Props> = ({ closeMenus, process }) => {
-  const { activate, minimize, unMinimize } = useKernel();
+export const RunningItem: FC<Props> = ({ process }) => {
+  const { activate, closeMenus, minimize, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
   const [isPressed, setIsPressed] = useState(false);
 

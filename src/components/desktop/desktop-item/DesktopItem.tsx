@@ -1,5 +1,6 @@
 import { DesktopItemIcon } from "components/desktop/desktop-item/DesktopItemIcon";
 import { DesktopItemTitle } from "components/desktop/desktop-item/DesktopItemTitle";
+import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
 import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
@@ -10,17 +11,15 @@ import * as React from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
-import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { css } from "utils/css";
 import styles from "./DesktopItem.module.css";
 
 type Props = {
   binary: Binary;
-  closeMenus: () => void;
 };
 
-export const DesktopItem: FC<Props> = ({ binary, closeMenus }) => {
-  const { activate, activeRef, executeBinary } = useKernel();
+export const DesktopItem: FC<Props> = ({ binary }) => {
+  const { activate, activeRef, closeMenus, executeBinary } = useKernel();
   const desktopItemRef = useOsRef<HTMLElement>();
   const handleMove = useOnDragAndDrop(desktopItemRef);
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
