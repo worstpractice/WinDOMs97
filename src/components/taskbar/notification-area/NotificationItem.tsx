@@ -2,6 +2,7 @@ import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
+import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
@@ -12,7 +13,7 @@ type Props = {
 };
 
 export const NotificationItem: FC<Props> = ({ process }) => {
-  const { activate, closeMenus } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `NotificationItem` handle.
@@ -22,8 +23,18 @@ export const NotificationItem: FC<Props> = ({ process }) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
-    activate(process.osWindowRef);
-    moveInFront(process.osWindowRef);
+
+    const { current: active } = activeRef;
+    const { current: osWindow } = process.osWindowRef;
+
+    if (is(active, osWindow)) {
+      minimize(process);
+      activate({ current: null });
+    } else {
+      unMinimize(process);
+      activate(process.osWindowRef);
+      moveInFront(process.osWindowRef);
+    }
   });
 
   const { icon, name } = process;
