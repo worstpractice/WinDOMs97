@@ -15,7 +15,6 @@ import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useOnContextMenu } from "hooks/useOnContextMenu";
 import { useKernel } from "kernel";
 import * as React from "react";
-import { useMemo } from "react";
 import type { FC } from "typings/FC";
 import { Desktop } from "./desktop/Desktop";
 import { DesktopItem } from "./desktop/desktop-item/DesktopItem";
@@ -38,64 +37,48 @@ export const OS: FC<Props> = () => {
 
   const isStartMenuOpen = openMenu === "StartMenu";
 
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const memoizedContextMenuItems = useMemo(() => {
-    return installedPrograms.map((binary) => {
-      const { fileName, name } = binary;
-
-      return <ContextMenuItem binary={binary} key={`ContextMenuItem-${fileName}-${name}`} />;
-    });
-  }, [installedPrograms]);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const memoizedDesktopItems = useMemo(() => {
-    return installedPrograms.map((binary) => {
-      const { fileName, name } = binary;
-
-      return <DesktopItem binary={binary} key={`DesktopItem-${fileName}-${name}`} />;
-    });
-  }, [installedPrograms]);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const memoizedStartMenuItems = useMemo(() => {
-    return installedPrograms.map((binary) => {
-      const { fileName, name } = binary;
-
-      return <StartMenuItem binary={binary} key={`StartMenuItem-${fileName}-${name}`} />;
-    });
-  }, [installedPrograms]);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
-  const memoizedQuickStartItems = useMemo(() => {
-    return installedPrograms.map((binary) => {
-      const { fileName, name } = binary;
-
-      return <QuickStartItem binary={binary} key={`QuickStartItem-${fileName}-${name}`} />;
-    });
-  }, [installedPrograms]);
-
-  ///////////////////////////////////////////////////////////////////////////////////////////////////
-
   return (
     <>
       <Desktop>
-        {isContextMenuOpen && <ContextMenu>{memoizedContextMenuItems}</ContextMenu>}
-        {memoizedDesktopItems}
+        {isContextMenuOpen && (
+          <ContextMenu>
+            {installedPrograms.map((binary) => {
+              const { fileName, name } = binary;
+
+              return <ContextMenuItem binary={binary} key={`ContextMenuItem-${fileName}-${name}`} />;
+            })}
+          </ContextMenu>
+        )}
+        {installedPrograms.map((binary) => {
+          const { fileName, name } = binary;
+
+          return <DesktopItem binary={binary} key={`DesktopItem-${fileName}-${name}`} />;
+        })}
       </Desktop>
       {runningProcesses.map((process) => {
         const { name, pid } = process;
 
         return <OsWindow key={`OsWindow-${pid}-${name}`} process={process} />;
       })}
-      {isStartMenuOpen && <StartMenu>{memoizedStartMenuItems}</StartMenu>}
+      {isStartMenuOpen && (
+        <StartMenu>
+          {installedPrograms.map((binary) => {
+            const { fileName, name } = binary;
+
+            return <StartMenuItem binary={binary} key={`StartMenuItem-${fileName}-${name}`} />;
+          })}
+        </StartMenu>
+      )}
       <Taskbar>
         <StartArea>
           <StartButton />
-          <QuickStart>{memoizedQuickStartItems}</QuickStart>
+          <QuickStart>
+            {installedPrograms.map((binary) => {
+              const { fileName, name } = binary;
+
+              return <QuickStartItem binary={binary} key={`QuickStartItem-${fileName}-${name}`} />;
+            })}
+          </QuickStart>
         </StartArea>
         <RunningArea>
           {runningProcesses.map((process) => {

@@ -8,5 +8,6 @@
 .Icon {
   max-width: 16px;
   object-fit: contain;
+  padding-top: 1.5px;
   pointer-events: none;
 }

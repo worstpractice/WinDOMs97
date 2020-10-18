@@ -4,7 +4,6 @@
   display: flex;
   flex-direction: row-reverse;
   gap: 4px;
-  justify-content: center;
   outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
