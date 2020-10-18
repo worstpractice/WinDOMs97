@@ -55,9 +55,10 @@ export const OsWindow: FC<Props> = ({ process }) => {
     if (!isResizable) return;
 
     const { target } = e;
+    const { current: osWindow } = osWindowRef;
 
     // Abort resizing if click target was not current `OsWindow`.
-    if (!is(target, osWindowRef.current)) return;
+    if (!is(target, osWindow)) return;
 
     handleResize(e);
   });

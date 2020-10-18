@@ -12,7 +12,6 @@ import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMen
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useOnContextMenu } from "hooks/useOnContextMenu";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { FC } from "typings/FC";
@@ -24,7 +23,6 @@ type Props = {};
 
 export const OS: FC<Props> = () => {
   const { floppyDiscs, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
-  useOnContextMenu();
   useLastClickPosition();
 
   if (!installedPrograms.length) {

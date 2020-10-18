@@ -2,7 +2,6 @@ import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
-import { is } from "type-predicates/is";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
@@ -26,10 +25,9 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
     e.stopPropagation();
     closeMenus();
 
-    const { current: active } = activeRef;
-    const { current: osWindow } = process.osWindowRef;
+    const { osWindowRef } = process;
 
-    if (is(active, osWindow)) {
+    if (isRef(activeRef, osWindowRef)) {
       minimize(process);
       activate({ current: null });
     } else {
@@ -39,9 +37,9 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
     }
   });
 
-  const style = isRef(activeRef, process.osWindowRef) ? css(styles.RunningAreaItem, styles.Active) : styles.RunningAreaItem;
+  const { icon, name, osWindowRef } = process;
 
-  const { icon, name } = process;
+  const style = isRef(activeRef, osWindowRef) ? css(styles.RunningAreaItem, styles.Active) : styles.RunningAreaItem;
 
   return (
     <button className={style} onMouseDown={handleMouseDown} ref={runningItemRef} type="button">

@@ -2,7 +2,7 @@ import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
-import { is } from "type-predicates/is";
+import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
@@ -24,10 +24,9 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
     e.stopPropagation();
     closeMenus();
 
-    const { current: active } = activeRef;
-    const { current: osWindow } = process.osWindowRef;
+    const { osWindowRef } = process;
 
-    if (is(active, osWindow)) {
+    if (isRef(activeRef, osWindowRef)) {
       minimize(process);
       activate({ current: null });
     } else {
