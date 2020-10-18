@@ -2,7 +2,8 @@ import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
-import { useState } from "react";
+import { is } from "type-predicates/is";
+import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
@@ -14,9 +15,8 @@ type Props = {
 };
 
 export const RunningItem: FC<Props> = ({ process }) => {
-  const { activate, closeMenus, minimize, unMinimize } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
-  const [isPressed, setIsPressed] = useState(false);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
@@ -25,47 +25,26 @@ export const RunningItem: FC<Props> = ({ process }) => {
     // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to activate.
     e.stopPropagation();
     closeMenus();
-    unMinimize(process);
-    activate(process.osWindowRef);
-    moveInFront(process.osWindowRef);
-    setIsPressed(true);
-  });
 
-  const handleMouseLeave = () => {
-    setIsPressed(false);
-  };
+    const { current: active } = activeRef;
+    const { current: osWindow } = process.osWindowRef;
 
-  const handleMouseUp = onLMB<HTMLButtonElement>((e) => {
-    if (!isPressed) return;
-
-    const { isMinimized } = process;
-
-    if (isMinimized) {
-      closeMenus();
-      activate(process.osWindowRef);
-      moveInFront(process.osWindowRef);
-      unMinimize(process);
-    } else {
+    if (is(active, osWindow)) {
       minimize(process);
       activate({ current: null });
+    } else {
+      unMinimize(process);
+      activate(process.osWindowRef);
+      moveInFront(process.osWindowRef);
     }
-
-    setIsPressed(false);
   });
 
-  const style = isPressed ? css(styles.RunningItem, styles.Active) : styles.RunningItem;
+  const style = isRef(activeRef, process.osWindowRef) ? css(styles.RunningItem, styles.Active) : styles.RunningItem;
 
   const { icon, name } = process;
 
   return (
-    <button
-      className={style}
-      onMouseLeave={handleMouseLeave}
-      onMouseDown={handleMouseDown}
-      onMouseUp={handleMouseUp}
-      ref={runningItemRef}
-      type="button"
-    >
+    <button className={style} onMouseDown={handleMouseDown} ref={runningItemRef} type="button">
       <img alt={name} className={styles.Icon} loading="eager" src={icon} />
       <p className={styles.Title}>{name}</p>
     </button>
