@@ -11,45 +11,54 @@ import type { Program } from "typings/Program";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-type KernelData = {
-  /////////////////////////////////////
+type UserState = {
   activeRef: OsRef<HTMLElement>;
   openMenu: MenuState;
-  /////////////////////////////////////
+  lastClickPosition: Position;
+};
+
+type KernelState = {
   availablePids: readonly number[];
   installedPrograms: readonly Binary[];
   floppyDiscs: readonly Program[];
   runningProcesses: readonly Process[];
-  /////////////////////////////////////
-  lastClickPosition: Position;
-  /////////////////////////////////////
 };
 
-type SystemCalls = {
-  activate: <T extends OsRef<HTMLElement>>(to: T) => void;
-  endProcess: (process: Process) => void;
-  executeBinary: (binary: Binary) => void;
-  installProgram: (program: Program) => void;
-  setLastClickPosition: (to: Position) => void;
-  ////////////////////////////////////////////////////////
+type WindowActions = {
   maximize: (process: Process) => void;
   minimize: (process: Process) => void;
   unMaximize: (process: Process) => void;
   unMinimize: (process: Process) => void;
-  ////////////////////////////////////////////////////////
+};
+
+type MenuActions = {
   closeMenus: () => void;
   openContextMenu: () => void;
   toggleStartMenu: () => void;
-  ////////////////////////////////////////////////////////
 };
 
-type State = KernelData & SystemCalls;
+type UserActions = {
+  activate: <T extends OsRef<HTMLElement>>(to: T) => void;
+  setLastClickPosition: (to: Position) => void;
+};
+
+type ControlActions = {
+  endProcess: (process: Process) => void;
+  executeBinary: (binary: Binary) => void;
+  installProgram: (program: Program) => void;
+};
+
+type SystemCalls = MenuActions & ControlActions & UserActions & WindowActions;
+
+type OsState = UserState & KernelState;
+
+type OperatingSystem = OsState & SystemCalls;
 
 let debugLogCounter = 0;
 
-export const useKernel = create<State>(
+export const useKernel = create<OperatingSystem>(
   devtools(
-    combine<KernelData, SystemCalls>(
+    combine<OsState, SystemCalls>(
       {
         /////////////////////////////////////
         activeRef: { current: null },
@@ -145,6 +154,14 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          setLastClickPosition: ({ x, y }: Position) => {
+            set(() => {
+              return { lastClickPosition: { x, y } } as const;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          // WINDOW SYSCALLS
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           maximize: (process: Process) => {
             set((store) => {
               process.isMaximized = true;
@@ -158,15 +175,6 @@ export const useKernel = create<State>(
               process.isMinimized = true;
 
               return store;
-            });
-          },
-          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          setLastClickPosition: ({ x, y }: Position) => {
-            set(({ lastClickPosition }) => {
-              lastClickPosition.x = x;
-              lastClickPosition.y = y;
-
-              return { lastClickPosition } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -186,27 +194,23 @@ export const useKernel = create<State>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          // MENU SYSCALLS
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           closeMenus: () => {
-            set((store) => {
-              store.openMenu = "";
-
-              return store;
+            set(() => {
+              return { openMenu: "" } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           openContextMenu: () => {
-            set((store) => {
-              store.openMenu = "ContextMenu";
-
-              return store;
+            set(() => {
+              return { openMenu: "ContextMenu" } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           toggleStartMenu: () => {
-            set((store) => {
-              store.openMenu = "StartMenu";
-
-              return store;
+            set(({ openMenu }) => {
+              return { openMenu: openMenu === "StartMenu" ? "" : "StartMenu" } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

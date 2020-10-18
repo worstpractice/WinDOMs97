@@ -7,19 +7,17 @@ import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 
-type Props = {
-  onMouseDown: () => void;
-};
+type Props = {};
 
-export const StartButton: FC<Props> = ({ onMouseDown }) => {
-  const { activate, activeRef } = useKernel();
+export const StartButton: FC<Props> = () => {
+  const { activate, activeRef, toggleStartMenu } = useKernel();
   const startButtonRef = useOsRef<HTMLButtonElement>();
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
     // NOTE: Since the Taskbar under us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
     e.stopPropagation();
     activate(startButtonRef);
-    onMouseDown();
+    toggleStartMenu();
   });
 
   const style = isRef(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;

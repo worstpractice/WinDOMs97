@@ -23,15 +23,7 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const {
-    floppyDiscs,
-    installedPrograms,
-    installProgram,
-    openContextMenu,
-    openMenu,
-    runningProcesses,
-    toggleStartMenu,
-  } = useKernel();
+  const { floppyDiscs, installedPrograms, installProgram, openContextMenu, openMenu, runningProcesses } = useKernel();
 
   useOnContextMenu(openContextMenu);
 
@@ -81,7 +73,7 @@ export const OS: FC<Props> = () => {
       )}
       <Taskbar>
         <StartArea>
-          <StartButton onMouseDown={toggleStartMenu} />
+          <StartButton />
           <QuickStart>
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
