@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { MenuState } from "typings/MenuState";
 
-export const useOsMenus = () => {
+export const useOsMenu = () => {
   const [openMenu, setOpenMenu] = useState<MenuState>("");
 
   const closeMenus = () => {

@@ -1,8 +1,8 @@
+import { Clock } from "components/taskbar/notification-area/Clock";
 import { VerticalSeparator } from "components/taskbar/VerticalSeparator";
 import type { ReactNode } from "react";
 import * as React from "react";
 import type { FC } from "typings/FC";
-import { timestamp } from "utils/timestamp";
 import styles from "./NotificationArea.module.css";
 
 type Props = {
@@ -14,7 +14,7 @@ export const NotificationArea: FC<Props> = ({ children }) => {
     <section className={styles.Wrapper}>
       <VerticalSeparator />
       <section className={styles.NotificationArea}>
-        <p>{timestamp()}</p>
+        <Clock />
         {children}
       </section>
     </section>

@@ -12,7 +12,7 @@ export const DragSelection: FC<Props> = ({ currentPosition }) => {
   const { lastClickPosition } = useKernel();
 
   const { x: startX, y: startY } = lastClickPosition;
-  
+
   const { x: currentX, y: currentY } = currentPosition;
 
   const left = startX;

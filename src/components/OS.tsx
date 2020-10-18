@@ -1,7 +1,8 @@
 import { ContextMenu } from "components/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "components/desktop/context-menu/ContextMenuItem";
-import { NotificationArea } from "components/taskbar/notifications-area/NotificationArea";
-import { NotificationItem } from "components/taskbar/notifications-area/NotificationItem";
+import { OsWindow } from "components/os-window/OsWindow";
+import { NotificationArea } from "components/taskbar/notification-area/NotificationArea";
+import { NotificationItem } from "components/taskbar/notification-area/NotificationItem";
 import { RunningArea } from "components/taskbar/running-area/RunningArea";
 import { RunningItem } from "components/taskbar/running-area/RunningItem";
 import { QuickStart } from "components/taskbar/start-area/quick-start/QuickStart";
@@ -10,9 +11,9 @@ import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
 import { StartButton } from "components/taskbar/start-area/StartButton";
-import { OsWindow } from "components/os-window/OsWindow";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useOsMenus } from "hooks/useOsMenus";
+import { useOnContextMenu } from "hooks/useOnContextMenu";
+import { useOsMenu } from "hooks/useOsMenu";
 import { useKernel } from "kernel";
 import * as React from "react";
 import type { FC } from "typings/FC";
@@ -24,7 +25,9 @@ type Props = {};
 
 export const OS: FC<Props> = () => {
   const { installedPrograms, installProgram, floppyDiscs, runningProcesses } = useKernel();
-  const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenus();
+  const { openMenu, closeMenus, openContextMenu, toggleStartMenu } = useOsMenu();
+
+  useOnContextMenu(openContextMenu);
 
   useLastClickPosition();
 
@@ -40,7 +43,7 @@ export const OS: FC<Props> = () => {
 
   return (
     <>
-      <Desktop closeMenus={closeMenus} onContextMenu={openContextMenu}>
+      <Desktop closeMenus={closeMenus}>
         {isContextMenuOpen && (
           <ContextMenu>
             {installedPrograms.map((binary) => {
