@@ -177,11 +177,12 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          openContextMenu: (rmbAlternatives: readonly Alternative[]) => {
+          openContextMenu: (alternatives: readonly Alternative[]) => {
             set(() => {
+              console.log(alternatives);
               // Store the alternatives in the store so it becomes available to ContextMenu from the other side
 
-              return { openMenu: "ContextMenu", rmbAlternatives: [...rmbAlternatives] } as const;
+              return { openMenu: "ContextMenu", alternatives: [...alternatives] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
