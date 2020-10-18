@@ -1,4 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
+import { onRMB } from "event-filters/onRMB";
+import { useAlternatives } from "hooks/useAlternatives";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
@@ -14,11 +16,16 @@ type Props = {
 };
 
 export const RunningAreaItem: FC<Props> = ({ process }) => {
-  const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
+  const alternatives = useAlternatives(process);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
+
+  const handleContextMenu = onRMB(() => {
+    openContextMenu(alternatives);
+  });
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
     // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to activate.
@@ -42,7 +49,13 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
   const style = isRef(activeRef, osWindowRef) ? css(styles.RunningAreaItem, styles.Active) : styles.RunningAreaItem;
 
   return (
-    <button className={style} onMouseDown={handleMouseDown} ref={runningItemRef} type="button">
+    <button
+      className={style}
+      onContextMenu={handleContextMenu}
+      onMouseDown={handleMouseDown}
+      ref={runningItemRef}
+      type="button"
+    >
       <img alt={name} className={styles.Icon} loading="eager" src={icon} />
       <p className={styles.Title}>{name}</p>
     </button>

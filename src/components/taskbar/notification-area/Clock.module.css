@@ -1,1 +1,4 @@
-.Clock {}
+.Clock {
+  /* For reasons I cannot explain, this actually seems to make things juuuuust right. */
+  padding: 0.1px;
+}

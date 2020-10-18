@@ -6,6 +6,7 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
+import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";
 import styles from "./Desktop.module.css";
 
@@ -21,8 +22,13 @@ export const Desktop: FC<Props> = ({ children }) => {
   // NOTE: this call is what allows the children calling `useActivateOnMount()` to function properly.
   useActivateOnMount(desktopRef);
 
+  // NOTE: This thing is allowed to (and expected) to grow quite a bit, since the `Desktop` is quite unique in RMB situations.
   const handleContextMenu = onRMB(() => {
-    openContextMenu();
+    const alternatives: readonly Alternative[] = [
+      { label: "Do stuff", action: () => console.log("Right here is where stuff would happen!") },
+    ] as const;
+
+    openContextMenu(alternatives);
   });
 
   return (

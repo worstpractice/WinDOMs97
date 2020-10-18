@@ -1,21 +1,27 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
 import * as React from "react";
+import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";
 import styles from "./ContextMenuItem.module.css";
 
-type Props = {};
+type Props = {
+  alternative: Alternative;
+};
 
-export const ContextMenuItem: FC<Props> = () => {
+export const ContextMenuItem: FC<Props> = ({ alternative }) => {
   const { closeMenus } = useKernel();
 
-  const handleLaunch = onLMB<HTMLLIElement>(() => {
+  const { label, action } = alternative;
+
+  const handleMouseDown = onLMB<HTMLLIElement>(() => {
     closeMenus();
+    action();
   });
 
   return (
-    <li className={styles.ContextMenuItem} onMouseDown={handleLaunch}>
-      <p>I'm a little Teapot</p>
+    <li className={styles.ContextMenuItem} onMouseDown={handleMouseDown}>
+      <p style={{ pointerEvents: "none" }}>{label}</p>
     </li>
   );
 };

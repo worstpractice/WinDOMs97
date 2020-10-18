@@ -22,7 +22,7 @@ import { Taskbar } from "./taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { floppyDiscs, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
+  const { floppyDiscs, installedPrograms, installProgram, openMenu, alternatives, runningProcesses } = useKernel();
   useLastClickPosition();
 
   if (!installedPrograms.length) {
@@ -40,7 +40,11 @@ export const OS: FC<Props> = () => {
       <Desktop>
         {isContextMenuOpen && (
           <ContextMenu>
-            <ContextMenuItem key={`ContextMenuItem-${Math.random()}`} />
+            {alternatives.map((alternative) => {
+              const { label } = alternative;
+
+              return <ContextMenuItem key={`ContextMenuItem-${label}`} alternative={alternative} />;
+            })}
           </ContextMenu>
         )}
         {installedPrograms.map((binary) => {

@@ -2,6 +2,7 @@ import { Pids } from "kernel/Pids";
 import { programs } from "programs";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
+import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
 import type { MenuState } from "typings/MenuState";
 import type { OsRef } from "typings/OsRef";
@@ -21,6 +22,7 @@ type KernelState = {
   availablePids: readonly number[];
   installedPrograms: readonly Binary[];
   floppyDiscs: readonly Program[];
+  alternatives: readonly Alternative[];
   runningProcesses: readonly Process[];
 };
 
@@ -33,7 +35,7 @@ type WindowActions = {
 
 type MenuActions = {
   closeMenus: () => void;
-  openContextMenu: () => void;
+  openContextMenu: (alternatives: readonly Alternative[]) => void;
   toggleStartMenu: () => void;
 };
 
@@ -61,15 +63,19 @@ export const useKernel = create<OperatingSystem>(
     combine<OsState, SystemCalls>(
       {
         /////////////////////////////////////
+        // USER STATE
+        /////////////////////////////////////
         activeRef: { current: null },
         openMenu: "",
+        lastClickPosition: { x: 0, y: 0 },
+        /////////////////////////////////////
+        // KERNEL STATE
         /////////////////////////////////////
         availablePids: Pids.available,
         floppyDiscs: programs,
         installedPrograms: [],
+        alternatives: [],
         runningProcesses: [],
-        /////////////////////////////////////
-        lastClickPosition: { x: 0, y: 0 },
         /////////////////////////////////////
       } as const,
 
@@ -171,9 +177,11 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          openContextMenu: () => {
+          openContextMenu: (rmbAlternatives: readonly Alternative[]) => {
             set(() => {
-              return { openMenu: "ContextMenu" } as const;
+              // Store the alternatives in the store so it becomes available to ContextMenu from the other side
+
+              return { openMenu: "ContextMenu", rmbAlternatives: [...rmbAlternatives] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
