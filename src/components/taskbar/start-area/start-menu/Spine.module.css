@@ -2,6 +2,7 @@
 
 .Bold {
   font-weight: 900;
+  pointer-events: none;
 }
 
 .Spine {
@@ -9,6 +10,7 @@
   background: linear-gradient(0deg, var(--startmenu-spine-bright) 55%, var(--startmenu-spine-dim) 90%, var(--startmenu-spine-bright) 100%);
   display: flex;
   flex-shrink: 0;
+  pointer-events: none;
   transform: rotate(180deg);
   width: 40px;
 }
@@ -18,5 +20,6 @@
   font-size: xx-large;
   font-weight: 100;
   min-height: 90%;
+  pointer-events: none;
   writing-mode: vertical-lr;
 }

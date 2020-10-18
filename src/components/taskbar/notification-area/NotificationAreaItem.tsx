@@ -40,7 +40,7 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
   const { icon, name } = process;
 
   return (
-    <li className={styles.NotificationItem} onMouseDown={handleMouseDown} ref={notificationItemRef}>
+    <li className={styles.NotificationAreaItem} onMouseDown={handleMouseDown} ref={notificationItemRef}>
       <img alt={name} className={styles.Icon} loading="eager" src={icon} />
     </li>
   );

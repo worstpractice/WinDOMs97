@@ -8,7 +8,8 @@ export const useOnContextMenu = () => {
   const { openContextMenu } = useKernel();
 
   const handleContextMenu = useCallback(
-    onRMB(() => {
+    onRMB(({ target }) => {
+      console.log("Here you can do stuff with", target);
       openContextMenu();
     }),
     [],
