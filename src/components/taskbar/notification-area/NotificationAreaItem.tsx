@@ -1,5 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
+import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
+import { useProcessAlternatives } from "hooks/useProcessAlternatives";
 import { useKernel } from "kernel";
 import * as React from "react";
 import { isRef } from "type-predicates/isRef";
@@ -13,11 +15,16 @@ type Props = {
 };
 
 export const NotificationAreaItem: FC<Props> = ({ process }) => {
-  const { activate, activeRef, closeMenus, minimize, unMinimize } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
+  const alternatives = useProcessAlternatives(process);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `NotificationItem` handle.
   process.notificationItemRef = notificationItemRef;
+
+  const handleContextMenu = onRMB<HTMLLIElement>(() => {
+    openContextMenu(alternatives);
+  });
 
   const handleMouseDown = onLMB<HTMLLIElement>((e) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
@@ -39,7 +46,12 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
   const { icon, name } = process;
 
   return (
-    <li className={styles.NotificationAreaItem} onMouseDown={handleMouseDown} ref={notificationItemRef}>
+    <li
+      className={styles.NotificationAreaItem}
+      onContextMenu={handleContextMenu}
+      onMouseDown={handleMouseDown}
+      ref={notificationItemRef}
+    >
       <img alt={name} className={styles.Icon} loading="eager" src={icon} />
     </li>
   );

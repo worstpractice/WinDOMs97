@@ -24,7 +24,7 @@ export const Desktop: FC<Props> = ({ children }) => {
   useActivateOnMount(desktopRef);
 
   // NOTE: This thing is allowed to (and expected) to grow quite a bit, since the `Desktop` is quite unique in RMB situations.
-  const handleContextMenu = onRMB(() => {
+  const handleContextMenu = onRMB<HTMLElement>(() => {
     openContextMenu(alternatives);
   });
 
