@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.css";
+@import "../../../../styles/colors.module.css";
 
 .ContextMenuItem {
   align-items: center;
@@ -13,10 +13,4 @@
   background-color: var(--startmenu-spine-bright);
   color: var(--white);
   cursor: pointer;
-}
-
-.Icon {
-  object-fit: contain;
-  pointer-events: none;
-  width: 16px;
 }
