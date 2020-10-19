@@ -1,5 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
-import { useCanvasRef } from "hooks/useCanvasRef";
+import { useCanvasRef } from "programs/paint/hooks/useCanvasRef";
 import { useOsRef } from "hooks/useOsRef";
 import type { FC } from "typings/FC";
 import React, { useState } from "react";
