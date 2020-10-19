@@ -6,5 +6,5 @@ export type Binary = Program & {
   ////////////////////////////////////////////////////////
   desktopItemRef: OsRef<HTMLElement>;
   startMenuItemRef: OsRef<HTMLElement>;
-  quickStartItemRef: OsRef<HTMLElement>;
+  quickstartAreaItemRef: OsRef<HTMLElement>;
 };

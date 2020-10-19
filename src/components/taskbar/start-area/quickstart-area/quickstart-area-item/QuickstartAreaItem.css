@@ -1,4 +1,4 @@
-.QuickStartItem {
+.QuickstartAreaItem {
   align-items: center;
   cursor: pointer;
   display: flex;
@@ -6,17 +6,10 @@
   outline-style: none;
 }
 
-.QuickStartItem:-moz-focusring {
+.QuickstartAreaItem:-moz-focusring {
   align-items: center;
   cursor: pointer;
   display: flex;
   justify-content: center;
   outline-style: none;
-}
-
-.Icon {
-  object-fit: contain;
-  padding-bottom: 4px;
-  pointer-events: none;
-  width: 20px;
 }

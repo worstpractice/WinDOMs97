@@ -1,18 +1,18 @@
 import { VerticalSeparator } from "components/taskbar/VerticalSeparator";
 import type { FC } from "typings/FC";
 import * as React from "react";
-import styles from "./QuickStart.module.css";
+import styles from "./QuickstartArea.module.css";
 import type { ReactNode } from "react";
 
 type Props = {
   children: ReactNode;
 };
 
-export const QuickStart: FC<Props> = ({ children }) => {
+export const QuickstartArea: FC<Props> = ({ children }) => {
   return (
     <>
       <VerticalSeparator />
-      <section className={styles.QuickStart}>{children}</section>
+      <section className={styles.QuickstartArea}>{children}</section>
       <VerticalSeparator />
     </>
   );

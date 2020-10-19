@@ -2,11 +2,11 @@ import { ContextMenu } from "components/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "components/desktop/context-menu/context-menu-item/ContextMenuItem";
 import { OsWindow } from "components/os-window/OsWindow";
 import { NotificationArea } from "components/taskbar/notification-area/NotificationArea";
-import { NotificationAreaItem } from "components/taskbar/notification-area/NotificationAreaItem";
+import { NotificationAreaItem } from "components/taskbar/notification-area/notification-area-item/NotificationAreaItem";
 import { RunningArea } from "components/taskbar/running-area/RunningArea";
-import { RunningAreaItem } from "components/taskbar/running-area/RunningAreaItem";
-import { QuickStart } from "components/taskbar/start-area/quick-start/QuickStart";
-import { QuickStartItem } from "components/taskbar/start-area/quick-start/QuickStartItem";
+import { RunningAreaItem } from "components/taskbar/running-area/running-area-item/RunningAreaItem";
+import { QuickstartArea } from "components/taskbar/start-area/quickstart-area/QuickstartArea";
+import { QuickstartAreaItem } from "components/taskbar/start-area/quickstart-area/quickstart-area-item/QuickstartAreaItem";
 import { StartMenu } from "components/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "components/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "components/taskbar/start-area/StartArea";
@@ -70,13 +70,13 @@ export const OS: FC<Props> = () => {
       <Taskbar>
         <StartArea>
           <StartButton />
-          <QuickStart>
+          <QuickstartArea>
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              return <QuickStartItem binary={binary} key={`QuickStartItem-${fileName}-${name}`} />;
+              return <QuickstartAreaItem binary={binary} key={`QuickstartAreaItem-${fileName}-${name}`} />;
             })}
-          </QuickStart>
+          </QuickstartArea>
         </StartArea>
         <RunningArea>
           {runningProcesses.map((process) => {

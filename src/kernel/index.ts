@@ -160,7 +160,7 @@ export const useKernel = create<OperatingSystem>(
                 ////////////////////////////////////////////////////////
                 desktopItemRef: { current: null },
                 startMenuItemRef: { current: null },
-                quickStartItemRef: { current: null },
+                quickstartAreaItemRef: { current: null },
                 ////////////////////////////////////////////////////////
               } as const;
 

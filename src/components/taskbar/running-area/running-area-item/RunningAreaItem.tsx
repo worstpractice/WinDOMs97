@@ -1,3 +1,5 @@
+import { RunningAreaItemIcon } from "components/taskbar/running-area/running-area-item/RunningAreaItemIcon";
+import { RunningAreaItemTitle } from "components/taskbar/running-area/running-area-item/RunningAreaItemTitle";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
@@ -44,7 +46,7 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
     }
   });
 
-  const { icon, name, osWindowRef } = process;
+  const { osWindowRef } = process;
 
   const buttonStyle = isRef(activeRef, osWindowRef)
     ? css(styles.RunningAreaItem, styles.Active)
@@ -58,8 +60,8 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
       ref={runningItemRef}
       type="button"
     >
-      <img alt={name} className={styles.Icon} loading="eager" src={icon} />
-      <p className={styles.Title}>{name}</p>
+      <RunningAreaItemIcon process={process} />
+      <RunningAreaItemTitle process={process} />
     </button>
   );
 };
