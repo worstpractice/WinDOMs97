@@ -1,5 +1,5 @@
 import { ContextMenu } from "components/desktop/context-menu/ContextMenu";
-import { ContextMenuItem } from "components/desktop/context-menu/ContextMenuItem";
+import { ContextMenuItem } from "components/desktop/context-menu/context-menu-item/ContextMenuItem";
 import { OsWindow } from "components/os-window/OsWindow";
 import { NotificationArea } from "components/taskbar/notification-area/NotificationArea";
 import { NotificationAreaItem } from "components/taskbar/notification-area/NotificationAreaItem";

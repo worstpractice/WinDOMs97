@@ -7,6 +7,8 @@ type Props = {
   binary: Binary;
 };
 
-export const DesktopItemTitle: FC<Props> = ({ binary: { fileName } }) => {
+export const DesktopItemTitle: FC<Props> = ({ binary }) => {
+  const { fileName } = binary;
+
   return <p className={styles.DesktopItemTitle}>{fileName}</p>;
 };

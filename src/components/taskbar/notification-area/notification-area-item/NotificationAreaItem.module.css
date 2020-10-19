@@ -4,9 +4,3 @@
   justify-content: center;
   max-width: 16px;
 }
-
-.Icon {
-  max-width: 16px;
-  object-fit: contain;
-  pointer-events: none;
-}

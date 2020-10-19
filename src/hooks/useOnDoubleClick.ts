@@ -6,7 +6,7 @@ import type { OsRef } from "typings/OsRef";
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
 const MAX_DELAY = 250 as const;
 
-/** Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF) */
+/** Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF). Think of this as regular `onDoubleClick`. */
 export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDoubleClick: () => void) => {
   const [lastTime, setLastTime] = useState(Infinity);
   const [is2ndClick, setIs2ndClick] = useState(false);

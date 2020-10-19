@@ -28,7 +28,7 @@ export const Desktop: FC<Props> = ({ children }) => {
   const handleContextMenu = onRMB<HTMLElement>(({ target }) => {
     const { current: desktop } = desktopRef;
 
-    // We're not interested if the target is something else
+    // We're not interested if the target isn't the `Desktop`
     if (!is(target, desktop)) return;
 
     openContextMenu(alternatives);

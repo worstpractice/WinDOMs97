@@ -1,3 +1,4 @@
+import { NotificationAreaItemIcon } from "components/taskbar/notification-area/notification-area-item/NotificationAreaItemIcon";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
@@ -43,8 +44,6 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
     }
   });
 
-  const { icon, name } = process;
-
   return (
     <li
       className={styles.NotificationAreaItem}
@@ -52,7 +51,7 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
       onMouseDown={handleMouseDown}
       ref={notificationItemRef}
     >
-      <img alt={name} className={styles.Icon} loading="eager" src={icon} />
+      <NotificationAreaItemIcon process={process} />
     </li>
   );
 };
