@@ -1,6 +1,6 @@
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
-import { useStayInSight } from "components/desktop/context-menu/hooks/useStayInSight";
+import { useStayInSight } from "hooks/desktop/context-menu/useStayInSight";
 import type { ReactNode } from "react";
 import * as React from "react";
 import type { FC } from "typings/FC";

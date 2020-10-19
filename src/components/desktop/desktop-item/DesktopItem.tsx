@@ -1,12 +1,12 @@
 import { DesktopItemIcon } from "components/desktop/desktop-item/DesktopItemIcon";
 import { DesktopItemTitle } from "components/desktop/desktop-item/DesktopItemTitle";
-import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
+import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
-import { useDesktopLayoutOnMount } from "components/desktop/desktop-item/hooks/useDesktopLayoutOnMount";
+import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
-import { useOnDragAndDrop } from "components/desktop/desktop-item/hooks/useOnDragAndDrop";
+import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";

@@ -3,12 +3,12 @@ import { OsWindowButtons } from "components/os-window/chrome-area/OsWindowButton
 import { OsWindowTitle } from "components/os-window/chrome-area/OsWindowTitle";
 import { ProgramArea } from "components/os-window/program-area/ProgramArea";
 import { ProgramContent } from "components/os-window/program-area/ProgramContent";
-import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
+import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
-import { useOnMoveWindow } from "components/os-window/hooks/useOnMoveWindow";
-import { useOnResizeWindow } from "components/os-window/hooks/useOnResizeWindow";
+import { useOnMoveWindow } from "hooks/os-window/useOnMoveWindow";
+import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { Cmd } from "programs/cmd/Cmd";
