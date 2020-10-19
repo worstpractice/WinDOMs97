@@ -14,8 +14,6 @@ export const ContextMenuItem: FC<Props> = ({ alternative }) => {
 
   const { label, action } = alternative;
 
-  console.log(alternative);
-
   const handleMouseDown = onLMB<HTMLLIElement>(() => {
     closeMenus();
     action();
