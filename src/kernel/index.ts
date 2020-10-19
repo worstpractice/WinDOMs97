@@ -152,7 +152,6 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           installProgram: (program: Program) => {
             set(({ installedPrograms }) => {
-              console.log(`Installed program ${program.name}`);
               const executableFile: Binary = {
                 ////////////////////////////////////////////////////////
                 ...program,

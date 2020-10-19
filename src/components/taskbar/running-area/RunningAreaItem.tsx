@@ -46,11 +46,13 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
 
   const { icon, name, osWindowRef } = process;
 
-  const style = isRef(activeRef, osWindowRef) ? css(styles.RunningAreaItem, styles.Active) : styles.RunningAreaItem;
+  const buttonStyle = isRef(activeRef, osWindowRef)
+    ? css(styles.RunningAreaItem, styles.Active)
+    : styles.RunningAreaItem;
 
   return (
     <button
-      className={style}
+      className={buttonStyle}
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
       ref={runningItemRef}

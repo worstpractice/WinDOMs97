@@ -27,9 +27,9 @@ export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
 
     const fullX = clickX + menuWidth;
 
-    if (fullX > viewportWidth) {
-      console.log("Too far right");
+    const isTooFarRight = fullX > viewportWidth;
 
+    if (isTooFarRight) {
       const deltaX = fullX - viewportWidth;
 
       adjustedX = clickX - deltaX;
@@ -43,9 +43,9 @@ export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
 
     const fullY = clickY + menuHeight;
 
-    if (fullY > viewportHeight) {
-      console.log("Too far down");
+    const isTooFarDown = fullY > viewportHeight;
 
+    if (isTooFarDown) {
       const deltaY = fullY - viewportHeight;
 
       adjustedY = clickY - deltaY;

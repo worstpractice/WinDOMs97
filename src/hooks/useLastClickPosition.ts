@@ -16,7 +16,6 @@ export const useLastClickPosition = () => {
       event: "mousedown",
       handler: handleMouseDown,
       on: document,
-      options: { capture: true },
     });
 
     return cleanup;
