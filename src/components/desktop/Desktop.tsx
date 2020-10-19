@@ -7,6 +7,7 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import * as React from "react";
+import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import styles from "./Desktop.module.css";
 
@@ -24,7 +25,12 @@ export const Desktop: FC<Props> = ({ children }) => {
   useActivateOnMount(desktopRef);
 
   // NOTE: This thing is allowed to (and expected) to grow quite a bit, since the `Desktop` is quite unique in RMB situations.
-  const handleContextMenu = onRMB<HTMLElement>(() => {
+  const handleContextMenu = onRMB<HTMLElement>(({ target }) => {
+    const { current: desktop } = desktopRef;
+
+    // We're not interested if the target is something else
+    if (!is(target, desktop)) return;
+
     openContextMenu(alternatives);
   });
 

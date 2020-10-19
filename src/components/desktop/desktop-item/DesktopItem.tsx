@@ -2,6 +2,8 @@ import { DesktopItemIcon } from "components/desktop/desktop-item/DesktopItemIcon
 import { DesktopItemTitle } from "components/desktop/desktop-item/DesktopItemTitle";
 import { blockNativeDrag } from "components/os-window/utils/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
+import { onRMB } from "event-filters/onRMB";
+import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
 import { useDesktopLayoutOnMount } from "hooks/useDesktopLayoutOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOnDragAndDrop } from "hooks/useOnDragAndDrop";
@@ -19,9 +21,15 @@ type Props = {
 };
 
 export const DesktopItem: FC<Props> = ({ binary }) => {
-  const { activate, activeRef, closeMenus, executeBinary } = useKernel();
+  const { activate, activeRef, closeMenus, executeBinary, openContextMenu } = useKernel();
   const desktopItemRef = useOsRef<HTMLElement>();
   const handleMove = useOnDragAndDrop(desktopItemRef);
+  const alternatives = useBinaryAlternatives(binary);
+
+  const handleContextMenu = onRMB<HTMLElement>(() => {
+    openContextMenu(alternatives);
+  });
+
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopItemRef);
 
@@ -48,6 +56,7 @@ export const DesktopItem: FC<Props> = ({ binary }) => {
   return (
     <article
       className={style}
+      onContextMenu={handleContextMenu}
       onDragStart={blockNativeDrag}
       onMouseDown={handleMouseDown}
       // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
