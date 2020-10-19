@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
-import { useAlternatives } from "hooks/useAlternatives";
+import { useProcessAlternatives } from "hooks/useProcessAlternatives";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
@@ -18,7 +18,7 @@ type Props = {
 export const RunningAreaItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
-  const alternatives = useAlternatives(process);
+  const alternatives = useProcessAlternatives(process);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
