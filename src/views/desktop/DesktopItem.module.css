@@ -5,11 +5,12 @@
   color: transparent;
   display: flex;
   flex-direction: column;
-  gap: 5px;
-  height: 100px;
+  font-size: 32px;
+  gap: 10px;
+  height: 200px;
   justify-content: center;
   position: absolute;
-  width: 100px;
+  width: 200px;
 }
 
 .Title {
@@ -25,5 +26,5 @@
   cursor: pointer;
   outline-color: var(--white-transparent);
   outline-style: dotted;
-  outline-width: 1px;
+  outline-width: 2px;
 }

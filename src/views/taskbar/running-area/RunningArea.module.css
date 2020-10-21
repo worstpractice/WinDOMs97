@@ -1,5 +1,5 @@
 .RunningArea {
   display: flex;
   flex: 1;
-  gap: 8px;
+  gap: 32px;
 }

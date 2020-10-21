@@ -60,8 +60,8 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
       ref={runningItemRef}
       type="button"
     >
-      <Icon alt={name} height={16} src={icon} />
-      <Words of={name} style={{ fontSize: "10px", paddingTop: "2px" }} />
+      <Icon alt={name} height={32} src={icon} />
+      <Words of={name} style={{ fontSize: "20px", paddingTop: "4px" }} />
     </button>
   );
 };

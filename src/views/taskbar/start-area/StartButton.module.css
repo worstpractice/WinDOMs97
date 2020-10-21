@@ -1,26 +1,18 @@
 @import "../../../styles/colors.module.css";
 
-.Pressed {
-  outline-color: var(--oswindow-outline);
-  outline-style: inset;
-  outline-width: 2px;
-}
-
-.Pressed:-moz-focusring {
-  outline-color: var(--oswindow-outline);
-  outline-style: inset;
-  outline-width: 2px;
+.Logo {
+  height: 100%;
 }
 
 .StartButton {
   align-content: center;
   cursor: pointer;
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
-  width: 65px;
+  outline-width: 4px;
+  width: 130px;
 }
 
 .StartButton:-moz-focusring {
@@ -30,6 +22,16 @@
   justify-content: center;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
-  width: 65px;
+  outline-width: 4px;
+  width: 130px;
+}
+
+/*** WARN: Must come last ***/
+
+.Pressed {
+  outline-style: inset;
+}
+
+.Pressed:-moz-focusring {
+  outline-style: inset;
 }

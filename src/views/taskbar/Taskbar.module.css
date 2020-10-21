@@ -4,13 +4,13 @@
   background-color: var(--oswindow-background);
   bottom: 0;
   display: flex;
-  gap: 7px;
+  gap: 14px;
   height: 60px;
   left: 0;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
-  padding: 5px;
+  outline-width: 4px;
+  padding: 10px;
   position: absolute;
   right: 0;
   z-index: 20;

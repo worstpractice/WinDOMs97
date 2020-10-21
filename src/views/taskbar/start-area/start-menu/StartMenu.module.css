@@ -8,14 +8,14 @@
 
 .StartMenu {
   background-color: var(--oswindow-background);
-  bottom: 30px;
+  bottom: 60px;
   display: flex;
-  left: 5px;
-  max-height: 360px;
-  max-width: 220px;
+  left: 10px;
+  max-height: 720px;
+  max-width: 440px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
+  outline-width: 4px;
   position: absolute;
   width: 100%;
   z-index: 40;

@@ -1,6 +1,6 @@
 import { ChromeArea } from "views/os-window/chrome-area/ChromeArea";
 import { OsWindowButtons } from "views/os-window/chrome-area/OsWindowButtons";
-import { OsWindowTitle } from "views/os-window/chrome-area/OsWindowTitle";
+import { OsWindowLabel } from "views/os-window/chrome-area/OsWindowLabel";
 import { ProgramArea } from "views/os-window/program-area/ProgramArea";
 import { ProgramContent } from "views/os-window/program-area/ProgramContent";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
@@ -89,8 +89,8 @@ export const OsWindow: FC<Props> = ({ process }) => {
     isResizable ? styles.Resizable : "",
   );
 
-  const left = 30 * pid;
-  const top = 20 * pid;
+  const left = (30 * pid) + 750;
+  const top = (20 * pid) + 250;
 
   return (
     <article
@@ -109,7 +109,7 @@ export const OsWindow: FC<Props> = ({ process }) => {
         onMouseDown={handleChromeDrag}
       >
         <ChromeArea process={process}>
-          <OsWindowTitle process={process} />
+          <OsWindowLabel process={process} />
           <OsWindowButtons process={process} />
         </ChromeArea>
       </span>

@@ -1,7 +1,7 @@
 .QuickstartArea {
   align-items: center;
   display: flex;
-  gap: 5px;
+  gap: 10px;
   justify-content: center;
-  padding-top: 4px;
+  padding-top: 6px;
 }

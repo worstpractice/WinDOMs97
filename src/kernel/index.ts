@@ -188,7 +188,10 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           toggleStartMenu: () => {
             set(({ openMenu }) => {
-              return { openMenu: openMenu === "StartMenu" ? "" : "StartMenu" } as const;
+              console.log(openMenu);
+              const newMenu = openMenu === "StartMenu" ? "" : "StartMenu";
+
+              return { openMenu: newMenu } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

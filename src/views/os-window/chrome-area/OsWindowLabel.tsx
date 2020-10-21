@@ -6,13 +6,13 @@ import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
-import styles from "./OsWindowTitle.module.css";
+import styles from "./OsWindowLabel.module.css";
 
 type Props = {
   process: Process;
 };
 
-export const OsWindowTitle: FC<Props> = ({ process }) => {
+export const OsWindowLabel: FC<Props> = ({ process }) => {
   const { activeRef } = useKernel();
 
   const { icon, name, osWindowRef } = process;
@@ -20,7 +20,7 @@ export const OsWindowTitle: FC<Props> = ({ process }) => {
   const titleStyle = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
 
   return (
-    <span className={styles.OsWindowTitle}>
+    <span className={styles.OsWindowLabel}>
       <Icon alt={name} className={styles.Icon} src={icon} />
       <Title className={titleStyle} of={name} />
     </span>

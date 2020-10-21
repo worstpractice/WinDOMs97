@@ -9,5 +9,5 @@
   background-color: var(--desktopitem-background);
   outline-color: var(--desktopitem-outline);
   outline-style: dotted;
-  outline-width: 1px;
+  outline-width: 2px;
 }

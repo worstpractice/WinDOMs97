@@ -4,26 +4,26 @@
   align-items: center;
   cursor: pointer;
   display: flex;
-  gap: 3px;
+  gap: 6px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 120px;
+  outline-width: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 240px;
 }
 
 .RunningAreaItem:-moz-focusring {
   align-items: center;
   cursor: pointer;
   display: flex;
-  gap: 3px;
+  gap: 6px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
-  outline-width: 2px;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 120px;
+  outline-width: 4px;
+  padding-left: 10px;
+  padding-right: 10px;
+  width: 240px;
 }
 
 /*** WARN: Must come last ***/

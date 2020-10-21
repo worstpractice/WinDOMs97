@@ -22,5 +22,8 @@ export const useDesktopLayoutOnMount = <T extends OsRef<HTMLElement>>(desktopIte
 
     current.style.top = `${x++}00px`;
     current.style.left = `${y}00px`;
+
+    // Increment `x` one extra time on purpose
+    x++;
   }, [desktopItemRef]);
 };

@@ -53,7 +53,7 @@ export const NotificationItem: FC<Props> = ({ process }) => {
       onMouseDown={handleMouseDown}
       ref={notificationItemRef}
     >
-      <Icon alt={name} src={icon} width={16} />
+      <Icon alt={name} src={icon} width={32} />
     </li>
   );
 };

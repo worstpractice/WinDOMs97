@@ -27,7 +27,7 @@ export const QuickstartAreaItem: FC<Props> = ({ binary }) => {
 
   return (
     <button className={styles.QuickstartAreaItem} onMouseDown={handleLaunch} type="button">
-      <Icon alt={name} src={icon} style={{ paddingBottom: "4px" }} width={20} />
+      <Icon alt={name} src={icon} style={{ paddingBottom: "8px" }} width={40} />
     </button>
   );
 };

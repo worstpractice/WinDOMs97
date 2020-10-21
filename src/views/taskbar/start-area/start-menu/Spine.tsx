@@ -1,4 +1,5 @@
 import { Title } from "components/Title";
+import { Words } from "components/Words";
 import * as React from "react";
 import type { FC } from "typings/FC";
 import styles from "./Spine.module.css";

@@ -1,23 +1,22 @@
 @import "../../../styles/colors.module.css";
 
 .Icon {
-  max-height: 30px;
+  max-height: 60px;
   padding-bottom: 4px;
   padding-top: 4px;
 }
 
-.OsWindowTitle {
+.OsWindowLabel {
   align-items: center;
   display: flex;
-  gap: 5px;
+  gap: 10px;
   pointer-events: none;
 }
 
 .Title {
   color: var(--oswindow-background);
-  font-size: 16px;
+  font-size: 32px;
   font-weight: 900;
-  padding-top: 2px;
 }
 
 /*** WARN: Must come last ***/

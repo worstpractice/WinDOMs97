@@ -16,7 +16,6 @@ export const IE: FC<Props> = ({ process }) => {
       frameBorder="0"
       loading="eager"
       src="page.html"
-      style={{ height: "100%", width: "100%" }}
       title={name}
     />
   );

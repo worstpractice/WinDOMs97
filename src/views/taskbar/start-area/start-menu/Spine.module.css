@@ -7,12 +7,12 @@
   flex-shrink: 0;
   pointer-events: none;
   transform: rotate(180deg);
-  width: 40px;
+  width: 80px;
 }
 
 .Title {
   color: var(--white);
-  font-size: xx-large;
+  font-size: 64px;
   min-height: 90%;
   writing-mode: vertical-lr;
 }
