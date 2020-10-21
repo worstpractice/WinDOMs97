@@ -1,4 +1,4 @@
-import { Clock } from "features/taskbar/notification-area/Clock";
+import { Clock } from "views/taskbar/notification-area/Clock";
 import { VerticalSeparator } from "components/separators/VerticalSeparator";
 import type { ReactNode } from "react";
 import * as React from "react";

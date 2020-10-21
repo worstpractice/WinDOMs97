@@ -1,4 +1,4 @@
-import { OS } from "features/OS";
+import { OS } from "views/OS";
 import "normalize.css";
 import React, { StrictMode } from "react";
 import { render } from "react-dom";

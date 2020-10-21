@@ -1,4 +1,4 @@
-import { Spine } from "features/taskbar/start-area/start-menu/Spine";
+import { Spine } from "views/taskbar/start-area/start-menu/Spine";
 import type { ReactNode } from "react";
 import * as React from "react";
 import type { FC } from "typings/FC";
