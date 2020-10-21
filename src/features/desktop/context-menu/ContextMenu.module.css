@@ -1,5 +1,12 @@
 @import "../../../styles/colors.module.css";
 
+.ContentList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
 .ContextMenu {
   background-color: var(--oswindow-background);
   outline-color: var(--oswindow-outline);
@@ -8,13 +15,6 @@
   position: absolute;
   width: 175px;
   z-index: 50;
-}
-
-.ContentList {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 100%;
 }
 
 /*** WARN: Must come last ***/

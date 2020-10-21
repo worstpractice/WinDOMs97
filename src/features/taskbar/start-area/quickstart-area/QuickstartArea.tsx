@@ -1,4 +1,4 @@
-import { VerticalSeparator } from "components/taskbar/VerticalSeparator";
+import { VerticalSeparator } from "components/separators/VerticalSeparator";
 import type { FC } from "typings/FC";
 import * as React from "react";
 import styles from "./QuickstartArea.module.css";

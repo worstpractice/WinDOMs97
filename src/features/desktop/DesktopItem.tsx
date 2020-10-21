@@ -1,12 +1,11 @@
-import { DesktopItemIcon } from "components/desktop/desktop-item/DesktopItemIcon";
-import { DesktopItemTitle } from "components/desktop/desktop-item/DesktopItemTitle";
-import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
+import { Icon } from "components/Icon";
+import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
-import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
 import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
-import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
+import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
+import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import * as React from "react";
@@ -14,6 +13,7 @@ import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
 import { css } from "utils/css";
+import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
 
 type Props = {
@@ -53,6 +53,8 @@ export const DesktopItem: FC<Props> = ({ binary }) => {
 
   const style = isRef(activeRef, desktopItemRef) ? css(styles.DesktopItem, styles.Active) : styles.DesktopItem;
 
+  const { fileName, icon } = binary;
+
   return (
     <article
       className={style}
@@ -63,8 +65,8 @@ export const DesktopItem: FC<Props> = ({ binary }) => {
       onMouseDownCapture={handleMouseDownCapture}
       ref={desktopItemRef}
     >
-      <DesktopItemIcon binary={binary} />
-      <DesktopItemTitle binary={binary} />
+      <Icon alt={fileName} height={48} src={icon} />
+      <Words className={styles.Title} of={fileName} />
     </article>
   );
 };

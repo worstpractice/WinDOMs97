@@ -1,5 +1,5 @@
 export type Alternative = {
-  label: string;
+  name: string;
   action: () => void;
   icon?: string;
 };

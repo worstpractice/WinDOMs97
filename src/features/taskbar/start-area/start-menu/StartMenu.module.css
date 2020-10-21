@@ -1,5 +1,11 @@
 @import "../../../../styles/colors.module.css";
 
+.ContentList {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .StartMenu {
   background-color: var(--oswindow-background);
   bottom: 30px;
@@ -13,10 +19,4 @@
   position: absolute;
   width: 100%;
   z-index: 40;
-}
-
-.ContentList {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
 }

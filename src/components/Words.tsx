@@ -1,0 +1,23 @@
+import type { CSSProperties, FC } from "react";
+import * as React from "react";
+import { css } from "utils/css";
+import styles from "./Words.module.css";
+
+type Props = {
+  className?: string;
+  of: string;
+  style?: CSSProperties;
+};
+
+/** I would name this component `Text`, but `Text` is already occupied by a DOM type -- sending me straight to auto-import hell if I use that name too.
+ * 
+ * So `Words` it is. */
+export const Words: FC<Props> = ({ className = "", of, style }) => {
+  const wordsStyle = css(styles.Words, className);
+
+  return (
+    <p className={wordsStyle} style={style}>
+      {of}
+    </p>
+  );
+};

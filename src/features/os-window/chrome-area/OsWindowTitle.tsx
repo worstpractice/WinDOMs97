@@ -1,3 +1,5 @@
+import { Icon } from "components/Icon";
+import { Title } from "components/Title";
 import { useKernel } from "kernel";
 import * as React from "react";
 import { isRef } from "type-predicates/isRef";
@@ -15,12 +17,12 @@ export const OsWindowTitle: FC<Props> = ({ process }) => {
 
   const { icon, name, osWindowRef } = process;
 
-  const style = isRef(activeRef, osWindowRef) ? css(styles.ProcessName, styles.Active) : styles.ProcessName;
+  const titleStyle = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
 
   return (
     <span className={styles.OsWindowTitle}>
-      <img alt={name} className={styles.ProcessIcon} loading="eager" src={icon} />
-      <h1 className={style}>{name}</h1>
+      <Icon alt={name} className={styles.Icon} src={icon} />
+      <Title className={titleStyle} of={name} />
     </span>
   );
 };

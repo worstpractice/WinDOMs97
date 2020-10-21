@@ -1,5 +1,11 @@
 @import "../../../styles/colors.module.css";
 
+.Icon {
+  max-height: 30px;
+  padding-bottom: 4px;
+  padding-top: 4px;
+}
+
 .OsWindowTitle {
   align-items: center;
   display: flex;
@@ -7,20 +13,11 @@
   pointer-events: none;
 }
 
-.ProcessIcon {
-  max-height: 30px;
-  object-fit: contain;
-  padding-bottom: 4px;
-  padding-top: 4px;
-  pointer-events: none;
-}
-
-.ProcessName {
+.Title {
   color: var(--oswindow-background);
   font-size: 16px;
   font-weight: 900;
   padding-top: 2px;
-  pointer-events: none;
 }
 
 /*** WARN: Must come last ***/

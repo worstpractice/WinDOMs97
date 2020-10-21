@@ -1,5 +1,4 @@
-.NotificationAreaItemIcon {
-  max-width: 16px;
+.Icon {
   object-fit: contain;
   pointer-events: none;
 }

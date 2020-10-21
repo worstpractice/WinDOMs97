@@ -1,5 +1,6 @@
-import type { FC } from "typings/FC";
+import { Title } from "components/Title";
 import * as React from "react";
+import type { FC } from "typings/FC";
 import styles from "./Spine.module.css";
 
 type Props = {};
@@ -7,9 +8,7 @@ type Props = {};
 export const Spine: FC<Props> = () => {
   return (
     <header aria-orientation="vertical" className={styles.Spine}>
-      <h1 className={styles.Title}>
-        <strong className={styles.Bold}>FakeOS</strong> 97
-      </h1>
+      <Title className={styles.Title} of={"FakeOS 97"} />
     </header>
   );
 };

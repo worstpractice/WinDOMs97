@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.css";
+@import "../../styles/colors.module.css";
 
 .DesktopItem {
   align-items: center;
@@ -10,6 +10,13 @@
   justify-content: center;
   position: absolute;
   width: 100px;
+}
+
+.Title {
+  color: var(--white);
+  overflow-wrap: break-word;
+  text-align: center;
+  width: 100%;
 }
 
 /*** WARN: Must come last ***/

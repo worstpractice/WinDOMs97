@@ -1,3 +1,4 @@
+import { Icon } from "components/Icon";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
@@ -26,7 +27,7 @@ export const StartMenuItem: FC<Props> = ({ binary }) => {
 
   return (
     <li className={styles.StartMenuItem} onMouseDown={handleLaunch} ref={startMenuItemRef}>
-      <img alt={fileName} className={styles.StartMenuItemIcon} loading="eager" src={icon} />
+      <Icon alt={fileName} src={icon} width={32} />
       {name}
     </li>
   );

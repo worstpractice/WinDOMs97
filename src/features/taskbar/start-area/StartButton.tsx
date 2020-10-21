@@ -1,3 +1,4 @@
+import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
@@ -23,8 +24,8 @@ export const StartButton: FC<Props> = () => {
   const style = isRef(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
 
   return (
-    <button className={style} id="StartButton" onMouseDown={handleMouseDown} type="button" ref={startButtonRef}>
-      <p className={styles.Title}>Start</p>
+    <button className={style} onMouseDown={handleMouseDown} type="button" ref={startButtonRef}>
+      <Words of={"Start"} />
     </button>
   );
 };

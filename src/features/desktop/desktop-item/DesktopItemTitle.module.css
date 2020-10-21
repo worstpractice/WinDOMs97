@@ -1,9 +1,0 @@
-@import "../../../styles/colors.module.css";
-
-.DesktopItemTitle {
-  color: var(--white);
-  overflow-wrap: break-word;
-  pointer-events: none;
-  text-align: center;
-  width: 100%;
-}

@@ -1,10 +1,5 @@
 @import "../../../../styles/colors.module.css";
 
-.Bold {
-  font-weight: 900;
-  pointer-events: none;
-}
-
 .Spine {
   align-items: flex-end;
   background: linear-gradient(0deg, var(--startmenu-spine-bright) 55%, var(--startmenu-spine-dim) 90%, var(--startmenu-spine-bright) 100%);
@@ -16,10 +11,8 @@
 }
 
 .Title {
-  color: white;
+  color: var(--white);
   font-size: xx-large;
-  font-weight: 100;
   min-height: 90%;
-  pointer-events: none;
   writing-mode: vertical-lr;
 }

@@ -1,4 +1,4 @@
-import { NotificationAreaItemIcon } from "components/taskbar/notification-area/notification-area-item/NotificationAreaItemIcon";
+import { Icon } from "components/Icon";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
@@ -9,13 +9,13 @@ import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./NotificationAreaItem.module.css";
+import styles from "./NotificationItem.module.css";
 
 type Props = {
   process: Process;
 };
 
-export const NotificationAreaItem: FC<Props> = ({ process }) => {
+export const NotificationItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
   const alternatives = useProcessAlternatives(process);
@@ -44,14 +44,16 @@ export const NotificationAreaItem: FC<Props> = ({ process }) => {
     }
   });
 
+  const { icon, name } = process;
+
   return (
     <li
-      className={styles.NotificationAreaItem}
+      className={styles.NotificationItem}
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
       ref={notificationItemRef}
     >
-      <NotificationAreaItemIcon process={process} />
+      <Icon alt={name} src={icon} width={16} />
     </li>
   );
 };

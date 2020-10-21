@@ -1,4 +1,4 @@
-import { QuickstartAreaItemIcon } from "components/taskbar/start-area/quickstart-area/quickstart-area-item/QuickstartAreaItemIcon";
+import { Icon } from "components/Icon";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
@@ -23,9 +23,11 @@ export const QuickstartAreaItem: FC<Props> = ({ binary }) => {
     closeMenus();
   });
 
+  const { icon, name } = binary;
+
   return (
     <button className={styles.QuickstartAreaItem} onMouseDown={handleLaunch} type="button">
-      <QuickstartAreaItemIcon binary={binary} />
+      <Icon alt={name} src={icon} style={{ paddingBottom: "4px" }} width={20} />
     </button>
   );
 };

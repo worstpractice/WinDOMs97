@@ -1,8 +1,8 @@
-import { DragSelection } from "components/desktop/drag-selection/DragSelection";
 import { onRMB } from "event-filters/onRMB";
-import { useActivateOnMount } from "hooks/useActivateOnMount";
+import { DragSelection } from "features/desktop/DragSelection";
 import { useDesktopAlternatives } from "hooks/desktop/useDesktopAlternatives";
 import { useDragSelection } from "hooks/desktop/useOnDragSelection";
+import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";

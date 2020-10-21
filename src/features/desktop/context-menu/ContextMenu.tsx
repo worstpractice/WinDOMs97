@@ -19,7 +19,7 @@ export const ContextMenu: FC<Props> = ({ children }) => {
   const contentListStyle = isTooFarDown ? css(styles.ContentList, styles.Outside) : styles.ContentList;
 
   return (
-    <section className={styles.ContextMenu} id="ContextMenu" ref={contextMenuRef} style={{ left, top }}>
+    <section className={styles.ContextMenu} ref={contextMenuRef} style={{ left, top }}>
       <ul className={contentListStyle}>{children}</ul>
     </section>
   );
