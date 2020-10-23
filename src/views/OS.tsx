@@ -51,9 +51,9 @@ export const OS: FC<Props> = () => {
         {installedPrograms.map((binary) => {
           const { fileName, name } = binary;
 
-          const linker = linkBinary(binary)["desktopItem"];
+          const { toDesktopItem } = linkBinary(binary);
 
-          return <DesktopItem key={`DesktopItem-${fileName}-${name}`} getBinary={linker} />;
+          return <DesktopItem key={`DesktopItem-${fileName}-${name}`} getBinary={toDesktopItem} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
@@ -77,9 +77,11 @@ export const OS: FC<Props> = () => {
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              const linker = linkBinary(binary)["quickstartAreaItem"];
+              const { toQuickstartAreaItem } = linkBinary(binary);
 
-              return <QuickstartAreaItem key={`QuickstartAreaItem-${fileName}-${name}`} getBinary={linker} />;
+              return (
+                <QuickstartAreaItem key={`QuickstartAreaItem-${fileName}-${name}`} getBinary={toQuickstartAreaItem} />
+              );
             })}
           </QuickstartArea>
         </StartArea>
