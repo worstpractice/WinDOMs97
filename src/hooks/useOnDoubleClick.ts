@@ -25,8 +25,9 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
     }
     // Current click was on location of interest!
 
+    // The prior click was ALSO on location of interest?
     if (is2ndClick) {
-      // The last click was ALSO on location of interest?
+      // Double click confirmed!
       return handleDoubleClick();
     }
 
