@@ -3,21 +3,19 @@ import { delegate } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
-import type { Binary } from "typings/Binary";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
+import type { Linker } from "typings/Linker";
 import styles from "./QuickstartAreaItem.module.css";
 
 type Props = {
-  binary: Binary;
+  getBinary: Linker;
 };
 
-export const QuickstartAreaItem: FC<Props> = ({ binary }) => {
+export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
   const { closeMenus, executeBinary } = useKernel();
   const quickstartAreaItemRef = useOsRef<HTMLButtonElement>();
-
-  // NOTE: This is vital. This is the line where each `Binary` is given its very own `QuickstartAreaItem` handle.
-  binary.quickstartAreaItemRef = quickstartAreaItemRef;
+  const binary = getBinary(quickstartAreaItemRef);
 
   const handleLMB = () => {
     executeBinary(binary);

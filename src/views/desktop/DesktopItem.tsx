@@ -10,22 +10,20 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
-import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
+import type { Linker } from "typings/Linker";
 import { css } from "utils/css";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
 
 type Props = {
-  binary: Binary;
+  getBinary: Linker;
 };
 
-export const DesktopItem: FC<Props> = ({ binary }) => {
+export const DesktopItem: FC<Props> = ({ getBinary }) => {
   const { activate, activeRef, closeMenus, executeBinary, openContextMenu } = useKernel();
   const desktopItemRef = useOsRef<HTMLElement>();
-
-  // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
-  binary.desktopItemRef = desktopItemRef;
+  const binary = getBinary(desktopItemRef);
 
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopItemRef);

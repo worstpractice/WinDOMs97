@@ -2,8 +2,11 @@ import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useKernel } from "kernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
+import { linkBinary } from "utils/linkBinary";
 import { ContextMenu } from "views/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "views/desktop/context-menu/ContextMenuItem";
+import { Desktop } from "views/desktop/Desktop";
+import { DesktopItem } from "views/desktop/DesktopItem";
 import { OsWindow } from "views/os-window/OsWindow";
 import { NotificationArea } from "views/taskbar/notification-area/NotificationArea";
 import { NotificationItem } from "views/taskbar/notification-area/NotificationItem";
@@ -15,9 +18,7 @@ import { StartMenu } from "views/taskbar/start-area/start-menu/StartMenu";
 import { StartMenuItem } from "views/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "views/taskbar/start-area/StartArea";
 import { StartButton } from "views/taskbar/start-area/StartButton";
-import { Desktop } from "./desktop/Desktop";
-import { DesktopItem } from "./desktop/DesktopItem";
-import { Taskbar } from "./taskbar/Taskbar";
+import { Taskbar } from "views/taskbar/Taskbar";
 
 type Props = {};
 
@@ -50,7 +51,9 @@ export const OS: FC<Props> = () => {
         {installedPrograms.map((binary) => {
           const { fileName, name } = binary;
 
-          return <DesktopItem binary={binary} key={`DesktopItem-${fileName}-${name}`} />;
+          const linker = linkBinary(binary)["desktopItem"];
+
+          return <DesktopItem key={`DesktopItem-${fileName}-${name}`} getBinary={linker} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
@@ -74,7 +77,9 @@ export const OS: FC<Props> = () => {
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              return <QuickstartAreaItem binary={binary} key={`QuickstartAreaItem-${fileName}-${name}`} />;
+              const linker = linkBinary(binary)["quickstartAreaItem"];
+
+              return <QuickstartAreaItem key={`QuickstartAreaItem-${fileName}-${name}`} getBinary={linker} />;
             })}
           </QuickstartArea>
         </StartArea>

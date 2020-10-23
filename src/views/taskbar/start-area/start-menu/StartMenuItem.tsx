@@ -1,5 +1,4 @@
 import { Icon } from "components/Icon";
-import { Divider } from "components/Divider";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
