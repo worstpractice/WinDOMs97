@@ -3,7 +3,7 @@ import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
-import { useProcessAlternatives } from "hooks/useProcessAlternatives";
+import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
 import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";

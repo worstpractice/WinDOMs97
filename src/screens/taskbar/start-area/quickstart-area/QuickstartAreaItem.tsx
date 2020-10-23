@@ -1,5 +1,5 @@
 import { Icon } from "components/Icon";
-import { delegate } from "event-filters/delegate";
+import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
@@ -33,7 +33,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
   return (
     <button
       className={styles.QuickstartAreaItem}
-      onMouseDown={delegate({ onLMB: handleLMB, onRMB: handleRMB })}
+      onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
       type="button"
       ref={quickstartAreaItemRef}
     >

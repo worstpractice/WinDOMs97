@@ -4,7 +4,7 @@ import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
-import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
+import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";

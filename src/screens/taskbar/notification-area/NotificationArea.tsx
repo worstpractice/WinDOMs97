@@ -2,7 +2,7 @@ import { Divider } from "components/Divider";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import { Clock } from "views/taskbar/notification-area/Clock";
+import { Clock } from "screens/taskbar/notification-area/Clock";
 import styles from "./NotificationArea.module.css";
 
 type Props = {

@@ -1,7 +1,7 @@
 import logo from "assets/icons/windows-0.png";
 import { Icon } from "components/Icon";
 import { Title } from "components/Title";
-import { delegate } from "event-filters/delegate";
+import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
@@ -41,12 +41,12 @@ export const StartButton: FC<Props> = () => {
   return (
     <button
       className={style}
-      onMouseDown={delegate({ onLMB: handleLMB, onRMB: handleRMB })}
+      onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
       type="button"
       ref={startButtonRef}
     >
       <Icon className={styles.Logo} alt={"Start"} src={logo} />
-      <Title of={"Start"} />
+      <Title className={styles.Title} of={"Start"} />
     </button>
   );
 };

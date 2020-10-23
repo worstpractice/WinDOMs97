@@ -1,6 +1,6 @@
 import { onRMB } from "event-filters/onRMB";
-import { DragSelection } from "views/desktop/DragSelection";
-import { useDesktopAlternatives } from "hooks/desktop/useDesktopAlternatives";
+import { DragSelection } from "screens/desktop/DragSelection";
+import { useDesktopAlternatives } from "hooks/alternatives/useDesktopAlternatives";
 import { useDragSelection } from "hooks/desktop/useOnDragSelection";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";

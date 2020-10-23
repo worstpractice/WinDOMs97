@@ -1,8 +1,8 @@
-import { ChromeArea } from "views/os-window/chrome-area/ChromeArea";
-import { OsWindowButtons } from "views/os-window/chrome-area/OsWindowButtons";
-import { OsWindowLabel } from "views/os-window/chrome-area/OsWindowLabel";
-import { ProgramArea } from "views/os-window/program-area/ProgramArea";
-import { ProgramContent } from "views/os-window/program-area/ProgramContent";
+import { ChromeArea } from "screens/os-window/chrome-area/ChromeArea";
+import { OsWindowButtons } from "screens/os-window/chrome-area/OsWindowButtons";
+import { OsWindowLabel } from "screens/os-window/chrome-area/OsWindowLabel";
+import { ProgramArea } from "screens/os-window/program-area/ProgramArea";
+import { ProgramContent } from "screens/os-window/program-area/ProgramContent";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import { onLMB } from "event-filters/onLMB";
 import { useActivateOnMount } from "hooks/useActivateOnMount";

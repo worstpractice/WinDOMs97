@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.Title {
+  padding-top: 3px;
+}
+
 .StartButton {
   align-content: center;
   cursor: pointer;

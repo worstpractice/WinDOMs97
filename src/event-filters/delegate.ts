@@ -1,24 +1,24 @@
 import type { Handler } from "typings/Handler";
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
-  onLMB?: Handler<T>;
-  onMMB?: Handler<T>;
-  onRMB?: Handler<T>;
+  LMB?: Handler<T>;
+  MMB?: Handler<T>;
+  RMB?: Handler<T>;
 };
 
-export const delegate = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => {
-  const { onLMB, onMMB, onRMB } = params;
+export const switchOn = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => {
+  const { LMB, MMB, RMB } = params;
 
   const switcharoo: Handler<T> = (e) => {
     switch (e.button) {
       case 0: {
-        return onLMB?.(e);
+        return LMB?.(e);
       }
       case 1: {
-        return onMMB?.(e);
+        return MMB?.(e);
       }
       case 2: {
-        return onRMB?.(e);
+        return RMB?.(e);
       }
     }
   };
