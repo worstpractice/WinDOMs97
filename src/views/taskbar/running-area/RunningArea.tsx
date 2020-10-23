@@ -1,3 +1,5 @@
+import { useIsRunningAreaFull } from "hooks/taskbar/useIsRunningAreaFull";
+import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
@@ -8,5 +10,12 @@ type Props = {
 };
 
 export const RunningArea: FC<Props> = ({ children }) => {
-  return <section className={styles.RunningArea}>{children}</section>;
+  const runningAreaRef = useOsRef<HTMLElement>();
+  useIsRunningAreaFull(runningAreaRef);
+
+  return (
+    <section className={styles.RunningArea} ref={runningAreaRef}>
+      {children}
+    </section>
+  );
 };

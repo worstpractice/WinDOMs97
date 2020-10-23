@@ -14,15 +14,16 @@ import { combine, devtools } from "zustand/middleware";
 
 type UserState = {
   activeRef: OsRef<HTMLElement>;
-  openMenu: MenuState;
+  isRunningAreaFull: boolean;
   lastClickPosition: Position;
+  openMenu: MenuState;
 };
 
 type KernelState = {
-  availablePids: readonly number[];
-  installedPrograms: readonly Binary[];
-  floppyDiscs: readonly Program[];
   alternatives: readonly Alternative[];
+  availablePids: readonly number[];
+  floppyDiscs: readonly Program[];
+  installedPrograms: readonly Binary[];
   runningProcesses: readonly Process[];
 };
 
@@ -42,6 +43,7 @@ type MenuActions = {
 type UserActions = {
   activate: <T extends OsRef<HTMLElement>>(to: T) => void;
   setLastClickPosition: (to: Position) => void;
+  setIsRunningAreaFull: (to: boolean) => void;
 };
 
 type ControlActions = {
@@ -66,15 +68,16 @@ export const useKernel = create<OperatingSystem>(
         // USER STATE
         /////////////////////////////////////
         activeRef: { current: null },
-        openMenu: "",
+        isRunningAreaFull: false,
         lastClickPosition: { x: 0, y: 0 },
+        openMenu: "",
         /////////////////////////////////////
         // KERNEL STATE
         /////////////////////////////////////
+        alternatives: [],
         availablePids: Pids.available,
         floppyDiscs: programs,
         installedPrograms: [],
-        alternatives: [],
         runningProcesses: [],
         /////////////////////////////////////
       } as const,
@@ -105,6 +108,12 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          setIsRunningAreaFull: (to: boolean) => {
+            set(() => {
+              return { isRunningAreaFull: to } as const;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           //* CONTROL ACTIONS *
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           endProcess: ({ pid: targetPid }: Process) => {
@@ -122,7 +131,15 @@ export const useKernel = create<OperatingSystem>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary: (binary: Binary) => {
-            set(({ runningProcesses }) => {
+            set(({ isRunningAreaFull, runningProcesses }) => {
+              if (isRunningAreaFull) {
+                console.error(
+                  "Out of task bar space! Ultra hi-fi (640x480) PATA modem required to launch more processes!",
+                );
+
+                return { isRunningAreaFull, runningProcesses } as const;
+              }
+
               const pid = Pids.use();
 
               if (isNull(pid)) {
@@ -188,7 +205,6 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           toggleStartMenu: () => {
             set(({ openMenu }) => {
-              console.log(openMenu);
               const newMenu = openMenu === "StartMenu" ? "" : "StartMenu";
 
               return { openMenu: newMenu } as const;
