@@ -30,7 +30,9 @@
 /*** WARN: Must come last ***/
 .Maximized {
   bottom: 0 !important;
-  height: calc(100vh - 64px) !important;
+
+  /* NOTE: The 60px is an approximation of `TaskBar` height. */
+  height: calc(100vh - 60px) !important;
   left: 0 !important;
   right: 0 !important;
   top: 0 !important;

@@ -1,4 +1,4 @@
-import { Separator } from "components/Separator";
+import { Divider } from "components/Divider";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
@@ -12,7 +12,7 @@ type Props = {
 export const NotificationArea: FC<Props> = ({ children }) => {
   return (
     <section className={styles.Wrapper}>
-      <Separator dent="in" direction="vertical" />
+      <Divider dent="in" direction="vertical" />
       <section className={styles.NotificationArea}>
         <Clock />
         {children}

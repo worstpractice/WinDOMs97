@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
 import { css } from "utils/css";
-import styles from "./Separator.module.css";
+import styles from "./Divider.module.css";
 
 type Props = {
   direction: "horizontal" | "vertical";
@@ -17,12 +17,18 @@ type Props = {
     }
 );
 
-export const Separator: FC<Props> = ({ dent, direction, isStocky = false }) => {
+const PX_BROAD = "2px";
+
+const PERCENT_TALL = "80%";
+
+const PX_AROUND = "5px";
+
+export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
   const isDentedIn = dent === "in";
   const isHorizontal = direction === "horizontal";
 
   const style = css(
-    styles.Separator,
+    styles.Divider,
     isDentedIn ? styles.In : styles.Out,
     isHorizontal ? styles.Horizontal : styles.Vertical,
   );
@@ -33,13 +39,13 @@ export const Separator: FC<Props> = ({ dent, direction, isStocky = false }) => {
     override.outlineStyle = "outset";
 
     if (isHorizontal) {
-      override.height = "4px";
+      override.marginLeft = PX_AROUND;
+      override.width = PERCENT_TALL;
+      override.height = PX_BROAD;
     } else {
-      // NOTE: New personal record for most gross-and-fragile line of CSS written. Great job!
-      override.marginTop = "calc(1% + 1px)";
-      override.height = "80%";
-
-      override.width = "3px";
+      override.marginTop = PX_AROUND;
+      override.height = PERCENT_TALL;
+      override.width = PX_BROAD;
     }
   }
 
