@@ -1,23 +1,22 @@
+import { onLMB } from "event-filters/onLMB";
+import { useOnMoveWindow } from "hooks/os-window/useOnMoveWindow";
+import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
+import { useActivateOnMount } from "hooks/useActivateOnMount";
+import { useOnDoubleClick } from "hooks/useOnDoubleClick";
+import { useOsRef } from "hooks/useOsRef";
+import { useKernel } from "kernel";
+import React, { useState } from "react";
 import { ChromeArea } from "screens/os-window/chrome-area/ChromeArea";
 import { OsWindowButtons } from "screens/os-window/chrome-area/OsWindowButtons";
 import { OsWindowLabel } from "screens/os-window/chrome-area/OsWindowLabel";
 import { ProgramArea } from "screens/os-window/program-area/ProgramArea";
 import { ProgramContent } from "screens/os-window/program-area/ProgramContent";
-import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
-import { onLMB } from "event-filters/onLMB";
-import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useOnDoubleClick } from "hooks/useOnDoubleClick";
-import { useOnMoveWindow } from "hooks/os-window/useOnMoveWindow";
-import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
-import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
-import { Cmd } from "programs/cmd/Cmd";
-import React, { useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
+import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
 type Props = {
@@ -81,7 +80,9 @@ export const OsWindow: FC<Props> = ({ process }) => {
     setIsResizable(false);
   };
 
-  const { isMaximized, isMinimized, pid } = process;
+  const { binaryImage, isMaximized, isMinimized, pid } = process;
+
+  const Program = binaryImage.instructions;
 
   const style = css(
     styles.OsWindow,
@@ -116,7 +117,7 @@ export const OsWindow: FC<Props> = ({ process }) => {
       </span>
       <ProgramArea>
         <ProgramContent>
-          <Cmd />
+          <Program process={process} />
         </ProgramContent>
       </ProgramArea>
     </article>

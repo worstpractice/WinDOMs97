@@ -162,8 +162,9 @@ export const useKernel = create<OperatingSystem>(
 
               const spawnedProcess: Process = {
                 ////////////////////////////////////////////////////////
-                ...binary,
+                binaryImage: binary,
                 ////////////////////////////////////////////////////////
+                ...binary,
                 pid,
                 ////////////////////////////////////////////////////////
                 isMaximized: false,
@@ -175,6 +176,8 @@ export const useKernel = create<OperatingSystem>(
                 osWindowRef: { current: null },
                 ////////////////////////////////////////////////////////
               } as const;
+
+              console.dir(spawnedProcess);
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
             });

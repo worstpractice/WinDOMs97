@@ -1,15 +1,18 @@
 import { onLMB } from "event-filters/onLMB";
-import { useCanvasRef } from "programs/paint/hooks/useCanvasRef";
 import { useOsRef } from "hooks/useOsRef";
-import type { FC } from "typings/FC";
+import { useCanvasRef } from "programs/paint/hooks/useCanvasRef";
 import React, { useState } from "react";
+import type { FC } from "typings/FC";
 import type { Position } from "typings/Position";
-import { drawLine } from "./utils/drawLine";
+import type { Process } from "typings/Process";
 import styles from "./Paint.module.css";
+import { drawLine } from "./utils/drawLine";
 
-type Props = {};
+type Props = {
+  process: Process;
+};
 
-export const Paint: FC<Props> = () => {
+export const Paint: FC<Props> = ({ process }) => {
   const [isDrawing, setIsDrawing] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const frameRef = useOsRef<HTMLElement>();
