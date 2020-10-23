@@ -18,10 +18,11 @@ type Props = {
 export const NotificationItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const notificationItemRef = useOsRef<HTMLLIElement>();
-  const alternatives = useProcessAlternatives(process);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `NotificationItem` handle.
   process.notificationItemRef = notificationItemRef;
+
+  const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB<HTMLLIElement>(() => {
     openContextMenu(alternatives);

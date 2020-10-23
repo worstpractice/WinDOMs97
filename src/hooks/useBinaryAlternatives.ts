@@ -3,14 +3,18 @@ import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
 import { alt } from "utils/alt";
 
-export const useBinaryAlternatives = (binary: Binary) => {
-  const { executeBinary } = useKernel();
+export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {
+  const { executeBinary, uninstallProgram } = useKernel();
 
-  const alternatives: readonly Alternative[] = [
+  return [
+    ////////////////////////////////////////////////
+    alt("Delete", () => {
+      uninstallProgram(binary);
+    }),
+    ////////////////////////////////////////////////
     alt("Run", () => {
       executeBinary(binary);
     }),
+    ////////////////////////////////////////////////
   ] as const;
-
-  return alternatives;
 };

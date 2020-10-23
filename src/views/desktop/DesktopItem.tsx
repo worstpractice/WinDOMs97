@@ -23,6 +23,13 @@ type Props = {
 export const DesktopItem: FC<Props> = ({ binary }) => {
   const { activate, activeRef, closeMenus, executeBinary, openContextMenu } = useKernel();
   const desktopItemRef = useOsRef<HTMLElement>();
+
+  // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
+  binary.desktopItemRef = desktopItemRef;
+
+  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
+  useDesktopLayoutOnMount(desktopItemRef);
+
   const handleMove = useOnDragAndDrop(desktopItemRef);
   const alternatives = useBinaryAlternatives(binary);
 
@@ -30,18 +37,12 @@ export const DesktopItem: FC<Props> = ({ binary }) => {
     openContextMenu(alternatives);
   });
 
-  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
-  useDesktopLayoutOnMount(desktopItemRef);
-
   const handleDoubleClick = () => {
     executeBinary(binary);
   };
 
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
   const handleMouseDownCapture = useOnDoubleClick(desktopItemRef, handleDoubleClick);
-
-  // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
-  binary.desktopItemRef = desktopItemRef;
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     // NOTE: This makes `DesktopItem` selection sticky, which we want.

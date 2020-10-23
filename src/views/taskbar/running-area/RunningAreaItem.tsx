@@ -20,10 +20,11 @@ type Props = {
 export const RunningAreaItem: FC<Props> = ({ process }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
   const runningItemRef = useOsRef<HTMLButtonElement>();
-  const alternatives = useProcessAlternatives(process);
 
   // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
+
+  const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB(() => {
     openContextMenu(alternatives);

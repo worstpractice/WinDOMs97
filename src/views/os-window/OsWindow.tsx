@@ -27,6 +27,10 @@ type Props = {
 export const OsWindow: FC<Props> = ({ process }) => {
   const { activate, closeMenus, maximize, unMaximize } = useKernel();
   const osWindowRef = useOsRef<HTMLElement>();
+
+  // NOTE: This is vital. This is the line where each `Process` is given its very own `OsWindow` handle.
+  process.osWindowRef = osWindowRef;
+
   const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
@@ -42,9 +46,6 @@ export const OsWindow: FC<Props> = ({ process }) => {
 
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
   const handleMouseDownCapture = useOnDoubleClick(chromeAreaRef, handleDoubleClick);
-
-  // NOTE: This is vital. This is the line where each `Process` is given its very own `OsWindow` handle.
-  process.osWindowRef = osWindowRef;
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     closeMenus();
@@ -89,8 +90,8 @@ export const OsWindow: FC<Props> = ({ process }) => {
     isResizable ? styles.Resizable : "",
   );
 
-  const left = (30 * pid) + 750;
-  const top = (20 * pid) + 250;
+  const left = 30 * pid + 750;
+  const top = 20 * pid + 250;
 
   return (
     <article

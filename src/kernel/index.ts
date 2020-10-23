@@ -50,6 +50,7 @@ type ControlActions = {
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   installProgram: (program: Program) => void;
+  uninstallProgram: (program: Program) => void;
 };
 
 type SystemCalls = MenuActions & ControlActions & UserActions & WindowActions;
@@ -118,7 +119,7 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           endProcess: ({ pid: targetPid }: Process) => {
             set(({ runningProcesses }) => {
-              const sparedProcesses: Process[] = runningProcesses.filter(({ pid }) => {
+              const sparedProcesses = runningProcesses.filter(({ pid }) => {
                 // We spare every process whose `pid` is NOT the `targetPid`.
                 return pid !== targetPid;
               });
@@ -131,20 +132,22 @@ export const useKernel = create<OperatingSystem>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary: (binary: Binary) => {
-            set(({ isRunningAreaFull, runningProcesses }) => {
+            set((store) => {
+              const { isRunningAreaFull, runningProcesses } = store;
+
               if (isRunningAreaFull) {
                 console.error(
                   "Out of task bar space! Ultra hi-fi (640x480) PATA modem required to launch more processes!",
                 );
 
-                return { isRunningAreaFull, runningProcesses } as const;
+                return store;
               }
 
               const pid = Pids.use();
 
               if (isNull(pid)) {
                 console.error("OUT OF PIDS! Kill some processes first.");
-                return { runningProcesses } as const;
+                return store;
               }
 
               const spawnedProcess: Process = {
@@ -182,6 +185,19 @@ export const useKernel = create<OperatingSystem>(
               } as const;
 
               return { installedPrograms: [...installedPrograms, executableFile] } as const;
+            });
+          },
+          /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+          uninstallProgram: ({ name }: Program) => {
+            set(({ installedPrograms }) => {
+              const targetFileName = `${name.toLowerCase()}.exe`;
+
+              const sparedPrograms = installedPrograms.filter(({ fileName }) => {
+                // We spare every program whose `fileName` is NOT the `targetFileName`.
+                return fileName !== targetFileName;
+              });
+
+              return { installedPrograms: sparedPrograms } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
