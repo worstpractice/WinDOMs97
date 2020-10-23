@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import { useState } from "react";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
@@ -15,7 +15,7 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
   const { activate, closeMenus, endProcess, maximize, minimize, unMaximize } = useKernel();
   const [isPressed, setIsPressed] = useState(false);
 
-  const handleExit = onLMB<HTMLButtonElement>(() => {
+  const handleExit = onLMB(() => {
     if (!isPressed) return;
 
     setIsPressed(false);
@@ -28,7 +28,7 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     setIsPressed(false);
   };
 
-  const handleMaximize = onLMB<HTMLButtonElement>(() => {
+  const handleMaximize = onLMB(() => {
     if (!isPressed) return;
 
     setIsPressed(false);
@@ -37,7 +37,7 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     isMaximized ? unMaximize(process) : maximize(process);
   });
 
-  const handleMinimize = onLMB<HTMLButtonElement>(() => {
+  const handleMinimize = onLMB(() => {
     if (!isPressed) return;
 
     setIsPressed(false);
@@ -45,7 +45,7 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     activate({ current: null });
   });
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLMB((e) => {
     // NOTE: This is necessary to stop the `OsWindow` from starting to move.
     e.stopPropagation();
     closeMenus();

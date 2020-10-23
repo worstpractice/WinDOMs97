@@ -4,7 +4,7 @@ import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useProcessAlternatives } from "hooks/useProcessAlternatives";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";

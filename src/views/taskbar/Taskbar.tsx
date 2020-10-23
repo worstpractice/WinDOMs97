@@ -1,7 +1,7 @@
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
-import * as React from "react";
+import { default as React } from "react";
 import type { FC } from "typings/FC";
 import styles from "./Taskbar.module.css";
 

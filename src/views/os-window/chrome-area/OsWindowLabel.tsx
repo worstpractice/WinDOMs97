@@ -1,7 +1,7 @@
 import { Icon } from "components/Icon";
 import { Title } from "components/Title";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";

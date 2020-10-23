@@ -8,7 +8,7 @@ import { useBinaryAlternatives } from "hooks/useBinaryAlternatives";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";

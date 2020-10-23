@@ -1,6 +1,6 @@
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import type { FC } from "typings/FC";
 import { ContextMenu } from "views/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "views/desktop/context-menu/ContextMenuItem";

@@ -1,7 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import { MouseEventHandler, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { is } from "type-predicates/is";
+import type { Handler } from "typings/Handler";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
@@ -12,8 +13,8 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 
-  const handleMouseDown = useCallback(
-    onLMB<HTMLElement>(({ target }) => {
+  const handleMouseDown: Handler<HTMLElement> = useCallback(
+    onLMB(({ target }) => {
       const { current } = desktopRef;
 
       // We're only interested in clicks on the actual desktop itself
@@ -26,12 +27,12 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
     [],
   );
 
-  const handleMouseMove: MouseEventHandler = useCallback(({ clientX, clientY }) => {
+  const handleMouseMove: Handler<HTMLElement> = useCallback(({ clientX, clientY }) => {
     setCurrentPosition({ x: clientX, y: clientY });
   }, []);
 
-  const handleMouseUp = useCallback(
-    onLMB<HTMLElement>(() => {
+  const handleMouseUp: Handler<HTMLElement> = useCallback(
+    onLMB(() => {
       setIsDragSelecting(false);
     }),
     [],

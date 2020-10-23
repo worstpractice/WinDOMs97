@@ -2,7 +2,7 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import { useStayInSight } from "hooks/desktop/context-menu/useStayInSight";
 import type { ReactNode } from "react";
-import * as React from "react";
+import { default as React } from "react";
 import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./ContextMenu.module.css";

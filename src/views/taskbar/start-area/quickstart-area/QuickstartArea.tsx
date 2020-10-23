@@ -1,8 +1,8 @@
 import { VerticalSeparator } from "components/separators/VerticalSeparator";
-import type { FC } from "typings/FC";
-import * as React from "react";
-import styles from "./QuickstartArea.module.css";
 import type { ReactNode } from "react";
+import { default as React } from "react";
+import type { FC } from "typings/FC";
+import styles from "./QuickstartArea.module.css";
 
 type Props = {
   children: ReactNode;

@@ -1,5 +1,5 @@
 import type { FC } from "typings/FC";
-import * as React from "react";
+import { default as React } from "react";
 import styles from "./StartArea.module.css";
 import type { ReactNode } from "react";
 

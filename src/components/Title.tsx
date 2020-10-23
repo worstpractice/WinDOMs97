@@ -1,5 +1,5 @@
 import type { CSSProperties, FC } from "react";
-import * as React from "react";
+import { default as React } from "react";
 import { css } from "utils/css";
 import styles from "./Title.module.css";
 

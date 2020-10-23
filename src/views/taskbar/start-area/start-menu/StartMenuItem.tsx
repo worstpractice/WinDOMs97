@@ -3,7 +3,7 @@ import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
 import styles from "./StartMenuItem.module.css";

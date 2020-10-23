@@ -1,8 +1,8 @@
-import type { MouseEventHandler } from "react";
+import type { Handler } from "typings/Handler";
 
-type Params<T> = {
+type Params<T extends NonNullable<HTMLElement | Document>> = {
   event: keyof WindowEventMap;
-  handler: MouseEventHandler<T>;
+  handler: Handler<T>;
   options?: AddEventListenerOptions;
   /** Defaults to the `document` object. */
   on: EventTarget;
@@ -13,7 +13,7 @@ type CleanupFn = {
 };
 
 type Listen = {
-  <T>(params: Params<T>): CleanupFn;
+  <T extends NonNullable<HTMLElement | Document>>(params: Params<T>): CleanupFn;
 };
 
 /** A more typesafe `addEventListener` that returns a convenient cleanup function. */

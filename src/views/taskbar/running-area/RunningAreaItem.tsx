@@ -5,7 +5,7 @@ import { onRMB } from "event-filters/onRMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useProcessAlternatives } from "hooks/useProcessAlternatives";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
@@ -25,11 +25,11 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
   // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
   process.runningItemRef = runningItemRef;
 
-  const handleContextMenu = onRMB<HTMLButtonElement>(() => {
+  const handleContextMenu = onRMB(() => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLMB((e) => {
     // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to activate.
     e.stopPropagation();
     closeMenus();

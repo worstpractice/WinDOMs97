@@ -2,7 +2,7 @@ import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import * as React from "react";
+import { default as React } from "react";
 import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";
 import styles from "./ContextMenuItem.module.css";
