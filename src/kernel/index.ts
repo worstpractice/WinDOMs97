@@ -9,6 +9,7 @@ import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
+import type { RawBinary } from "typings/RawBinary";
 import { ARS256 } from "utils/algorithms/ars256";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
@@ -57,7 +58,7 @@ type SystemCalls = {
   ////////////////////////////////////////////////////////////////
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  installProgram: (binary: Binary) => void;
+  installProgram: (rawBinary: RawBinary) => void;
   uninstallProgram: (binary: Binary) => void;
   ////////////////////////////////////////////////////////////////
   // Debug
@@ -179,13 +180,13 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          installProgram: (binary: Binary) => {
+          installProgram: (rawBinary: RawBinary) => {
             set(({ installedPrograms }) => {
-              const executableFile: Binary = {
+              const binary: Binary = {
                 ////////////////////////////////////////////////////////
-                ...binary,
+                ...rawBinary,
                 ////////////////////////////////////////////////////////
-                fileName: `${binary.name.toLowerCase()}.exe`,
+                fileName: `${rawBinary.name.toLowerCase()}.exe`,
                 // Placeholder until we can hash the entire binary itself a few lines down.
                 fileHash: "" as Hash,
                 ////////////////////////////////////////////////////////
@@ -196,9 +197,9 @@ export const useKernel = create<OperatingSystem>(
               };
 
               // NOTE: Crucial step in which we hash the binary.
-              executableFile.fileHash = ARS256(executableFile);
+              binary.fileHash = ARS256(binary);
 
-              return { installedPrograms: [...installedPrograms, executableFile] } as const;
+              return { installedPrograms: [...installedPrograms, binary] } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

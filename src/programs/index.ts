@@ -1,52 +1,40 @@
 import calculator from "assets/icons/calculator-0.png";
+import task_manager from "assets/icons/computer_taskmgr-0.png";
 import console_prompt from "assets/icons/console_prompt-0.png";
 import game_mine from "assets/icons/game_mine_1-0.png";
+import internet_exploder from "assets/icons/msie2-2.png";
 import paint_file from "assets/icons/paint_file-5.png";
 import type { Binary } from "typings/Binary";
-import { Hash } from "typings/phantom-types/Hash";
+import type { RawBinary } from "typings/RawBinary";
 
-const calc: Binary = {
-  fileHash: "" as Hash,
-  fileName: "" as Hash,
+const calc: RawBinary = {
   icon: calculator,
   name: "Calculator",
-  ////////////////////////////////////////////
-  desktopItemRef: { current: null },
-  startMenuItemRef: { current: null },
-  quickstartAreaItemRef: { current: null },
 } as const;
 
-const cmd: Binary = {
-  fileHash: "" as Hash,
-  fileName: "" as Hash,
+const cmd: RawBinary = {
   icon: console_prompt,
   name: "Command Prompt",
-  ////////////////////////////////////////////
-  desktopItemRef: { current: null },
-  startMenuItemRef: { current: null },
-  quickstartAreaItemRef: { current: null },
 } as const;
 
-const minesweeper: Binary = {
-  fileHash: "" as Hash,
-  fileName: "" as Hash,
+const minesweeper: RawBinary = {
   icon: game_mine,
   name: "Minesweeper",
-  ////////////////////////////////////////////
-  desktopItemRef: { current: null },
-  startMenuItemRef: { current: null },
-  quickstartAreaItemRef: { current: null },
 } as const;
 
-const paint: Binary = {
-  fileHash: "" as Hash,
-  fileName: "" as Hash,
+const paint: RawBinary = {
   icon: paint_file,
   name: "Paint",
-  ////////////////////////////////////////////
-  desktopItemRef: { current: null },
-  startMenuItemRef: { current: null },
-  quickstartAreaItemRef: { current: null },
 } as const;
 
-export const programs = [calc, cmd, minesweeper, paint] as const;
+const taskManager: RawBinary = {
+  icon: task_manager,
+  name: "Task Manager",
+} as const;
+
+const ie: RawBinary = {
+  icon: internet_exploder,
+  name: "Internet Exploder",
+} as const;
+
+export const programs = [calc, cmd, minesweeper, paint, taskManager, ie] as const;
