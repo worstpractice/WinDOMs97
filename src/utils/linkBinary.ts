@@ -16,8 +16,8 @@ const linkerFactory = (binary: Binary, key: RefType) => {
 
 export const linkBinary = (binary: Binary) => {
   return {
-    desktopItem: linkerFactory(binary, "desktopItemRef"),
-    quickstartAreaItem: linkerFactory(binary, "quickstartAreaItemRef"),
-    startMenuItem: linkerFactory(binary, "startMenuItemRef"),
+    toDesktopItem: linkerFactory(binary, "desktopItemRef"),
+    toQuickstartAreaItem: linkerFactory(binary, "quickstartAreaItemRef"),
+    toStartMenuItem: linkerFactory(binary, "startMenuItemRef"),
   } as const;
 };

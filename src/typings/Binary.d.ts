@@ -1,8 +1,9 @@
 import type { OsRef } from "typings/OsRef";
 import type { Hash } from "typings/phantom-types/Hash";
-import type { Program } from "typings/Program";
 
-export type Binary = Program & {
+export type Binary = {
+  icon: string;
+  name: string;
   fileName: string;
   fileHash: Hash;
   ////////////////////////////////////////////////////////

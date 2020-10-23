@@ -1,5 +1,6 @@
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useKernel } from "kernel";
+import { programs } from "programs";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
 import { linkBinary } from "utils/linkBinary";
@@ -23,12 +24,12 @@ import { Taskbar } from "views/taskbar/Taskbar";
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { alternatives, floppyDiscs, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
+  const { alternatives, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
   useLastClickPosition();
 
   if (!installedPrograms.length) {
-    for (const floppy of floppyDiscs) {
-      installProgram(floppy);
+    for (const each of programs) {
+      installProgram(each);
     }
   }
 

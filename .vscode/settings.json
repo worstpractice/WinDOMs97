@@ -1,4 +1,5 @@
 {
   "typescript.tsdk": "c:\\Users\\WorstPractice\\Desktop\\fakeos\\node_modules\\typescript\\lib",
-  "files.autoSave": "onWindowChange"
+  "files.autoSave": "onWindowChange",
+  "typescript.tsserver.experimental.enableProjectDiagnostics": true
 }

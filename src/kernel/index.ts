@@ -10,7 +10,6 @@ import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
-import type { Program } from "typings/Program";
 import { ars256 } from "utils/algorithms/ars256";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
@@ -25,7 +24,6 @@ type UserState = {
 type KernelState = {
   alternatives: readonly Alternative[];
   availablePids: readonly PID[];
-  floppyDiscs: readonly Program[];
   installedPrograms: readonly Binary[];
   runningProcesses: readonly Process[];
 };
@@ -52,8 +50,8 @@ type UserActions = {
 type ControlActions = {
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  installProgram: (program: Program) => void;
-  uninstallProgram: (program: Program) => void;
+  installProgram: (binary: Binary) => void;
+  uninstallProgram: (binary: Binary) => void;
 };
 
 type SystemCalls = MenuActions & ControlActions & UserActions & WindowActions;
@@ -80,7 +78,6 @@ export const useKernel = create<OperatingSystem>(
         /////////////////////////////////////
         alternatives: [],
         availablePids: Pids.available,
-        floppyDiscs: programs,
         installedPrograms: [],
         runningProcesses: [],
         /////////////////////////////////////
@@ -173,13 +170,13 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          installProgram: (program: Program) => {
+          installProgram: (binary: Binary) => {
             set(({ installedPrograms }) => {
               const executableFile: Binary = {
                 ////////////////////////////////////////////////////////
-                ...program,
+                ...binary,
                 ////////////////////////////////////////////////////////
-                fileName: `${program.name.toLowerCase()}.exe`,
+                fileName: `${binary.name.toLowerCase()}.exe`,
                 // Placeholder until we can hash the entire binary itself a few lines down.
                 fileHash: "" as Hash,
                 ////////////////////////////////////////////////////////
@@ -196,7 +193,7 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          uninstallProgram: ({ name }: Program) => {
+          uninstallProgram: ({ name }: Binary) => {
             set(({ installedPrograms }) => {
               const targetFileName = `${name.toLowerCase()}.exe`;
 
