@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": false,
     "allowSyntheticDefaultImports": true,
     "allowUnusedLabels": true,
     "assumeChangesOnlyAffectDirectDependencies": false,
@@ -9,6 +10,11 @@
     "importsNotUsedAsValues": "remove",
     "isolatedModules": true,
     "jsx": "react",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -21,6 +27,8 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "resolveJsonModule": true,
+    "skipDefaultLibCheck": false,
+    "skipLibCheck": false,
     "strict": true,
     "strictBindCallApply": true,
     "strictFunctionTypes": true,
@@ -28,14 +36,7 @@
     "strictPropertyInitialization": true,
     "suppressExcessPropertyErrors": false,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "ESNext",
-    "allowJs": false,
-    "skipLibCheck": false,
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ]
+    "target": "ESNext"
   },
   "include": [
     "src"

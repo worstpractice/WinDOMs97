@@ -1,5 +1,4 @@
 import { Pids } from "kernel/Pids";
-import { programs } from "programs";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
 import type { Alternative } from "typings/Alternative";
@@ -10,7 +9,7 @@ import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
-import { ars256 } from "utils/algorithms/ars256";
+import { ARS256 } from "utils/algorithms/ars256";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -187,7 +186,7 @@ export const useKernel = create<OperatingSystem>(
               };
 
               // NOTE: Crucial step in which we hash the binary.
-              executableFile.fileHash = ars256(executableFile);
+              executableFile.fileHash = ARS256(executableFile);
 
               return { installedPrograms: [...installedPrograms, executableFile] } as const;
             });
