@@ -8,7 +8,7 @@ type Props = {};
 export const Spine: FC<Props> = () => {
   return (
     <header aria-orientation="vertical" className={styles.Spine}>
-      <Title className={styles.Title} of={"FakeOS 97"} />
+      <Title className={styles.Title} of={"WinDOMs 97"} />
     </header>
   );
 };
