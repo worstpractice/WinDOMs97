@@ -1,4 +1,4 @@
-import { VerticalSeparator } from "components/separators/VerticalSeparator";
+import { Separator } from "components/Separator";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
@@ -11,9 +11,10 @@ type Props = {
 export const QuickstartArea: FC<Props> = ({ children }) => {
   return (
     <>
-      <VerticalSeparator />
+      <Separator dent="in" direction="vertical" />
       <section className={styles.QuickstartArea}>{children}</section>
-      <VerticalSeparator />
+      <Separator dent="in" direction="vertical" />
+      <Separator direction="vertical" isStocky />
     </>
   );
 };

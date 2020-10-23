@@ -6,9 +6,12 @@ import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
 import type { MenuState } from "typings/MenuState";
 import type { OsRef } from "typings/OsRef";
+import type { Hash } from "typings/phantom-types/Hash";
+import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import type { Program } from "typings/Program";
+import { ars256 } from "utils/algorithms/ars256";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -21,7 +24,7 @@ type UserState = {
 
 type KernelState = {
   alternatives: readonly Alternative[];
-  availablePids: readonly number[];
+  availablePids: readonly PID[];
   floppyDiscs: readonly Program[];
   installedPrograms: readonly Binary[];
   runningProcesses: readonly Process[];
@@ -177,12 +180,17 @@ export const useKernel = create<OperatingSystem>(
                 ...program,
                 ////////////////////////////////////////////////////////
                 fileName: `${program.name.toLowerCase()}.exe`,
+                // Placeholder until we can hash the entire binary itself a few lines down.
+                fileHash: "" as Hash,
                 ////////////////////////////////////////////////////////
                 desktopItemRef: { current: null },
                 startMenuItemRef: { current: null },
                 quickstartAreaItemRef: { current: null },
                 ////////////////////////////////////////////////////////
-              } as const;
+              };
+
+              // NOTE: Crucial step in which we hash the binary.
+              executableFile.fileHash = ars256(executableFile);
 
               return { installedPrograms: [...installedPrograms, executableFile] } as const;
             });

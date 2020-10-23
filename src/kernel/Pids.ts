@@ -1,18 +1,18 @@
 import { isUndefined } from "type-predicates/isUndefined";
-import type { Pid } from "typings/phantom-types/Pid";
+import type { PID } from "typings/phantom-types/PID";
 import { from } from "utils/range";
 
 /** Inclusive. */
 const MAX = 10 as const;
 
-const backingSet = new Set<Pid>(from(0).to(MAX) as Pid[]);
+const backingSet = new Set<PID>(from(0).to(MAX) as PID[]);
 
 export const Pids = {
   get available() {
     return [...backingSet].sort();
   },
 
-  free(pid: Pid) {
+  free(pid: PID) {
     if (pid < 0) throw new RangeError(`Pids below 0 cannot be used! (Pid was ${pid})`);
     if (pid > MAX) throw new RangeError(`Pids above ${MAX} cannot be used! (Pid was ${pid})`);
 
@@ -37,6 +37,6 @@ export const Pids = {
 
     backingSet.delete(pid);
 
-    return pid as Pid;
+    return pid as PID;
   },
 } as const;

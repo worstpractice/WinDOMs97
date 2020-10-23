@@ -26,8 +26,6 @@ export const useIsRunningAreaFull = <T extends HTMLElement>(runningAreaRef: OsRe
 
     const verdict = remaining < 240;
 
-    console.log(`Is running area full: ${verdict}`);
-
     setIsRunningAreaFull(verdict);
   }, [isRunningAreaFull, runningAreaRef, runningProcesses.length, setIsRunningAreaFull]);
 };

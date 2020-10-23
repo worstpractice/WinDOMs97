@@ -1,11 +1,12 @@
+import type { Binary } from "typings/Binary";
 import type { OsRef } from "typings/OsRef";
-import type { Pid } from "typings/phantom-types/Pid";
+import type { PID } from "typings/phantom-types/PID";
 
-export type Process = {
+export type Process = Binary & {
   ////////////////////////////////////////////////////////
   icon: string;
   name: string;
-  pid: Pid;
+  pid: PID;
   ////////////////////////////////////////////////////////
   isMaximized: boolean;
   isMinimized: boolean;

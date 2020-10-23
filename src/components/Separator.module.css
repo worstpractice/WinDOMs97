@@ -1,0 +1,22 @@
+@import "../styles/colors.module.css";
+
+.Separator {
+  outline-color: var(--oswindow-outline);
+  outline-width: 3px;
+}
+
+.In {
+  outline-style: inset;
+}
+
+.Out {
+  outline-style: outset;
+}
+
+.Horizontal {
+  width: 100%;
+}
+
+.Vertical {
+  height: 100%;
+}
