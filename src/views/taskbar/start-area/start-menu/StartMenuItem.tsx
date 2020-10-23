@@ -17,9 +17,6 @@ export const StartMenuItem: FC<Props> = ({ getBinary }) => {
   const startMenuItemRef = useOsRef<HTMLLIElement>();
   const binary = getBinary(startMenuItemRef);
 
-  // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
-  binary.startMenuItemRef = startMenuItemRef;
-
   const handleLaunch = onLMB(() => {
     closeMenus();
     executeBinary(binary);
