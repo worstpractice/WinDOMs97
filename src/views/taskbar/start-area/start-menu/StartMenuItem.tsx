@@ -4,17 +4,18 @@ import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
-import type { Binary } from "typings/Binary";
 import type { FC } from "typings/FC";
+import type { Linker } from "typings/Linker";
 import styles from "./StartMenuItem.module.css";
 
 type Props = {
-  binary: Binary;
+  getBinary: Linker;
 };
 
-export const StartMenuItem: FC<Props> = ({ binary }) => {
+export const StartMenuItem: FC<Props> = ({ getBinary }) => {
   const { closeMenus, executeBinary } = useKernel();
   const startMenuItemRef = useOsRef<HTMLLIElement>();
+  const binary = getBinary(startMenuItemRef);
 
   // NOTE: This is vital. This is the line where each `Binary` is given its very own `ContextMenuItem` handle.
   binary.startMenuItemRef = startMenuItemRef;

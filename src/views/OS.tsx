@@ -3,7 +3,7 @@ import { useKernel } from "kernel";
 import { programs } from "programs";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import { linkBinary } from "utils/linkBinary";
+import { Linker } from "typings/Linker";
 import { ContextMenu } from "views/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "views/desktop/context-menu/ContextMenuItem";
 import { Desktop } from "views/desktop/Desktop";
@@ -52,7 +52,12 @@ export const OS: FC<Props> = () => {
         {installedPrograms.map((binary) => {
           const { fileName, name } = binary;
 
-          const { toDesktopItem } = linkBinary(binary);
+          const toDesktopItem: Linker = (desktopItemRef) => {
+            // NOTE: This is vital.
+            binary.desktopItemRef = desktopItemRef;
+
+            return binary;
+          };
 
           return <DesktopItem key={`DesktopItem-${fileName}-${name}`} getBinary={toDesktopItem} />;
         })}
@@ -67,7 +72,14 @@ export const OS: FC<Props> = () => {
           {installedPrograms.map((binary) => {
             const { fileName, name } = binary;
 
-            return <StartMenuItem binary={binary} key={`StartMenuItem-${fileName}-${name}`} />;
+            const toStartMenuItem: Linker = (startMenuItemRef) => {
+              // NOTE: This is vital.
+              binary.startMenuItemRef = startMenuItemRef;
+
+              return binary;
+            };
+
+            return <StartMenuItem key={`StartMenuItem-${fileName}-${name}`} getBinary={toStartMenuItem} />;
           })}
         </StartMenu>
       )}
@@ -78,7 +90,12 @@ export const OS: FC<Props> = () => {
             {installedPrograms.map((binary) => {
               const { fileName, name } = binary;
 
-              const { toQuickstartAreaItem } = linkBinary(binary);
+              const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
+                // NOTE: This is vital.
+                binary.quickstartAreaItemRef = quickstartAreaItem;
+
+                return binary;
+              };
 
               return (
                 <QuickstartAreaItem key={`QuickstartAreaItem-${fileName}-${name}`} getBinary={toQuickstartAreaItem} />
