@@ -31,12 +31,15 @@ export const Separator: FC<Props> = ({ dent, direction, isStocky = false }) => {
 
   if (isStocky) {
     override.outlineStyle = "outset";
+
     if (isHorizontal) {
-      override.width = "80%";
-      override.height = "5px";
+      override.height = "4px";
     } else {
+      // NOTE: New personal record for most gross-and-fragile line of CSS written. Great job!
+      override.marginTop = "calc(1% + 1px)";
       override.height = "80%";
-      override.width = "5px";
+
+      override.width = "3px";
     }
   }
 

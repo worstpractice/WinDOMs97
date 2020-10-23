@@ -12,6 +12,7 @@ export const QuickstartArea: FC<Props> = ({ children }) => {
   return (
     <>
       <Separator dent="in" direction="vertical" />
+      <Separator direction="vertical" isStocky />
       <section className={styles.QuickstartArea}>{children}</section>
       <Separator dent="in" direction="vertical" />
       <Separator direction="vertical" isStocky />
