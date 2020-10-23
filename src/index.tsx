@@ -1,7 +1,7 @@
-import { OS } from "screens/OS";
 import "normalize.css";
 import React, { StrictMode } from "react";
 import { render } from "react-dom";
+import { OS } from "screens/OS";
 import "styles/reset.module.css";
 
 // Disable the default context menu globally

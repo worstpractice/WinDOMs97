@@ -2,8 +2,7 @@ import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useKernel } from "kernel";
 import { programs } from "programs";
 import { default as React } from "react";
-import type { FC } from "typings/FC";
-import { Linker } from "typings/Linker";
+import { BSOD } from "screens/BSOD";
 import { ContextMenu } from "screens/desktop/context-menu/ContextMenu";
 import { ContextMenuItem } from "screens/desktop/context-menu/ContextMenuItem";
 import { Desktop } from "screens/desktop/Desktop";
@@ -20,11 +19,13 @@ import { StartMenuItem } from "screens/taskbar/start-area/start-menu/StartMenuIt
 import { StartArea } from "screens/taskbar/start-area/StartArea";
 import { StartButton } from "screens/taskbar/start-area/StartButton";
 import { Taskbar } from "screens/taskbar/Taskbar";
+import type { FC } from "typings/FC";
+import { Linker } from "typings/Linker";
 
 type Props = {};
 
 export const OS: FC<Props> = () => {
-  const { alternatives, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
+  const { alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
   useLastClickPosition();
 
   if (!installedPrograms.length) {
@@ -36,6 +37,10 @@ export const OS: FC<Props> = () => {
   const isContextMenuOpen = openMenu === "ContextMenu";
 
   const isStartMenuOpen = openMenu === "StartMenu";
+
+  if (isBsod) {
+    return <BSOD />
+  }
 
   return (
     <>
@@ -53,7 +58,6 @@ export const OS: FC<Props> = () => {
           const { fileName, name } = binary;
 
           const toDesktopItem: Linker = (desktopItemRef) => {
-            // NOTE: This is vital.
             binary.desktopItemRef = desktopItemRef;
 
             return binary;
@@ -73,7 +77,6 @@ export const OS: FC<Props> = () => {
             const { fileName, name } = binary;
 
             const toStartMenuItem: Linker = (startMenuItemRef) => {
-              // NOTE: This is vital.
               binary.startMenuItemRef = startMenuItemRef;
 
               return binary;
@@ -91,7 +94,6 @@ export const OS: FC<Props> = () => {
               const { fileName, name } = binary;
 
               const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
-                // NOTE: This is vital.
                 binary.quickstartAreaItemRef = quickstartAreaItem;
 
                 return binary;

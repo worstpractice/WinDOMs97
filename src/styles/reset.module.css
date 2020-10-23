@@ -16,7 +16,6 @@
 }
 
 body {
-  background-color: var(--desktop-wallpaper);
   font-size: large;
   font-weight: 100;
   overflow: hidden;
