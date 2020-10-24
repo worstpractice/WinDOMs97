@@ -2,8 +2,8 @@ import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
-import { useOsRef } from "hooks/useOsRef";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
+import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
@@ -47,7 +47,8 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
     }
   });
 
-  const { icon, name, osWindowRef } = process;
+  const { binaryImage, osWindowRef } = process;
+  const { icon, name } = binaryImage;
 
   const buttonStyle = isRef(activeRef, osWindowRef)
     ? css(styles.RunningAreaItem, styles.Active)

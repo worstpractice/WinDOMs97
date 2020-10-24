@@ -28,6 +28,10 @@ export const OS: FC<Props> = () => {
   const { alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel();
   useLastClickPosition();
 
+  if (isBsod) {
+    return <BSOD />;
+  }
+
   if (!installedPrograms.length) {
     for (const each of programs) {
       installProgram(each);
@@ -37,10 +41,6 @@ export const OS: FC<Props> = () => {
   const isContextMenuOpen = openMenu === "ContextMenu";
 
   const isStartMenuOpen = openMenu === "StartMenu";
-
-  if (isBsod) {
-    return <BSOD />
-  }
 
   return (
     <>
@@ -67,7 +67,8 @@ export const OS: FC<Props> = () => {
         })}
       </Desktop>
       {runningProcesses.map((process) => {
-        const { name, pid } = process;
+        const { binaryImage, pid } = process;
+        const { name } = binaryImage;
 
         return <OsWindow key={`OsWindow-${pid}-${name}`} process={process} />;
       })}
@@ -107,14 +108,16 @@ export const OS: FC<Props> = () => {
         </StartArea>
         <RunningArea>
           {runningProcesses.map((process) => {
-            const { name, pid } = process;
+            const { binaryImage, pid } = process;
+            const { name } = binaryImage;
 
             return <RunningAreaItem key={`RunningAreaItem-${pid}-${name}`} process={process} />;
           })}
         </RunningArea>
         <NotificationArea>
           {runningProcesses.map((process) => {
-            const { name, pid } = process;
+            const { binaryImage, pid } = process;
+            const { name } = binaryImage;
 
             return <NotificationItem key={`NotificationAreaItem-${pid}-${name}`} process={process} />;
           })}

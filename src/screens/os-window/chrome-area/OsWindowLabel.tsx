@@ -15,7 +15,8 @@ type Props = {
 export const OsWindowLabel: FC<Props> = ({ process }) => {
   const { activeRef } = useKernel();
 
-  const { icon, name, osWindowRef } = process;
+  const { binaryImage, osWindowRef } = process;
+  const { icon, name } = binaryImage;
 
   const titleStyle = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
 

@@ -8,14 +8,13 @@ type Props = {
 };
 
 export const IE: FC<Props> = ({ process }) => {
-  const { name } = process;
+  const { name } = process.binaryImage;
 
   return (
     <iframe
       className={style.IE}
       frameBorder="0"
       loading="eager"
-      // src="page.html"
       src="http://nineties.website/"
       title={name}
     />
