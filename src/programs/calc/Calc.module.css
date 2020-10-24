@@ -1,5 +1,23 @@
 .Calc {
-  background-color: black;
   height: 100%;
+  padding: 10px;
   width: 100%;
+}
+
+.GridContainer {
+  display: grid;
+}
+
+.CalculatorButton {
+  font-size: 32px;
+  height: 80px;
+  outline-color: whitesmoke;
+  outline-style: outset;
+  outline-width: 4px;
+  width: 100px;
+}
+
+.CalculatorResults {
+  font-size: 32px;
+  height: 50px;
 }

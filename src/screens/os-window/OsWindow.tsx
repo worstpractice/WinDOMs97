@@ -27,10 +27,13 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
   const { activate, closeMenus, maximize, unMaximize } = useKernel();
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);
-
   const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
+
+  const { pid } = process;
+
+  const [osWindowDimensions, setOsWindowDimensions] = useState({ width: 30 * pid + 750, height: 20 * pid + 250 });
   useActivateOnMount(osWindowRef);
 
   const handleDoubleClick = () => {
@@ -78,7 +81,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     setIsResizable(false);
   };
 
-  const { binaryImage, isMaximized, isMinimized, pid } = process;
+  const { binaryImage, isMaximized, isMinimized } = process;
 
   const Program = binaryImage.instructions;
 
@@ -89,8 +92,14 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     isResizable ? styles.Resizable : "",
   );
 
+  const { width, height } = osWindowDimensions;
+
   const left = 30 * pid + 750;
   const top = 20 * pid + 250;
+
+  const handleDimensionChange = (dimensions: { width: number; height: number }) => {
+    setOsWindowDimensions(dimensions);
+  };
 
   return (
     <article
@@ -100,7 +109,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={osWindowRef}
-      style={{ left, top }}
+      style={{ left, top, width, height }}
     >
       <span
         className={styles.Outline}
@@ -115,7 +124,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       </span>
       <ProgramArea>
         <ProgramContent>
-          <Program process={process} />
+          <Program process={process} setOsWindowDimensions={handleDimensionChange} />
         </ProgramContent>
       </ProgramArea>
     </article>

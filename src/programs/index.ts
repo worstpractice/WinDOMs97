@@ -10,42 +10,50 @@ import { IE } from "programs/ie/IE";
 import { Minesweeper } from "programs/minesweeper/Minesweeper";
 import { Paint } from "programs/paint/Paint";
 import { TaskMgr } from "programs/taskmgr/TaskMgr";
-import type { RawBinary } from "typings/RawBinary";
+import { Binary } from "typings/Binary";
 
-const calc: RawBinary = {
+const calc = {
   icon: calculator,
   name: "Calculator",
   instructions: Calc,
 } as const;
 
-const cmd: RawBinary = {
+const cmd = {
   icon: console_prompt,
   name: "Command Prompt",
   instructions: Cmd,
 } as const;
 
-const minesweeper: RawBinary = {
+const minesweeper = {
   icon: game_mine,
   name: "Minesweeper",
   instructions: Minesweeper,
 } as const;
 
-const paint: RawBinary = {
+const paint = {
   icon: paint_file,
   name: "Paint",
   instructions: Paint,
 } as const;
 
-const taskManager: RawBinary = {
+const taskManager = {
   icon: task_manager,
   name: "Task Manager",
   instructions: TaskMgr,
 } as const;
 
-const ie: RawBinary = {
+const ie = {
   icon: internet_exploder,
   name: "Internet Exploder",
   instructions: IE,
 } as const;
 
-export const programs = [calc, cmd, minesweeper, paint, taskManager, ie] as const;
+export const programs = [
+  // NOTE: @%&#^@!^$&$!!!
+  (calc as any) as Binary,
+  (cmd as any) as Binary,
+  (minesweeper as any) as Binary,
+  (paint as any) as Binary,
+  (taskManager as any) as Binary,
+  (ie as any) as Binary,
+] as const;

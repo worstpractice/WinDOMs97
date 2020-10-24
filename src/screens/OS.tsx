@@ -21,7 +21,7 @@ import { StartButton } from "screens/taskbar/start-area/StartButton";
 import { Taskbar } from "screens/taskbar/Taskbar";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
-import type { Loader, LiLoader, ButtonLoader } from "typings/Loader";
+import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
 
 type Props = {};
 
@@ -132,7 +132,9 @@ export const OS: FC<Props> = () => {
               return process;
             };
 
-            return <NotificationAreaItem key={`NotificationAreaItem-${pid}-${name}`} getProcess={toNotificationAreaItem} />;
+            return (
+              <NotificationAreaItem key={`NotificationAreaItem-${pid}-${name}`} getProcess={toNotificationAreaItem} />
+            );
           })}
         </NotificationArea>
       </Taskbar>
