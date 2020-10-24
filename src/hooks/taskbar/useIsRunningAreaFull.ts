@@ -1,5 +1,5 @@
 import { useKernel } from "kernel";
-import { useEffect } from "react";
+import { useLayoutEffect } from "react";
 import type { OsRef } from "typings/OsRef";
 
 /** Magic number. */
@@ -8,7 +8,7 @@ const RUNNING_AREA_ITEM_WIDTH = 240 as const;
 export const useIsRunningAreaFull = <T extends HTMLElement>(runningAreaRef: OsRef<T>) => {
   const { isRunningAreaFull, setIsRunningAreaFull, runningProcesses } = useKernel();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { current: runningArea } = runningAreaRef;
 
     if (!runningArea) return;

@@ -1,5 +1,5 @@
 import { useKernel } from "kernel";
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 
@@ -8,7 +8,7 @@ export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
   const [isTooFarDown, setIsTooFarDown] = useState(false);
   const [position, setPosition] = useState<Position>(lastClickPosition);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const { current: contextMenu } = contextMenuRef;
 
     if (!contextMenu) return;

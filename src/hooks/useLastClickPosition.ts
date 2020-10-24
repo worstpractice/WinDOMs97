@@ -12,12 +12,11 @@ export const useLastClickPosition = () => {
       closeMenus();
     };
 
-    const cleanup = listen({
+    // NOTE: It's subtle, but we ARE providing `useEffect` with a cleanup function.
+    return listen({
       event: "mousedown",
       handler: handleMouseDown,
       on: document,
     });
-
-    return cleanup;
   }, [closeMenus, setLastClickPosition]);
 };

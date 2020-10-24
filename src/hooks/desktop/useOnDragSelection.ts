@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { is } from "type-predicates/is";
 import type { Handler } from "typings/Handler";
 import { OsRef } from "typings/OsRef";
@@ -13,8 +13,8 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 
-  const handleMouseDown: Handler<HTMLElement> = useCallback(
-    onLMB(({ target }) => {
+  useEffect(() => {
+    const handleMouseDown: Handler<HTMLElement> = onLMB(({ target }) => {
       const { current } = desktopRef;
 
       // We're only interested in clicks on the actual desktop itself
@@ -23,47 +23,42 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
       setIsDragSelecting(true);
       closeMenus();
       activate(desktopRef);
-    }),
-    [],
-  );
+    });
 
-  const handleMouseMove: Handler<HTMLElement> = useCallback(({ clientX, clientY }) => {
-    setCurrentPosition({ x: clientX, y: clientY });
-  }, []);
+    const handleMouseMove: Handler<HTMLElement> = ({ clientX, clientY }) => {
+      setCurrentPosition({ x: clientX, y: clientY });
+    };
 
-  const handleMouseUp: Handler<HTMLElement> = useCallback(
-    onLMB(() => {
+    const handleMouseUp: Handler<HTMLElement> = onLMB(() => {
       setIsDragSelecting(false);
-    }),
-    [],
-  );
+    });
 
-  useEffect(() => {
-    const cleanup = compose(
+    // NOTE: It's subtle, but we ARE providing `useEffect` with a cleanup function.
+    return compose(
+      /////////////////////////////
       listen({
         event: "mousedown",
         handler: handleMouseDown,
         on: document,
         options: { capture: true },
       }),
-
+      /////////////////////////////
       listen({
         event: "mousemove",
         handler: handleMouseMove,
         on: document,
         options: { capture: true },
       }),
-
+      /////////////////////////////
       listen({
         event: "mouseup",
         handler: handleMouseUp,
         on: document,
         options: { capture: true },
       }),
+      /////////////////////////////
     );
-
-    return cleanup;
-  }, [handleMouseDown, handleMouseMove, handleMouseUp]);
+  }, [activate, closeMenus, desktopRef]);
 
   return [isDragSelecting, currentPosition] as const;
 };
