@@ -51,7 +51,7 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
       onMouseDown={handleMouseDown}
       ref={notificationAreaItemRef}
     >
-      <Icon alt={name} src={icon} width={32} />
+      <Icon alt={name} height={32} src={icon} width={32} />
     </li>
   );
 };

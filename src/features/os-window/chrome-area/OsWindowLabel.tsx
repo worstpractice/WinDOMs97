@@ -21,9 +21,9 @@ export const OsWindowLabel: FC<Props> = ({ process }) => {
   const titleStyle = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
 
   return (
-    <span className={styles.OsWindowLabel}>
-      <Icon alt={name} className={styles.Icon} src={icon} />
+    <header className={styles.OsWindowLabel}>
+      <Icon alt={name} className={styles.Icon} height={60} src={icon} width={60} />
       <Title className={titleStyle} of={name} />
-    </span>
+    </header>
   );
 };

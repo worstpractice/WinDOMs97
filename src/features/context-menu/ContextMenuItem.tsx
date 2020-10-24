@@ -23,7 +23,7 @@ export const ContextMenuItem: FC<Props> = ({ alternative }) => {
 
   return (
     <li className={styles.ContextMenuItem} onMouseDown={handleMouseDown}>
-      {icon && <Icon alt={name} src={icon} width={32} />}
+      {icon && <Icon alt={name} height={32} src={icon} width={32} />}
       <Words of={name} />
     </li>
   );

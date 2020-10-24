@@ -2,9 +2,9 @@ import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
+import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives";
 import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
-import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
@@ -64,7 +64,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       onMouseDownCapture={handleMouseDownCapture}
       ref={desktopItemRef}
     >
-      <Icon alt={fileName} height={96} src={icon} />
+      <Icon alt={fileName} height={96} src={icon} width={96} />
       <Words className={styles.Title} of={fileName} />
     </article>
   );
