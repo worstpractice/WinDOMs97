@@ -8,22 +8,19 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
+import type { Loader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningAreaItem.module.css";
 
 type Props = {
-  process: Process;
+  getProcess: Loader<HTMLButtonElement>;
 };
 
-export const RunningAreaItem: FC<Props> = ({ process }) => {
+export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
-  const runningItemRef = useOsRef<HTMLButtonElement>();
-
-  // NOTE: This is vital. This is the line where each `Process` is given its very own `RunningItem` handle.
-  process.runningItemRef = runningItemRef;
-
+  const runningAreaItemRef = useOsRef<HTMLButtonElement>();
+  const process = getProcess(runningAreaItemRef);
   const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB(() => {
@@ -59,7 +56,7 @@ export const RunningAreaItem: FC<Props> = ({ process }) => {
       className={buttonStyle}
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
-      ref={runningItemRef}
+      ref={runningAreaItemRef}
       type="button"
     >
       <Icon alt={name} height={32} src={icon} />

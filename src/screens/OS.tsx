@@ -20,7 +20,8 @@ import { StartArea } from "screens/taskbar/start-area/StartArea";
 import { StartButton } from "screens/taskbar/start-area/StartButton";
 import { Taskbar } from "screens/taskbar/Taskbar";
 import type { FC } from "typings/FC";
-import { Linker } from "typings/Linker";
+import type { Linker } from "typings/Linker";
+import type { Loader } from "typings/Loader";
 
 type Props = {};
 
@@ -59,7 +60,6 @@ export const OS: FC<Props> = () => {
 
           const toDesktopItem: Linker = (desktopItemRef) => {
             binary.desktopItemRef = desktopItemRef;
-
             return binary;
           };
 
@@ -70,7 +70,12 @@ export const OS: FC<Props> = () => {
         const { binaryImage, pid } = process;
         const { name } = binaryImage;
 
-        return <OsWindow key={`OsWindow-${pid}-${name}`} process={process} />;
+        const toOsWindow: Loader = (osWindowRef) => {
+          process.osWindowRef = osWindowRef;
+          return process;
+        };
+
+        return <OsWindow key={`OsWindow-${pid}-${name}`} getProcess={toOsWindow} />;
       })}
       {isStartMenuOpen && (
         <StartMenu>
@@ -79,7 +84,6 @@ export const OS: FC<Props> = () => {
 
             const toStartMenuItem: Linker = (startMenuItemRef) => {
               binary.startMenuItemRef = startMenuItemRef;
-
               return binary;
             };
 
@@ -96,7 +100,6 @@ export const OS: FC<Props> = () => {
 
               const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
                 binary.quickstartAreaItemRef = quickstartAreaItem;
-
                 return binary;
               };
 
@@ -110,6 +113,11 @@ export const OS: FC<Props> = () => {
           {runningProcesses.map((process) => {
             const { binaryImage, pid } = process;
             const { name } = binaryImage;
+
+            const toRunningAreaItem: Loader = (runningAreaItemRef) => {
+              process.runningItemRef = runningAreaItemRef;
+              return process;
+            };
 
             return <RunningAreaItem key={`RunningAreaItem-${pid}-${name}`} process={process} />;
           })}

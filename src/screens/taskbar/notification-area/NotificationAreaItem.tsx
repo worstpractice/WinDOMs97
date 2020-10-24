@@ -7,21 +7,18 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
+import { Loader } from "typings/Loader";
 import { moveInFront } from "utils/moveInFront";
-import styles from "./NotificationItem.module.css";
+import styles from "./NotificationAreaItem.module.css";
 
 type Props = {
-  process: Process;
+  getProcess: Loader;
 };
 
-export const NotificationItem: FC<Props> = ({ process }) => {
+export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
   const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
-  const notificationItemRef = useOsRef<HTMLLIElement>();
-
-  // NOTE: This is vital. This is the line where each `Process` is given its very own `NotificationItem` handle.
-  process.notificationItemRef = notificationItemRef;
-
+  const notificationAreaItemRef = useOsRef<HTMLLIElement>();
+  const process = getProcess(notificationAreaItemRef);
   const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB<HTMLLIElement>(() => {
@@ -49,10 +46,10 @@ export const NotificationItem: FC<Props> = ({ process }) => {
 
   return (
     <li
-      className={styles.NotificationItem}
+      className={styles.NotificationAreaItem}
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
-      ref={notificationItemRef}
+      ref={notificationAreaItemRef}
     >
       <Icon alt={name} src={icon} width={32} />
     </li>

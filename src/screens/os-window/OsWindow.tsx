@@ -13,22 +13,20 @@ import { ProgramArea } from "screens/os-window/program-area/ProgramArea";
 import { ProgramContent } from "screens/os-window/program-area/ProgramContent";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
+import type { Loader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
 type Props = {
-  process: Process;
+  getProcess: Loader;
 };
 
-export const OsWindow: FC<Props> = ({ process }) => {
+export const OsWindow: FC<Props> = ({ getProcess }) => {
   const { activate, closeMenus, maximize, unMaximize } = useKernel();
   const osWindowRef = useOsRef<HTMLElement>();
-
-  // NOTE: This is vital. This is the line where each `Process` is given its very own `OsWindow` handle.
-  process.osWindowRef = osWindowRef;
+  const process = getProcess(osWindowRef);
 
   const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
