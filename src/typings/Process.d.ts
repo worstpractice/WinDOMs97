@@ -12,8 +12,8 @@ export type Process = {
   isMinimized: boolean;
   ////////////////////////////////////////////////////////
   chromeAreaRef: OsRef<HTMLElement>;
-  notificationItemRef: OsRef<HTMLLIElement>;
-  runningItemRef: OsRef<HTMLButtonElement>;
+  notificationAreaItemRef: OsRef<HTMLLIElement>;
+  runningAreaItemRef: OsRef<HTMLButtonElement>;
   osWindowRef: OsRef<HTMLElement>;
   ////////////////////////////////////////////////////////
 };

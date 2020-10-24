@@ -7,12 +7,12 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import { Loader } from "typings/Loader";
+import type { LiLoader } from "typings/Loader";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationAreaItem.module.css";
 
 type Props = {
-  getProcess: Loader;
+  getProcess: LiLoader;
 };
 
 export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {

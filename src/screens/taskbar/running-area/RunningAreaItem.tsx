@@ -8,13 +8,13 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { Loader } from "typings/Loader";
+import type { ButtonLoader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningAreaItem.module.css";
 
 type Props = {
-  getProcess: Loader<HTMLButtonElement>;
+  getProcess: ButtonLoader;
 };
 
 export const RunningAreaItem: FC<Props> = ({ getProcess }) => {

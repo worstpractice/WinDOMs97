@@ -9,7 +9,7 @@ import { Desktop } from "screens/desktop/Desktop";
 import { DesktopItem } from "screens/desktop/DesktopItem";
 import { OsWindow } from "screens/os-window/OsWindow";
 import { NotificationArea } from "screens/taskbar/notification-area/NotificationArea";
-import { NotificationItem } from "screens/taskbar/notification-area/NotificationItem";
+import { NotificationAreaItem } from "screens/taskbar/notification-area/NotificationAreaItem";
 import { RunningArea } from "screens/taskbar/running-area/RunningArea";
 import { RunningAreaItem } from "screens/taskbar/running-area/RunningAreaItem";
 import { QuickstartArea } from "screens/taskbar/start-area/quickstart-area/QuickstartArea";
@@ -21,7 +21,7 @@ import { StartButton } from "screens/taskbar/start-area/StartButton";
 import { Taskbar } from "screens/taskbar/Taskbar";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
-import type { Loader } from "typings/Loader";
+import type { Loader, LiLoader, ButtonLoader } from "typings/Loader";
 
 type Props = {};
 
@@ -114,12 +114,12 @@ export const OS: FC<Props> = () => {
             const { binaryImage, pid } = process;
             const { name } = binaryImage;
 
-            const toRunningAreaItem: Loader = (runningAreaItemRef) => {
-              process.runningItemRef = runningAreaItemRef;
+            const toRunningAreaItem: ButtonLoader = (runningAreaItemRef) => {
+              process.runningAreaItemRef = runningAreaItemRef;
               return process;
             };
 
-            return <RunningAreaItem key={`RunningAreaItem-${pid}-${name}`} process={process} />;
+            return <RunningAreaItem key={`RunningAreaItem-${pid}-${name}`} getProcess={toRunningAreaItem} />;
           })}
         </RunningArea>
         <NotificationArea>
@@ -127,7 +127,12 @@ export const OS: FC<Props> = () => {
             const { binaryImage, pid } = process;
             const { name } = binaryImage;
 
-            return <NotificationItem key={`NotificationAreaItem-${pid}-${name}`} process={process} />;
+            const toNotificationAreaItem: LiLoader = (notificationAreaItemRef) => {
+              process.notificationAreaItemRef = notificationAreaItemRef;
+              return process;
+            };
+
+            return <NotificationAreaItem key={`NotificationAreaItem-${pid}-${name}`} getProcess={toNotificationAreaItem} />;
           })}
         </NotificationArea>
       </Taskbar>

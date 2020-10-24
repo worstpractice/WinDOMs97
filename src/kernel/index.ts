@@ -170,8 +170,8 @@ export const useKernel = create<OperatingSystem>(
                 isMinimized: false,
                 ////////////////////////////////////////////////////////
                 chromeAreaRef: { current: null },
-                notificationItemRef: { current: null },
-                runningItemRef: { current: null },
+                notificationAreaItemRef: { current: null },
+                runningAreaItemRef: { current: null },
                 osWindowRef: { current: null },
                 ////////////////////////////////////////////////////////
               } as const;
