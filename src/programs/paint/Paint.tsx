@@ -1,23 +1,26 @@
 import { onLMB } from "event-filters/onLMB";
+import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { useCanvasRef } from "programs/paint/hooks/useCanvasRef";
 import React, { useState } from "react";
 import type { FC } from "typings/FC";
+import type { Loader } from "typings/Loader";
 import type { Position } from "typings/Position";
-import type { Process } from "typings/Process";
 import styles from "./Paint.module.css";
 import { drawLine } from "./utils/drawLine";
 
 type Props = {
-  process: Process;
+  getProcess: Loader;
 };
 
-export const Paint: FC<Props> = ({ process }) => {
+export const Paint: FC<Props> = ({ getProcess }) => {
+  const programRef = useOsRef<HTMLElement>();
+  const process = getProcess(programRef);
   const [isDrawing, setIsDrawing] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
-  const frameRef = useOsRef<HTMLElement>();
   const canvasRef = useOsRef<HTMLCanvasElement>();
   const ctxRef = useCanvasRef();
+  useStartingDimensions(process);
 
   if (canvasRef.current) {
     if (!ctxRef.current) {
@@ -71,11 +74,11 @@ export const Paint: FC<Props> = ({ process }) => {
   });
 
   // TODO: ???
-  const width = frameRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
-  const height = frameRef.current?.getBoundingClientRect().height ?? 286; // ditto
+  const width = programRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
+  const height = programRef.current?.getBoundingClientRect().height ?? 286; // ditto
 
   return (
-    <main className={styles.Frame} ref={frameRef}>
+    <main className={styles.Frame} ref={programRef}>
       <canvas
         // TODO: Make this not be complete bullshit
         height={height}

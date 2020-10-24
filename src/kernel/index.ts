@@ -174,6 +174,8 @@ export const useKernel = create<OperatingSystem>(
                 runningAreaItemRef: { current: null },
                 osWindowRef: { current: null },
                 ////////////////////////////////////////////////////////
+                programRef: { current: null },
+                ////////////////////////////////////////////////////////
               } as const;
 
               return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;

@@ -16,4 +16,6 @@ export type Process = {
   runningAreaItemRef: OsRef<HTMLButtonElement>;
   osWindowRef: OsRef<HTMLElement>;
   ////////////////////////////////////////////////////////
+  programRef: OsRef<HTMLElement>;
+  ////////////////////////////////////////////////////////
 };

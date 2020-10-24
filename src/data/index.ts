@@ -10,17 +10,28 @@ import { IE } from "programs/ie/IE";
 import { Minesweeper } from "programs/minesweeper/Minesweeper";
 import { Paint } from "programs/paint/Paint";
 import { TaskMgr } from "programs/taskmgr/TaskMgr";
-import { OsLocations } from "typings/OsLocations";
 import type { RawBinary } from "typings/RawBinary";
+
+///////////////////////////////////////////////////////////////
+
+/** For convenience. And to prevent pointer sharing badness. */
+const everywhere = () => {
+  const everywhere: RawBinary["softlinks"] = {
+    isOnDesktop: true,
+    isOnStartMenu: true,
+    isInQuickstartArea: true,
+  } as const;
+
+  return everywhere;
+};
+
+///////////////////////////////////////////////////////////////
 
 const calc: RawBinary = {
   icon: calculator,
   instructions: Calc,
   name: "Calculator",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "Desktop",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
 } as const;
 
@@ -28,10 +39,7 @@ const cmd: RawBinary = {
   icon: console_prompt,
   instructions: Cmd,
   name: "Command Prompt",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "QuickstartArea",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 1000, y: 500 },
 } as const;
 
@@ -39,10 +47,7 @@ const minesweeper: RawBinary = {
   icon: game_mine,
   instructions: Minesweeper,
   name: "Minesweeper",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "StartMenu",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
 } as const;
 
@@ -50,10 +55,7 @@ const paint: RawBinary = {
   icon: paint_file,
   instructions: Paint,
   name: "Paint",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "QuickstartArea",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
 } as const;
 
@@ -61,10 +63,7 @@ const taskManager: RawBinary = {
   icon: task_manager,
   instructions: TaskMgr,
   name: "Task Manager",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "Desktop",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
 } as const;
 
@@ -72,10 +71,7 @@ const ie: RawBinary = {
   icon: internet_exploder,
   instructions: IE,
   name: "Internet Exploder",
-  softlinks: [
-    // NOTE: Hi. This stops Prettier.
-    "StartMenu",
-  ] as OsLocations[],
+  softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
 } as const;
 

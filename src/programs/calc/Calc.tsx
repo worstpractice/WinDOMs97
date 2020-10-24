@@ -1,17 +1,21 @@
+import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
+import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
+import type { Loader } from "typings/Loader";
 import styles from "./Calc.module.css";
 
 type Props = {
-  process: Process;
+  getProcess: Loader;
 };
 
-// const calculatorStartingSize = { width: 500, height: 600 };
+export const Calc: FC<Props> = ({ getProcess }) => {
+  const programRef = useOsRef<HTMLElement>();
+  const process = getProcess(programRef);
+  useStartingDimensions(process);
 
-export const Calc: FC<Props> = ({ process }) => {
   return (
-    <main className={styles.Calc}>
+    <main className={styles.Calc} ref={programRef}>
       <input className={styles.CalculatorResults} type="text" />
       <section className={styles.GridContainer}>
         <button className={styles.CalculatorButton}>Maths</button>

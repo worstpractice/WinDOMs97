@@ -1,13 +1,19 @@
+import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
+import { useOsRef } from "hooks/useOsRef";
 import { default as React, memo } from "react";
 import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
+import type { Loader } from "typings/Loader";
 import style from "./IE.module.css";
 
 type Props = {
-  process: Process;
+  getProcess: Loader;
 };
 
-const IE: FC<Props> = ({ process }) => {
+const IE: FC<Props> = ({ getProcess }) => {
+  const programRef = useOsRef<HTMLIFrameElement>();
+  const process = getProcess(programRef);
+  useStartingDimensions(process);
+
   const { name } = process.binaryImage;
 
   return (
@@ -18,6 +24,7 @@ const IE: FC<Props> = ({ process }) => {
       // src="http://nineties.website/"
       src="page.html"
       title={name}
+      ref={programRef}
     />
   );
 };

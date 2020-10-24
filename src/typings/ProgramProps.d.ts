@@ -1,5 +1,5 @@
-import type { Process } from "typings/Process";
+import type { Loader } from "typings/Loader";
 
 export type ProgramProps = {
-  process: Process;
+  getProcess: Loader;
 };

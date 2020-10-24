@@ -1,6 +1,6 @@
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useKernel } from "kernel";
-import { programs } from "programs";
+import { programs } from "data";
 import { default as React } from "react";
 import { BSOD } from "features/BSOD";
 import { ContextMenu } from "features/context-menu/ContextMenu";
@@ -57,8 +57,9 @@ export const OS: FC<Props> = () => {
         )}
         {installedPrograms.map((binary) => {
           const { fileName, name, softlinks } = binary;
+          const { isOnDesktop } = softlinks;
 
-          if (!softlinks.includes("Desktop")) {
+          if (!isOnDesktop) {
             return null;
           }
 
@@ -85,8 +86,9 @@ export const OS: FC<Props> = () => {
         <StartMenu>
           {installedPrograms.map((binary) => {
             const { fileName, name, softlinks } = binary;
+            const { isOnStartMenu } = softlinks;
 
-            if (!softlinks.includes("StartMenu")) {
+            if (!isOnStartMenu) {
               return null;
             }
 
@@ -105,8 +107,9 @@ export const OS: FC<Props> = () => {
           <QuickstartArea>
             {installedPrograms.map((binary) => {
               const { fileName, name, softlinks } = binary;
+              const { isInQuickstartArea } = softlinks;
 
-              if (!softlinks.includes("QuickstartArea")) {
+              if (!isInQuickstartArea) {
                 return null;
               }
 

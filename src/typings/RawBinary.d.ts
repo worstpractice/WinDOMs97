@@ -1,5 +1,4 @@
 import type { FC } from "react";
-import type { OsLocations } from "typings/OsLocations";
 import type { Position } from "typings/Position";
 import type { ProgramProps } from "typings/ProgramProps";
 
@@ -10,6 +9,10 @@ export type RawBinary = {
   ////////////////////////////////////////////////////////
   // "Registry"
   ////////////////////////////////////////////////////////
-  softlinks: readonly OsLocations[];
+  softlinks: {
+    isOnDesktop: boolean;
+    isOnStartMenu: boolean;
+    isInQuickstartArea: boolean;
+  };
   startingDimensions: Position;
 };
