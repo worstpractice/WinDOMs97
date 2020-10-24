@@ -1,11 +1,5 @@
 @import "../../../styles/colors.module.css";
 
-.Icon {
-  max-height: 60px;
-  padding-bottom: 4px;
-  padding-top: 4px;
-}
-
 .OsWindowLabel {
   align-items: center;
   display: flex;
@@ -15,8 +9,9 @@
 
 .Title {
   color: var(--oswindow-background);
-  font-size: 32px;
+  font-size: 24px;
   font-weight: 900;
+  pointer-events: none;
 }
 
 /*** WARN: Must come last ***/

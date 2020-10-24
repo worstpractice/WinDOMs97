@@ -1,7 +1,14 @@
 .QuickstartArea {
   align-items: center;
   display: flex;
-  gap: 10px;
+  gap: 14px;
   justify-content: center;
-  padding-top: 6px;
+}
+
+.Wrapper {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  height: 100%;
+  justify-content: center;
 }

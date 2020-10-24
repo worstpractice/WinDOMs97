@@ -2,7 +2,7 @@
 
 .Divider {
   outline-color: var(--oswindow-outline);
-  outline-width: 3px;
+  outline-width: 2px;
   pointer-events: none;
 }
 
@@ -20,4 +20,8 @@
 
 .Vertical {
   height: 100%;
+}
+
+.Stocky {
+  outline-style: outset;
 }

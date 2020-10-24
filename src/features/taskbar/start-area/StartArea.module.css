@@ -1,4 +1,7 @@
 .StartArea {
+  align-items: center;
   display: flex;
   gap: 12px;
+  height: 100%;
+  justify-content: center;
 }

@@ -64,7 +64,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       onMouseDownCapture={handleMouseDownCapture}
       ref={desktopItemRef}
     >
-      <Icon alt={fileName} height={96} src={icon} width={96} />
+      <Icon alt={fileName} height={64} src={icon} width={64} />
       <Words className={styles.Title} of={fileName} />
     </article>
   );

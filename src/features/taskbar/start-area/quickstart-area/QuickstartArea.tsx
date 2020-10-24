@@ -10,12 +10,12 @@ type Props = {
 
 export const QuickstartArea: FC<Props> = ({ children }) => {
   return (
-    <>
+    <div className={styles.Wrapper}>
       <Divider dent="in" direction="vertical" />
       <Divider direction="vertical" isStocky />
       <section className={styles.QuickstartArea}>{children}</section>
       <Divider dent="in" direction="vertical" />
       <Divider direction="vertical" isStocky />
-    </>
+    </div>
   );
 };

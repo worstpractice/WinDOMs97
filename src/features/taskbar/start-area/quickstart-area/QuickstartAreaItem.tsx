@@ -37,7 +37,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
       type="button"
       ref={quickstartAreaItemRef}
     >
-      <Icon alt={name} height={40} src={icon} style={{ paddingBottom: "8px" }} width={40} />
+      <Icon alt={name} height={32} src={icon} width={32} />
     </button>
   );
 };

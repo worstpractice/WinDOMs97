@@ -6,24 +6,28 @@ let x = 0;
 /** Denotes how many hundred pixels. */
 let y = 0;
 
-/** Denotes how many hundred pixels. */
-const maxHeight = Number(document.documentElement.clientHeight.toString()[0]);
+/** Current screen height, in pixels. */
+const clientHeight = Number(document.documentElement.clientHeight.toString());
 
-export const useDesktopLayoutOnMount = <T extends OsRef<HTMLElement>>(desktopItemRef: T) => {
+export const useDesktopLayoutOnMount = <T extends HTMLElement>(desktopItemRef: OsRef<T>) => {
   useLayoutEffect(() => {
     const { current } = desktopItemRef;
 
     if (!current) return;
 
-    if (x === maxHeight) {
+    /** Since we don't want any icons placed UNDER the taskbar, we bail at `clientHeight` minus 200 pixels. */
+    const maxDistanceDown = clientHeight - 200;
+
+    if (x >= maxDistanceDown) {
+      /** We reset `x`, meaning we start from the top of the screen next time around. */
       x = 0;
-      y++;
+      /** We add 200 to */
+      y += 200;
     }
 
-    current.style.top = `${x++}00px`;
-    current.style.left = `${y}00px`;
+    current.style.top = `${x}px`;
+    current.style.left = `${y}px`;
 
-    // Increment `x` one extra time on purpose
-    x++;
+    x += 200;
   }, [desktopItemRef]);
 };

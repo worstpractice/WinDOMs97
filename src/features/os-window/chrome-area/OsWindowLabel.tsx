@@ -22,7 +22,7 @@ export const OsWindowLabel: FC<Props> = ({ process }) => {
 
   return (
     <header className={styles.OsWindowLabel}>
-      <Icon alt={name} className={styles.Icon} height={60} src={icon} width={60} />
+      <Icon alt={name} className={styles.Icon} height={32} src={icon} width={32} />
       <Title className={titleStyle} of={name} />
     </header>
   );

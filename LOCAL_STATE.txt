@@ -1,0 +1,5 @@
+If you’re not sure whether some state is local, ask yourself:
+
+  “If this component was rendered twice, should this interaction reflect in the other copy?”
+
+Whenever the answer is “no”, you found some local state.

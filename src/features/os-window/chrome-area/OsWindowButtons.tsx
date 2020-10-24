@@ -52,10 +52,10 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     setIsPressed(true);
   });
 
-  const buttonStyle = isPressed ? css(styles.OsWindowButton, styles.Pressed) : styles.OsWindowButton;
+  const buttonStyle = isPressed ? css(styles.Button, styles.Pressed) : styles.Button;
 
   return (
-    <section className={styles.OsWindowButtons}>
+    <section className={styles.ButtonRow}>
       <button
         className={buttonStyle}
         onMouseDown={handleMouseDown}

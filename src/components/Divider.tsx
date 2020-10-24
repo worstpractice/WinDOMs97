@@ -17,11 +17,9 @@ type Props = {
     }
 );
 
-const PX_BROAD = "2px";
-
-const PERCENT_TALL = "80%";
-
-const PX_AROUND = "5px";
+const STOCKY_BROAD = "2px"; 
+const STOCKY_TALL = "80%";
+const STOCKY_AROUND = "5px";
 
 export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
   const isDentedIn = dent === "in";
@@ -31,21 +29,20 @@ export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
     styles.Divider,
     isDentedIn ? styles.In : styles.Out,
     isHorizontal ? styles.Horizontal : styles.Vertical,
+    isStocky ? styles.Stocky : "",
   );
 
   const override: CSSProperties = {};
 
   if (isStocky) {
-    override.outlineStyle = "outset";
-
     if (isHorizontal) {
-      override.marginLeft = PX_AROUND;
-      override.width = PERCENT_TALL;
-      override.height = PX_BROAD;
+      override.marginLeft = STOCKY_AROUND;
+      override.width = STOCKY_TALL;
+      override.height = STOCKY_BROAD;
     } else {
-      override.marginTop = PX_AROUND;
-      override.height = PERCENT_TALL;
-      override.width = PX_BROAD;
+      override.marginTop = STOCKY_AROUND;
+      override.height = STOCKY_TALL;
+      override.width = STOCKY_BROAD;
     }
   }
 

@@ -1,29 +1,31 @@
 @import "../../../styles/colors.module.css";
 
-.OsWindowButtons {
+.ButtonRow {
   align-items: center;
   cursor: pointer;
   display: flex;
-  gap: 20px;
+  gap: 16px;
   justify-content: center;
 }
 
-.OsWindowButton {
+.Button {
   background-color: var(--oswindow-background);
-  font-size: 32px;
+  font-size: 20px;
+  height: 24px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 36px;
+  width: 24px;
 }
 
-.OsWindowButton:-moz-focusring {
+.Button:-moz-focusring {
   background-color: var(--oswindow-background);
-  font-size: 32px;
+  font-size: 20px;
+  height: 24px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 36px;
+  width: 24px;
 }
 
 .Pressed:hover {

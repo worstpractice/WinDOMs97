@@ -45,8 +45,8 @@ export const StartButton: FC<Props> = () => {
       type="button"
       ref={startButtonRef}
     >
-      <Icon alt={"Start"} height={44} src={logo} width={44} />
-      <Title className={styles.Title} of={"Start"} />
+      <Icon alt={"Start"} height={30} src={logo} width={30} />
+      <Title of={"Start"} style={{ fontSize: 26, paddingTop: 2.5 }} />
     </button>
   );
 };

@@ -1,16 +1,18 @@
 @import "../../styles/colors.module.css";
 
 .Taskbar {
+  align-items: center;
   background-color: var(--oswindow-background);
   bottom: 0;
   display: flex;
   gap: 10px;
-  height: 60px;
+  height: 48px;
+  justify-content: center;
   left: 0;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  padding: 8px;
+  padding: 6px;
   position: absolute;
   right: 0;
   z-index: 20;
