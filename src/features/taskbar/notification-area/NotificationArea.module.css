@@ -3,15 +3,12 @@
 .NotificationArea {
   align-items: center;
   display: flex;
-  flex-direction: row-reverse;
+  gap: 12px;
   height: 100%;
   justify-content: center;
   outline-color: var(--oswindow-outline);
   outline-style: inset;
   outline-width: 2px;
-  padding-left: 8px;
-  padding-right: 10px;
-  padding-top: 4px;
 }
 
 .Wrapper {
@@ -20,4 +17,10 @@
   gap: 8px;
   height: 100%;
   justify-content: center;
+}
+
+.Icons {
+  display: flex;
+  gap: 10px;
+  margin-left: 4px;
 }

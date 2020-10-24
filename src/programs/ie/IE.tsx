@@ -1,13 +1,13 @@
+import { default as React, memo } from "react";
 import type { FC } from "typings/FC";
-import { default as React } from "react";
-import style from "./IE.module.css";
 import type { Process } from "typings/Process";
+import style from "./IE.module.css";
 
 type Props = {
   process: Process;
 };
 
-export const IE: FC<Props> = ({ process }) => {
+const IE: FC<Props> = ({ process }) => {
   const { name } = process.binaryImage;
 
   return (
@@ -15,8 +15,13 @@ export const IE: FC<Props> = ({ process }) => {
       className={style.IE}
       frameBorder="0"
       loading="eager"
-      src="http://nineties.website/"
+      // src="http://nineties.website/"
+      src="page.html"
       title={name}
     />
   );
 };
+
+const memoized = memo<Props>(IE);
+
+export { memoized as IE };

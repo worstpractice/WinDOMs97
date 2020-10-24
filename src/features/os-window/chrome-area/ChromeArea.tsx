@@ -16,7 +16,7 @@ type Props = {
 export const ChromeArea: FC<Props> = ({ children, process }) => {
   const { activeRef } = useKernel();
   const chromeAreaRef = useOsRef<HTMLElement>();
-
+  
   // NOTE: This is vital. This is the line where each `Process` is given its very own `ChromeArea` handle.
   process.chromeAreaRef = chromeAreaRef;
 

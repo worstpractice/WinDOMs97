@@ -10,50 +10,81 @@ import { IE } from "programs/ie/IE";
 import { Minesweeper } from "programs/minesweeper/Minesweeper";
 import { Paint } from "programs/paint/Paint";
 import { TaskMgr } from "programs/taskmgr/TaskMgr";
-import { Binary } from "typings/Binary";
+import { OsLocations } from "typings/OsLocations";
+import type { RawBinary } from "typings/RawBinary";
 
-const calc = {
+const calc: RawBinary = {
   icon: calculator,
-  name: "Calculator",
   instructions: Calc,
+  name: "Calculator",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "Desktop",
+  ] as OsLocations[],
+  startingDimensions: { x: 600, y: 500 },
 } as const;
 
-const cmd = {
+const cmd: RawBinary = {
   icon: console_prompt,
-  name: "Command Prompt",
   instructions: Cmd,
+  name: "Command Prompt",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "QuickstartArea",
+  ] as OsLocations[],
+  startingDimensions: { x: 1000, y: 500 },
 } as const;
 
-const minesweeper = {
+const minesweeper: RawBinary = {
   icon: game_mine,
-  name: "Minesweeper",
   instructions: Minesweeper,
+  name: "Minesweeper",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "StartMenu",
+  ] as OsLocations[],
+  startingDimensions: { x: 600, y: 500 },
 } as const;
 
-const paint = {
+const paint: RawBinary = {
   icon: paint_file,
-  name: "Paint",
   instructions: Paint,
+  name: "Paint",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "QuickstartArea",
+  ] as OsLocations[],
+  startingDimensions: { x: 600, y: 500 },
 } as const;
 
-const taskManager = {
+const taskManager: RawBinary = {
   icon: task_manager,
-  name: "Task Manager",
   instructions: TaskMgr,
+  name: "Task Manager",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "Desktop",
+  ] as OsLocations[],
+  startingDimensions: { x: 600, y: 500 },
 } as const;
 
-const ie = {
+const ie: RawBinary = {
   icon: internet_exploder,
-  name: "Internet Exploder",
   instructions: IE,
+  name: "Internet Exploder",
+  softlinks: [
+    // NOTE: Hi. This stops Prettier.
+    "StartMenu",
+  ] as OsLocations[],
+  startingDimensions: { x: 600, y: 500 },
 } as const;
 
 export const programs = [
-  // NOTE: @%&#^@!^$&$!!!
-  (calc as any) as Binary,
-  (cmd as any) as Binary,
-  (minesweeper as any) as Binary,
-  (paint as any) as Binary,
-  (taskManager as any) as Binary,
-  (ie as any) as Binary,
+  // NOTE: Hi. This line stops prettier.
+  calc,
+  cmd,
+  minesweeper,
+  paint,
+  taskManager,
+  ie,
 ] as const;

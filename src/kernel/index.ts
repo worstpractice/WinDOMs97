@@ -9,6 +9,7 @@ import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
+import type { RawBinary } from "typings/RawBinary";
 import { ARS256 } from "utils/algorithms/ars256";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
@@ -57,7 +58,7 @@ type SystemCalls = {
   ////////////////////////////////////////////////////////////////
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
-  installProgram: (rawBinary: Binary) => void;
+  installProgram: (rawBinary: RawBinary) => void;
   uninstallProgram: (binary: Binary) => void;
   ////////////////////////////////////////////////////////////////
   // Debug
@@ -179,7 +180,7 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          installProgram: (rawBinary: Binary) => {
+          installProgram: (rawBinary: RawBinary) => {
             set(({ installedPrograms }) => {
               const binary: Binary = {
                 ////////////////////////////////////////////////////////

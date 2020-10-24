@@ -5,6 +5,7 @@
   cursor: pointer;
   display: flex;
   gap: 6px;
+  height: 100%;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
@@ -18,6 +19,7 @@
   cursor: pointer;
   display: flex;
   gap: 6px;
+  height: 100%;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;

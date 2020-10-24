@@ -17,9 +17,14 @@ type Props = {
     }
 );
 
-const STOCKY_BROAD = "2px"; 
-const STOCKY_TALL = "80%";
-const STOCKY_AROUND = "5px";
+/** Maps visually to breadth. Set via height or width depending on direction (horizontal or vertical). */
+const STOCKY_BREADTH = "2px";
+
+/** Maps visually to length. Set via height or width depending on direction (horizontal or vertical). */
+const STOCKY_LENGTH = "80%";
+
+/** Maps visually to free space surrounding the divider. Set via paddingTop or paddingLeft depending on direction (horizontal or vertical). */
+const STOCKY_FREE_SPACE = "5px";
 
 export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
   const isDentedIn = dent === "in";
@@ -36,13 +41,13 @@ export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
 
   if (isStocky) {
     if (isHorizontal) {
-      override.marginLeft = STOCKY_AROUND;
-      override.width = STOCKY_TALL;
-      override.height = STOCKY_BROAD;
+      override.paddingLeft = STOCKY_FREE_SPACE;
+      override.width = STOCKY_LENGTH;
+      override.height = STOCKY_BREADTH;
     } else {
-      override.marginTop = STOCKY_AROUND;
-      override.height = STOCKY_TALL;
-      override.width = STOCKY_BROAD;
+      override.paddingTop = STOCKY_FREE_SPACE;
+      override.height = STOCKY_LENGTH;
+      override.width = STOCKY_BREADTH;
     }
   }
 

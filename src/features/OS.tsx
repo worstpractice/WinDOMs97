@@ -56,7 +56,11 @@ export const OS: FC<Props> = () => {
           </ContextMenu>
         )}
         {installedPrograms.map((binary) => {
-          const { fileName, name } = binary;
+          const { fileName, name, softlinks } = binary;
+
+          if (!softlinks.includes("Desktop")) {
+            return null;
+          }
 
           const toDesktopItem: Linker = (desktopItemRef) => {
             binary.desktopItemRef = desktopItemRef;
@@ -80,7 +84,11 @@ export const OS: FC<Props> = () => {
       {isStartMenuOpen && (
         <StartMenu>
           {installedPrograms.map((binary) => {
-            const { fileName, name } = binary;
+            const { fileName, name, softlinks } = binary;
+
+            if (!softlinks.includes("StartMenu")) {
+              return null;
+            }
 
             const toStartMenuItem: Linker = (startMenuItemRef) => {
               binary.startMenuItemRef = startMenuItemRef;
@@ -96,7 +104,11 @@ export const OS: FC<Props> = () => {
           <StartButton />
           <QuickstartArea>
             {installedPrograms.map((binary) => {
-              const { fileName, name } = binary;
+              const { fileName, name, softlinks } = binary;
+
+              if (!softlinks.includes("QuickstartArea")) {
+                return null;
+              }
 
               const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
                 binary.quickstartAreaItemRef = quickstartAreaItem;

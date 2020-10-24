@@ -1,5 +1,6 @@
 @import "../../styles/animations.module.css";
 @import "../../styles/colors.module.css";
+@import "../../styles/layout.module.css";
 
 .OsWindow {
   animation: Maximized 500ms;
@@ -13,7 +14,7 @@
   padding: 6px;
   position: absolute;
   top: 400px;
-  width: 700px;
+  width: 600px;
   z-index: 30;
 }
 
@@ -29,12 +30,8 @@
 
 /*** WARN: Must come last ***/
 .Maximized {
-  bottom: 0 !important;
-
-  /* NOTE: The 60px is an approximation of `TaskBar` height. */
-  height: calc(100vh - 60px) !important;
+  height: calc(100vh - var(--taskbar-height)) !important;
   left: 0 !important;
-  right: 0 !important;
   top: 0 !important;
   width: 100vw !important;
 }

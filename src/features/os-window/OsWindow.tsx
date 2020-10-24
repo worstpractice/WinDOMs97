@@ -1,4 +1,9 @@
 import { onLMB } from "event-filters/onLMB";
+import { ChromeArea } from "features/os-window/chrome-area/ChromeArea";
+import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons";
+import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
+import { ProgramArea } from "features/os-window/program-area/ProgramArea";
+import { ProgramContent } from "features/os-window/program-area/ProgramContent";
 import { useOnMoveWindow } from "hooks/os-window/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
@@ -6,11 +11,6 @@ import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import React, { useState } from "react";
-import { ChromeArea } from "features/os-window/chrome-area/ChromeArea";
-import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons";
-import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
-import { ProgramArea } from "features/os-window/program-area/ProgramArea";
-import { ProgramContent } from "features/os-window/program-area/ProgramContent";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
@@ -30,10 +30,6 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
   const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
-
-  const { pid } = process;
-
-  const [osWindowDimensions, setOsWindowDimensions] = useState({ width: 30 * pid + 750, height: 20 * pid + 250 });
   useActivateOnMount(osWindowRef);
 
   const handleDoubleClick = () => {
@@ -81,7 +77,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     setIsResizable(false);
   };
 
-  const { binaryImage, isMaximized, isMinimized } = process;
+  const { binaryImage, isMaximized, isMinimized, pid } = process;
 
   const Program = binaryImage.instructions;
 
@@ -92,14 +88,8 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     isResizable ? styles.Resizable : "",
   );
 
-  const { width, height } = osWindowDimensions;
-
-  const left = 30 * pid + 750;
-  const top = 20 * pid + 250;
-
-  const handleDimensionChange = (dimensions: { width: number; height: number }) => {
-    setOsWindowDimensions(dimensions);
-  };
+  const left = 30 * pid;
+  const top = 20 * pid;
 
   return (
     <article
@@ -109,7 +99,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={osWindowRef}
-      style={{ left, top, width, height }}
+      style={{ left, top }}
     >
       <span
         className={styles.Outline}
@@ -124,7 +114,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       </span>
       <ProgramArea>
         <ProgramContent>
-          <Program process={process} setOsWindowDimensions={handleDimensionChange} />
+          <Program process={process} />
         </ProgramContent>
       </ProgramArea>
     </article>
