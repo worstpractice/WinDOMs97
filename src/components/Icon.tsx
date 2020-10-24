@@ -6,10 +6,10 @@ import styles from "./Icon.module.css";
 type Props = {
   alt: string;
   className?: string;
-  height?: number;
+  height: number;
   src: string;
   style?: CSSProperties;
-  width?: number;
+  width: number;
 };
 
 export const Icon: FC<Props> = ({ alt, className = "", height, src, style, width }) => {
