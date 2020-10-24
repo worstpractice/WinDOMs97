@@ -6,7 +6,7 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import { default as React } from "react";
-import { DragSelection } from "screens/desktop/DragSelection";
+import { DragSelection } from "features/desktop/DragSelection";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import styles from "./Desktop.module.css";
