@@ -185,14 +185,12 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           installProgram: (rawBinary: RawBinary) => {
             set(({ installedPrograms }) => {
-              const { fileName, icon, instructions, name, softlinks, startingDimensions } = rawBinary;
+              // Extract optional properties so we can populate these fields manually a few lines down.
+              const { softlinks, startingDimensions } = rawBinary;
 
               const binary: Binary = {
                 ////////////////////////////////////////////////////////
-                fileName,
-                icon,
-                instructions,
-                name,
+                ...rawBinary,
                 softlinks: softlinks ?? everywhere(),
                 startingDimensions: startingDimensions ?? { x: 600, y: 600 },
                 ////////////////////////////////////////////////////////
