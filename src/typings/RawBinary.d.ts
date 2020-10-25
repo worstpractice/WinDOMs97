@@ -1,6 +1,7 @@
 import type { FC } from "react";
 import type { Position } from "typings/Position";
 import type { ProgramProps } from "typings/ProgramProps";
+import type { Softlinks } from "typings/Softlinks";
 
 export type RawBinary = {
   icon: string;
@@ -10,10 +11,6 @@ export type RawBinary = {
   ////////////////////////////////////////////////////////
   // "Registry"
   ////////////////////////////////////////////////////////
-  softlinks?: {
-    isOnDesktop: boolean;
-    isOnStartMenu: boolean;
-    isInQuickstartArea: boolean;
-  };
+  softlinks?: Softlinks;
   startingDimensions?: Position;
 };

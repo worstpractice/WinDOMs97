@@ -1,7 +1,7 @@
-import type { RawBinary } from "typings/RawBinary";
+import type { Softlinks } from "typings/Softlinks";
 
 /** For convenience. All `OsLocation`s at once. */
-export const everywhere = (): RawBinary["softlinks"] => {
+export const everywhere = (): Softlinks => {
   return {
     isOnDesktop: true,
     isOnStartMenu: true,
