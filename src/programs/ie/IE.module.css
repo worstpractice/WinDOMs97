@@ -1,4 +1,6 @@
 .IE {
+  /* This ensures that otherwise unstyled html will atleast default to a white background. */
+  background-color: white;
   height: 100%;
   width: 100%;
 }
