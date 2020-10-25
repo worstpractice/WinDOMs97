@@ -1,3 +1,4 @@
+import { OUT_OF_TASKBAR, OUT_OF_PIDS } from "kernel/errors";
 import { Pids } from "kernel/Pids";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
@@ -15,7 +16,7 @@ import { everywhere } from "utils/everwhere";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-type KernelState = {
+export type KernelState = {
   ////////////////////////////////////////////////////////////////
   // Not Collections
   ////////////////////////////////////////////////////////////////
@@ -35,7 +36,7 @@ type KernelState = {
   runningProcesses: readonly Process[];
 };
 
-type SystemCalls = {
+export type SystemCalls = {
   ////////////////////////////////////////////////////////////////
   // Window
   ////////////////////////////////////////////////////////////////
@@ -149,21 +150,13 @@ export const useKernel = create<OperatingSystem>(
               const { isRunningAreaFull, runningProcesses } = store;
 
               if (isRunningAreaFull) {
-                return {
-                  isBsod: true,
-                  bsodError: "OUT_OF_TASKBAR",
-                  bsodMessage: "Upgrade to 800x600 monitor to launch more processes",
-                } as const;
+                return OUT_OF_TASKBAR;
               }
 
               const pid = Pids.use();
 
               if (isNull(pid)) {
-                return {
-                  isBsod: true,
-                  bsodError: "OUT_OF_PIDS",
-                  bsodMessage: "Do not launch more processes than there are in the universe",
-                } as const;
+                return OUT_OF_PIDS;
               }
 
               const spawnedProcess: Process = {
@@ -291,7 +284,11 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           bluescreen: (error: string, message: string) => {
             set(() => {
-              return { isBsod: true, bsodError: error, bsodMessage: message } as const;
+              return {
+                isBsod: true,
+                bsodError: error,
+                bsodMessage: message,
+              } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
