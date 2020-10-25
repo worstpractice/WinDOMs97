@@ -15,4 +15,5 @@ export type Binary = RawBinary & {
   ////////////////////////////////////////////////////////
   softlinks: Softlinks;
   startingDimensions: Position;
+  isSingleInstanceOnly: boolean;
 };

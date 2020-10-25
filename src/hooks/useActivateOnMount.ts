@@ -7,7 +7,19 @@ export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
   const { activate } = useKernel();
 
   useLayoutEffect(() => {
-    activate(ref);
-    moveInFront(ref);
+    let isCancelled = false;
+
+    const effect = (): void => {
+      if (isCancelled) return;
+
+      activate(ref);
+      moveInFront(ref);
+    };
+
+    effect();
+
+    return function cleanup() {
+      isCancelled = true;
+    };
   }, [activate, ref]);
 };

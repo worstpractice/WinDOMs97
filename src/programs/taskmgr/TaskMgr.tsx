@@ -11,20 +11,34 @@ type Props = {
 };
 
 export const TaskMgr: FC<Props> = ({ getProcess }) => {
-  const { runningProcesses } = useKernel();
+  const { runningProcesses, endProcess } = useKernel();
   const programRef = useOsRef<HTMLDivElement>();
   const process = getProcess(programRef);
   useStartingDimensions(process);
 
   return (
     <div className={styles.TaskMgr} ref={programRef}>
-      <p>PID | Filename</p>
-      <ul>
+      <ul className={styles.ProcessList}>
         {runningProcesses.map((process) => {
+          const { binaryImage, pid } = process;
+          const { name } = binaryImage;
+
+          const handleMouseDown = () => {
+            endProcess(process);
+          };
+
           return (
-            <p style={{ marginLeft: 15 }}>
-              {process.pid} | {process.binaryImage.fileName}
-            </p>
+            <span
+              key={`OsWindow-${pid}-${name}`}
+              style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "30px", margin: "10px" }}
+            >
+              <p style={{ marginLeft: 15 }}>
+                {process.pid} | {process.binaryImage.fileName}
+              </p>
+              <button className={styles.KillButton} onMouseDown={handleMouseDown} type="button">
+                KILL
+              </button>
+            </span>
           );
         })}
       </ul>

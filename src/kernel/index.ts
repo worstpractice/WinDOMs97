@@ -151,7 +151,7 @@ export const useKernel = create<OperatingSystem>(
               if (isRunningAreaFull) {
                 return {
                   isBsod: true,
-                  bsodError: "NO_TASKBAR_SPACE",
+                  bsodError: "OUT_OF_TASKBAR",
                   bsodMessage: "Upgrade to 800x600 monitor to launch more processes",
                 } as const;
               }
@@ -159,8 +159,11 @@ export const useKernel = create<OperatingSystem>(
               const pid = Pids.use();
 
               if (isNull(pid)) {
-                console.error("OUT OF PIDS! Kill some processes first.");
-                return store;
+                return {
+                  isBsod: true,
+                  bsodError: "OUT_OF_PIDS",
+                  bsodMessage: "Do not launch more processes than there are in the universe",
+                } as const;
               }
 
               const spawnedProcess: Process = {
@@ -188,11 +191,12 @@ export const useKernel = create<OperatingSystem>(
           installProgram: (rawBinary: RawBinary) => {
             set(({ installedPrograms }) => {
               // Extract optional properties so we can populate these fields manually a few lines down.
-              const { softlinks, startingDimensions } = rawBinary;
+              const { isSingleInstanceOnly, softlinks, startingDimensions } = rawBinary;
 
               const binary: Binary = {
                 ////////////////////////////////////////////////////////
                 ...rawBinary,
+                isSingleInstanceOnly: isSingleInstanceOnly ?? false,
                 softlinks: softlinks ?? everywhere(),
                 startingDimensions: startingDimensions ?? { x: 400, y: 400 },
                 ////////////////////////////////////////////////////////
@@ -212,13 +216,11 @@ export const useKernel = create<OperatingSystem>(
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          uninstallProgram: ({ name }: Binary) => {
+          uninstallProgram: ({ fileHash: targetHash }: Binary) => {
             set(({ installedPrograms }) => {
-              const targetFileName = `${name.toLowerCase()}.exe`;
-
-              const sparedPrograms = installedPrograms.filter(({ fileName }) => {
+              const sparedPrograms = installedPrograms.filter(({ fileHash }) => {
                 // We spare every program whose `fileName` is NOT the `targetFileName`.
-                return fileName !== targetFileName;
+                return fileHash !== targetHash;
               });
 
               return { installedPrograms: sparedPrograms } as const;

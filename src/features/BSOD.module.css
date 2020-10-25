@@ -57,6 +57,8 @@
   font-size: 18px;
 }
 
+/* Animation */
+
 @keyframes blinkingText {
   0% {
     color: var(--gray);

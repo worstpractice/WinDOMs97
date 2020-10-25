@@ -9,51 +9,63 @@ export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
   const [position, setPosition] = useState<Position>(lastClickPosition);
 
   useLayoutEffect(() => {
-    const { current: contextMenu } = contextMenuRef;
+    let isCancelled = false;
 
-    if (!contextMenu) return;
+    const effect = (): void => {
+      if (isCancelled) return;
 
-    const { x: clickX, y: clickY } = lastClickPosition;
+      const { current: contextMenu } = contextMenuRef;
 
-    const { width: menuWidth, height: menuHeight } = contextMenu.getBoundingClientRect();
+      if (!contextMenu) return;
 
-    let adjustedX = clickX;
-    let adjustedY = clickY;
+      const { x: clickX, y: clickY } = lastClickPosition;
 
-    //////////////////////////////////////////
-    // Width (static)
-    //////////////////////////////////////////
-    const viewportWidth = window.innerWidth;
+      const { width: menuWidth, height: menuHeight } = contextMenu.getBoundingClientRect();
 
-    const fullX = clickX + menuWidth;
+      let adjustedX = clickX;
+      let adjustedY = clickY;
 
-    const isTooFarRight = fullX > viewportWidth;
+      //////////////////////////////////////////
+      // Width (static)
+      //////////////////////////////////////////
+      const viewportWidth = window.innerWidth;
 
-    if (isTooFarRight) {
-      const deltaX = fullX - viewportWidth;
+      const fullX = clickX + menuWidth;
 
-      adjustedX = clickX - deltaX;
-    }
+      const isTooFarRight = fullX > viewportWidth;
 
-    //////////////////////////////////////////
-    // Height (dynamic)
-    //////////////////////////////////////////
+      if (isTooFarRight) {
+        const deltaX = fullX - viewportWidth;
 
-    const viewportHeight = window.innerHeight;
+        adjustedX = clickX - deltaX;
+      }
 
-    const fullY = clickY + menuHeight;
+      //////////////////////////////////////////
+      // Height (dynamic)
+      //////////////////////////////////////////
 
-    const isTooFarDown = fullY > viewportHeight;
+      const viewportHeight = window.innerHeight;
 
-    if (isTooFarDown) {
-      const deltaY = fullY - viewportHeight;
+      const fullY = clickY + menuHeight;
 
-      adjustedY = clickY - deltaY;
+      const isTooFarDown = fullY > viewportHeight;
 
-      setIsTooFarDown(true);
-    }
+      if (isTooFarDown) {
+        const deltaY = fullY - viewportHeight;
 
-    setPosition({ x: adjustedX, y: adjustedY });
+        adjustedY = clickY - deltaY;
+
+        setIsTooFarDown(true);
+      }
+
+      setPosition({ x: adjustedX, y: adjustedY });
+    };
+
+    effect();
+
+    return function cleanup() {
+      isCancelled = true;
+    };
   }, [contextMenuRef, isTooFarDown, lastClickPosition]);
 
   return [isTooFarDown, position] as const;

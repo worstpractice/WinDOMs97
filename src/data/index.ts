@@ -62,6 +62,7 @@ const paint: RawBinary = {
 const taskManager: RawBinary = {
   icon: png_taskmgr,
   instructions: TaskMgr,
+  isSingleInstanceOnly: true,
   fileName: "taskmgr.exe",
   name: "Task Manager",
 } as const;

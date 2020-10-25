@@ -13,4 +13,5 @@ export type RawBinary = {
   ////////////////////////////////////////////////////////
   softlinks?: Softlinks;
   startingDimensions?: Position;
+  isSingleInstanceOnly?: boolean;
 };

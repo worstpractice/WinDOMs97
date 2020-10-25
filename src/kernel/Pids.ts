@@ -3,7 +3,7 @@ import type { PID } from "typings/phantom-types/PID";
 import { from } from "utils/range";
 
 /** Inclusive. */
-const MAX = 10 as const;
+const MAX = 8 as const;
 
 const backingSet = new Set<PID>(from(0).to(MAX) as PID[]);
 
@@ -12,7 +12,7 @@ export const Pids = {
     return [...backingSet].sort();
   },
 
-  free(pid: PID) {
+  free(pid: PID): void {
     if (pid < 0) throw new RangeError(`Pids below 0 cannot be used! (Pid was ${pid})`);
     if (pid > MAX) throw new RangeError(`Pids above ${MAX} cannot be used! (Pid was ${pid})`);
 
@@ -23,7 +23,7 @@ export const Pids = {
     backingSet.add(pid);
   },
 
-  use() {
+  use(): PID | null {
     if (!backingSet.size) return null;
 
     // NOTE: Sorting here is CRUCIAL, or (for starters:) random buttons start controlling random `OsWindow`s!

@@ -1,3 +1,4 @@
+import type { CleanupFn } from "typings/CleanupFn";
 import type { Handler } from "typings/Handler";
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
@@ -8,13 +9,7 @@ type Params<T extends NonNullable<HTMLElement | Document>> = {
   on: EventTarget;
 };
 
-type CleanupFn = {
-  (): void;
-};
-
-type Listen = {
-  <T extends NonNullable<HTMLElement | Document>>(params: Params<T>): CleanupFn;
-};
+type Listen = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => CleanupFn;
 
 /** A more typesafe `addEventListener` that returns a convenient cleanup function. */
 export const listen: Listen = ({ event, handler, options, on }) => {

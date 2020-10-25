@@ -4,14 +4,26 @@ import type { Process } from "typings/Process";
 export const useStartingDimensions = (process: Process) => {
   // NOTE: For whatever reason, this doesn't work with `useLayoutEffect`. So be it.
   useEffect(() => {
-    const { binaryImage, osWindowRef } = process;
-    const { current: osWindow } = osWindowRef;
+    let isCancelled = false;
 
-    if (!osWindow) return;
+    const effect = (): void => {
+      if (isCancelled) return;
 
-    const { x: width, y: height } = binaryImage.startingDimensions;
+      const { binaryImage, osWindowRef } = process;
+      const { current: osWindow } = osWindowRef;
 
-    osWindow.style.width = `${width}px`;
-    osWindow.style.height = `${height}px`;
+      if (!osWindow) return;
+
+      const { x: width, y: height } = binaryImage.startingDimensions;
+
+      osWindow.style.width = `${width}px`;
+      osWindow.style.height = `${height}px`;
+    };
+
+    effect();
+
+    return function cleanup() {
+      isCancelled = true;
+    };
   }, [process]);
 };

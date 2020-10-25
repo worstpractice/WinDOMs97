@@ -1,6 +1,6 @@
 /* prettier-ignore */
 @font-face {
-  font-display: swap;
+  font-display: auto;
   font-family: "Perfect DOS VGA 437 Win";
   src:
     url(../assets/fonts/perfect-DOS-VGA-437-win.woff2) format("woff2"),
@@ -8,7 +8,7 @@
 }
 
 @font-face {
-  font-display: swap;
+  font-display: auto;
   font-family: "W95FA";
   src: url(../assets/fonts/w95fa.woff2) format("woff2"), url(../assets/fonts/w95fa.woff) format("woff");
 }

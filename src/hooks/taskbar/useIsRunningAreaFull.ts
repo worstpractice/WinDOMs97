@@ -6,26 +6,38 @@ import type { OsRef } from "typings/OsRef";
 const RUNNING_AREA_ITEM_WIDTH = 240 as const;
 
 export const useIsRunningAreaFull = <T extends HTMLElement>(runningAreaRef: OsRef<T>) => {
-  const { isRunningAreaFull, setIsRunningAreaFull, runningProcesses } = useKernel();
+  const { setIsRunningAreaFull, runningProcesses } = useKernel();
 
   useLayoutEffect(() => {
-    const { current: runningArea } = runningAreaRef;
+    let isCancelled = false;
 
-    if (!runningArea) return;
+    const effect = (): void => {
+      if (isCancelled) return;
 
-    const processes = runningProcesses.length;
+      const { current: runningArea } = runningAreaRef;
 
-    if (!processes) return;
+      if (!runningArea) return;
 
-    const runningAreaWidth = runningArea.getBoundingClientRect().width;
+      const processes = runningProcesses.length;
 
-    /** Each running process consumes 240px of horizontal `TaskBar` space. */
-    const occupied = processes * RUNNING_AREA_ITEM_WIDTH;
+      if (!processes) return;
 
-    const remaining = runningAreaWidth - occupied;
+      const runningAreaWidth = runningArea.getBoundingClientRect().width;
 
-    const verdict = remaining < 240;
+      /** Each running process consumes 240px of horizontal `TaskBar` space. */
+      const occupied = processes * RUNNING_AREA_ITEM_WIDTH;
 
-    setIsRunningAreaFull(verdict);
-  }, [isRunningAreaFull, runningAreaRef, runningProcesses.length, setIsRunningAreaFull]);
+      const remaining = runningAreaWidth - occupied;
+
+      const verdict = remaining < 240;
+
+      setIsRunningAreaFull(verdict);
+    };
+
+    effect();
+
+    return function cleanup() {
+      isCancelled = true;
+    };
+  }, [runningAreaRef, runningProcesses.length, setIsRunningAreaFull]);
 };

@@ -21,10 +21,12 @@ export const BSOD: FC<Props> = () => {
         </p>
         <p className={styles.Text}>ERROR: "{bsodMessage}"</p>
         <section className={styles.Steps}>
-          <p className={styles.Text}>* Press F5 to terminate the current web application.</p>
-          <p className={styles.Text}>* Press ALT + F4 to exit the current browser session.</p>
-          <p className={styles.Text}>You will lose any unsaved information in this tab.<strong className={styles.Blink}>█</strong></p>
+          <p className={styles.Text}>* Press F5 to restart the current web application.</p>
+          <p className={styles.Text}>* Press ALT + F4 to terminate the current browser session.</p>
         </section>
+        <p className={styles.Text}>
+          You will lose any unsaved information in this tab.<strong className={styles.Blink}>█</strong>
+        </p>
       </article>
     </main>
   );
