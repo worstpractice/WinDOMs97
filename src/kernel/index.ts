@@ -24,7 +24,8 @@ type KernelState = {
   lastClickPosition: Position;
   openMenu: MenuState;
   isBsod: boolean;
-  bsodReason: string;
+  bsodError: string;
+  bsodMessage: string;
   ////////////////////////////////////////////////////////////////
   // Collections
   ////////////////////////////////////////////////////////////////
@@ -64,7 +65,7 @@ type SystemCalls = {
   ////////////////////////////////////////////////////////////////
   // Debug
   ////////////////////////////////////////////////////////////////
-  bluescreen: (reason: string) => void;
+  bluescreen: (error: string, message: string) => void;
 };
 
 type OperatingSystem = KernelState & SystemCalls;
@@ -83,7 +84,8 @@ export const useKernel = create<OperatingSystem>(
         lastClickPosition: { x: 0, y: 0 },
         openMenu: "",
         isBsod: false,
-        bsodReason: "",
+        bsodError: "",
+        bsodMessage: "",
         ///////////////////////////////////////////
         // Collections
         ///////////////////////////////////////////
@@ -147,11 +149,11 @@ export const useKernel = create<OperatingSystem>(
               const { isRunningAreaFull, runningProcesses } = store;
 
               if (isRunningAreaFull) {
-                console.error(
-                  "Out of task bar space! Ultra hi-fi (640x480) PATA modem required to launch more processes!",
-                );
-
-                return store;
+                return {
+                  isBsod: true,
+                  bsodError: "NO_TASKBAR_SPACE",
+                  bsodMessage: "Upgrade to 800x600 monitor to launch more processes",
+                } as const;
               }
 
               const pid = Pids.use();
@@ -285,9 +287,9 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           //* Debug *
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-          bluescreen: (reason: string) => {
+          bluescreen: (error: string, message: string) => {
             set(() => {
-              return { isBsod: true, bsodReason: reason } as const;
+              return { isBsod: true, bsodError: error, bsodMessage: message } as const;
             });
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

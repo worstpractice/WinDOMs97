@@ -11,7 +11,7 @@ export const useDesktopAlternatives = (): readonly Alternative[] => {
       console.log("We create a new folder");
     }),
     alt("Halt and catch fire", () => {
-      bluescreen("Halt and catch fire");
+      bluescreen("HALT_AND_CATCH_FIRE", "Something went wrong");
     }),
   ] as const;
 };

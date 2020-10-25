@@ -1,18 +1,13 @@
 @import "../styles/colors.module.css";
 
-/* prettier-ignore */
-@font-face {
-  font-display: swap;
-  font-family: "Perfect DOS VGA 437 Win";
-  src:
-    url(../assets/fonts/perfect-DOS-VGA-437-win.woff2) format("woff2"),
-    url(../assets/fonts/perfect-DOS-VGA-437-win.woff) format("woff");
-}
-
 .Container {
+  align-items: center;
   background-color: var(--bsod-background);
   bottom: 0;
+  display: flex;
+  flex-direction: column;
   height: 100vh;
+  justify-content: center;
   left: 0;
   position: absolute;
   right: 0;
@@ -21,13 +16,26 @@
   z-index: 1337;
 }
 
+.Headline {
+  box-sizing: border-box;
+  color: var(--gray);
+  font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  line-height: 100px;
+}
+
+.Steps {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
 .Text {
   box-sizing: border-box;
   color: var(--gray);
   font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
   line-height: 100px;
-  max-width: 80%;
 }
 
 .Layout {
@@ -35,21 +43,38 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 30vh;
 }
 
 .Blink {
+  animation: blinkingText 1.2s infinite;
   font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
-  font-size: 24px;
-  transition: opacity;
-}
-
-.Blink:hover {
-  opacity: 0;
+  font-size: 18px;
 }
 
 .Hex {
   color: var(--yellow);
   font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 18px;
+}
+
+@keyframes blinkingText {
+  0% {
+    color: var(--gray);
+  }
+
+  49% {
+    color: var(--gray);
+  }
+
+  60% {
+    color: transparent;
+  }
+
+  99% {
+    color: transparent;
+  }
+
+  100% {
+    color: var(--gray);
+  }
 }

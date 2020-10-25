@@ -1,4 +1,7 @@
+@import "../../styles/colors.module.css";
+
 .TaskMgr {
+  background-color: var(--oswindow-background);
   height: 100%;
   width: 100%;
 }
