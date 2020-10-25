@@ -1,15 +1,15 @@
-import type { Handler } from "typings/Handler";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
-  LMB?: Handler<T>;
-  MMB?: Handler<T>;
-  RMB?: Handler<T>;
+  LMB?: MouseHandler<T>;
+  MMB?: MouseHandler<T>;
+  RMB?: MouseHandler<T>;
 };
 
 export const switchOn = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => {
   const { LMB, MMB, RMB } = params;
 
-  const switcharoo: Handler<T> = (e) => {
+  const switcharoo: MouseHandler<T> = (e) => {
     switch (e.button) {
       case 0: {
         return LMB?.(e);

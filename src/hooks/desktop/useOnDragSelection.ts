@@ -3,7 +3,7 @@ import { useKernel } from "kernel";
 import { useEffect, useState } from "react";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";
-import type { Handler } from "typings/Handler";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
@@ -20,7 +20,7 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
     const effect = (): ComposedFn | undefined => {
       if (isCancelled) return;
 
-      const handleMouseDown: Handler<HTMLElement> = onLMB(({ target }) => {
+      const handleMouseDown: MouseHandler<HTMLElement> = onLMB(({ target }) => {
         const { current } = desktopRef;
 
         // We're only interested in clicks on the actual desktop itself
@@ -31,11 +31,11 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
         activate(desktopRef);
       });
 
-      const handleMouseMove: Handler<HTMLElement> = ({ clientX, clientY }) => {
+      const handleMouseMove: MouseHandler<HTMLElement> = ({ clientX, clientY }) => {
         setCurrentPosition({ x: clientX, y: clientY });
       };
 
-      const handleMouseUp: Handler<HTMLElement> = onLMB(() => {
+      const handleMouseUp: MouseHandler<HTMLElement> = onLMB(() => {
         setIsDragSelecting(false);
       });
 

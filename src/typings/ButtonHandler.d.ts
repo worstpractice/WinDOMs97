@@ -1,3 +1,3 @@
-import type { Handler } from "typings/Handler";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 
-export type ButtonHandler = Handler<HTMLButtonElement>;
+export type ButtonHandler = MouseHandler<HTMLButtonElement>;

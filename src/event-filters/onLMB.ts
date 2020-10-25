@@ -1,7 +1,7 @@
-import type { Handler } from "typings/Handler";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 
-export const onLMB = <T extends NonNullable<HTMLElement | Document>>(fn: Handler<T>) => {
-  const inner: Handler<T> = (e) => {
+export const onLMB = <T extends NonNullable<HTMLElement | Document>>(fn: MouseHandler<T>) => {
+  const inner: MouseHandler<T> = (e) => {
     if (e.button === 0) {
       fn(e);
     }

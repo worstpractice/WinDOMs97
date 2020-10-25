@@ -1,7 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import { useKernel } from "kernel";
-import { default as React } from "react";
-import { useState } from "react";
+import { default as React, useState } from "react";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
@@ -15,18 +14,16 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
   const { activate, closeMenus, endProcess, maximize, minimize, unMaximize } = useKernel();
   const [isPressed, setIsPressed] = useState(false);
 
+  //////////////////////////////////////////////////////////////////////////////
+  // Domain-Specific
+  //////////////////////////////////////////////////////////////////////////////
+
   const handleExit = onLMB(() => {
     if (!isPressed) return;
 
     setIsPressed(false);
     endProcess(process);
   });
-
-  const handleMouseLeave = () => {
-    if (!isPressed) return;
-
-    setIsPressed(false);
-  };
 
   const handleMaximize = onLMB(() => {
     if (!isPressed) return;
@@ -45,12 +42,24 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     activate({ current: null });
   });
 
+  //////////////////////////////////////////////////////////////////////////////
+  // Event Handlers
+  //////////////////////////////////////////////////////////////////////////////
+
+  const handleMouseLeave = () => {
+    if (!isPressed) return;
+
+    setIsPressed(false);
+  };
+
   const handleMouseDown = onLMB((e) => {
     // NOTE: This is necessary to stop the `OsWindow` from starting to move.
     e.stopPropagation();
     closeMenus();
     setIsPressed(true);
   });
+
+  //////////////////////////////////////////////////////////////////////////////
 
   const buttonStyle = isPressed ? css(styles.Button, styles.Pressed) : styles.Button;
 

@@ -2,7 +2,7 @@ import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import { Handler } from "typings/Handler";
+import { MouseHandler } from "typings/handlers/MouseHandler";
 import type { Loader } from "typings/Loader";
 import styles from "./Cmd.module.css";
 
@@ -15,7 +15,7 @@ export const Cmd: FC<Props> = ({ getProcess }) => {
   const process = getProcess(programRef);
   useStartingDimensions(process);
 
-  const handleClick: Handler<HTMLElement> = () => {
+  const handleClick: MouseHandler<HTMLElement> = () => {
     process.binaryImage.softlinks.isInQuickstartArea = false;
   };
 

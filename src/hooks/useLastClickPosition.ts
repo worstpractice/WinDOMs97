@@ -1,7 +1,7 @@
 import { useKernel } from "kernel";
 import { useEffect } from "react";
 import type { CleanupFn } from "typings/CleanupFn";
-import type { Handler } from "typings/Handler";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 import { listen } from "utils/listen";
 
 export const useLastClickPosition = () => {
@@ -13,7 +13,7 @@ export const useLastClickPosition = () => {
     const effect = (): CleanupFn | undefined => {
       if (isCancelled) return;
 
-      const handleMouseDown: Handler<Document> = ({ clientX, clientY }) => {
+      const handleMouseDown: MouseHandler<Document> = ({ clientX, clientY }) => {
         setLastClickPosition({ x: clientX, y: clientY });
         closeMenus();
       };
