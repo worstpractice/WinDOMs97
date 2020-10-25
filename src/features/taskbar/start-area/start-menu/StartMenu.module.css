@@ -1,4 +1,5 @@
 @import "../../../../styles/colors.module.css";
+@import "../../../../styles/layout.module.css";
 
 .ContentList {
   display: flex;
@@ -8,9 +9,9 @@
 
 .StartMenu {
   background-color: var(--oswindow-background);
-  bottom: 60px;
+  bottom: var(--taskbar-height);
   display: flex;
-  left: 10px;
+  left: var(--taskbar-padding-left);
   max-height: 720px;
   max-width: 440px;
   outline-color: var(--oswindow-outline);

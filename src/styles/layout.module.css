@@ -1,3 +1,7 @@
 :root {
   --taskbar-height: 48px;
+
+  /* NOTE: The difference here evens out the outline width difference between the Start button (thick) and the clock (thin). */
+  --taskbar-padding-elsewhere: 6px;
+  --taskbar-padding-left: 8px;
 }

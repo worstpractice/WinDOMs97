@@ -6,7 +6,6 @@
   display: flex;
   gap: 2px;
   justify-content: center;
-  margin-left: 2px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
