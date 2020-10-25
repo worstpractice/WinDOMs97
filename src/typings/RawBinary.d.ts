@@ -5,6 +5,7 @@ import type { ProgramProps } from "typings/ProgramProps";
 export type RawBinary = {
   icon: string;
   name: string;
+  fileName: string;
   instructions: FC<ProgramProps>;
   ////////////////////////////////////////////////////////
   // "Registry"

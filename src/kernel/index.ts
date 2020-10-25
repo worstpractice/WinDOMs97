@@ -188,7 +188,6 @@ export const useKernel = create<OperatingSystem>(
                 ////////////////////////////////////////////////////////
                 ...rawBinary,
                 ////////////////////////////////////////////////////////
-                fileName: `${rawBinary.name.toLowerCase()}.exe`,
                 // Placeholder until we can hash the entire binary itself a few lines down.
                 fileHash: "" as Hash,
                 ////////////////////////////////////////////////////////

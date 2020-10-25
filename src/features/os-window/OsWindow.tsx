@@ -10,7 +10,7 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
-import { default as React, memo, useState } from "react";
+import { default as React, useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
@@ -23,7 +23,7 @@ type Props = {
   getProcess: Loader;
 };
 
-const OsWindow: FC<Props> = ({ getProcess }) => {
+export const OsWindow: FC<Props> = ({ getProcess }) => {
   const { activate, closeMenus, maximize, unMaximize } = useKernel();
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);
@@ -125,7 +125,3 @@ const OsWindow: FC<Props> = ({ getProcess }) => {
     </article>
   );
 };
-
-const memoized = memo<Props>(OsWindow);
-
-export { memoized as OsWindow };

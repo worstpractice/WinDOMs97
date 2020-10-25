@@ -30,6 +30,7 @@ const everywhere = () => {
 const calc: RawBinary = {
   icon: calculator,
   instructions: Calc,
+  fileName: "calc.exe",
   name: "Calculator",
   softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
@@ -38,6 +39,7 @@ const calc: RawBinary = {
 const cmd: RawBinary = {
   icon: console_prompt,
   instructions: Cmd,
+  fileName: "cmd.exe",
   name: "Command Prompt",
   softlinks: everywhere(),
   startingDimensions: { x: 1000, y: 500 },
@@ -46,6 +48,7 @@ const cmd: RawBinary = {
 const minesweeper: RawBinary = {
   icon: game_mine,
   instructions: Minesweeper,
+  fileName: "minesweeper.exe",
   name: "Minesweeper",
   softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
@@ -54,6 +57,7 @@ const minesweeper: RawBinary = {
 const paint: RawBinary = {
   icon: paint_file,
   instructions: Paint,
+  fileName: "paint.exe",
   name: "Paint",
   softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
@@ -62,6 +66,7 @@ const paint: RawBinary = {
 const taskManager: RawBinary = {
   icon: task_manager,
   instructions: TaskMgr,
+  fileName: "taskmgr.exe",
   name: "Task Manager",
   softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
@@ -70,6 +75,7 @@ const taskManager: RawBinary = {
 const ie: RawBinary = {
   icon: internet_exploder,
   instructions: IE,
+  fileName: "ie.exe",
   name: "Internet Exploder",
   softlinks: everywhere(),
   startingDimensions: { x: 600, y: 500 },
