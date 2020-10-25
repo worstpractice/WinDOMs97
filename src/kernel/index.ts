@@ -1,4 +1,4 @@
-import { OUT_OF_TASKBAR, OUT_OF_PIDS } from "kernel/errors";
+import { OUT_OF_PIDS, OUT_OF_TASKBAR } from "kernel/errors";
 import { Pids } from "kernel/Pids";
 import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
@@ -146,9 +146,7 @@ export const useKernel = create<OperatingSystem>(
           },
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           executeBinary: (binary: Binary) => {
-            set((store) => {
-              const { isRunningAreaFull, runningProcesses } = store;
-
+            set(({ isRunningAreaFull, runningProcesses }) => {
               if (isRunningAreaFull) {
                 return OUT_OF_TASKBAR;
               }
@@ -157,6 +155,23 @@ export const useKernel = create<OperatingSystem>(
 
               if (isNull(pid)) {
                 return OUT_OF_PIDS;
+              }
+
+              const { isSingleInstanceOnly } = binary;
+
+              if (isSingleInstanceOnly) {
+                // BEGIN EXPENSIVE SEARCH //////////////////////////////
+                const { fileHash: targetHash } = binary;
+
+                for (const { binaryImage } of runningProcesses) {
+                  const { fileHash } = binaryImage;
+
+                  if (fileHash === targetHash) {
+                    // Abort launch
+                    return { runningProcesses } as const;
+                  }
+                }
+                // END EXPENSIVE SEARCH ////////////////////////////////
               }
 
               const spawnedProcess: Process = {

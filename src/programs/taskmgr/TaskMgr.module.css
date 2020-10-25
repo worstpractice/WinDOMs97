@@ -14,7 +14,7 @@
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 24px;
+  width: 48px;
 }
 
 .KillButton:-moz-focusring {
@@ -24,7 +24,7 @@
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 24px;
+  width: 48px;
 }
 
 .Pressed:hover {
