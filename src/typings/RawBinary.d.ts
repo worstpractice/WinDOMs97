@@ -10,10 +10,10 @@ export type RawBinary = {
   ////////////////////////////////////////////////////////
   // "Registry"
   ////////////////////////////////////////////////////////
-  softlinks: {
+  softlinks?: {
     isOnDesktop: boolean;
     isOnStartMenu: boolean;
     isInQuickstartArea: boolean;
   };
-  startingDimensions: Position;
+  startingDimensions?: Position;
 };

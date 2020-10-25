@@ -11,6 +11,7 @@ import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
 import { ARS256 } from "utils/algorithms/ars256";
+import { everywhere } from "utils/everwhere";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
@@ -184,9 +185,16 @@ export const useKernel = create<OperatingSystem>(
           /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           installProgram: (rawBinary: RawBinary) => {
             set(({ installedPrograms }) => {
+              const { fileName, icon, instructions, name, softlinks, startingDimensions } = rawBinary;
+
               const binary: Binary = {
                 ////////////////////////////////////////////////////////
-                ...rawBinary,
+                fileName,
+                icon,
+                instructions,
+                name,
+                softlinks: softlinks ?? everywhere(),
+                startingDimensions: startingDimensions ?? { x: 600, y: 600 },
                 ////////////////////////////////////////////////////////
                 // Placeholder until we can hash the entire binary itself a few lines down.
                 fileHash: "" as Hash,
