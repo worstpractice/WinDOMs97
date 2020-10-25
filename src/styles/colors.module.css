@@ -2,6 +2,7 @@
   /** Colors */
 
   /* Base */
+  --black: rgb(0, 0, 0);
   --gray: rgb(192, 192, 192);
   --teal: rgb(0, 117, 130);
   --yellow: rgb(255, 255, 0);
@@ -9,6 +10,7 @@
 
   /* Bright */
   --blue-bright: rgb(16, 129, 205);
+  --gray-bright: rgb(224, 224, 224);
 
   /* Dim */
   --blue-dim: rgb(0, 0, 128);
@@ -41,4 +43,7 @@
   /* OsWindow */
   --oswindow-background: var(--gray);
   --oswindow-outline: var(--white);
+
+  /* ProgramContent */
+  --programcontent-background: var(--black);
 }

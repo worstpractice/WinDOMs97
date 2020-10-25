@@ -1,5 +1,8 @@
+@import "../../styles/colors.module.css";
+
 .Calc {
   align-items: center;
+  background-color: var(--oswindow-background);
   display: flex;
   flex-direction: column;
   height: 100%;

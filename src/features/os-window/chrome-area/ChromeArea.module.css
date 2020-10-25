@@ -2,7 +2,7 @@
 
 .ChromeArea {
   align-items: center;
-  background: linear-gradient(90deg, var(--titlebar-passive-dim), var(--oswindow-background));
+  background: linear-gradient(90deg, var(--titlebar-passive-dim), var(--gray));
   cursor: grab;
   display: flex;
   gap: 10px;

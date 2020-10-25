@@ -192,7 +192,7 @@ export const useKernel = create<OperatingSystem>(
                 ////////////////////////////////////////////////////////
                 ...rawBinary,
                 softlinks: softlinks ?? everywhere(),
-                startingDimensions: startingDimensions ?? { x: 600, y: 600 },
+                startingDimensions: startingDimensions ?? { x: 400, y: 400 },
                 ////////////////////////////////////////////////////////
                 // Placeholder until we can hash the entire binary itself a few lines down.
                 fileHash: "" as Hash,

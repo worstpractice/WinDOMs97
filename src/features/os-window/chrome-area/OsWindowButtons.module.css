@@ -9,7 +9,7 @@
 }
 
 .Button {
-  background-color: var(--oswindow-background);
+  background-color: var(--gray);
   font-size: 20px;
   height: 24px;
   outline-color: var(--oswindow-outline);
@@ -19,7 +19,7 @@
 }
 
 .Button:-moz-focusring {
-  background-color: var(--oswindow-background);
+  background-color: var(--gray);
   font-size: 20px;
   height: 24px;
   outline-color: var(--oswindow-outline);

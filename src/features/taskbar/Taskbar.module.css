@@ -3,7 +3,7 @@
 
 .Taskbar {
   align-items: center;
-  background-color: var(--oswindow-background);
+  background-color: var(--gray);
   bottom: 0;
   display: flex;
   gap: 10px;
