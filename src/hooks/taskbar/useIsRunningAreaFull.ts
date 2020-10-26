@@ -1,12 +1,18 @@
 import { useKernel } from "kernel";
 import { useLayoutEffect } from "react";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { OsRef } from "typings/OsRef";
+
+const selector = ({ setIsRunningAreaFull, runningProcesses }: Kernel) => ({
+  setIsRunningAreaFull,
+  runningProcesses,
+});
 
 /** Magic number. */
 const RUNNING_AREA_ITEM_WIDTH = 240 as const;
 
 export const useIsRunningAreaFull = <T extends HTMLElement>(runningAreaRef: OsRef<T>) => {
-  const { setIsRunningAreaFull, runningProcesses } = useKernel();
+  const { setIsRunningAreaFull, runningProcesses } = useKernel(selector);
 
   useLayoutEffect(() => {
     let isCancelled = false;

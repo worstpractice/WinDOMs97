@@ -13,18 +13,26 @@ import { useKernel } from "kernel";
 import { default as React, useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { Loader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
+const selector = ({ activate, closeMenus, maximize, unMaximize }: Kernel) => ({
+  activate,
+  closeMenus,
+  maximize,
+  unMaximize,
+});
+
 type Props = {
   getProcess: Loader;
 };
 
 export const OsWindow: FC<Props> = ({ getProcess }) => {
-  const { activate, closeMenus, maximize, unMaximize } = useKernel();
+  const { activate, closeMenus, maximize, unMaximize } = useKernel(selector);
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);
   const handleMove = useOnMoveWindow(osWindowRef);

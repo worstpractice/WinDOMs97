@@ -7,16 +7,26 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { LiLoader } from "typings/Loader";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationAreaItem.module.css";
+
+const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: Kernel) => ({
+  activate,
+  activeRef,
+  closeMenus,
+  minimize,
+  openContextMenu,
+  unMinimize,
+});
 
 type Props = {
   getProcess: LiLoader;
 };
 
 export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel(selector);
   const notificationAreaItemRef = useOsRef<HTMLLIElement>();
   const process = getProcess(notificationAreaItemRef);
   const alternatives = useProcessAlternatives(process);

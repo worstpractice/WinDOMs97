@@ -4,13 +4,21 @@ import { useEffect, useState } from "react";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
+import type { Kernel } from "typings/kernel/Kernel";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
+const selector = ({ activate, closeMenus }: Kernel) => ({
+  activate,
+  closeMenus,
+});
+
+// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
+
 export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
-  const { activate, closeMenus } = useKernel();
+  const { activate, closeMenus } = useKernel(selector);
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 

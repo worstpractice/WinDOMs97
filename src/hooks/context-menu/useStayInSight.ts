@@ -1,10 +1,17 @@
 import { useKernel } from "kernel";
 import { useLayoutEffect, useState } from "react";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 
+const selector = ({ lastClickPosition }: Kernel) => ({
+  lastClickPosition,
+});
+
+// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
+
 export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
-  const { lastClickPosition } = useKernel();
+  const { lastClickPosition } = useKernel(selector);
   const [isTooFarDown, setIsTooFarDown] = useState(false);
   const [position, setPosition] = useState<Position>(lastClickPosition);
 

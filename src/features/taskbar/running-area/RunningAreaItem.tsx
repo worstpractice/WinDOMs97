@@ -8,17 +8,27 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { ButtonLoader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningAreaItem.module.css";
+
+const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: Kernel) => ({
+  activate,
+  activeRef,
+  closeMenus,
+  minimize,
+  openContextMenu,
+  unMinimize,
+});
 
 type Props = {
   getProcess: ButtonLoader;
 };
 
 export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel();
+  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel(selector);
   const runningAreaItemRef = useOsRef<HTMLButtonElement>();
   const process = getProcess(runningAreaItemRef);
   const alternatives = useProcessAlternatives(process);

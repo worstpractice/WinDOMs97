@@ -1,10 +1,18 @@
 import { useKernel } from "kernel";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
+import type { Kernel } from "typings/kernel/Kernel";
 import { alt } from "utils/alt";
 
+const selector = ({ executeBinary, uninstallProgram }: Kernel) => ({
+  executeBinary,
+  uninstallProgram,
+});
+
+// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
+
 export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {
-  const { executeBinary, uninstallProgram } = useKernel();
+  const { executeBinary, uninstallProgram } = useKernel(selector);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [

@@ -1,9 +1,16 @@
 import { useKernel } from "kernel";
 import type { Alternative } from "typings/Alternative";
+import type { Kernel } from "typings/kernel/Kernel";
 import { alt } from "utils/alt";
 
+const selector = ({ bluescreen }: Kernel) => ({
+  bluescreen,
+});
+
+// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
+
 export const useDesktopAlternatives = (): readonly Alternative[] => {
-  const { bluescreen } = useKernel();
+  const { bluescreen } = useKernel(selector);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [

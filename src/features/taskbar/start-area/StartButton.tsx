@@ -8,13 +8,20 @@ import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
+
+const selector = ({ activate, activeRef, toggleStartMenu }: Kernel) => ({
+  activate,
+  activeRef,
+  toggleStartMenu,
+});
 
 type Props = {};
 
 export const StartButton: FC<Props> = () => {
-  const { activate, activeRef, toggleStartMenu } = useKernel();
+  const { activate, activeRef, toggleStartMenu } = useKernel(selector);
   const startButtonRef = useOsRef<HTMLButtonElement>();
 
   const handleLMB: ButtonHandler = (e) => {

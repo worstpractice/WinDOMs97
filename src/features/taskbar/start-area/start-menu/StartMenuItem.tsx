@@ -5,15 +5,21 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { Linker } from "typings/Linker";
 import styles from "./StartMenuItem.module.css";
+
+const selector = ({ closeMenus, executeBinary }: Kernel) => ({
+  closeMenus,
+  executeBinary,
+});
 
 type Props = {
   getBinary: Linker;
 };
 
 export const StartMenuItem: FC<Props> = ({ getBinary }) => {
-  const { closeMenus, executeBinary } = useKernel();
+  const { closeMenus, executeBinary } = useKernel(selector);
   const startMenuItemRef = useOsRef<HTMLLIElement>();
   const binary = getBinary(startMenuItemRef);
 

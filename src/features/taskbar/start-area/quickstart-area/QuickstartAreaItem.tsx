@@ -5,15 +5,21 @@ import { useKernel } from "kernel";
 import { default as React } from "react";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import type { Linker } from "typings/Linker";
 import styles from "./QuickstartAreaItem.module.css";
+
+const selector = ({ closeMenus, executeBinary }: Kernel) => ({
+  closeMenus,
+  executeBinary,
+});
 
 type Props = {
   getBinary: Linker;
 };
 
 export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
-  const { closeMenus, executeBinary } = useKernel();
+  const { closeMenus, executeBinary } = useKernel(selector);
   const quickstartAreaItemRef = useOsRef<HTMLButtonElement>();
   const binary = getBinary(quickstartAreaItemRef);
 

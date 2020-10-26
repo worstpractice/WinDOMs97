@@ -4,10 +4,11 @@ import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
-import type { MenuState } from "typings/MenuState";
+import type { Kernel } from "typings/kernel/Kernel";
+import type { OsState } from "typings/kernel/OsState";
+import type { SysCalls } from "typings/kernel/SysCalls";
 import type { OsRef } from "typings/OsRef";
 import type { Hash } from "typings/phantom-types/Hash";
-import type { PID } from "typings/phantom-types/PID";
 import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
@@ -16,66 +17,11 @@ import { everywhere } from "utils/everwhere";
 import create from "zustand";
 import { combine, devtools } from "zustand/middleware";
 
-export type KernelState = {
-  ////////////////////////////////////////////////////////////////
-  // Not Collections
-  ////////////////////////////////////////////////////////////////
-  activeRef: OsRef<HTMLElement>;
-  isRunningAreaFull: boolean;
-  lastClickPosition: Position;
-  openMenu: MenuState;
-  isBsod: boolean;
-  bsodError: string;
-  bsodMessage: string;
-  ////////////////////////////////////////////////////////////////
-  // Collections
-  ////////////////////////////////////////////////////////////////
-  alternatives: readonly Alternative[];
-  availablePids: readonly PID[];
-  installedPrograms: readonly Binary[];
-  runningProcesses: readonly Process[];
-};
-
-export type SystemCalls = {
-  ////////////////////////////////////////////////////////////////
-  // Window
-  ////////////////////////////////////////////////////////////////
-  maximize: (process: Process) => void;
-  minimize: (process: Process) => void;
-  unMaximize: (process: Process) => void;
-  unMinimize: (process: Process) => void;
-  ////////////////////////////////////////////////////////////////
-  // Menu
-  ////////////////////////////////////////////////////////////////
-  closeMenus: () => void;
-  openContextMenu: (alternatives: readonly Alternative[]) => void;
-  toggleStartMenu: () => void;
-  ////////////////////////////////////////////////////////////////
-  // Ui
-  ////////////////////////////////////////////////////////////////
-  activate: <T extends OsRef<HTMLElement>>(to: T) => void;
-  setLastClickPosition: (to: Position) => void;
-  setIsRunningAreaFull: (to: boolean) => void;
-  ////////////////////////////////////////////////////////////////
-  // Control
-  ////////////////////////////////////////////////////////////////
-  endProcess: (process: Process) => void;
-  executeBinary: (binary: Binary) => void;
-  installProgram: (rawBinary: RawBinary) => void;
-  uninstallProgram: (binary: Binary) => void;
-  ////////////////////////////////////////////////////////////////
-  // Debug
-  ////////////////////////////////////////////////////////////////
-  bluescreen: (error: string, message: string) => void;
-};
-
-type OperatingSystem = KernelState & SystemCalls;
-
 let debugLogCounter = 0;
 
-export const useKernel = create<OperatingSystem>(
+export const useKernel = create<Kernel>(
   devtools(
-    combine<KernelState, SystemCalls>(
+    combine<OsState, SysCalls>(
       {
         ///////////////////////////////////////////
         // Not Collections

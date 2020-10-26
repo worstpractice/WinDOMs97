@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const NotificationArea: FC<Props> = ({ children }) => {
-  // @ts-expect-error Lying is wrong.
+  // @ts-expect-error Because lying is wrong.
   const hasChildren = children?.length;
 
   const iconsStyle = hasChildren ? styles.Icons : "";

@@ -1,4 +1,5 @@
 import { onRMB } from "event-filters/onRMB";
+import { DragSelection } from "features/desktop/DragSelection";
 import { useDesktopAlternatives } from "hooks/alternatives/useDesktopAlternatives";
 import { useDragSelection } from "hooks/desktop/useOnDragSelection";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
@@ -6,17 +7,21 @@ import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel";
 import type { ReactNode } from "react";
 import { default as React } from "react";
-import { DragSelection } from "features/desktop/DragSelection";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
+import type { Kernel } from "typings/kernel/Kernel";
 import styles from "./Desktop.module.css";
+
+const selector = ({ openContextMenu }: Kernel) => ({
+  openContextMenu,
+});
 
 type Props = {
   children: ReactNode;
 };
 
 export const Desktop: FC<Props> = ({ children }) => {
-  const { openContextMenu } = useKernel();
+  const { openContextMenu } = useKernel(selector);
   const desktopRef = useOsRef<HTMLElement>();
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
   const alternatives = useDesktopAlternatives();
