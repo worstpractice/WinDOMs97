@@ -1,9 +1,9 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { useLayoutEffect } from "react";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { OsRef } from "typings/OsRef";
 
-const selector = ({ setIsRunningAreaFull, runningProcesses }: Kernel) => ({
+const selector = ({ setIsRunningAreaFull, runningProcesses }: OS) => ({
   setIsRunningAreaFull,
   runningProcesses,
 });

@@ -4,17 +4,17 @@ import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { ButtonLoader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningAreaItem.module.css";
 
-const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: Kernel) => ({
+const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: OS) => ({
   activate,
   activeRef,
   closeMenus,

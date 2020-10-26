@@ -1,5 +1,5 @@
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";

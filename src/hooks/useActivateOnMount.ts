@@ -1,10 +1,10 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { useLayoutEffect } from "react";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { OsRef } from "typings/OsRef";
 import { moveInFront } from "utils/moveInFront";
 
-const selector = ({ activate }: Kernel) => ({
+const selector = ({ activate }: OS) => ({
   activate,
 });
 

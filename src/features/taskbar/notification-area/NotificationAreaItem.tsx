@@ -3,16 +3,16 @@ import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { LiLoader } from "typings/Loader";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationAreaItem.module.css";
 
-const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: Kernel) => ({
+const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: OS) => ({
   activate,
   activeRef,
   closeMenus,

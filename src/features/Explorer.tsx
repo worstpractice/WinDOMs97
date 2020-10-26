@@ -1,5 +1,5 @@
 import { programs } from "data";
-import { BSOD } from "features/BSOD";
+import { Bsod } from "features/Bsod";
 import { ContextMenu } from "features/context-menu/ContextMenu";
 import { ContextMenuItem } from "features/context-menu/ContextMenuItem";
 import { Desktop } from "features/desktop/Desktop";
@@ -17,14 +17,14 @@ import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { Linker } from "typings/Linker";
 import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
 
-const selector = ({ alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses }: Kernel) => ({
+const selector = ({ alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses }: OS) => ({
   alternatives,
   isBsod,
   installedPrograms,
@@ -35,12 +35,12 @@ const selector = ({ alternatives, isBsod, installedPrograms, installProgram, ope
 
 type Props = {};
 
-export const OS: FC<Props> = () => {
+export const Explorer: FC<Props> = () => {
   const { alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel(selector);
   useLastClickPosition();
 
   if (isBsod) {
-    return <BSOD />;
+    return <Bsod />;
   }
 
   if (!installedPrograms.length) {

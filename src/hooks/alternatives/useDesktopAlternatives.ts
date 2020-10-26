@@ -1,9 +1,9 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import type { Alternative } from "typings/Alternative";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import { alt } from "utils/alt";
 
-const selector = ({ bluescreen }: Kernel) => ({
+const selector = ({ bluescreen }: OS) => ({
   bluescreen,
 });
 

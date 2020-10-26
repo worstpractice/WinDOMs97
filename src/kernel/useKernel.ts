@@ -4,8 +4,8 @@ import { is } from "type-predicates/is";
 import { isNull } from "type-predicates/isNull";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
+import type { OS } from "typings/kernel/OS";
 import type { Kernel } from "typings/kernel/Kernel";
-import type { OsState } from "typings/kernel/OsState";
 import type { SysCalls } from "typings/kernel/SysCalls";
 import type { OsRef } from "typings/OsRef";
 import type { Hash } from "typings/phantom-types/Hash";
@@ -19,9 +19,9 @@ import { combine, devtools } from "zustand/middleware";
 
 let debugLogCounter = 0;
 
-export const useKernel = create<Kernel>(
+export const useKernel = create<OS>(
   devtools(
-    combine<OsState, SysCalls>(
+    combine<Kernel, SysCalls>(
       {
         ///////////////////////////////////////////
         // Not Collections

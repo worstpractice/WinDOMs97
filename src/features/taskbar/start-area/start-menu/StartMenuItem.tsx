@@ -2,14 +2,14 @@ import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { Linker } from "typings/Linker";
 import styles from "./StartMenuItem.module.css";
 
-const selector = ({ closeMenus, executeBinary }: Kernel) => ({
+const selector = ({ closeMenus, executeBinary }: OS) => ({
   closeMenus,
   executeBinary,
 });

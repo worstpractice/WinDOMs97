@@ -1,10 +1,10 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { useLayoutEffect, useState } from "react";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 
-const selector = ({ lastClickPosition }: Kernel) => ({
+const selector = ({ lastClickPosition }: OS) => ({
   lastClickPosition,
 });
 

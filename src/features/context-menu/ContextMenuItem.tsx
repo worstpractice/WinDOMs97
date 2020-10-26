@@ -1,7 +1,7 @@
 import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";

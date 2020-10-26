@@ -3,16 +3,16 @@ import { Icon } from "components/Icon";
 import { Title } from "components/Title";
 import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 
-const selector = ({ activate, activeRef, toggleStartMenu }: Kernel) => ({
+const selector = ({ activate, activeRef, toggleStartMenu }: OS) => ({
   activate,
   activeRef,
   toggleStartMenu,

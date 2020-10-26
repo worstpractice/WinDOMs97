@@ -1,16 +1,16 @@
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { useEffect, useState } from "react";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
-const selector = ({ activate, closeMenus }: Kernel) => ({
+const selector = ({ activate, closeMenus }: OS) => ({
   activate,
   closeMenus,
 });

@@ -1,6 +1,6 @@
 @import "../styles/colors.module.css";
 
-.Container {
+.Bsod {
   align-items: center;
   background-color: var(--bsod-background);
   bottom: 0;

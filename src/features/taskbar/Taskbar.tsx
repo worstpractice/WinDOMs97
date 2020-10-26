@@ -1,12 +1,12 @@
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import styles from "./Taskbar.module.css";
 
-const selector = ({ activate, closeMenus }: Kernel) => ({
+const selector = ({ activate, closeMenus }: OS) => ({
   activate,
   closeMenus,
 });

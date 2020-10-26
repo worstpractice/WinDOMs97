@@ -1,4 +1,4 @@
-import { OS } from "features/OS";
+import { Explorer } from "features/Explorer";
 import "normalize.css";
 import React, { StrictMode } from "react";
 import { render } from "react-dom";
@@ -10,7 +10,7 @@ document.oncontextmenu = () => false;
 
 render(
   <StrictMode>
-    <OS />
+    <Explorer />
   </StrictMode>,
   document.getElementById("root"),
 );

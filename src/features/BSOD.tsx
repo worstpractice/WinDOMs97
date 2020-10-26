@@ -1,11 +1,11 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import { randomHexQuad } from "utils/randomHexQuad";
-import styles from "./BSOD.module.css";
+import styles from "./Bsod.module.css";
 
-const selector = ({ bsodError, bsodMessage }: Kernel) => ({
+const selector = ({ bsodError, bsodMessage }: OS) => ({
   bsodError,
   bsodMessage,
 });
@@ -16,11 +16,11 @@ const MEMADDR = `0x${randomHexQuad()}`;
 
 type Props = {};
 
-export const BSOD: FC<Props> = () => {
+export const Bsod: FC<Props> = () => {
   const { bsodError, bsodMessage } = useKernel(selector);
 
   return (
-    <main className={styles.Container}>
+    <main className={styles.Bsod}>
       <article className={styles.Layout}>
         <p className={styles.Headline}>
           A fatal exception {ERRNO} has occurred at <strong className={styles.Hex}>{MEMADDR}</strong>: {bsodError}

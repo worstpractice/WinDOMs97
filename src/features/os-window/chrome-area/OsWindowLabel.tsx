@@ -1,6 +1,6 @@
 import { Icon } from "components/Icon";
 import { Title } from "components/Title";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";

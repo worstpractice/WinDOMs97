@@ -1,5 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React, useState } from "react";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";

@@ -7,7 +7,7 @@ import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLa
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";

@@ -1,11 +1,11 @@
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { useEffect } from "react";
 import type { CleanupFn } from "typings/CleanupFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import { listen } from "utils/listen";
 
-const selector = ({ closeMenus, setLastClickPosition }: Kernel) => ({
+const selector = ({ closeMenus, setLastClickPosition }: OS) => ({
   closeMenus,
   setLastClickPosition,
 });

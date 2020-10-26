@@ -9,18 +9,18 @@ import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React, useState } from "react";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { Loader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
-const selector = ({ activate, closeMenus, maximize, unMaximize }: Kernel) => ({
+const selector = ({ activate, closeMenus, maximize, unMaximize }: OS) => ({
   activate,
   closeMenus,
   maximize,

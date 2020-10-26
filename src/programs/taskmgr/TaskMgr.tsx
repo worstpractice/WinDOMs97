@@ -1,13 +1,13 @@
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel";
+import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
-import type { Kernel } from "typings/kernel/Kernel";
+import type { OS } from "typings/kernel/OS";
 import type { Loader } from "typings/Loader";
 import styles from "./TaskMgr.module.css";
 
-const selector = ({ endProcess, runningProcesses }: Kernel) => ({
+const selector = ({ endProcess, runningProcesses }: OS) => ({
   endProcess,
   runningProcesses,
 });
