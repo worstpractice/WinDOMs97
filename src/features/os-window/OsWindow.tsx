@@ -1,13 +1,10 @@
 import { onLMB } from "event-filters/onLMB";
-import { ChromeArea } from "features/os-window/chrome-area/ChromeArea";
-import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons";
-import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
+import { OsWindowChromeArea } from "features/os-window/chrome-area/OsWindowChromeArea";
 import { ProgramArea } from "features/os-window/program-area/ProgramArea";
 import { ProgramContent } from "features/os-window/program-area/ProgramContent";
 import { useOnMoveWindow } from "hooks/os-window/useOnMoveWindow";
 import { useOnResizeWindow } from "hooks/os-window/useOnResizeWindow";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { useKernel } from "kernel/useKernel";
 import { default as React, useState } from "react";
@@ -20,11 +17,9 @@ import { moveInFront } from "utils/moveInFront";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
-const selector = ({ activate, closeMenus, maximize, unMaximize }: OS) => ({
+const selector = ({ activate, closeMenus }: OS) => ({
   activate,
   closeMenus,
-  maximize,
-  unMaximize,
 });
 
 type Props = {
@@ -32,24 +27,25 @@ type Props = {
 };
 
 export const OsWindow: FC<Props> = ({ getProcess }) => {
-  const { activate, closeMenus, maximize, unMaximize } = useKernel(selector);
+  const { activate, closeMenus } = useKernel(selector);
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);
-  const handleMove = useOnMoveWindow(osWindowRef);
   const handleResize = useOnResizeWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
+  const handleMove = useOnMoveWindow(osWindowRef);
   useActivateOnMount(osWindowRef);
 
-  const handleDoubleClick = () => {
-    const { isMaximized, osWindowRef } = process;
-    activate(osWindowRef);
-    isMaximized ? unMaximize(process) : maximize(process);
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // Event Handlers
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  const handleEnter = () => {
+    setIsResizable(true);
   };
 
-  const { chromeAreaRef } = process;
-
-  // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
-  const handleMouseDownCapture = useOnDoubleClick(chromeAreaRef, handleDoubleClick);
+  const handleLeave = () => {
+    setIsResizable(false);
+  };
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     closeMenus();
@@ -68,22 +64,21 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     handleResize(e);
   });
 
-  const handleChromeDrag = onLMB<HTMLSpanElement>((e) => {
-    const { isMaximized } = process;
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // Loaders
+  /////////////////////////////////////////////////////////////////////////////////////////
 
-    // Trying to move a maximized `OsWindow`? That's a paddling.
-    if (isMaximized) return;
-
-    handleMove(e);
-  });
-
-  const handleEnter = () => {
-    setIsResizable(true);
+  const toChromeArea: Loader = (chromeAreaRef) => {
+    process.chromeAreaRef = chromeAreaRef;
+    return process;
   };
 
-  const handleLeave = () => {
-    setIsResizable(false);
+  const toProgram: Loader = (programRef) => {
+    process.programRef = programRef;
+    return process;
   };
+
+  ///////////////////////////////////////////////////////////////////////////////////
 
   const { binaryImage, isMaximized, isMinimized, pid } = process;
 
@@ -99,11 +94,6 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
   const left = 30 * pid;
   const top = 20 * pid;
 
-  const toProgram: Loader = (programRef) => {
-    process.programRef = programRef;
-    return process;
-  };
-
   return (
     <article
       className={style}
@@ -114,17 +104,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       ref={osWindowRef}
       style={{ left, top }}
     >
-      <span
-        className={styles.Outline}
-        // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
-        onMouseDownCapture={handleMouseDownCapture}
-        onMouseDown={handleChromeDrag}
-      >
-        <ChromeArea process={process}>
-          <OsWindowLabel process={process} />
-          <OsWindowButtons process={process} />
-        </ChromeArea>
-      </span>
+      <OsWindowChromeArea getProcess={toChromeArea} handleMove={handleMove} />
       <ProgramArea>
         <ProgramContent>
           <Program getProcess={toProgram} />

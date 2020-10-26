@@ -21,12 +21,6 @@
   cursor: move;
 }
 
-.Outline {
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
-}
-
 /*** WARN: Must come last ***/
 .Maximized {
   height: calc(100vh - var(--taskbar-height)) !important;

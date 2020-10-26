@@ -1,6 +1,6 @@
 @import "../../../styles/colors.module.css";
 
-.ChromeArea {
+.OsWindowChromeArea {
   align-items: center;
   background: linear-gradient(90deg, var(--titlebar-passive-dim), var(--gray));
   cursor: grab;
@@ -11,6 +11,12 @@
   padding-bottom: 4px;
   padding-left: 10px;
   padding-right: 10px;
+}
+
+.Outline {
+  outline-color: var(--oswindow-outline);
+  outline-style: outset;
+  outline-width: 4px;
 }
 
 /*** WARN: Must come last ***/
