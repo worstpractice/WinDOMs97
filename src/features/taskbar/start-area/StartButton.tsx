@@ -3,25 +3,31 @@ import { Icon } from "components/Icon";
 import { Title } from "components/Title";
 import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 
-const selector = ({ activate, activeRef, toggleStartMenu }: OS) => ({
-  activate,
-  activeRef,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ toggleStartMenu }: MenuState) => ({
   toggleStartMenu,
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};
 
 export const StartButton: FC<Props> = () => {
-  const { activate, activeRef, toggleStartMenu } = useKernel(selector);
+  const { activate, activeRef } = useActiveState();
+  const { toggleStartMenu } = useMenuState(fromMenu);
   const startButtonRef = useOsRef<HTMLButtonElement>();
 
   const handleLMB: ButtonHandler = (e) => {

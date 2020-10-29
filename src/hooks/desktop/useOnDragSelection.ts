@@ -1,24 +1,29 @@
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel/useKernel";
 import { useEffect, useState } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { OS } from "typings/kernel/OS";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
-const selector = ({ activate, closeMenus }: OS) => ({
-  activate,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
 });
 
-// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
-  const { activate, closeMenus } = useKernel(selector);
+  const { activate } = useActiveState();
+  const { closeMenus } = useMenuState(fromMenu);
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 

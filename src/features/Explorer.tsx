@@ -17,27 +17,41 @@ import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { Linker } from "typings/Linker";
 import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
 
-const selector = ({ alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses }: OS) => ({
-  alternatives,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ isBsod, installedPrograms, installProgram, runningProcesses }: KernelState) => ({
   isBsod,
   installedPrograms,
   installProgram,
-  openMenu,
   runningProcesses,
 });
+
+const fromMenu = ({ alternatives, openMenu }: MenuState) => ({
+  alternatives,
+  openMenu,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};
 
 export const Explorer: FC<Props> = () => {
-  const { alternatives, isBsod, installedPrograms, installProgram, openMenu, runningProcesses } = useKernel(selector);
+  const { isBsod, installedPrograms, installProgram, runningProcesses } = useKernelState(fromKernel);
+  const { alternatives, openMenu } = useMenuState(fromMenu);
   useLastClickPosition();
+
+  console.log(alternatives);
 
   if (isBsod) {
     return <Bsod />;

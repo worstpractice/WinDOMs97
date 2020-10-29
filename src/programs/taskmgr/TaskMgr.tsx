@@ -1,13 +1,13 @@
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { Loader } from "typings/Loader";
+import type { KernelState } from "state/useKernelState";
 import styles from "./TaskMgr.module.css";
 
-const selector = ({ endProcess, runningProcesses }: OS) => ({
+const fromKernel = ({ endProcess, runningProcesses }: KernelState) => ({
   endProcess,
   runningProcesses,
 });
@@ -17,7 +17,7 @@ type Props = {
 };
 
 export const TaskMgr: FC<Props> = ({ getProcess }) => {
-  const { endProcess, runningProcesses } = useKernel(selector);
+  const { endProcess, runningProcesses } = useKernelState(fromKernel);
   const programRef = useOsRef<HTMLDivElement>();
   const process = getProcess(programRef);
   useStartingDimensions(process);

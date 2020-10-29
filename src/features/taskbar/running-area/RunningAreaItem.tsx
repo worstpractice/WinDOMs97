@@ -3,34 +3,40 @@ import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { ButtonLoader } from "typings/Loader";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./RunningAreaItem.module.css";
 
-const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: OS) => ({
-  activate,
-  activeRef,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
-  minimize,
   openContextMenu,
-  unMinimize,
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   getProcess: ButtonLoader;
 };
 
 export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel(selector);
+  const { activate, activeRef } = useActiveState();
+  const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const runningAreaItemRef = useOsRef<HTMLButtonElement>();
   const process = getProcess(runningAreaItemRef);
+  const { minimize, unMinimize } = useOsWindowControls(process);
   const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB(() => {
@@ -45,10 +51,10 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
     const { osWindowRef } = process;
 
     if (isRef(activeRef, osWindowRef)) {
-      minimize(process);
+      minimize();
       activate({ current: null });
     } else {
-      unMinimize(process);
+      unMinimize();
       activate(process.osWindowRef);
       moveInFront(process.osWindowRef);
     }

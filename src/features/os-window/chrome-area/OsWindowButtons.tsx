@@ -1,30 +1,40 @@
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel/useKernel";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { default as React, useState } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { Process } from "typings/Process";
 import { css } from "utils/css";
+import { moveInFront } from "utils/moveInFront";
 import styles from "./OsWindowButtons.module.css";
 
-const selector = ({ activate, closeMenus, endProcess, maximize, minimize, unMaximize }: OS) => ({
-  activate,
-  closeMenus,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ endProcess }: KernelState) => ({
   endProcess,
-  maximize,
-  minimize,
-  unMaximize,
 });
 
-const buttonStyle = styles.Button;
-const pressedButtonStyle = css(styles.Button, styles.Pressed);
+const fromMenu = ({ closeMenus }: MenuState) => ({
+  closeMenus,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   process: Process;
 };
 
 export const OsWindowButtons: FC<Props> = ({ process }) => {
-  const { activate, closeMenus, endProcess, maximize, minimize, unMaximize } = useKernel(selector);
+  const { activate } = useActiveState();
+  const { closeMenus } = useMenuState(fromMenu);
+  const { endProcess } = useKernelState(fromKernel);
+  const { maximize, minimize, unMaximize } = useOsWindowControls(process);
   const [isPressed, setIsPressed] = useState(false);
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -61,20 +71,21 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
     setIsPressed(false);
     const { isMaximized, osWindowRef } = process;
     activate(osWindowRef);
-    isMaximized ? unMaximize(process) : maximize(process);
+    moveInFront(osWindowRef);
+    isMaximized ? unMaximize() : maximize();
   });
 
   const handleMinimize = onLMB(() => {
     if (!isPressed) return;
 
     setIsPressed(false);
-    minimize(process);
+    minimize();
     activate({ current: null });
   });
 
   //////////////////////////////////////////////////////////////////////////////
 
-  const style = isPressed ? pressedButtonStyle : buttonStyle;
+  const style = isPressed ? css(styles.Button, styles.Pressed) : styles.Button;
 
   return (
     <section className={styles.ButtonRow}>

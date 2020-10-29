@@ -1,20 +1,19 @@
-import { useKernel } from "kernel/useKernel";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
+import { useActiveState } from "state/useActiveState";
+import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
-import type { OS } from "typings/kernel/OS";
 import type { Process } from "typings/Process";
 import { alt } from "utils/alt";
 
-const selector = ({ activate, endProcess, maximize, minimize, unMaximize, unMinimize }: OS) => ({
-  activate,
+const fromKernel = ({ endProcess }: KernelState) => ({
   endProcess,
-  maximize,
-  minimize,
-  unMaximize,
-  unMinimize,
 });
 
 export const useProcessAlternatives = (process: Process): readonly Alternative[] => {
-  const { activate, endProcess, maximize, minimize, unMaximize, unMinimize } = useKernel(selector);
+  const { activate } = useActiveState();
+  const { endProcess } = useKernelState(fromKernel);
+  const { maximize, minimize, unMaximize, unMinimize } = useOsWindowControls(process);
 
   const { isMaximized, isMinimized, osWindowRef } = process;
 
@@ -27,21 +26,21 @@ export const useProcessAlternatives = (process: Process): readonly Alternative[]
     ////////////////////////////////////////////////
     isMaximized
       ? alt("Unmaximize", () => {
-          unMaximize(process);
+          unMaximize();
           activate(osWindowRef);
         })
       : alt("Maximize", () => {
-          maximize(process);
+          maximize();
           activate(osWindowRef);
         }),
     ////////////////////////////////////////////////
     isMinimized
       ? alt("Unminimize", () => {
-          unMinimize(process);
+          unMinimize();
           activate(osWindowRef);
         })
       : alt("Minimize", () => {
-          minimize(process);
+          minimize();
           activate({ current: null });
         }),
     ////////////////////////////////////////////////

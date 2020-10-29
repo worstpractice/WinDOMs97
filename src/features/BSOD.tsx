@@ -1,11 +1,11 @@
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
+import type { KernelState } from "state/useKernelState";
 import { randomHexQuad } from "utils/randomHexQuad";
 import styles from "./Bsod.module.css";
 
-const selector = ({ bsodError, bsodMessage }: OS) => ({
+const fromKernel = ({ bsodError, bsodMessage }: KernelState) => ({
   bsodError,
   bsodMessage,
 });
@@ -17,7 +17,7 @@ const MEMADDR = `0x${randomHexQuad()}`;
 type Props = {};
 
 export const Bsod: FC<Props> = () => {
-  const { bsodError, bsodMessage } = useKernel(selector);
+  const { bsodError, bsodMessage } = useKernelState(fromKernel);
 
   return (
     <main className={styles.Bsod}>

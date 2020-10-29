@@ -1,4 +1,4 @@
-import { useKernel } from "kernel/useKernel";
+import { useKernelState } from "state/useKernelState";
 import { default as React } from "react";
 import type { FC } from "typings/FC";
 import type { Position } from "typings/Position";
@@ -9,7 +9,7 @@ type Props = {
 };
 
 export const DragSelection: FC<Props> = ({ currentPosition }) => {
-  const { lastClickPosition } = useKernel();
+  const { lastClickPosition } = useKernelState();
 
   const { x: startX, y: startY } = lastClickPosition;
 

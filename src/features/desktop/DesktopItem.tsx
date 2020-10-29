@@ -7,8 +7,12 @@ import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLa
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
@@ -16,12 +20,29 @@ import { css } from "utils/css";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ executeBinary }: KernelState) => ({
+  executeBinary,
+});
+
+const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
+  closeMenus,
+  openContextMenu,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 type Props = {
   getBinary: Linker;
 };
 
 export const DesktopItem: FC<Props> = ({ getBinary }) => {
-  const { activate, activeRef, closeMenus, executeBinary, openContextMenu } = useKernel();
+  const { activate, activeRef } = useActiveState();
+  const { executeBinary } = useKernelState(fromKernel);
+  const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);
 

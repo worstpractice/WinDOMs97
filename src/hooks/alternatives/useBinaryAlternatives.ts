@@ -1,18 +1,16 @@
-import { useKernel } from "kernel/useKernel";
+import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
-import type { OS } from "typings/kernel/OS";
+import type { KernelState } from "state/useKernelState";
 import { alt } from "utils/alt";
 
-const selector = ({ executeBinary, uninstallProgram }: OS) => ({
+const fromKernel = ({ executeBinary, uninstallProgram }: KernelState) => ({
   executeBinary,
   uninstallProgram,
 });
 
-// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
-
 export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {
-  const { executeBinary, uninstallProgram } = useKernel(selector);
+  const { executeBinary, uninstallProgram } = useKernelState(fromKernel);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [

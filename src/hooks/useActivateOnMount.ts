@@ -1,15 +1,10 @@
-import { useKernel } from "kernel/useKernel";
 import { useLayoutEffect } from "react";
-import type { OS } from "typings/kernel/OS";
+import { useActiveState } from "state/useActiveState";
 import type { OsRef } from "typings/OsRef";
 import { moveInFront } from "utils/moveInFront";
 
-const selector = ({ activate }: OS) => ({
-  activate,
-});
-
 export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
-  const { activate } = useKernel(selector);
+  const { activate } = useActiveState();
 
   useLayoutEffect(() => {
     let isCancelled = false;

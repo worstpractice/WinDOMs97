@@ -3,24 +3,17 @@ import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons"
 import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useActiveState } from "state/useActiveState";
+import { useKernelState } from "state/useKernelState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { Loader } from "typings/Loader";
+import type { KernelState } from "state/useKernelState";
 import { css } from "utils/css";
 import styles from "./OsWindowChromeArea.module.css";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 
-const selector = ({ activate, activeRef, maximize, unMaximize }: OS) => ({
-  activate,
-  activeRef,
-  maximize,
-  unMaximize,
-});
-
-const chromeAreaStyle = styles.OsWindowChromeArea;
-const activeChromeAreaStyle = css(styles.OsWindowChromeArea, styles.Active);
 
 type Props = {
   getProcess: Loader;
@@ -28,9 +21,10 @@ type Props = {
 };
 
 export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
-  const { activate, activeRef, maximize, unMaximize } = useKernel(selector);
+  const { activate, activeRef } = useActiveState();
   const chromeAreaRef = useOsRef<HTMLElement>();
   const process = getProcess(chromeAreaRef);
+  const { maximize, unMaximize } = useOsWindowControls(process);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   //  Hook Handlers
@@ -41,7 +35,7 @@ export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
 
     activate(osWindowRef);
 
-    isMaximized ? unMaximize(process) : maximize(process);
+    isMaximized ? unMaximize() : maximize();
   };
 
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
@@ -64,7 +58,9 @@ export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
 
   const { osWindowRef } = process;
 
-  const style = isRef(activeRef, osWindowRef) ? activeChromeAreaStyle : chromeAreaStyle;
+  const style = isRef(activeRef, osWindowRef)
+    ? css(styles.OsWindowChromeArea, styles.Active)
+    : styles.OsWindowChromeArea;
 
   return (
     <span

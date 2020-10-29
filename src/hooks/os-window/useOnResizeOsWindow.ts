@@ -9,7 +9,7 @@ import { moveInFront } from "utils/moveInFront";
 const OSWINDOW_MIN_HEIGHT = 250 as const;
 const OSWINDOW_MIN_WIDTH = 350 as const;
 
-export const useOnResizeWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
+export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   /** Drag start event. */
   const handleMouseDown = onLMB<U>((e) => {
     const { current: osWindow } = osWindowRef;

@@ -2,33 +2,39 @@ import { Icon } from "components/Icon";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import { useActiveState } from "state/useActiveState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import type { LiLoader } from "typings/Loader";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationAreaItem.module.css";
 
-const selector = ({ activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize }: OS) => ({
-  activate,
-  activeRef,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
-  minimize,
   openContextMenu,
-  unMinimize,
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   getProcess: LiLoader;
 };
 
 export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate, activeRef, closeMenus, minimize, openContextMenu, unMinimize } = useKernel(selector);
+  const { activate, activeRef } = useActiveState();
+  const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const notificationAreaItemRef = useOsRef<HTMLLIElement>();
   const process = getProcess(notificationAreaItemRef);
+  const { minimize, unMinimize } = useOsWindowControls(process);
   const alternatives = useProcessAlternatives(process);
 
   const handleContextMenu = onRMB<HTMLLIElement>(() => {
@@ -43,10 +49,10 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
     const { osWindowRef } = process;
 
     if (isRef(activeRef, osWindowRef)) {
-      minimize(process);
+      minimize();
       activate({ current: null });
     } else {
-      unMinimize(process);
+      unMinimize();
       activate(process.osWindowRef);
       moveInFront(process.osWindowRef);
     }

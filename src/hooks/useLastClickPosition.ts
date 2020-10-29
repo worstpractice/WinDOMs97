@@ -1,17 +1,29 @@
-import { useKernel } from "kernel/useKernel";
 import { useEffect } from "react";
+import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import type { CleanupFn } from "typings/CleanupFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { OS } from "typings/kernel/OS";
 import { listen } from "utils/listen";
 
-const selector = ({ closeMenus, setLastClickPosition }: OS) => ({
-  closeMenus,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ setLastClickPosition }: KernelState) => ({
   setLastClickPosition,
 });
 
+const fromMenu = ({ closeMenus }: MenuState) => ({
+  closeMenus,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const useLastClickPosition = () => {
-  const { closeMenus, setLastClickPosition } = useKernel(selector);
+  const { setLastClickPosition } = useKernelState(fromKernel);
+  const { closeMenus } = useMenuState(fromMenu);
 
   useEffect(() => {
     let isCancelled = false;

@@ -1,18 +1,29 @@
 import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
-import { useKernel } from "kernel/useKernel";
 import { default as React } from "react";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";
 import styles from "./ContextMenuItem.module.css";
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ closeMenus }: MenuState) => ({
+  closeMenus,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   alternative: Alternative;
 };
 
 export const ContextMenuItem: FC<Props> = ({ alternative }) => {
-  const { closeMenus } = useKernel();
+  const { closeMenus } = useMenuState(fromMenu);
 
   const { action, icon, name } = alternative;
 

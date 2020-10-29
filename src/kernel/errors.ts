@@ -1,4 +1,4 @@
-import type { BSOD } from "typings/kernel/BSOD";
+import type { BSOD } from "state/useKernelState";
 
 export const OUT_OF_TASKBAR: BSOD = {
   isBsod: true,

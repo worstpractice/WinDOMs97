@@ -1,16 +1,14 @@
-import { useKernel } from "kernel/useKernel";
+import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
-import type { OS } from "typings/kernel/OS";
+import type { KernelState } from "state/useKernelState";
 import { alt } from "utils/alt";
 
-const selector = ({ bluescreen }: OS) => ({
+const fromKernel = ({ bluescreen }: KernelState) => ({
   bluescreen,
 });
 
-// NOTE: Remember to UTILIZE the selector too. Like, pass it to `useKernel.`
-
 export const useDesktopAlternatives = (): readonly Alternative[] => {
-  const { bluescreen } = useKernel(selector);
+  const { bluescreen } = useKernelState(fromKernel);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [

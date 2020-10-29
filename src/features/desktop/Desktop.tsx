@@ -4,24 +4,30 @@ import { useDesktopAlternatives } from "hooks/alternatives/useDesktopAlternative
 import { useDragSelection } from "hooks/desktop/useOnDragSelection";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
-import { useKernel } from "kernel/useKernel";
 import type { ReactNode } from "react";
 import { default as React } from "react";
+import type { MenuState } from "state/useMenuState";
+import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
-import type { OS } from "typings/kernel/OS";
 import styles from "./Desktop.module.css";
 
-const selector = ({ openContextMenu }: OS) => ({
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromMenu = ({ openContextMenu }: MenuState) => ({
   openContextMenu,
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   children: ReactNode;
 };
 
 export const Desktop: FC<Props> = ({ children }) => {
-  const { openContextMenu } = useKernel(selector);
+  const { openContextMenu } = useMenuState(fromMenu);
   const desktopRef = useOsRef<HTMLElement>();
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
   const alternatives = useDesktopAlternatives();
