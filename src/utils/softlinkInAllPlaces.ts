@@ -1,7 +1,7 @@
 import type { Softlinks } from "typings/Softlinks";
 
 /** For convenience. All `OsLocation`s at once. */
-export const everywhere = (): Softlinks => {
+export const softlinkInAllPlaces = (): Softlinks => {
   return {
     isOnDesktop: true,
     isOnStartMenu: true,

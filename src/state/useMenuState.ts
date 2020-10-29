@@ -1,19 +1,18 @@
 import type { Alternative } from "typings/Alternative";
+import type { MenuState } from "typings/state/MenuState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   alternatives: readonly Alternative[];
   openMenu: "ContextMenu" | "StartMenu" | "";
 };
 
-type Actions = {
+export type Actions = {
   closeMenus: () => void;
   openContextMenu: (alternatives: readonly Alternative[]) => void;
   toggleStartMenu: () => void;
 };
-
-export type MenuState = Data & Actions;
 
 export const useMenuState = create<MenuState>(
   combine<Data, Actions>(

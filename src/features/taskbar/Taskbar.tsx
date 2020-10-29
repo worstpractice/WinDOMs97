@@ -2,9 +2,9 @@ import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
+import type { MenuState } from "typings/state/MenuState";
 import styles from "./Taskbar.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

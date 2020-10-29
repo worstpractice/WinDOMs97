@@ -1,7 +1,7 @@
 import { onLMB } from "event-filters/onLMB";
 import { useEffect, useState } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { MenuState } from "state/useMenuState";
+import type { MenuState } from "typings/state/MenuState";
 import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";

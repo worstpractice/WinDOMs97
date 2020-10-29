@@ -18,15 +18,15 @@ import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { default as React } from "react";
-import type { ErrorState } from "state/useErrorState";
 import { useErrorState } from "state/useErrorState";
-import type { KernelState } from "state/useKernelState";
 import { useKernelState } from "state/useKernelState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
 import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
+import type { ErrorState } from "typings/state/ErrorState";
+import type { KernelState } from "typings/state/KernelState";
+import type { MenuState } from "typings/state/MenuState";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

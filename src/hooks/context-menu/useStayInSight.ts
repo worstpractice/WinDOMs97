@@ -1,7 +1,8 @@
 import { useLayoutEffect, useState } from "react";
-import { ClickState, useClickState } from "state/useClickState";
+import { useClickState } from "state/useClickState";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
+import type { ClickState } from "typings/state/ClickState";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

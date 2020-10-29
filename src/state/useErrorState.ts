@@ -1,18 +1,17 @@
 import type { BSOD } from "typings/BSOD";
+import type { ErrorState } from "typings/state/ErrorState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   isBsod: boolean;
   bsodError: string;
   bsodMessage: string;
 };
 
-type Actions = {
+export type Actions = {
   bluescreen: (bsod: BSOD) => void;
 };
-
-export type ErrorState = Data & Actions;
 
 export const useErrorState = create<ErrorState>(
   combine<Data, Actions>(

@@ -2,7 +2,7 @@ import type { BSOD } from "typings/BSOD";
 
 export const HALT_AND_CATCH_FIRE: BSOD = {
   error: "HALT_AND_CATCH_FIRE",
-  message: "Something went wrong",
+  message: "The system successfully failed.",
 } as const;
 
 export const OUT_OF_TASKBAR: BSOD = {

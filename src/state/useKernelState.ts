@@ -4,25 +4,24 @@ import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
-import { ARS256 } from "utils/algorithms/ars256";
-import { everywhere } from "utils/everwhere";
+import type { KernelState } from "typings/state/KernelState";
+import { ars256 } from "utils/algorithms/ars256";
+import { softlinkInAllPlaces } from "utils/softlinkInAllPlaces";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   availablePids: readonly PID[];
   installedPrograms: readonly Binary[];
   runningProcesses: readonly Process[];
 };
 
-type Actions = {
+export type Actions = {
   endProcess: (process: Process) => void;
   dangerouslyExecuteBinary: (binary: Binary, pid: PID) => void;
   installProgram: (rawBinary: RawBinary) => void;
   uninstallProgram: (binary: Binary) => void;
 };
-
-export type KernelState = Data & Actions;
 
 export const useKernelState = create<KernelState>(
   combine<Data, Actions>(
@@ -86,7 +85,7 @@ export const useKernelState = create<KernelState>(
               ////////////////////////////////////////////////////////
               ...rawBinary,
               isSingleInstanceOnly: isSingleInstanceOnly ?? false,
-              softlinks: softlinks ?? everywhere(),
+              softlinks: softlinks ?? softlinkInAllPlaces(),
               startingDimensions: startingDimensions ?? { x: 400, y: 400 },
               ////////////////////////////////////////////////////////
               // Placeholder until we can hash the entire binary itself a few lines down.
@@ -99,7 +98,7 @@ export const useKernelState = create<KernelState>(
             };
 
             // NOTE: Crucial step in which we hash the binary.
-            binary.fileHash = ARS256(binary);
+            binary.fileHash = ars256(binary);
 
             return { installedPrograms: [...installedPrograms, binary] } as const;
           });

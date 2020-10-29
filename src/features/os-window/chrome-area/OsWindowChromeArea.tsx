@@ -9,7 +9,7 @@ import { useKernelState } from "state/useKernelState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
-import type { KernelState } from "state/useKernelState";
+import type { KernelState } from "typings/state/KernelState";
 import { css } from "utils/css";
 import styles from "./OsWindowChromeArea.module.css";
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";

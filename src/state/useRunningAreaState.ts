@@ -1,15 +1,14 @@
+import type { RunningAreaState } from "typings/state/RunningAreaState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   isRunningAreaFull: boolean;
 };
 
-type Actions = {
+export type Actions = {
   setIsRunningAreaFull: (to: boolean) => void;
 };
-
-export type RunningAreaState = Data & Actions;
 
 export const useRunningAreaState = create<RunningAreaState>(
   combine<Data, Actions>(

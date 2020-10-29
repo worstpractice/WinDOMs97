@@ -1,6 +1,6 @@
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useActiveState } from "state/useActiveState";
-import type { KernelState } from "state/useKernelState";
+import type { KernelState } from "typings/state/KernelState";
 import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
 import type { Process } from "typings/Process";

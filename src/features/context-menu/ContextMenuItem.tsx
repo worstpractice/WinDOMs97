@@ -2,10 +2,10 @@ import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { default as React } from "react";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { Alternative } from "typings/Alternative";
 import type { FC } from "typings/FC";
+import type { MenuState } from "typings/state/MenuState";
 import styles from "./ContextMenuItem.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

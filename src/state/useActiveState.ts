@@ -1,19 +1,18 @@
 import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
+import type { ActiveState } from "typings/state/ActiveState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   activeRef: OsRef<HTMLElement>;
 };
 
-type Actions = {
+export type Actions = {
   activate: <T extends OsRef<HTMLElement>>(to: T) => void;
 };
 
 let debugLogCounter = 0;
-
-export type ActiveState = Data & Actions;
 
 export const useActiveState = create<ActiveState>(
   combine<Data, Actions>(

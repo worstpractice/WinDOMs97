@@ -1,16 +1,15 @@
 import type { Position } from "typings/Position";
+import type { ClickState } from "typings/state/ClickState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
-type Data = {
+export type Data = {
   lastClickPosition: Position;
 };
 
-type Actions = {
+export type Actions = {
   setLastClickPosition: (to: Position) => void;
 };
-
-export type ClickState = Data & Actions;
 
 export const useClickState = create<ClickState>(
   combine<Data, Actions>(

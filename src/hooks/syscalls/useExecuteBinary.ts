@@ -1,14 +1,14 @@
 import { OUT_OF_PIDS, OUT_OF_TASKBAR } from "errors";
 import { Pids } from "kernel/Pids";
 import { useCallback } from "react";
-import type { ErrorState } from "state/useErrorState";
 import { useErrorState } from "state/useErrorState";
-import type { KernelState } from "state/useKernelState";
 import { useKernelState } from "state/useKernelState";
-import type { RunningAreaState } from "state/useRunningAreaState";
 import { useRunningAreaState } from "state/useRunningAreaState";
 import { isNull } from "type-predicates/isNull";
 import type { Binary } from "typings/Binary";
+import type { ErrorState } from "typings/state/ErrorState";
+import type { KernelState } from "typings/state/KernelState";
+import type { RunningAreaState } from "typings/state/RunningAreaState";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

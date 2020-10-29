@@ -4,10 +4,10 @@ import { onLMB } from "event-filters/onLMB";
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
+import type { MenuState } from "typings/state/MenuState";
 import styles from "./StartMenuItem.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

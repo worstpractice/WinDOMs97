@@ -5,11 +5,11 @@ import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
+import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 

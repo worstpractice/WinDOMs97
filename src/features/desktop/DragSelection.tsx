@@ -1,8 +1,8 @@
 import { default as React } from "react";
-import type { ClickState } from "state/useClickState";
 import { useClickState } from "state/useClickState";
 import type { FC } from "typings/FC";
 import type { Position } from "typings/Position";
+import type { ClickState } from "typings/state/ClickState";
 import style from "./DragSelection.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -4,7 +4,7 @@ import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
-import type { KernelState } from "state/useKernelState";
+import type { KernelState } from "typings/state/KernelState";
 import styles from "./TaskMgr.module.css";
 
 const fromKernel = ({ endProcess, runningProcesses }: KernelState) => ({

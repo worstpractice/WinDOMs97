@@ -1,5 +1,5 @@
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
-import type { KernelState } from "state/useKernelState";
+import type { KernelState } from "typings/state/KernelState";
 import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";

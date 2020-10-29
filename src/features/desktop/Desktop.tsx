@@ -6,10 +6,10 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
 import { default as React } from "react";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
+import type { MenuState } from "typings/state/MenuState";
 import styles from "./Desktop.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

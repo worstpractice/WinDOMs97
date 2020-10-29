@@ -6,11 +6,11 @@ import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { LiLoader } from "typings/Loader";
+import type { MenuState } from "typings/state/MenuState";
 import { moveInFront } from "utils/moveInFront";
 import styles from "./NotificationAreaItem.module.css";
 

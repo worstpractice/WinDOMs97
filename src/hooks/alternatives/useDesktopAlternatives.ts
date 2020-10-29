@@ -1,7 +1,7 @@
 import { HALT_AND_CATCH_FIRE } from "errors";
-import type { ErrorState } from "state/useErrorState";
 import { useErrorState } from "state/useErrorState";
 import type { Alternative } from "typings/Alternative";
+import type { ErrorState } from "typings/state/ErrorState";
 import { alt } from "utils/alt";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

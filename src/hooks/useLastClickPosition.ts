@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import type { ClickState } from "state/useClickState";
 import { useClickState } from "state/useClickState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { CleanupFn } from "typings/CleanupFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
+import type { ClickState } from "typings/state/ClickState";
+import type { MenuState } from "typings/state/MenuState";
 import { listen } from "utils/listen";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

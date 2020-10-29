@@ -10,13 +10,11 @@ import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { KernelState } from "state/useKernelState";
-import { useKernelState } from "state/useKernelState";
-import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
+import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
@@ -24,8 +22,6 @@ import styles from "./DesktopItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
