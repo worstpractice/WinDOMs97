@@ -1,10 +1,9 @@
 import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
+import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
-import type { KernelState } from "state/useKernelState";
-import { useKernelState } from "state/useKernelState";
 import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
@@ -14,10 +13,6 @@ import styles from "./StartMenuItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const fromKernel = ({ executeBinary }: KernelState) => ({
-  executeBinary,
-});
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
@@ -30,14 +25,14 @@ type Props = {
 };
 
 export const StartMenuItem: FC<Props> = ({ getBinary }) => {
-  const { executeBinary } = useKernelState(fromKernel);
   const { closeMenus } = useMenuState(fromMenu);
   const startMenuItemRef = useOsRef<HTMLLIElement>();
   const binary = getBinary(startMenuItemRef);
+  const executeBinary = useExecuteBinary(binary);
 
   const handleLaunch = onLMB(() => {
     closeMenus();
-    executeBinary(binary);
+    executeBinary();
   });
 
   const { fileName, icon, name } = binary;

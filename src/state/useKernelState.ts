@@ -1,7 +1,5 @@
 import { Pids } from "kernel/Pids";
-import { isNull } from "type-predicates/isNull";
 import type { Binary } from "typings/Binary";
-import type { BSOD } from "typings/BSOD";
 import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
 import type { Process } from "typings/Process";
@@ -19,7 +17,7 @@ type Data = {
 
 type Actions = {
   endProcess: (process: Process) => void;
-  executeBinary: (binary: Binary) => void;
+  dangerouslyExecuteBinary: (binary: Binary, pid: PID) => void;
   installProgram: (rawBinary: RawBinary) => void;
   uninstallProgram: (binary: Binary) => void;
 };
@@ -55,33 +53,8 @@ export const useKernelState = create<KernelState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        executeBinary: (binary: Binary) => {
-          set((store) => {
-            const { runningProcesses } = store;
-
-            const pid = Pids.use();
-
-            if (isNull(pid)) {
-              return store; // OUT_OF_PIDS; <--- This should be in a kernel-gate-hook
-            }
-
-            const { isSingleInstanceOnly } = binary;
-
-            if (isSingleInstanceOnly) {
-              // BEGIN EXPENSIVE SEARCH //////////////////////////////
-              const { fileHash: targetHash } = binary;
-
-              for (const { binaryImage } of runningProcesses) {
-                const { fileHash } = binaryImage;
-
-                if (fileHash === targetHash) {
-                  // Abort launch
-                  return { runningProcesses } as const;
-                }
-              }
-              // END EXPENSIVE SEARCH ////////////////////////////////
-            }
-
+        dangerouslyExecuteBinary: (binary: Binary, pid: PID) => {
+          set(({ runningProcesses }) => {
             const spawnedProcess: Process = {
               ////////////////////////////////////////////////////////
               binaryImage: binary,

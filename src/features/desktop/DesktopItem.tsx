@@ -5,6 +5,7 @@ import { onRMB } from "event-filters/onRMB";
 import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives";
 import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
+import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
@@ -24,9 +25,7 @@ import styles from "./DesktopItem.module.css";
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const fromKernel = ({ executeBinary }: KernelState) => ({
-  executeBinary,
-});
+
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
@@ -41,10 +40,10 @@ type Props = {
 
 export const DesktopItem: FC<Props> = ({ getBinary }) => {
   const { activate, activeRef } = useActiveState();
-  const { executeBinary } = useKernelState(fromKernel);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);
+  const executeBinary = useExecuteBinary(binary);
 
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopItemRef);
@@ -57,7 +56,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
   });
 
   const handleDoubleClick = () => {
-    executeBinary(binary);
+    executeBinary();
   };
 
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.

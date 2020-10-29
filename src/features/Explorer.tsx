@@ -57,8 +57,6 @@ export const Explorer: FC<Props> = () => {
   const { alternatives, openMenu } = useMenuState(fromMenu);
   useLastClickPosition();
 
-  console.log(alternatives);
-
   if (isBsod) {
     return <Bsod />;
   }

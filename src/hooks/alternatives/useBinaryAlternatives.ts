@@ -1,22 +1,29 @@
+import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
+import type { KernelState } from "state/useKernelState";
 import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
-import type { KernelState } from "state/useKernelState";
 import { alt } from "utils/alt";
 
-const fromKernel = ({ executeBinary, uninstallProgram }: KernelState) => ({
-  executeBinary,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ uninstallProgram }: KernelState) => ({
   uninstallProgram,
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {
-  const { executeBinary, uninstallProgram } = useKernelState(fromKernel);
+  const { uninstallProgram } = useKernelState(fromKernel);
+  const executeBinary = useExecuteBinary(binary);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [
     ////////////////////////////////////////////////
     alt("Open", () => {
-      executeBinary(binary);
+      executeBinary();
     }),
     ////////////////////////////////////////////////
     alt("Rename", () => {

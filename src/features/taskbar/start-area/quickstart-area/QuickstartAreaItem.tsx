@@ -1,9 +1,8 @@
 import { Icon } from "components/Icon";
 import { switchOn } from "event-filters/delegate";
+import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
-import type { KernelState } from "state/useKernelState";
-import { useKernelState } from "state/useKernelState";
 import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { ButtonHandler } from "typings/ButtonHandler";
@@ -14,10 +13,6 @@ import styles from "./QuickstartAreaItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-const fromKernel = ({ executeBinary }: KernelState) => ({
-  executeBinary,
-});
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
@@ -30,13 +25,13 @@ type Props = {
 };
 
 export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
-  const { executeBinary } = useKernelState(fromKernel);
   const { closeMenus } = useMenuState(fromMenu);
   const quickstartAreaItemRef = useOsRef<HTMLButtonElement>();
   const binary = getBinary(quickstartAreaItemRef);
+  const executeBinary = useExecuteBinary(binary);
 
   const handleLMB = () => {
-    executeBinary(binary);
+    executeBinary();
     closeMenus();
   };
 
