@@ -1,10 +1,9 @@
-import { OUT_OF_PIDS, OUT_OF_TASKBAR } from "kernel/errors";
 import { Pids } from "kernel/Pids";
 import { isNull } from "type-predicates/isNull";
 import type { Binary } from "typings/Binary";
+import type { BSOD } from "typings/BSOD";
 import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
-import type { Position } from "typings/Position";
 import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
 import { ARS256 } from "utils/algorithms/ars256";
@@ -13,42 +12,16 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 type Data = {
-  ////////////////////////////////////////////////////////////////
-  // Not Collections
-  ////////////////////////////////////////////////////////////////
-  isRunningAreaFull: boolean;
-  lastClickPosition: Position;
-  isBsod: boolean;
-  bsodError: string;
-  bsodMessage: string;
-  ////////////////////////////////////////////////////////////////
-  // Collections
-  ////////////////////////////////////////////////////////////////
   availablePids: readonly PID[];
   installedPrograms: readonly Binary[];
   runningProcesses: readonly Process[];
 };
 
-/** NOTE: Temporarily located here for simplicity. `useErrorState` should be its own hook. */
-export type BSOD = Pick<Data, "isBsod" | "bsodError" | "bsodMessage">;
-
 type Actions = {
-  ////////////////////////////////////////////////////////////////
-  // Ui
-  ////////////////////////////////////////////////////////////////
-  setLastClickPosition: (to: Position) => void;
-  setIsRunningAreaFull: (to: boolean) => void;
-  ////////////////////////////////////////////////////////////////
-  // Control
-  ////////////////////////////////////////////////////////////////
   endProcess: (process: Process) => void;
   executeBinary: (binary: Binary) => void;
   installProgram: (rawBinary: RawBinary) => void;
   uninstallProgram: (binary: Binary) => void;
-  ////////////////////////////////////////////////////////////////
-  // Debug
-  ////////////////////////////////////////////////////////////////
-  bluescreen: (error: string, message: string) => void;
 };
 
 export type KernelState = Data & Actions;
@@ -56,16 +29,6 @@ export type KernelState = Data & Actions;
 export const useKernelState = create<KernelState>(
   combine<Data, Actions>(
     {
-      ///////////////////////////////////////////
-      // Not Collections
-      ///////////////////////////////////////////
-      isRunningAreaFull: false,
-      lastClickPosition: { x: 0, y: 0 },
-      isBsod: false,
-      bsodError: "",
-      bsodMessage: "",
-      ///////////////////////////////////////////
-      // Collections
       ///////////////////////////////////////////
       availablePids: Pids.available,
       installedPrograms: [],
@@ -75,20 +38,6 @@ export const useKernelState = create<KernelState>(
 
     (set) =>
       ({
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //* UI *
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setLastClickPosition: ({ x, y }: Position) => {
-          set(() => {
-            return { lastClickPosition: { x, y } } as const;
-          });
-        },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setIsRunningAreaFull: (to: boolean) => {
-          set(() => {
-            return { isRunningAreaFull: to } as const;
-          });
-        },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         //* CONTROL *
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -107,15 +56,13 @@ export const useKernelState = create<KernelState>(
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         executeBinary: (binary: Binary) => {
-          set(({ isRunningAreaFull, runningProcesses }) => {
-            if (isRunningAreaFull) {
-              return OUT_OF_TASKBAR;
-            }
+          set((store) => {
+            const { runningProcesses } = store;
 
             const pid = Pids.use();
 
             if (isNull(pid)) {
-              return OUT_OF_PIDS;
+              return store; // OUT_OF_PIDS; <--- This should be in a kernel-gate-hook
             }
 
             const { isSingleInstanceOnly } = binary;
@@ -193,18 +140,6 @@ export const useKernelState = create<KernelState>(
             });
 
             return { installedPrograms: sparedPrograms } as const;
-          });
-        },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //* Debug *
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        bluescreen: (error: string, message: string) => {
-          set(() => {
-            return {
-              isBsod: true,
-              bsodError: error,
-              bsodMessage: message,
-            } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

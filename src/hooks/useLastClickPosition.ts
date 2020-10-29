@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import type { KernelState } from "state/useKernelState";
-import { useKernelState } from "state/useKernelState";
+import type { ClickState } from "state/useClickState";
+import { useClickState } from "state/useClickState";
 import type { MenuState } from "state/useMenuState";
 import { useMenuState } from "state/useMenuState";
 import type { CleanupFn } from "typings/CleanupFn";
@@ -11,7 +11,7 @@ import { listen } from "utils/listen";
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const fromKernel = ({ setLastClickPosition }: KernelState) => ({
+const fromClick = ({ setLastClickPosition }: ClickState) => ({
   setLastClickPosition,
 });
 
@@ -22,7 +22,7 @@ const fromMenu = ({ closeMenus }: MenuState) => ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastClickPosition = () => {
-  const { setLastClickPosition } = useKernelState(fromKernel);
+  const { setLastClickPosition } = useClickState(fromClick);
   const { closeMenus } = useMenuState(fromMenu);
 
   useEffect(() => {

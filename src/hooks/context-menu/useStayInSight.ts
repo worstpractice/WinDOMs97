@@ -1,15 +1,20 @@
 import { useLayoutEffect, useState } from "react";
-import { useKernelState } from "state/useKernelState";
+import { ClickState, useClickState } from "state/useClickState";
 import type { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
-import type { KernelState } from "state/useKernelState";
 
-const fromKernel = ({ lastClickPosition }: KernelState) => ({
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromClick = ({ lastClickPosition }: ClickState) => ({
   lastClickPosition,
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {
-  const { lastClickPosition } = useKernelState(fromKernel);
+  const { lastClickPosition } = useClickState(fromClick);
   const [isTooFarDown, setIsTooFarDown] = useState(false);
   const [position, setPosition] = useState<Position>(lastClickPosition);
 

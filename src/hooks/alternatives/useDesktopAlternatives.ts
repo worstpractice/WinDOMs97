@@ -1,14 +1,21 @@
-import { useKernelState } from "state/useKernelState";
+import { HALT_AND_CATCH_FIRE } from "errors";
+import type { ErrorState } from "state/useErrorState";
+import { useErrorState } from "state/useErrorState";
 import type { Alternative } from "typings/Alternative";
-import type { KernelState } from "state/useKernelState";
 import { alt } from "utils/alt";
 
-const fromKernel = ({ bluescreen }: KernelState) => ({
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromError = ({ bluescreen }: ErrorState) => ({
   bluescreen,
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 export const useDesktopAlternatives = (): readonly Alternative[] => {
-  const { bluescreen } = useKernelState(fromKernel);
+  const { bluescreen } = useErrorState(fromError);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
   return [
@@ -16,7 +23,7 @@ export const useDesktopAlternatives = (): readonly Alternative[] => {
       console.log("We create a new folder");
     }),
     alt("Halt and catch fire", () => {
-      bluescreen("HALT_AND_CATCH_FIRE", "Something went wrong");
+      bluescreen(HALT_AND_CATCH_FIRE);
     }),
   ] as const;
 };

@@ -1,0 +1,11 @@
+import type { BSOD } from "typings/BSOD";
+
+export const HALT_AND_CATCH_FIRE: BSOD = {
+  error: "HALT_AND_CATCH_FIRE",
+  message: "Something went wrong",
+} as const;
+
+export const OUT_OF_TASKBAR: BSOD = {
+  error: "OUT_OF_TASKBAR",
+  message: "Upgrade to 800x600 monitor to accomodate more processes",
+} as const;

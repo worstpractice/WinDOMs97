@@ -1,18 +1,30 @@
 import { useLayoutEffect } from "react";
-import { useKernelState } from "state/useKernelState";
-import type { OsRef } from "typings/OsRef";
 import type { KernelState } from "state/useKernelState";
+import { useKernelState } from "state/useKernelState";
+import type { RunningAreaState } from "state/useRunningAreaState";
+import { useRunningAreaState } from "state/useRunningAreaState";
+import type { OsRef } from "typings/OsRef";
 
-const fromKernel = ({ setIsRunningAreaFull, runningProcesses }: KernelState) => ({
-  setIsRunningAreaFull,
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const fromKernel = ({ runningProcesses }: KernelState) => ({
   runningProcesses,
 });
+
+const fromRunningArea = ({ setIsRunningAreaFull }: RunningAreaState) => ({
+  setIsRunningAreaFull,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** Magic number. */
 const RUNNING_AREA_ITEM_WIDTH = 240 as const;
 
 export const useIsRunningAreaFull = <T extends HTMLElement>(runningAreaRef: OsRef<T>) => {
-  const { setIsRunningAreaFull, runningProcesses } = useKernelState(fromKernel);
+  const { runningProcesses } = useKernelState(fromKernel);
+  const { setIsRunningAreaFull } = useRunningAreaState(fromRunningArea);
 
   useLayoutEffect(() => {
     let isCancelled = false;

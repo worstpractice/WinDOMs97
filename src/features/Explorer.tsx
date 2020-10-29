@@ -18,6 +18,8 @@ import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { default as React } from "react";
+import type { ErrorState } from "state/useErrorState";
+import { useErrorState } from "state/useErrorState";
 import type { KernelState } from "state/useKernelState";
 import { useKernelState } from "state/useKernelState";
 import type { MenuState } from "state/useMenuState";
@@ -30,8 +32,11 @@ import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const fromKernel = ({ isBsod, installedPrograms, installProgram, runningProcesses }: KernelState) => ({
+const fromError = ({ isBsod }: ErrorState) => ({
   isBsod,
+});
+
+const fromKernel = ({ installedPrograms, installProgram, runningProcesses }: KernelState) => ({
   installedPrograms,
   installProgram,
   runningProcesses,
@@ -47,7 +52,8 @@ const fromMenu = ({ alternatives, openMenu }: MenuState) => ({
 type Props = {};
 
 export const Explorer: FC<Props> = () => {
-  const { isBsod, installedPrograms, installProgram, runningProcesses } = useKernelState(fromKernel);
+  const { isBsod } = useErrorState(fromError);
+  const { installedPrograms, installProgram, runningProcesses } = useKernelState(fromKernel);
   const { alternatives, openMenu } = useMenuState(fromMenu);
   useLastClickPosition();
 
