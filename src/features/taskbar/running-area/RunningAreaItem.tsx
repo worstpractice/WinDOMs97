@@ -4,6 +4,7 @@ import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
@@ -40,6 +41,7 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
   const runningAreaItemRef = useOsRef<HTMLButtonElement>();
   const process = getProcess(runningAreaItemRef);
   const alternatives = useProcessAlternatives(process);
+  const { minimize, unMinimize } = useOsWindowControls(process);
 
   const handleContextMenu = onRMB<HTMLButtonElement>(() => {
     openContextMenu(alternatives);
@@ -53,8 +55,10 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
     const { osWindowRef } = process;
 
     if (isRef(activeRef, osWindowRef)) {
+      minimize();
       activate({ current: null });
     } else {
+      unMinimize();
       activate(process.osWindowRef);
       moveInFront(process.osWindowRef);
     }
