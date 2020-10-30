@@ -15,7 +15,6 @@ const fromKernel = ({ runningProcesses }: KernelState) => ({
 const fromRunningArea = ({ setIsRunningAreaFull }: RunningAreaState) => ({
   setIsRunningAreaFull,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** Magic number. */

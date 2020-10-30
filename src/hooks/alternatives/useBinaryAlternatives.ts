@@ -11,7 +11,6 @@ import { alt } from "utils/alt";
 const fromKernel = ({ uninstallProgram }: KernelState) => ({
   uninstallProgram,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {

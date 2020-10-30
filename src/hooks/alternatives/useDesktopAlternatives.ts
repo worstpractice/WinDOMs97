@@ -10,7 +10,6 @@ import { alt } from "utils/alt";
 const fromError = ({ bluescreen }: ErrorState) => ({
   bluescreen,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDesktopAlternatives = (): readonly Alternative[] => {

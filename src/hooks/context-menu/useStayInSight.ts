@@ -10,7 +10,6 @@ import type { ClickState } from "typings/state/ClickState";
 const fromClick = ({ lastClickPosition }: ClickState) => ({
   lastClickPosition,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {

@@ -25,7 +25,6 @@ const fromKernel = ({ dangerouslyExecuteBinary, runningProcesses }: KernelState)
 const fromRunningArea = ({ isRunningAreaFull }: RunningAreaState) => ({
   isRunningAreaFull,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useExecuteBinary = (binary: Binary) => {

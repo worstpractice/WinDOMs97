@@ -17,7 +17,6 @@ const fromClick = ({ setLastClickPosition }: ClickState) => ({
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastClickPosition = () => {
