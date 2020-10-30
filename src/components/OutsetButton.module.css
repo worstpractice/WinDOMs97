@@ -1,0 +1,30 @@
+@import "../styles/colors.module.css";
+
+.OutsetButton {
+  background-color: var(--gray);
+  font-size: 20px;
+  height: 24px;
+  outline-color: var(--oswindow-outline);
+  outline-style: outset;
+  outline-width: 4px;
+  width: 24px;
+}
+
+.OutsetButton:-moz-focusring {
+  background-color: var(--gray);
+  font-size: 20px;
+  height: 24px;
+  outline-color: var(--oswindow-outline);
+  outline-style: outset;
+  outline-width: 4px;
+  width: 24px;
+}
+
+/*** WARN: Must come last ***/
+.Pressed:hover {
+  outline-style: inset;
+}
+
+.Pressed:not(:hover) {
+  outline-style: outset;
+}

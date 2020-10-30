@@ -1,5 +1,4 @@
 import type { ReactElement, ValidationMap, WeakValidationMap } from "react";
-import type { AnyProps } from "typings/AnyProps";
 
 /** The regular `FC` type, sans `PropsWithChildren`.
  *
@@ -21,7 +20,7 @@ import type { AnyProps } from "typings/AnyProps";
  *   children: ReactElement; // NOTE: Not optional unless you make it
  * };
  */
-export type FC<P extends AnyProps> = {
+export type FC<P extends {}> = {
   (props: P, context?: unknown): ReactElement<P, any> | null;
   propTypes?: WeakValidationMap<P>;
   contextTypes?: ValidationMap<unknown>;

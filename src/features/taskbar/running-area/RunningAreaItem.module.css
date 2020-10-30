@@ -1,14 +1,9 @@
-@import "../../../styles/colors.module.css";
-
 .RunningAreaItem {
   align-items: center;
   cursor: pointer;
   display: flex;
   gap: 6px;
   height: 100%;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
   padding-left: 10px;
   padding-right: 10px;
   width: 240px;
@@ -20,19 +15,7 @@
   display: flex;
   gap: 6px;
   height: 100%;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
   padding-left: 10px;
   padding-right: 10px;
   width: 240px;
-}
-
-/*** WARN: Must come last ***/
-.Active {
-  outline-style: inset;
-}
-
-.Active:-moz-focusring {
-  outline-style: inset;
 }

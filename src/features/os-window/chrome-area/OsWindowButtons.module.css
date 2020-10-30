@@ -7,35 +7,3 @@
   gap: 16px;
   justify-content: center;
 }
-
-.Button {
-  background-color: var(--gray);
-  font-size: 20px;
-  height: 24px;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
-  width: 24px;
-}
-
-.Button:-moz-focusring {
-  background-color: var(--gray);
-  font-size: 20px;
-  height: 24px;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
-  width: 24px;
-}
-
-.Pressed:hover {
-  outline-color: var(--oswindow-outline);
-  outline-style: inset;
-  outline-width: 4px;
-}
-
-.Pressed:not(:hover) {
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
-}

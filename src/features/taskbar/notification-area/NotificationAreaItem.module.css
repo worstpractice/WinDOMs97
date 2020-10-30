@@ -1,6 +1,16 @@
+@import "../../../styles/colors.module.css";
+
 .NotificationAreaItem {
   align-items: center;
   display: flex;
   justify-content: center;
   max-width: 32px;
+}
+
+.ButtonOverride {
+  outline: none;
+}
+
+.ButtonOverride:focus {
+  outline: none;
 }

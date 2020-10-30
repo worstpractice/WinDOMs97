@@ -1,4 +1,5 @@
 import { Icon } from "components/Icon";
+import { OutsetButton } from "components/OutsetButton";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
@@ -35,11 +36,11 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
   const { minimize, unMinimize } = useOsWindowControls(process);
   const alternatives = useProcessAlternatives(process);
 
-  const handleContextMenu = onRMB<HTMLLIElement>(() => {
+  const handleContextMenu = onRMB<HTMLButtonElement>(() => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLLIElement>((e) => {
+  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
@@ -59,13 +60,10 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
   const { icon, name } = process.binaryImage;
 
   return (
-    <li
-      className={styles.NotificationAreaItem}
-      onContextMenu={handleContextMenu}
-      onMouseDown={handleMouseDown}
-      ref={notificationAreaItemRef}
-    >
-      <Icon alt={name} height={28} src={icon} width={28} />
+    <li className={styles.NotificationAreaItem} ref={notificationAreaItemRef}>
+      <OutsetButton className={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
+        <Icon alt={name} height={24} src={icon} width={24} />
+      </OutsetButton>
     </li>
   );
 };
