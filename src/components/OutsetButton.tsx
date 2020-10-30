@@ -6,7 +6,7 @@ import { ButtonProps } from "typings/props/ButtonProps";
 import { css } from "utils/css";
 import styles from "./OutsetButton.module.css";
 
-type Props = ButtonProps & {
+type Props = Omit<ButtonProps, "type"> & {
   children?: ReactNode;
   className?: string;
   onContextMenu?: ButtonHandler;

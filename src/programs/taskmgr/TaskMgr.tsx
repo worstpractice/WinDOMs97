@@ -1,3 +1,4 @@
+import { OutsetButton } from "components/OutsetButton";
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
@@ -33,7 +34,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
           const { binaryImage, pid } = process;
           const { name } = binaryImage;
 
-          const handleMouseDown = () => {
+          const handleKill = () => {
             endProcess(process);
           };
 
@@ -45,9 +46,9 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
               <p style={{ marginLeft: 15 }}>
                 {process.pid} | {process.binaryImage.fileName}
               </p>
-              <button className={styles.KillButton} onMouseDown={handleMouseDown} type="button">
+              <OutsetButton className={styles.KillButton} onMouseUp={handleKill}>
                 KILL
-              </button>
+              </OutsetButton>
             </span>
           );
         })}

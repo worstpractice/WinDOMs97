@@ -1,36 +1,20 @@
-@import "../../../styles/colors.module.css";
-
-.StartButton {
+.ButtonOverride {
   align-content: center;
   cursor: pointer;
   display: flex;
   gap: 2px;
+  height: 100%;
   justify-content: center;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
   width: 100px;
 }
 
-.StartButton:-moz-focusring {
+.ButtonOverride:-moz-focusring {
   align-content: center;
   cursor: pointer;
   display: flex;
   gap: 2px;
+  height: 100%;
   justify-content: center;
   margin-left: 2px;
-  outline-color: var(--oswindow-outline);
-  outline-style: outset;
-  outline-width: 4px;
   width: 100px;
-}
-
-/*** WARN: Must come last ***/
-
-.Pressed {
-  outline-style: inset;
-}
-
-.Pressed:-moz-focusring {
-  outline-style: inset;
 }

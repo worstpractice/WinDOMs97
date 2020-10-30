@@ -1,5 +1,6 @@
 import logo from "assets/icons/windows-0.png";
 import { Icon } from "components/Icon";
+import { OutsetButton } from "components/OutsetButton";
 import { Title } from "components/Title";
 import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
@@ -11,7 +12,6 @@ import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
-import { css } from "utils/css";
 import styles from "./StartButton.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,17 +53,14 @@ export const StartButton: FC<Props> = () => {
     // TODO: Import `Alternative` and get cracking on context menu options!
   };
 
-  const style = isRef(activeRef, startButtonRef) ? css(styles.StartButton, styles.Pressed) : styles.StartButton;
-
   return (
-    <button
-      className={style}
+    <OutsetButton
+      className={styles.ButtonOverride}
       onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
-      type="button"
       ref={startButtonRef}
     >
-      <Icon alt={"Start"} height={30} src={logo} width={30} />
-      <Title of={"Start"} style={{ fontSize: 26, paddingTop: 2.5 }} />
-    </button>
+      <Icon alt={"Start"} height={38} src={logo} width={38} />
+      <Title of={"Start"} style={{ fontSize: 28, paddingTop: 4 }} />
+    </OutsetButton>
   );
 };
