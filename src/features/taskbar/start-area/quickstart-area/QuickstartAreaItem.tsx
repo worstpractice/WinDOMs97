@@ -1,4 +1,5 @@
 import { Icon } from "components/Icon";
+import { OsButton } from "components/OsButton";
 import { switchOn } from "event-filters/delegate";
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
@@ -42,13 +43,14 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
   const { icon, name } = binary;
 
   return (
-    <button
-      className={styles.QuickstartAreaItem}
-      onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
-      type="button"
-      ref={quickstartAreaItemRef}
-    >
-      <Icon alt={name} height={32} src={icon} width={32} />
-    </button>
+    <li className={styles.QuickstartAreaItem}>
+      <OsButton
+        className={styles.ButtonOverride}
+        onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
+        ref={quickstartAreaItemRef}
+      >
+        <Icon alt={name} height={32} src={icon} width={32} />
+      </OsButton>
+    </li>
   );
 };

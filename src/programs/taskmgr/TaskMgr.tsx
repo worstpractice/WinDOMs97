@@ -1,4 +1,4 @@
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
@@ -46,9 +46,9 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
               <p style={{ marginLeft: 15 }}>
                 {process.pid} | {process.binaryImage.fileName}
               </p>
-              <OutsetButton className={styles.KillButton} onMouseUp={handleKill}>
+              <OsButton className={styles.KillButton} onMouseUp={handleKill}>
                 KILL
-              </OutsetButton>
+              </OsButton>
             </span>
           );
         })}

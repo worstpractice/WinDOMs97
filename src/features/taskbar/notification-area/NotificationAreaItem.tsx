@@ -1,5 +1,5 @@
 import { Icon } from "components/Icon";
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
@@ -54,9 +54,9 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
 
   return (
     <li className={styles.NotificationAreaItem} ref={notificationAreaItemRef}>
-      <OutsetButton className={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
+      <OsButton className={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
         <Icon alt={name} height={24} src={icon} width={24} />
-      </OutsetButton>
+      </OsButton>
     </li>
   );
 };

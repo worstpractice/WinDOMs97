@@ -1,6 +1,6 @@
 @import "../styles/colors.module.css";
 
-.OutsetButton {
+.OsButton {
   background-color: var(--gray);
   font-size: 20px;
   height: 24px;
@@ -10,7 +10,7 @@
   width: 24px;
 }
 
-.OutsetButton:-moz-focusring {
+.OsButton:-moz-focusring {
   background-color: var(--gray);
   font-size: 20px;
   height: 24px;

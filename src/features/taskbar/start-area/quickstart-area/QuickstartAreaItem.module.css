@@ -13,3 +13,11 @@
   justify-content: center;
   outline-style: none;
 }
+
+.ButtonOverride {
+  outline: none;
+}
+
+.ButtonOverride:focus {
+  outline: none;
+}

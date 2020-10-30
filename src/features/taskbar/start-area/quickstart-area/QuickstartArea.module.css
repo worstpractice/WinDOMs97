@@ -1,8 +1,10 @@
 .QuickstartArea {
   align-items: center;
   display: flex;
-  gap: 8px;
+  gap: 18px;
   justify-content: center;
+  padding-right: 8px;
+  padding-bottom: 8px;
 }
 
 .Wrapper {

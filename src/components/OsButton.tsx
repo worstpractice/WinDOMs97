@@ -4,7 +4,7 @@ import { default as React, forwardRef, useState } from "react";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import { ButtonProps } from "typings/props/ButtonProps";
 import { css } from "utils/css";
-import styles from "./OutsetButton.module.css";
+import styles from "./OsButton.module.css";
 
 type Props = Omit<ButtonProps, "type"> & {
   children?: ReactNode;
@@ -17,7 +17,7 @@ type Props = Omit<ButtonProps, "type"> & {
 };
 
 // prettier-ignore
-export const OutsetButton = forwardRef<HTMLButtonElement, Props>(({ children, className, onMouseDown, onMouseLeave, onMouseUp, style, ...rest }, ref) => {
+export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, className, onMouseDown, onMouseLeave, onMouseUp, style, ...rest }, ref) => {
   const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
@@ -44,7 +44,7 @@ export const OutsetButton = forwardRef<HTMLButtonElement, Props>(({ children, cl
 
   const osButtonStyle = css(
     // NOTE: Never mind me. I'm just here to curb Prettier's enthusiasm.
-    styles.OutsetButton,
+    styles.OsButton,
     isPressed ? styles.Pressed : "",
     className ? className : "",
   );

@@ -1,4 +1,4 @@
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { onLMB } from "event-filters/onLMB";
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { default as React } from "react";
@@ -71,15 +71,15 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
 
   return (
     <section className={styles.ButtonRow}>
-      <OutsetButton onMouseDown={handleMouseDown} onMouseUp={handleMinimize}>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleMinimize}>
         _
-      </OutsetButton>
-      <OutsetButton onMouseDown={handleMouseDown} onMouseUp={handleMaximize}>
+      </OsButton>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleMaximize}>
         #
-      </OutsetButton>
-      <OutsetButton onMouseDown={handleMouseDown} onMouseUp={handleExit}>
+      </OsButton>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleExit}>
         X
-      </OutsetButton>
+      </OsButton>
     </section>
   );
 };

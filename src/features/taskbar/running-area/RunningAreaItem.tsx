@@ -1,5 +1,5 @@
 import { Icon } from "components/Icon";
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
@@ -68,7 +68,7 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
   const { icon, name } = binaryImage;
 
   return (
-    <OutsetButton
+    <OsButton
       className={styles.RunningAreaItem}
       onContextMenu={handleContextMenu}
       onMouseDown={handleMouseDown}
@@ -76,6 +76,6 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
     >
       <Icon alt={name} height={20} src={icon} width={20} />
       <Words of={name} style={{ fontSize: "18px" }} />
-    </OutsetButton>
+    </OsButton>
   );
 };

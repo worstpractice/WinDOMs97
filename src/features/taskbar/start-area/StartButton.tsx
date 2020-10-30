@@ -1,6 +1,6 @@
 import logo from "assets/icons/windows-0.png";
 import { Icon } from "components/Icon";
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { Title } from "components/Title";
 import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
@@ -54,13 +54,13 @@ export const StartButton: FC<Props> = () => {
   };
 
   return (
-    <OutsetButton
+    <OsButton
       className={styles.ButtonOverride}
       onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
       ref={startButtonRef}
     >
       <Icon alt={"Start"} height={38} src={logo} width={38} />
       <Title of={"Start"} style={{ fontSize: 28, paddingTop: 4 }} />
-    </OutsetButton>
+    </OsButton>
   );
 };

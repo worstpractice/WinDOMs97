@@ -1,4 +1,4 @@
-import { OutsetButton } from "components/OutsetButton";
+import { OsButton } from "components/OsButton";
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React, useState } from "react";
@@ -24,7 +24,7 @@ export const Calc: FC<Props> = ({ getProcess }) => {
     <main className={styles.Calc} ref={calcRef}>
       <header className={styles.CalculatorResults}>{sum}</header>
       <section className={styles.GridContainer}>
-        <OutsetButton onMouseUp={handleMouseUp}>C</OutsetButton>
+        <OsButton onMouseUp={handleMouseUp}>C</OsButton>
       </section>
     </main>
   );
