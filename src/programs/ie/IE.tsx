@@ -10,8 +10,8 @@ type Props = {
 };
 
 const IE: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLIFrameElement>();
-  const process = getProcess(programRef);
+  const ieRef = useOsRef<HTMLIFrameElement>();
+  const process = getProcess(ieRef);
   useStartingDimensions(process);
 
   const { name } = process.binaryImage;
@@ -24,7 +24,7 @@ const IE: FC<Props> = ({ getProcess }) => {
       // src="http://nineties.website/"
       src="page.html"
       title={name}
-      ref={programRef}
+      ref={ieRef}
     />
   );
 };

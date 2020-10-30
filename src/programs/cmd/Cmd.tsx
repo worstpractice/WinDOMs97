@@ -11,8 +11,8 @@ type Props = {
 };
 
 export const Cmd: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLElement>();
-  const process = getProcess(programRef);
+  const cmdRef = useOsRef<HTMLElement>();
+  const process = getProcess(cmdRef);
   useStartingDimensions(process);
 
   const handleClick: MouseHandler<HTMLElement> = () => {
@@ -20,7 +20,7 @@ export const Cmd: FC<Props> = ({ getProcess }) => {
   };
 
   return (
-    <main className={styles.Cmd} onMouseDown={handleClick} ref={programRef}>
+    <main className={styles.Cmd} onMouseDown={handleClick} ref={cmdRef}>
       <p>Mircosoft WinDOMs [Version 10.0.1337.1234]</p>
       <p>(c) 1997 Mircosoft Corporation. All rights reversed.</p>
     </main>

@@ -7,10 +7,15 @@ import type { Loader } from "typings/Loader";
 import type { KernelState } from "typings/state/KernelState";
 import styles from "./TaskMgr.module.css";
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const fromKernel = ({ endProcess, runningProcesses }: KernelState) => ({
   endProcess,
   runningProcesses,
 });
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   getProcess: Loader;
@@ -18,12 +23,12 @@ type Props = {
 
 export const TaskMgr: FC<Props> = ({ getProcess }) => {
   const { endProcess, runningProcesses } = useKernelState(fromKernel);
-  const programRef = useOsRef<HTMLDivElement>();
-  const process = getProcess(programRef);
+  const taskMgrRef = useOsRef<HTMLDivElement>();
+  const process = getProcess(taskMgrRef);
   useStartingDimensions(process);
 
   return (
-    <div className={styles.TaskMgr} ref={programRef}>
+    <div className={styles.TaskMgr} ref={taskMgrRef}>
       <ul className={styles.ProcessList}>
         {runningProcesses.map((process) => {
           const { binaryImage, pid } = process;

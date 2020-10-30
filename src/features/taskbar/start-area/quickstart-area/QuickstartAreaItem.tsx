@@ -13,7 +13,6 @@ import styles from "./QuickstartAreaItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
 });
@@ -38,7 +37,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
   const handleRMB: ButtonHandler = (e) => {
     // NOTE: This is here because we want `QuickstartAreaItem` to support `ContextMenu` clicks.
     e.stopPropagation();
-    // TODO: Import `Alternative` and get cracking on context menu options!
+    // TODO: Get cracking on context menu `Alternative`s!
   };
 
   const { icon, name } = binary;

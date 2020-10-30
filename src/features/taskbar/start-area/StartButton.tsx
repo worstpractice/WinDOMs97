@@ -9,6 +9,7 @@ import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";
+import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
 import styles from "./StartButton.module.css";
@@ -16,6 +17,10 @@ import styles from "./StartButton.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate, activeRef }: ActiveState) => ({
+  activate,
+  activeRef,
+});
 
 const fromMenu = ({ toggleStartMenu }: MenuState) => ({
   toggleStartMenu,
@@ -26,7 +31,7 @@ const fromMenu = ({ toggleStartMenu }: MenuState) => ({
 type Props = {};
 
 export const StartButton: FC<Props> = () => {
-  const { activate, activeRef } = useActiveState();
+  const { activate, activeRef } = useActiveState(fromActive);
   const { toggleStartMenu } = useMenuState(fromMenu);
   const startButtonRef = useOsRef<HTMLButtonElement>();
 

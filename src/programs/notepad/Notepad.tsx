@@ -10,9 +10,9 @@ type Props = {
 };
 
 export const Notepad: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLDivElement>();
-  const process = getProcess(programRef);
+  const notepadRef = useOsRef<HTMLDivElement>();
+  const process = getProcess(notepadRef);
   useStartingDimensions(process);
 
-  return <div className={styles.Notepad} ref={programRef}></div>;
+  return <div className={styles.Notepad} ref={notepadRef}></div>;
 };

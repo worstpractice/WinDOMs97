@@ -10,12 +10,6 @@
   width: 100%;
 }
 
-.GridContainer {
-  display: grid;
-  grid-gap: 10px;
-  grid-template-columns: 100px 100px 100px;
-}
-
 .CalculatorButton {
   align-items: center;
   display: flex;

@@ -14,6 +14,7 @@ import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
+import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
@@ -22,6 +23,10 @@ import styles from "./DesktopItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate, activeRef }: ActiveState) => ({
+  activate,
+  activeRef,
+});
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
@@ -35,7 +40,7 @@ type Props = {
 };
 
 export const DesktopItem: FC<Props> = ({ getBinary }) => {
-  const { activate, activeRef } = useActiveState();
+  const { activate, activeRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);

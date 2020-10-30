@@ -12,6 +12,7 @@ import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
+import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
 import { moveInFront } from "utils/moveInFront";
@@ -21,6 +22,9 @@ import styles from "./OsWindow.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate }: ActiveState) => ({
+  activate,
+});
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
@@ -33,7 +37,7 @@ type Props = {
 };
 
 export const OsWindow: FC<Props> = ({ getProcess }) => {
-  const { activate } = useActiveState();
+  const { activate } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);

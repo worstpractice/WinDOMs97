@@ -6,6 +6,7 @@ import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { Process } from "typings/Process";
+import type { ActiveState } from "typings/state/ActiveState";
 import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
@@ -15,6 +16,9 @@ import styles from "./OsWindowButtons.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate }: ActiveState) => ({
+  activate,
+});
 
 const fromKernel = ({ endProcess }: KernelState) => ({
   endProcess,
@@ -31,7 +35,7 @@ type Props = {
 };
 
 export const OsWindowButtons: FC<Props> = ({ process }) => {
-  const { activate } = useActiveState();
+  const { activate } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const { endProcess } = useKernelState(fromKernel);
   const { maximize, minimize, unMaximize } = useOsWindowControls(process);

@@ -10,9 +10,9 @@ type Props = {
 };
 
 export const Minesweeper: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLDivElement>();
-  const process = getProcess(programRef);
+  const minesweeperRef = useOsRef<HTMLDivElement>();
+  const process = getProcess(minesweeperRef);
   useStartingDimensions(process);
 
-  return <div className={styles.Minesweeper} ref={programRef}></div>;
+  return <div className={styles.Minesweeper} ref={minesweeperRef}></div>;
 };

@@ -14,14 +14,15 @@ type Props = {
 };
 
 export const Paint: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLElement>();
-  const process = getProcess(programRef);
+  const paintRef = useOsRef<HTMLElement>();
+  const process = getProcess(paintRef);
   const [isDrawing, setIsDrawing] = useState(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const canvasRef = useOsRef<HTMLCanvasElement>();
   const ctxRef = useCanvasRef();
   useStartingDimensions(process);
 
+  // NOTE: Tsk-tsk-tsk. Trouble abrewin
   if (canvasRef.current) {
     if (!ctxRef.current) {
       ctxRef.current = canvasRef.current.getContext("2d");
@@ -74,11 +75,11 @@ export const Paint: FC<Props> = ({ getProcess }) => {
   });
 
   // TODO: ???
-  const width = programRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
-  const height = programRef.current?.getBoundingClientRect().height ?? 286; // ditto
+  const width = paintRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
+  const height = paintRef.current?.getBoundingClientRect().height ?? 286; // ditto
 
   return (
-    <main className={styles.Frame} ref={programRef}>
+    <main className={styles.Frame} ref={paintRef}>
       <canvas
         // TODO: Make this not be complete bullshit
         height={height}

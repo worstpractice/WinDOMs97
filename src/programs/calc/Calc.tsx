@@ -12,11 +12,10 @@ type Props = {
 };
 
 export const Calc: FC<Props> = ({ getProcess }) => {
-  const programRef = useOsRef<HTMLElement>();
-  const process = getProcess(programRef);
+  const calcRef = useOsRef<HTMLElement>();
+  const process = getProcess(calcRef);
   useStartingDimensions(process);
-  const [sum, setSum] = useState(1337);
-
+  const [sum, setSum] = useState(12);
   const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown = onLMB(() => {
@@ -39,7 +38,7 @@ export const Calc: FC<Props> = ({ getProcess }) => {
   const buttonStyle = isPressed ? css(styles.CalculatorButton, styles.Pressed) : styles.CalculatorButton;
 
   return (
-    <main className={styles.Calc} ref={programRef}>
+    <main className={styles.Calc} ref={calcRef}>
       <header className={styles.CalculatorResults}>{sum}</header>
       <section className={styles.GridContainer}>
         <button

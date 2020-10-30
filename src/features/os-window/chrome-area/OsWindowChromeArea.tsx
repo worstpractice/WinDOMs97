@@ -1,19 +1,27 @@
 import { onLMB } from "event-filters/onLMB";
 import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons";
 import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
+import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
-import { useKernelState } from "state/useKernelState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
-import type { KernelState } from "typings/state/KernelState";
+import type { ActiveState } from "typings/state/ActiveState";
 import { css } from "utils/css";
 import styles from "./OsWindowChromeArea.module.css";
-import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//* Selectors *
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate, activeRef }: ActiveState) => ({
+  activate,
+  activeRef,
+});
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   getProcess: Loader;
@@ -21,7 +29,7 @@ type Props = {
 };
 
 export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
-  const { activate, activeRef } = useActiveState();
+  const { activate, activeRef } = useActiveState(fromActive);
   const chromeAreaRef = useOsRef<HTMLElement>();
   const process = getProcess(chromeAreaRef);
   const { maximize, unMaximize } = useOsWindowControls(process);
