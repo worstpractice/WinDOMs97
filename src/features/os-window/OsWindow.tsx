@@ -15,7 +15,7 @@ import type { Loader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
@@ -60,7 +60,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     closeMenus();
     activate(osWindowRef);
-    moveInFront(osWindowRef);
+    bringToFront(osWindowRef);
 
     // Not resizable at the moment? That means we're done here.
     if (!isResizable) return;

@@ -11,7 +11,7 @@ import type { FC } from "typings/FC";
 import type { LiLoader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 import styles from "./NotificationAreaItem.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -47,7 +47,7 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
     e.stopPropagation();
     closeMenus();
     activate(process.osWindowRef);
-    moveInFront(process.osWindowRef);
+    bringToFront(process.osWindowRef);
   });
 
   const { icon, name } = process.binaryImage;

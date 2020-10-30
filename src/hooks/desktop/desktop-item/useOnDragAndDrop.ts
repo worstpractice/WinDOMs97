@@ -2,7 +2,7 @@ import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 import styles from "./useOnDragAndDrop.module.css";
 
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
@@ -14,7 +14,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     const shiftX = clientX - desktopItem.getBoundingClientRect().left;
     const shiftY = clientY - desktopItem.getBoundingClientRect().top;
 
-    moveInFront({ current: desktopItem });
+    bringToFront({ current: desktopItem });
 
     const clone = desktopItem.cloneNode(true) as HTMLDivElement;
     clone.classList.add(styles.Moving);

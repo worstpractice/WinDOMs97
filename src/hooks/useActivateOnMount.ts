@@ -2,7 +2,7 @@ import { useLayoutEffect } from "react";
 import { useActiveState } from "state/useActiveState";
 import type { OsRef } from "typings/OsRef";
 import type { ActiveState } from "typings/state/ActiveState";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
@@ -22,7 +22,7 @@ export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
       if (isCancelled) return;
 
       activate(ref);
-      moveInFront(ref);
+      bringToFront(ref);
     };
 
     effect();

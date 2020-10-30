@@ -2,7 +2,7 @@ import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 
 export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
@@ -10,7 +10,7 @@ export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osW
 
     if (!osWindow) return;
 
-    moveInFront(osWindowRef);
+    bringToFront(osWindowRef);
 
     const shiftX = clientX - osWindow.getBoundingClientRect().left;
     const shiftY = clientY - osWindow.getBoundingClientRect().top;

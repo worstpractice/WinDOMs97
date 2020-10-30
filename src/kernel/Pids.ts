@@ -3,7 +3,7 @@ import type { PID } from "typings/phantom-types/PID";
 import { from } from "utils/range";
 
 /** Inclusive. */
-const MAX = 32 as const;
+const MAX = 16 as const;
 
 const backingSet = new Set<PID>(from(0).to(MAX) as PID[]);
 

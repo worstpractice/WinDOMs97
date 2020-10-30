@@ -3,7 +3,7 @@ import type { OsRef } from "typings/OsRef";
 import { compose } from "utils/compose";
 import { getResizeLatitude } from "utils/os-window/getResizeLatitude";
 import { listen } from "utils/listen";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 
 /** In pixels. */
 const OSWINDOW_MIN_HEIGHT = 250 as const;
@@ -15,7 +15,7 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
     const { current: osWindow } = osWindowRef;
     if (!osWindow) return;
 
-    moveInFront(osWindowRef);
+    bringToFront(osWindowRef);
 
     const latitude = getResizeLatitude(osWindow, e);
 

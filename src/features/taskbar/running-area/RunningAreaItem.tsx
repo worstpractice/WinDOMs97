@@ -14,7 +14,7 @@ import type { FC } from "typings/FC";
 import type { ButtonLoader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 import styles from "./RunningAreaItem.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -60,7 +60,7 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
     } else {
       unMinimize();
       activate(process.osWindowRef);
-      moveInFront(process.osWindowRef);
+      bringToFront(process.osWindowRef);
     }
   });
 

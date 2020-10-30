@@ -1,6 +1,6 @@
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React, memo } from "react";
+import { default as React } from "react";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
 import style from "./IE.module.css";
@@ -9,7 +9,7 @@ type Props = {
   getProcess: Loader;
 };
 
-const IE: FC<Props> = ({ getProcess }) => {
+export const IE: FC<Props> = ({ getProcess }) => {
   const ieRef = useOsRef<HTMLIFrameElement>();
   const process = getProcess(ieRef);
   useStartingDimensions(process);
@@ -28,7 +28,3 @@ const IE: FC<Props> = ({ getProcess }) => {
     />
   );
 };
-
-const memoized = memo<Props>(IE);
-
-export { memoized as IE };

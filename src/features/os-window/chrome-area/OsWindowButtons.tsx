@@ -10,7 +10,7 @@ import type { Process } from "typings/Process";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
-import { moveInFront } from "utils/moveInFront";
+import { bringToFront } from "utils/bringToFront";
 import styles from "./OsWindowButtons.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,7 +58,7 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
   const handleMaximize = onLMB<HTMLButtonElement>(() => {
     const { isMaximized, osWindowRef } = process;
     activate(osWindowRef);
-    moveInFront(osWindowRef);
+    bringToFront(osWindowRef);
     isMaximized ? unMaximize() : maximize();
   });
 

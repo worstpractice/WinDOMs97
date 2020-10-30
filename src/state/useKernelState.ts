@@ -5,7 +5,7 @@ import type { PID } from "typings/phantom-types/PID";
 import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
 import type { KernelState } from "typings/state/KernelState";
-import { ars256 } from "utils/algorithms/ars256";
+import { ars256 } from "utils/crypto/ars256";
 import { softlinkInAllPlaces } from "utils/softlinkInAllPlaces";
 import create from "zustand";
 import { combine } from "zustand/middleware";
