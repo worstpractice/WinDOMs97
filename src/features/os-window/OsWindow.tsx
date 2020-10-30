@@ -6,6 +6,7 @@ import { useOnMoveOsWindow } from "hooks/os-window/useOnMoveOsWindow";
 import { useOnResizeOsWindow } from "hooks/os-window/useOnResizeOsWindow";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
+import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
 import { default as React, useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
@@ -14,8 +15,8 @@ import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { MenuState } from "typings/state/MenuState";
-import { css } from "utils/css";
 import { bringToFront } from "utils/bringToFront";
+import { css } from "utils/css";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./OsWindow.module.css";
 
@@ -112,7 +113,12 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={osWindowRef}
-      style={{ left, top }}
+      style={{
+        left,
+        top,
+        minHeight: MIN_HEIGHT,
+        minWidth: MIN_WIDTH,
+      }}
     >
       <OsWindowChromeArea getProcess={toChromeArea} handleMove={handleMove} />
       <ProgramArea>

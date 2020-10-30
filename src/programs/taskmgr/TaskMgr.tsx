@@ -45,7 +45,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
   const process = getProcess(taskMgrRef);
   useStartingDimensions(process);
 
-  // NOTE: This is required since `runningProcesses` is immutable.
+  // NOTE: This is a necessary step since `runningProcesses` is technically immutable.
   const orderedByPID = sortProcesses(runningProcesses, byPid);
 
   return (
