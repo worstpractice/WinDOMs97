@@ -1,27 +1,31 @@
 import { onLMB } from "event-filters/onLMB";
 import { useEffect, useState } from "react";
 import { useActiveState } from "state/useActiveState";
-import type { MenuState } from "typings/state/MenuState";
 import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import { ComposedFn } from "typings/ComposedFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
 import { OsRef } from "typings/OsRef";
 import type { Position } from "typings/Position";
+import type { ActiveState } from "typings/state/ActiveState";
+import type { MenuState } from "typings/state/MenuState";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate }: ActiveState) => ({
+  activate,
+});
+
 const fromMenu = ({ closeMenus }: MenuState) => ({
   closeMenus,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
-  const { activate } = useActiveState();
+  const { activate } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);

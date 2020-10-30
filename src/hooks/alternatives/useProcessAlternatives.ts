@@ -1,22 +1,26 @@
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useActiveState } from "state/useActiveState";
-import type { KernelState } from "typings/state/KernelState";
 import { useKernelState } from "state/useKernelState";
 import type { Alternative } from "typings/Alternative";
 import type { Process } from "typings/Process";
+import type { ActiveState } from "typings/state/ActiveState";
+import type { KernelState } from "typings/state/KernelState";
 import { alt } from "utils/alt";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const fromActive = ({ activate }: ActiveState) => ({
+  activate,
+});
+
 const fromKernel = ({ endProcess }: KernelState) => ({
   endProcess,
 });
-
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useProcessAlternatives = (process: Process): readonly Alternative[] => {
-  const { activate } = useActiveState();
+  const { activate } = useActiveState(fromActive);
   const { endProcess } = useKernelState(fromKernel);
   const { maximize, minimize, unMaximize, unMinimize } = useOsWindowControls(process);
 
