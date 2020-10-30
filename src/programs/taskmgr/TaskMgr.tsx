@@ -8,12 +8,12 @@ import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
-import type { Process } from "typings/Process";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 import { bringToFront } from "utils/bringToFront";
 import { byPid } from "utils/sort/byPid";
+import { sortProcesses } from "utils/sortImmutably";
 import styles from "./TaskMgr.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,11 +45,8 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
   const process = getProcess(taskMgrRef);
   useStartingDimensions(process);
 
-  // @ts-expect-error As mutable...
-  const mutableTemp: Process[] = runningProcesses;
-
-  // ...and then back to immutable (after sorting).
-  const orderedByPID: readonly Process[] = mutableTemp.sort(byPid);
+  // NOTE: This is required since `runningProcesses` is immutable.
+  const orderedByPID = sortProcesses(runningProcesses, byPid);
 
   return (
     <div className={styles.TaskMgr} ref={taskMgrRef}>
@@ -63,7 +60,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
           };
 
           const handleMouseDown = onLMB((e) => {
-            // NOTE: This is required to successfully activate the `OsWindow` in question.
+            // NOTE: This is required to prevent the taskmgr's own `OsWindow` from immediately stealing back the focus.
             e.stopPropagation();
 
             const { osWindowRef } = process;

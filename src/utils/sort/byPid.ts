@@ -1,5 +1,5 @@
-import type { ByPID } from "typings/ByPID";
+import type { ComparePid } from "typings/sorting/ComparePid";
 
-export const byPid: ByPID = ({ pid: a }, { pid: b }) => {
+export const byPid: ComparePid = ({ pid: a }, { pid: b }) => {
   return a < b ? -1 : 1;
 };
