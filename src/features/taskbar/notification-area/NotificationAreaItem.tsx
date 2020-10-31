@@ -50,12 +50,12 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
     bringToFront(process.osWindowRef);
   });
 
-  const { icon, name } = process.binaryImage;
+  const { icon, programName } = process.binaryImage;
 
   return (
     <li className={styles.NotificationAreaItem} ref={notificationAreaItemRef}>
       <OsButton className={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
-        <Icon alt={name} height={24} src={icon} width={24} />
+        <Icon alt={programName} height={24} src={icon} width={24} />
       </OsButton>
     </li>
   );

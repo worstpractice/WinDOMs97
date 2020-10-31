@@ -1,4 +1,5 @@
 import { Pids } from "kernel/Pids";
+import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
 import type { Binary } from "typings/Binary";
 import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
@@ -35,8 +36,6 @@ export const useKernelState = create<KernelState>(
 
     (set) =>
       ({
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        //* CONTROL *
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         endProcess: ({ pid: targetPid }: Process) => {
           set(({ runningProcesses }) => {
@@ -84,16 +83,18 @@ export const useKernelState = create<KernelState>(
             const binary: Binary = {
               ////////////////////////////////////////////////////////
               ...rawBinary,
+              // NOTE: Do not include any dot. It will be added programmatically in the right contexts.
+              isBeingRenamed: false,
               isSingleInstanceOnly: isSingleInstanceOnly ?? false,
               softlinks: softlinks ?? softlinkInAllPlaces(),
-              startingDimensions: startingDimensions ?? { x: 400, y: 400 },
-              ////////////////////////////////////////////////////////
-              // Placeholder until we can hash the entire binary itself a few lines down.
-              fileHash: "" as Hash,
+              startingDimensions: startingDimensions ?? { x: MIN_HEIGHT, y: MIN_WIDTH },
               ////////////////////////////////////////////////////////
               desktopItemRef: { current: null },
               startMenuItemRef: { current: null },
               quickstartAreaItemRef: { current: null },
+              ////////////////////////////////////////////////////////
+              // Placeholder until we can hash the entire binary itself a few lines down.
+              fileHash: "" as Hash,
               ////////////////////////////////////////////////////////
             };
 

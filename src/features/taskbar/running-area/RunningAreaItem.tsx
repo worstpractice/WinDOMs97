@@ -65,7 +65,7 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
   });
 
   const { binaryImage } = process;
-  const { icon, name } = binaryImage;
+  const { icon, programName } = binaryImage;
 
   return (
     <OsButton
@@ -74,8 +74,8 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
       onMouseDown={handleMouseDown}
       ref={runningAreaItemRef}
     >
-      <Icon alt={name} height={20} src={icon} width={20} />
-      <Words of={name} style={{ fontSize: "18px" }} />
+      <Icon alt={programName} height={20} src={icon} width={20} />
+      <Words of={programName} style={{ fontSize: "18px" }} />
     </OsButton>
   );
 };

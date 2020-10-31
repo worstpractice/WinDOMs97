@@ -1,9 +1,9 @@
 import type { CleanupFn } from "typings/CleanupFn";
-import type { MouseHandler } from "typings/handlers/MouseHandler";
+import type { Handler } from "typings/handlers/Handler";
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
   event: keyof WindowEventMap;
-  handler: MouseHandler<T>;
+  handler: Handler<T>;
   options?: AddEventListenerOptions;
   /** Defaults to the `document` object. */
   on: EventTarget;

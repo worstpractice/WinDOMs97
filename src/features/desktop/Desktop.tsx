@@ -29,15 +29,12 @@ export const Desktop: FC<Props> = ({ children }) => {
   const desktopRef = useOsRef<HTMLElement>();
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
   const alternatives = useDesktopAlternatives();
-
   // NOTE: this call is what allows the children calling `useActivateOnMount()` to function properly.
   useActivateOnMount(desktopRef);
 
-  // NOTE: This thing is allowed to (and expected) to grow quite a bit, since the `Desktop` is quite unique in RMB situations.
   const handleContextMenu = onRMB<HTMLElement>(({ target }) => {
     const { current: desktop } = desktopRef;
 
-    // We're not interested if the target isn't the `Desktop`
     if (!is(target, desktop)) return;
 
     openContextMenu(alternatives);

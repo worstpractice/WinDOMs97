@@ -1,8 +1,9 @@
 import { onLMB } from "event-filters/onLMB";
+import type { CleanupFn } from "typings/CleanupFn";
 import type { OsRef } from "typings/OsRef";
+import { bringToFront } from "utils/bringToFront";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
-import { bringToFront } from "utils/bringToFront";
 import styles from "./useOnDragAndDrop.module.css";
 
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
@@ -32,7 +33,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       clone.style.top = `${newTop}px`;
     });
 
-    let cleanup: () => void;
+    let cleanup: CleanupFn;
 
     /** `Document`-level event listener. */
     const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {

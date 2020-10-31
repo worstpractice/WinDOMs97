@@ -1,27 +1,20 @@
 import { useEffect } from "react";
-import { useClickState } from "state/useClickState";
-import { useMenuState } from "state/useMenuState";
+import { useKeyboardState } from "state/useKeyboardState";
 import type { CleanupFn } from "typings/CleanupFn";
-import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { ClickState } from "typings/state/ClickState";
-import type { MenuState } from "typings/state/MenuState";
+import type { KeyboardHandler } from "typings/handlers/KeyboardHandler";
+import type { KeyboardState } from "typings/state/KeyboardState";
 import { listen } from "utils/listen";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ setLastClickPosition }: ClickState) => ({
-  setLastClickPosition,
-});
-
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
+const fromKeyboard = ({ setLastKeyPress }: KeyboardState) => ({
+  setLastKeyPress,
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const useLastClickPosition = () => {
-  const { setLastClickPosition } = useClickState(fromClick);
-  const { closeMenus } = useMenuState(fromMenu);
+export const useLastKeyPress = () => {
+  const { setLastKeyPress } = useKeyboardState(fromKeyboard);
 
   useEffect(() => {
     let isCancelled = false;
@@ -29,15 +22,14 @@ export const useLastClickPosition = () => {
     const effect = (): CleanupFn | undefined => {
       if (isCancelled) return;
 
-      const handleMouseDown: MouseHandler<Document> = ({ clientX, clientY }) => {
-        setLastClickPosition({ x: clientX, y: clientY });
-        closeMenus();
+      const handleKeyDown: KeyboardHandler<Document> = ({ key }) => {
+        setLastKeyPress(key);
       };
 
       // NOTE: It's subtle, but we're passing a cleanup function to `useEffect`.
       return listen({
-        event: "mousedown",
-        handler: handleMouseDown,
+        event: "keydown",
+        handler: handleKeyDown,
         on: document,
       });
     };
@@ -48,5 +40,5 @@ export const useLastClickPosition = () => {
       isCancelled = true;
       cleanupFn?.();
     };
-  }, [closeMenus, setLastClickPosition]);
+  }, [setLastKeyPress]);
 };

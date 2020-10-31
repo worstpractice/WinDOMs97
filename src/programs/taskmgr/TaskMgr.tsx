@@ -53,7 +53,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
       <ul className={styles.ProcessList}>
         {orderedByPID.map((process) => {
           const { binaryImage, pid } = process;
-          const { name } = binaryImage;
+          const { programName } = binaryImage;
 
           const handleKill = () => {
             endProcess(process);
@@ -71,7 +71,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
           });
 
           return (
-            <li className={styles.Task} key={`OsWindow-${pid}-${name}`}>
+            <li className={styles.Task} key={`OsWindow-${pid}-${programName}`}>
               <p onMouseDown={handleMouseDown}>{process.pid}</p>
               <p onMouseDown={handleMouseDown}>{process.binaryImage.fileName}</p>
               <OsButton className={styles.KillButton} onMouseUp={handleKill}>

@@ -14,7 +14,7 @@ export const IE: FC<Props> = ({ getProcess }) => {
   const process = getProcess(ieRef);
   useStartingDimensions(process);
 
-  const { name } = process.binaryImage;
+  const { programName } = process.binaryImage;
 
   return (
     <iframe
@@ -23,7 +23,7 @@ export const IE: FC<Props> = ({ getProcess }) => {
       loading="eager"
       // src="http://nineties.website/"
       src="page.html"
-      title={name}
+      title={programName}
       ref={ieRef}
     />
   );

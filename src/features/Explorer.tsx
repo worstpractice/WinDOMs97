@@ -17,6 +17,7 @@ import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
+import { useLastKeyPress } from "hooks/useLastKeyPress";
 import { default as React } from "react";
 import { useErrorState } from "state/useErrorState";
 import { useKernelState } from "state/useKernelState";
@@ -54,6 +55,7 @@ export const Explorer: FC<Props> = () => {
   const { installedPrograms, installProgram, runningProcesses } = useKernelState(fromKernel);
   const { alternatives, openMenu } = useMenuState(fromMenu);
   useLastClickPosition();
+  useLastKeyPress();
 
   if (isBsod) {
     return <Bsod />;
@@ -82,7 +84,7 @@ export const Explorer: FC<Props> = () => {
           </ContextMenu>
         )}
         {installedPrograms.map((binary) => {
-          const { fileName, name, softlinks } = binary;
+          const { fileHash, softlinks } = binary;
           const { isOnDesktop } = softlinks;
 
           if (!isOnDesktop) {
@@ -94,24 +96,23 @@ export const Explorer: FC<Props> = () => {
             return binary;
           };
 
-          return <DesktopItem key={`DesktopItem-${fileName}-${name}`} getBinary={toDesktopItem} />;
+          return <DesktopItem key={`DesktopItem-${fileHash}`} getBinary={toDesktopItem} />;
         })}
       </Desktop>
       {runningProcesses.map((process) => {
-        const { binaryImage, pid } = process;
-        const { name } = binaryImage;
+        const { pid } = process;
 
         const toOsWindow: Loader = (osWindowRef) => {
           process.osWindowRef = osWindowRef;
           return process;
         };
 
-        return <OsWindow key={`OsWindow-${pid}-${name}`} getProcess={toOsWindow} />;
+        return <OsWindow key={`OsWindow-${pid}`} getProcess={toOsWindow} />;
       })}
       {isStartMenuOpen && (
         <StartMenu>
           {installedPrograms.map((binary) => {
-            const { fileName, name, softlinks } = binary;
+            const { fileHash, softlinks } = binary;
             const { isOnStartMenu } = softlinks;
 
             if (!isOnStartMenu) {
@@ -123,7 +124,7 @@ export const Explorer: FC<Props> = () => {
               return binary;
             };
 
-            return <StartMenuItem key={`StartMenuItem-${fileName}-${name}`} getBinary={toStartMenuItem} />;
+            return <StartMenuItem key={`StartMenuItem-${fileHash}`} getBinary={toStartMenuItem} />;
           })}
         </StartMenu>
       )}
@@ -132,7 +133,7 @@ export const Explorer: FC<Props> = () => {
           <StartButton />
           <QuickstartArea>
             {installedPrograms.map((binary) => {
-              const { fileName, name, softlinks } = binary;
+              const { fileHash, softlinks } = binary;
               const { isInQuickstartArea } = softlinks;
 
               if (!isInQuickstartArea) {
@@ -144,38 +145,32 @@ export const Explorer: FC<Props> = () => {
                 return binary;
               };
 
-              return (
-                <QuickstartAreaItem key={`QuickstartAreaItem-${fileName}-${name}`} getBinary={toQuickstartAreaItem} />
-              );
+              return <QuickstartAreaItem key={`QuickstartAreaItem-${fileHash}`} getBinary={toQuickstartAreaItem} />;
             })}
           </QuickstartArea>
         </StartArea>
         <RunningArea>
           {runningProcesses.map((process) => {
-            const { binaryImage, pid } = process;
-            const { name } = binaryImage;
+            const { pid } = process;
 
             const toRunningAreaItem: ButtonLoader = (runningAreaItemRef) => {
               process.runningAreaItemRef = runningAreaItemRef;
               return process;
             };
 
-            return <RunningAreaItem key={`RunningAreaItem-${pid}-${name}`} getProcess={toRunningAreaItem} />;
+            return <RunningAreaItem key={`RunningAreaItem-${pid}`} getProcess={toRunningAreaItem} />;
           })}
         </RunningArea>
         <NotificationArea>
           {runningProcesses.map((process) => {
-            const { binaryImage, pid } = process;
-            const { name } = binaryImage;
+            const { pid } = process;
 
             const toNotificationAreaItem: LiLoader = (notificationAreaItemRef) => {
               process.notificationAreaItemRef = notificationAreaItemRef;
               return process;
             };
 
-            return (
-              <NotificationAreaItem key={`NotificationAreaItem-${pid}-${name}`} getProcess={toNotificationAreaItem} />
-            );
+            return <NotificationAreaItem key={`NotificationAreaItem-${pid}`} getProcess={toNotificationAreaItem} />;
           })}
         </NotificationArea>
       </Taskbar>

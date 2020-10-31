@@ -25,14 +25,14 @@ export const OsWindowLabel: FC<Props> = ({ process }) => {
   const { activeRef } = useActiveState(fromActive);
 
   const { binaryImage, osWindowRef } = process;
-  const { icon, name } = binaryImage;
+  const { icon, programName } = binaryImage;
 
   const style = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
 
   return (
     <header className={styles.OsWindowLabel}>
-      <Icon alt={name} className={styles.Icon} height={32} src={icon} width={32} />
-      <Title className={style} of={name} />
+      <Icon alt={programName} className={styles.Icon} height={32} src={icon} width={32} />
+      <Title className={style} of={programName} />
     </header>
   );
 };

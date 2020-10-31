@@ -33,12 +33,12 @@ export const StartMenuItem: FC<Props> = ({ getBinary }) => {
     executeBinary();
   });
 
-  const { fileName, icon, name } = binary;
+  const { fileName, icon, programName } = binary;
 
   return (
     <li className={styles.StartMenuItem} onMouseDown={handleLaunch} ref={startMenuItemRef}>
       <Icon alt={fileName} height={64} src={icon} width={64} />
-      <Words of={name} />
+      <Words of={programName} />
     </li>
   );
 };

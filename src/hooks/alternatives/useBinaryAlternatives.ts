@@ -25,7 +25,7 @@ export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] =>
     }),
     ////////////////////////////////////////////////
     alt("Rename", () => {
-      console.log("This is where we rename", binary.fileName);
+      binary.isBeingRenamed = true;
     }),
     ////////////////////////////////////////////////
     alt("Delete", () => {

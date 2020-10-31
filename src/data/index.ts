@@ -20,14 +20,14 @@ const calc: RawBinary = {
   icon: png_calc,
   instructions: Calc,
   fileName: "calc.exe",
-  name: "Calculator",
+  programName: "Calculator",
 } as const;
 
 const cmd: RawBinary = {
   icon: png_cmd,
   instructions: Cmd,
   fileName: "cmd.exe",
-  name: "Command Prompt",
+  programName: "Command Prompt",
   startingDimensions: { x: 1000, y: 500 },
 } as const;
 
@@ -35,28 +35,28 @@ const ie: RawBinary = {
   icon: png_ie,
   instructions: IE,
   fileName: "ie.exe",
-  name: "Internet Exploder",
+  programName: "Internet Exploder",
 } as const;
 
 const minesweeper: RawBinary = {
   icon: png_minesweeper,
   instructions: Minesweeper,
   fileName: "minesweeper.exe",
-  name: "Minesweeper",
+  programName: "Minesweeper",
 } as const;
 
 const notepad: RawBinary = {
   icon: png_notepad,
   instructions: Notepad,
   fileName: "notepad.exe",
-  name: "Notepad",
+  programName: "Notepad",
 } as const;
 
 const paint: RawBinary = {
   icon: png_paint,
   instructions: Paint,
   fileName: "paint.exe",
-  name: "Paint",
+  programName: "Paint",
 } as const;
 
 const taskManager: RawBinary = {
@@ -64,7 +64,7 @@ const taskManager: RawBinary = {
   instructions: TaskMgr,
   isSingleInstanceOnly: true,
   fileName: "taskmgr.exe",
-  name: "Task Manager",
+  programName: "Task Manager",
 } as const;
 
 ///////////////////////////////////////////////////////////////

@@ -6,6 +6,7 @@ import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives"
 import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
 import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
+import { useLastSequence } from "hooks/useLastSequence";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
 import { default as React } from "react";
@@ -44,16 +45,15 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);
   const executeBinary = useExecuteBinary(binary);
-
-  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
-  useDesktopLayoutOnMount(desktopItemRef);
-
   const handleMove = useOnDragAndDrop(desktopItemRef);
   const alternatives = useBinaryAlternatives(binary);
+  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
+  useDesktopLayoutOnMount(desktopItemRef);
+  const sequence = useLastSequence(binary);
 
-  const handleContextMenu = onRMB<HTMLElement>(() => {
-    openContextMenu(alternatives);
-  });
+  /////////////////////////////////////////////////////////////////////////////////////////
+  //  Hook Handlers
+  /////////////////////////////////////////////////////////////////////////////////////////
 
   const handleDoubleClick = () => {
     executeBinary();
@@ -61,6 +61,14 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
   // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
   const handleMouseDownCapture = useOnDoubleClick(desktopItemRef, handleDoubleClick);
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // Event Handlers
+  /////////////////////////////////////////////////////////////////////////////////////////
+
+  const handleContextMenu = onRMB<HTMLElement>(() => {
+    openContextMenu(alternatives);
+  });
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     // NOTE: This makes `DesktopItem` selection sticky, which we want.
@@ -70,13 +78,19 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
     handleMove(e);
   });
 
-  const style = isRef(activeRef, desktopItemRef) ? css(styles.DesktopItem, styles.Active) : styles.DesktopItem;
+  /////////////////////////////////////////////////////////////////////////////////////////
 
-  const { fileName, icon } = binary;
+  const desktopItemStyle = isRef(activeRef, desktopItemRef)
+    ? css(styles.DesktopItem, styles.Active)
+    : styles.DesktopItem;
+
+  const { fileName, icon, isBeingRenamed } = binary;
+
+  // const wordsStyle = isBeingRenamed ? css(styles.Title, styles.Renaming) : styles.Title;
 
   return (
     <article
-      className={style}
+      className={desktopItemStyle}
       onContextMenu={handleContextMenu}
       onDragStart={blockNativeDrag}
       onMouseDown={handleMouseDown}
@@ -85,7 +99,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       ref={desktopItemRef}
     >
       <Icon alt={fileName} height={64} src={icon} width={64} />
-      <Words className={styles.Title} of={fileName} />
+      <Words className={styles.Title} of={isBeingRenamed ? sequence : fileName} />
     </article>
   );
 };

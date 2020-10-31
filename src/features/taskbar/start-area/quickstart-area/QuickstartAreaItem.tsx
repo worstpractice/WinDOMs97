@@ -40,7 +40,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
     // TODO: Get cracking on context menu `Alternative`s!
   };
 
-  const { icon, name } = binary;
+  const { icon, programName } = binary;
 
   return (
     <li className={styles.QuickstartAreaItem}>
@@ -49,7 +49,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
         onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
         ref={quickstartAreaItemRef}
       >
-        <Icon alt={name} height={32} src={icon} width={32} />
+        <Icon alt={programName} height={32} src={icon} width={32} />
       </OsButton>
     </li>
   );
