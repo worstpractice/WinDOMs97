@@ -35,6 +35,8 @@ const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const activeStyle = css(styles.DesktopItem, styles.Active);
+
 type Props = {
   getBinary: Linker;
 };
@@ -80,9 +82,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  const desktopItemStyle = isRef(activeRef, desktopItemRef)
-    ? css(styles.DesktopItem, styles.Active)
-    : styles.DesktopItem;
+  const desktopItemStyle = isRef(activeRef, desktopItemRef) ? activeStyle : styles.DesktopItem;
 
   const { fileName, icon, isBeingRenamed } = binary;
 

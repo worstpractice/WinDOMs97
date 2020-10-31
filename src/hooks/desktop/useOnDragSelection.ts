@@ -24,7 +24,7 @@ const fromMenu = ({ closeMenus }: MenuState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
+export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) => {
   const { activate } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
@@ -36,7 +36,7 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
     const effect = (): ComposedFn | undefined => {
       if (isCancelled) return;
 
-      const handleMouseDown: MouseHandler<HTMLElement> = onLMB(({ target }) => {
+      const handleMouseDown: MouseHandler<HTMLElement> = onLMB<T>(({ target }) => {
         const { current } = desktopRef;
 
         // We're only interested in clicks on the actual desktop itself
@@ -51,7 +51,7 @@ export const useDragSelection = (desktopRef: OsRef<HTMLElement>) => {
         setCurrentPosition({ x: clientX, y: clientY });
       };
 
-      const handleMouseUp: MouseHandler<HTMLElement> = onLMB(() => {
+      const handleMouseUp: MouseHandler<HTMLElement> = onLMB<T>(() => {
         setIsDragSelecting(false);
       });
 

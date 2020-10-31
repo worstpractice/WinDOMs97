@@ -37,7 +37,7 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
 
   ///////////////////////////////////////////////////////////////////////////////////////////
 
-  const handleMouseDownCapture = onLMB(({ target }) => {
+  const handleMouseDownCapture = onLMB<T>(({ target }) => {
     const { current } = ref;
 
     if (!current) return;

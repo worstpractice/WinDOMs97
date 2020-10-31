@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const StartMenu: FC<Props> = ({ children }) => {
-  const handleContextMenu = onRMB((e) => {
+  const handleContextMenu = onRMB<HTMLElement>((e) => {
     // NOTE: This is here because we want `StartMenu` to support showing a context menu.
     e.stopPropagation();
     // TODO: Get cracking on context menu `Alternative`s!

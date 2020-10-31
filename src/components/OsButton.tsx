@@ -1,6 +1,6 @@
 import { onLMB } from "event-filters/onLMB";
 import type { CSSProperties, ReactNode } from "react";
-import { default as React, forwardRef, useState } from "react";
+import { default as React, forwardRef, useMemo, useState } from "react";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import { ButtonProps } from "typings/props/ButtonProps";
 import { css } from "utils/css";
@@ -42,12 +42,11 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
     onMouseUp?.(e);
   });
 
-  const osButtonStyle = css(
-    // NOTE: Never mind me. I'm just here to curb Prettier's enthusiasm.
+  const osButtonStyle = useMemo(() => css(
     styles.OsButton,
     isPressed ? styles.Pressed : "",
     className ? className : "",
-  );
+  ), [className, isPressed]);
 
   return (
     <button

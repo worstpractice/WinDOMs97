@@ -1,5 +1,6 @@
-import type { CSSProperties, FC } from "react";
-import { default as React } from "react";
+import type { CSSProperties } from "react";
+import { default as React, useMemo } from "react";
+import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./Icon.module.css";
 
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export const Icon: FC<Props> = ({ alt, className = "", height, src, style, width }) => {
-  const iconStyle = css(styles.Icon, className);
+  const iconStyle = useMemo(() => css(styles.Icon, className), [className]);
 
   return <img alt={alt} className={iconStyle} height={height} loading="eager" src={src} style={style} width={width} />;
 };

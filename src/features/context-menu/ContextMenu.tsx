@@ -7,6 +7,8 @@ import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./ContextMenu.module.css";
 
+const tooFarDownStyle = css(styles.ContentList, styles.Outside);
+
 type Props = {
   children: ReactNode;
 };
@@ -16,7 +18,7 @@ export const ContextMenu: FC<Props> = ({ children }) => {
   const [isTooFarDown, { x: left, y: top }] = useStayInSight(contextMenuRef);
   useActivateOnMount(contextMenuRef);
 
-  const contentListStyle = isTooFarDown ? css(styles.ContentList, styles.Outside) : styles.ContentList;
+  const contentListStyle = isTooFarDown ? tooFarDownStyle : styles.ContentList;
 
   return (
     <section className={styles.ContextMenu} ref={contextMenuRef} style={{ left, top }}>

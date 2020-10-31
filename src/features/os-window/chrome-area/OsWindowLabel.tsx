@@ -17,6 +17,8 @@ const fromActive = ({ activeRef }: ActiveState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const activeStyle = css(styles.Title, styles.Active);
+
 type Props = {
   process: Process;
 };
@@ -27,7 +29,7 @@ export const OsWindowLabel: FC<Props> = ({ process }) => {
   const { binaryImage, osWindowRef } = process;
   const { icon, programName } = binaryImage;
 
-  const style = isRef(activeRef, osWindowRef) ? css(styles.Title, styles.Active) : styles.Title;
+  const style = isRef(activeRef, osWindowRef) ? activeStyle : styles.Title;
 
   return (
     <header className={styles.OsWindowLabel}>

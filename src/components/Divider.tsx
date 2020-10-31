@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { default as React } from "react";
+import { default as React, useMemo } from "react";
 import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./Divider.module.css";
@@ -30,11 +30,15 @@ export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
   const isDentedIn = dent === "in";
   const isHorizontal = direction === "horizontal";
 
-  const style = css(
-    styles.Divider,
-    isDentedIn ? styles.In : styles.Out,
-    isHorizontal ? styles.Horizontal : styles.Vertical,
-    isStocky ? styles.Stocky : "",
+  const style = useMemo(
+    () =>
+      css(
+        styles.Divider,
+        isDentedIn ? styles.In : styles.Out,
+        isHorizontal ? styles.Horizontal : styles.Vertical,
+        isStocky ? styles.Stocky : "",
+      ),
+    [isDentedIn, isHorizontal, isStocky],
   );
 
   const override: CSSProperties = {};

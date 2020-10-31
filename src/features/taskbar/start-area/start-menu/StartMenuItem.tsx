@@ -28,7 +28,7 @@ export const StartMenuItem: FC<Props> = ({ getBinary }) => {
   const binary = getBinary(startMenuItemRef);
   const executeBinary = useExecuteBinary(binary);
 
-  const handleLaunch = onLMB(() => {
+  const handleLaunch = onLMB<HTMLLIElement>(() => {
     closeMenus();
     executeBinary();
   });

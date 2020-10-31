@@ -28,7 +28,6 @@ const cmd: RawBinary = {
   instructions: Cmd,
   fileName: "cmd.exe",
   programName: "Command Prompt",
-  startingDimensions: { x: 1000, y: 500 },
 } as const;
 
 const ie: RawBinary = {

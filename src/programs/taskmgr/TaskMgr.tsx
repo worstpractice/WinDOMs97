@@ -59,7 +59,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
             endProcess(process);
           };
 
-          const handleMouseDown = onLMB((e) => {
+          const handleMouseDown = onLMB<HTMLParagraphElement>((e) => {
             // NOTE: This is required to prevent the taskmgr's own `OsWindow` from immediately stealing back the focus.
             e.stopPropagation();
 

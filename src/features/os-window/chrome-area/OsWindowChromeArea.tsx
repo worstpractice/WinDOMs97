@@ -22,6 +22,8 @@ const fromActive = ({ activate, activeRef }: ActiveState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+const activeStyle = css(styles.OsWindowChromeArea, styles.Active);
+
 type Props = {
   getProcess: Loader;
   handleMove: any;
@@ -65,9 +67,7 @@ export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
 
   const { osWindowRef } = process;
 
-  const style = isRef(activeRef, osWindowRef)
-    ? css(styles.OsWindowChromeArea, styles.Active)
-    : styles.OsWindowChromeArea;
+  const style = isRef(activeRef, osWindowRef) ? activeStyle : styles.OsWindowChromeArea;
 
   return (
     <span

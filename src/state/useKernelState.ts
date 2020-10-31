@@ -7,6 +7,7 @@ import type { Process } from "typings/Process";
 import type { RawBinary } from "typings/RawBinary";
 import type { KernelState } from "typings/state/KernelState";
 import { ars256 } from "utils/crypto/ars256";
+import { enforceMinDimensions } from "utils/enforceMinDimensions";
 import { softlinkInAllPlaces } from "utils/softlinkInAllPlaces";
 import create from "zustand";
 import { combine } from "zustand/middleware";
@@ -79,6 +80,8 @@ export const useKernelState = create<KernelState>(
           set(({ installedPrograms }) => {
             // Extract optional properties so we can populate these fields manually a few lines down.
             const { isSingleInstanceOnly, softlinks, startingDimensions } = rawBinary;
+
+            enforceMinDimensions(rawBinary);
 
             const binary: Binary = {
               ////////////////////////////////////////////////////////
