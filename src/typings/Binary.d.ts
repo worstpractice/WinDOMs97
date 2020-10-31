@@ -5,6 +5,7 @@ import type { RawBinary } from "typings/RawBinary";
 export type Binary = Required<RawBinary> & {
   fileHash: Hash;
   isBeingRenamed: boolean;
+  isFileExtensionRecognized: boolean;
   ////////////////////////////////////////////////////////
   // Refs
   ////////////////////////////////////////////////////////

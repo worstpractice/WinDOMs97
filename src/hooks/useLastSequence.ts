@@ -1,8 +1,9 @@
+import { recognizedFileExtensions } from "os-constants/recognizedFileExtensions";
 import { useLayoutEffect, useRef } from "react";
 import { useKeyboardState } from "state/useKeyboardState";
 import type { Binary } from "typings/Binary";
 import type { KeyboardState } from "typings/state/KeyboardState";
-import { getFileExtension } from "utils/getFileExtension";
+import { deriveFileExtension } from "utils/deriveFileExtension";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
@@ -31,14 +32,23 @@ export const useLastSequence = (binary: Binary) => {
       if (button === "Enter") {
         binary.isBeingRenamed = false;
 
-        const fileExtension = getFileExtension(binary);
+        if (!sequenceRef.current.trim().length) {
+          sequenceRef.current = "";
+          // NOTE: An early return. This code reeks of Yog-Sothoth.
+          return;
+        }
 
-        if (sequenceRef.current.endsWith(fileExtension)) {
+        const fileExtension = deriveFileExtension(binary);
+
+        const isSameFileExtension = sequenceRef.current.endsWith(fileExtension);
+
+        if (isSameFileExtension) {
           binary.fileName = sequenceRef.current;
         } else {
           const isChangingFileExtension = window.confirm("Do you really want to change the file extension?");
 
           if (isChangingFileExtension) {
+            binary.isFileExtensionRecognized = recognizedFileExtensions.includes(fileExtension);
             binary.fileName = sequenceRef.current;
           }
         }

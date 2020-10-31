@@ -1,6 +1,6 @@
-import type { Binary } from "typings/Binary";
+import type { RawBinary } from "typings/RawBinary";
 
-export const getFileExtension = ({ fileName }: Binary) => {
+export const deriveFileExtension = <T extends RawBinary>({ fileName }: T) => {
   if (!fileName.includes(".")) {
     throw new ReferenceError("What am I to you Erik");
   }

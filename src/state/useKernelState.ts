@@ -1,5 +1,6 @@
 import { Pids } from "kernel/Pids";
 import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
+import { recognizedFileExtensions } from "os-constants/recognizedFileExtensions";
 import type { Binary } from "typings/Binary";
 import type { Hash } from "typings/phantom-types/Hash";
 import type { PID } from "typings/phantom-types/PID";
@@ -8,6 +9,7 @@ import type { RawBinary } from "typings/RawBinary";
 import type { KernelState } from "typings/state/KernelState";
 import { ars256 } from "utils/crypto/ars256";
 import { enforceMinDimensions } from "utils/enforceMinDimensions";
+import { deriveFileExtension } from "utils/deriveFileExtension";
 import { softlinkInAllPlaces } from "utils/softlinkInAllPlaces";
 import create from "zustand";
 import { combine } from "zustand/middleware";
@@ -83,11 +85,13 @@ export const useKernelState = create<KernelState>(
 
             enforceMinDimensions(rawBinary);
 
+            const fileExtension = deriveFileExtension(rawBinary);
+
             const binary: Binary = {
               ////////////////////////////////////////////////////////
               ...rawBinary,
-              // NOTE: Do not include any dot. It will be added programmatically in the right contexts.
               isBeingRenamed: false,
+              isFileExtensionRecognized: recognizedFileExtensions.includes(fileExtension),
               isSingleInstanceOnly: isSingleInstanceOnly ?? false,
               softlinks: softlinks ?? softlinkInAllPlaces(),
               startingDimensions: startingDimensions ?? { x: MIN_HEIGHT, y: MIN_WIDTH },

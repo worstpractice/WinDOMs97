@@ -1,3 +1,4 @@
+import png_unrecognized_file_extension from "assets/icons/file_question.png";
 import { Icon } from "components/Icon";
 import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
@@ -84,9 +85,11 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
   const desktopItemStyle = isRef(activeRef, desktopItemRef) ? activeStyle : styles.DesktopItem;
 
-  const { fileName, icon, isBeingRenamed } = binary;
+  const { fileName, icon, isBeingRenamed, isFileExtensionRecognized } = binary;
 
-  // const wordsStyle = isBeingRenamed ? css(styles.Title, styles.Renaming) : styles.Title;
+  const iconSrc = isFileExtensionRecognized ? icon : png_unrecognized_file_extension;
+
+  const wordsOf = isBeingRenamed ? sequence : fileName;
 
   return (
     <article
@@ -98,8 +101,8 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       onMouseDownCapture={handleMouseDownCapture}
       ref={desktopItemRef}
     >
-      <Icon alt={fileName} height={64} src={icon} width={64} />
-      <Words className={styles.Title} of={isBeingRenamed ? sequence : fileName} />
+      <Icon alt={fileName} height={64} src={iconSrc} width={64} />
+      <Words className={styles.Title} of={wordsOf} />
     </article>
   );
 };

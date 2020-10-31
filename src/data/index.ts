@@ -70,8 +70,8 @@ const taskManager: RawBinary = {
 
 ///////////////////////////////////////////////////////////////
 
+// prettier-ignore
 export const programs = [
-  // NOTE: Hi. This line stops prettier.
   calc,
   cmd,
   ie,
