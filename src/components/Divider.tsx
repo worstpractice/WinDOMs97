@@ -30,16 +30,14 @@ export const Divider: FC<Props> = ({ dent, direction, isStocky = false }) => {
   const isDentedIn = dent === "in";
   const isHorizontal = direction === "horizontal";
 
-  const style = useMemo(
-    () =>
-      css(
-        styles.Divider,
-        isDentedIn ? styles.In : styles.Out,
-        isHorizontal ? styles.Horizontal : styles.Vertical,
-        isStocky ? styles.Stocky : "",
-      ),
-    [isDentedIn, isHorizontal, isStocky],
-  );
+  const style = useMemo(() => {
+    return css(
+      styles.Divider,
+      isDentedIn ? styles.In : styles.Out,
+      isHorizontal ? styles.Horizontal : styles.Vertical,
+      isStocky ? styles.Stocky : "",
+    );
+  }, [isDentedIn, isHorizontal, isStocky]);
 
   const override: CSSProperties = {};
 

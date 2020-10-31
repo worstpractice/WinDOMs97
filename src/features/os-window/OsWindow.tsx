@@ -95,16 +95,14 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
 
   const Program = binaryImage.instructions;
 
-  const style = useMemo(
-    () =>
-      css(
-        styles.OsWindow,
-        isMaximized ? styles.Maximized : "",
-        isMinimized ? styles.Minimized : "",
-        isResizable ? styles.Resizable : "",
-      ),
-    [isMaximized, isMinimized, isResizable],
-  );
+  const style = useMemo(() => {
+    return css(
+      styles.OsWindow,
+      isMaximized ? styles.Maximized : "",
+      isMinimized ? styles.Minimized : "",
+      isResizable ? styles.Resizable : "",
+    );
+  }, [isMaximized, isMinimized, isResizable]);
 
   const left = 30 * pid;
   const top = 20 * pid;

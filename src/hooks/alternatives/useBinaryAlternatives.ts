@@ -1,8 +1,8 @@
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
-import type { KernelState } from "typings/state/KernelState";
+import { useMemo } from "react";
 import { useKernelState } from "state/useKernelState";
-import type { Alternative } from "typings/Alternative";
 import type { Binary } from "typings/Binary";
+import type { KernelState } from "typings/state/KernelState";
 import { alt } from "utils/alt";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -13,24 +13,28 @@ const fromKernel = ({ uninstallProgram }: KernelState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-export const useBinaryAlternatives = (binary: Binary): readonly Alternative[] => {
+export const useBinaryAlternatives = (binary: Binary) => {
   const { uninstallProgram } = useKernelState(fromKernel);
   const executeBinary = useExecuteBinary(binary);
 
-  // NOTE: `ContextMenuItems` get listed in the order specified here.
-  return [
-    ////////////////////////////////////////////////
-    alt("Open", () => {
-      executeBinary();
-    }),
-    ////////////////////////////////////////////////
-    alt("Rename", () => {
-      binary.isBeingRenamed = true;
-    }),
-    ////////////////////////////////////////////////
-    alt("Delete", () => {
-      uninstallProgram(binary);
-    }),
-    ////////////////////////////////////////////////
-  ] as const;
+  const alternatives = useMemo(() => {
+    // NOTE: `ContextMenuItems` get listed in the order specified here.
+    return [
+      ////////////////////////////////////////////////
+      alt("Open", () => {
+        executeBinary();
+      }),
+      ////////////////////////////////////////////////
+      alt("Rename", () => {
+        binary.isBeingRenamed = true;
+      }),
+      ////////////////////////////////////////////////
+      alt("Delete", () => {
+        uninstallProgram(binary);
+      }),
+      ////////////////////////////////////////////////
+    ] as const;
+  }, [binary, executeBinary, uninstallProgram]);
+
+  return alternatives;
 };

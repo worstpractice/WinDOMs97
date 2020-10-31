@@ -42,11 +42,13 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
     onMouseUp?.(e);
   });
 
-  const osButtonStyle = useMemo(() => css(
-    styles.OsButton,
-    isPressed ? styles.Pressed : "",
-    className ? className : "",
-  ), [className, isPressed]);
+  const osButtonStyle = useMemo(() => {
+    return css(
+      styles.OsButton,
+      isPressed ? styles.Pressed : "",
+      className ? className : ""
+    );
+  }, [className, isPressed]);
 
   return (
     <button

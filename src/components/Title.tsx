@@ -11,7 +11,9 @@ type Props = {
 };
 
 export const Title: FC<Props> = ({ className = "", of, style }) => {
-  const titleStyle = useMemo(() => css(styles.Title, className), [className]);
+  const titleStyle = useMemo(() => {
+    return css(styles.Title, className);
+  }, [className]);
 
   return (
     <h1 className={titleStyle} style={style}>

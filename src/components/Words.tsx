@@ -14,7 +14,9 @@ type Props = {
  *
  * So `Words` it is. */
 export const Words: FC<Props> = ({ className = "", of, style }) => {
-  const wordsStyle = useMemo(() => css(styles.Words, className), [className]);
+  const wordsStyle = useMemo(() => {
+    return css(styles.Words, className);
+  }, [className]);
 
   return (
     <p className={wordsStyle} style={style}>

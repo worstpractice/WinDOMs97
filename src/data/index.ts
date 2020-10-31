@@ -5,6 +5,7 @@ import png_minesweeper from "assets/icons/game_mine_1-0.png";
 import png_ie from "assets/icons/msie2-2.png";
 import png_notepad from "assets/icons/notepad-2.png";
 import png_paint from "assets/icons/paint_file-5.png";
+import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
 import { Calc } from "programs/calc/Calc";
 import { Cmd } from "programs/cmd/Cmd";
 import { IE } from "programs/ie/IE";
@@ -28,6 +29,7 @@ const cmd: RawBinary = {
   instructions: Cmd,
   fileName: "cmd.exe",
   programName: "Command Prompt",
+  startingDimensions: { x: MIN_WIDTH + 200, y: MIN_HEIGHT },
 } as const;
 
 const ie: RawBinary = {

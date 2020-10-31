@@ -14,7 +14,9 @@ type Props = {
 };
 
 export const Icon: FC<Props> = ({ alt, className = "", height, src, style, width }) => {
-  const iconStyle = useMemo(() => css(styles.Icon, className), [className]);
+  const iconStyle = useMemo(() => {
+    return css(styles.Icon, className);
+  }, [className]);
 
   return <img alt={alt} className={iconStyle} height={height} loading="eager" src={src} style={style} width={width} />;
 };
