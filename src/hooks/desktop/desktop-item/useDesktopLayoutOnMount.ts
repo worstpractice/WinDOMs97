@@ -20,20 +20,20 @@ export const useDesktopLayoutOnMount = <T extends HTMLElement>(desktopItemRef: O
 
       if (!current) return;
 
-      /** Since we don't want any icons placed UNDER the taskbar, we bail at `clientHeight` minus 200 pixels. */
-      const maxDistanceDown = clientHeight - 200;
+      /** Since we don't want any icons placed UNDER the taskbar, we bail at `clientHeight` minus `--desktopitem-height` pixels. */
+      const maxDistanceDown = clientHeight - 160;
 
       if (x >= maxDistanceDown) {
         /** We reset `x`, meaning we start from the top of the screen next time around. */
         x = 0;
-        /** We add 200 to */
-        y += 200;
+        /** We increment y by `--desktopitem-height`. */
+        y += 160;
       }
 
       current.style.top = `${x}px`;
       current.style.left = `${y}px`;
 
-      x += 200;
+      x += 160;
     };
 
     effect();

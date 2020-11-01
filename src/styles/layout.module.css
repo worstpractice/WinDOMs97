@@ -1,4 +1,9 @@
 :root {
+  /** `DesktopItem` **/
+  --desktopitem-height: 160px;
+  --desktopitem-width: 160px;
+
+  /** `Taskbar` **/
   --taskbar-height: 48px;
 
   /* NOTE: The difference here evens out the outline width difference between the Start button (thick) and the clock (thin). */

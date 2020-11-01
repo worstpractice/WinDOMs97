@@ -1,4 +1,5 @@
 @import "../../styles/colors.module.css";
+@import "../../styles/layout.module.css";
 
 .DesktopItem {
   align-items: center;
@@ -7,10 +8,10 @@
   flex-direction: column;
   font-size: 28px;
   gap: 10px;
-  height: 160px;
+  height: var(--desktopitem-height);
   justify-content: center;
   position: absolute;
-  width: 160px;
+  width: var(--desktopitem-width);
 }
 
 .Title {
