@@ -1,4 +1,3 @@
-import { programs } from "data";
 import { Bsod } from "features/Bsod";
 import { ContextMenu } from "features/context-menu/ContextMenu";
 import { ContextMenuItem } from "features/context-menu/ContextMenuItem";
@@ -16,8 +15,6 @@ import { StartMenuItem } from "features/taskbar/start-area/start-menu/StartMenuI
 import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
-import { useLastClickPosition } from "hooks/useLastClickPosition";
-import { useLastKeyPress } from "hooks/useLastKeyPress";
 import { default as React } from "react";
 import { useErrorState } from "state/useErrorState";
 import { useKernelState } from "state/useKernelState";
@@ -36,9 +33,8 @@ const fromError = ({ isBsod }: ErrorState) => ({
   isBsod,
 });
 
-const fromKernel = ({ installedPrograms, installProgram, runningProcesses }: KernelState) => ({
+const fromKernel = ({ installedPrograms, runningProcesses }: KernelState) => ({
   installedPrograms,
-  installProgram,
   runningProcesses,
 });
 
@@ -52,19 +48,11 @@ type Props = {};
 
 export const Explorer: FC<Props> = () => {
   const { isBsod } = useErrorState(fromError);
-  const { installedPrograms, installProgram, runningProcesses } = useKernelState(fromKernel);
+  const { installedPrograms, runningProcesses } = useKernelState(fromKernel);
   const { alternatives, openMenu } = useMenuState(fromMenu);
-  useLastClickPosition();
-  useLastKeyPress();
 
   if (isBsod) {
     return <Bsod />;
-  }
-
-  if (!installedPrograms.length) {
-    for (const each of programs) {
-      installProgram(each);
-    }
   }
 
   const isContextMenuOpen = openMenu === "ContextMenu";

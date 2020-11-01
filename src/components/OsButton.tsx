@@ -2,11 +2,10 @@ import { onLMB } from "event-filters/onLMB";
 import type { CSSProperties, ReactNode } from "react";
 import { default as React, forwardRef, useMemo, useState } from "react";
 import type { ButtonHandler } from "typings/ButtonHandler";
-import { ButtonProps } from "typings/props/ButtonProps";
 import { css } from "utils/css";
 import styles from "./OsButton.module.css";
 
-type Props = Omit<ButtonProps, "type"> & {
+type Props = {
   children?: ReactNode;
   className?: string;
   onContextMenu?: ButtonHandler;
@@ -65,3 +64,5 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
     </button>
   );
 });
+
+OsButton.displayName = "OsButton";
