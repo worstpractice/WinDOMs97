@@ -34,7 +34,6 @@ export const useLastSequence = (binary: Binary) => {
 
         if (!sequenceRef.current.trim().length) {
           sequenceRef.current = "";
-          // NOTE: An early return. This code reeks of Yog-Sothoth.
           return;
         }
 
