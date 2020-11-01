@@ -1,6 +1,5 @@
 import { OUT_OF_PIDS, OUT_OF_TASKBAR } from "errors";
 import { Pids } from "kernel/Pids";
-import { useCallback } from "react";
 import { useErrorState } from "state/useErrorState";
 import { useKernelState } from "state/useKernelState";
 import { useRunningAreaState } from "state/useRunningAreaState";
@@ -32,7 +31,7 @@ export const useExecuteBinary = (binary: Binary) => {
   const { dangerouslyExecuteBinary, runningProcesses } = useKernelState(fromKernel);
   const { isRunningAreaFull } = useRunningAreaState(fromRunningArea);
 
-  const safelyExecuteBinary = useCallback(() => {
+  const safelyExecuteBinary = () => {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Check if taskbar full
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -71,7 +70,7 @@ export const useExecuteBinary = (binary: Binary) => {
     // Confetti, we launch the process
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     dangerouslyExecuteBinary(binary, pid);
-  }, [binary, bluescreen, dangerouslyExecuteBinary, isRunningAreaFull, runningProcesses]);
+  };
 
   return safelyExecuteBinary;
 };

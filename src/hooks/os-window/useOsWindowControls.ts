@@ -1,25 +1,24 @@
-import { useCallback } from "react";
 import type { Process } from "typings/Process";
 
 export const useOsWindowControls = (process: Process) => {
-  const maximize = useCallback(() => {
+  const maximize = () => {
     process.isMaximized = true;
-  }, [process]);
+  };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const minimize = useCallback(() => {
+  const minimize = () => {
     process.isMinimized = true;
-  }, [process]);
+  };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const unMaximize = useCallback(() => {
+  const unMaximize = () => {
     process.isMaximized = false;
-  }, [process]);
+  };
 
   /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const unMinimize = useCallback(() => {
+  const unMinimize = () => {
     process.isMinimized = false;
-  }, [process]);
+  };
 
   return { maximize, minimize, unMaximize, unMinimize } as const;
 };
