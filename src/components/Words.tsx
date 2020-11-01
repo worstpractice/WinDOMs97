@@ -1,5 +1,5 @@
 import type { CSSProperties } from "react";
-import { default as React, useMemo } from "react";
+import { default as React } from "react";
 import type { FC } from "typings/FC";
 import { css } from "utils/css";
 import styles from "./Words.module.css";
@@ -14,9 +14,7 @@ type Props = {
  *
  * So `Words` it is. */
 export const Words: FC<Props> = ({ className = "", of, style }) => {
-  const wordsStyle = useMemo(() => {
-    return css(styles.Words, className);
-  }, [className]);
+  const wordsStyle = css(styles.Words, className);
 
   return (
     <p className={wordsStyle} style={style}>

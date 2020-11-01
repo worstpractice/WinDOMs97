@@ -1,5 +1,4 @@
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
-import { useMemo } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useKernelState } from "state/useKernelState";
 import type { Process } from "typings/Process";
@@ -24,38 +23,36 @@ export const useProcessAlternatives = (process: Process) => {
   const { endProcess } = useKernelState(fromKernel);
   const { maximize, minimize, unMaximize, unMinimize } = useOsWindowControls(process);
 
-  const alternatives = useMemo(() => {
-    const { isMaximized, isMinimized, osWindowRef } = process;
+  const { isMaximized, isMinimized, osWindowRef } = process;
 
-    // NOTE: `ContextMenuItems` get listed in the order specified here.
-    return [
-      ////////////////////////////////////////////////
-      alt("Exit", () => {
-        endProcess(process);
-      }),
-      ////////////////////////////////////////////////
-      isMaximized
-        ? alt("Unmaximize", () => {
-            unMaximize();
-            activate(osWindowRef);
-          })
-        : alt("Maximize", () => {
-            maximize();
-            activate(osWindowRef);
-          }),
-      ////////////////////////////////////////////////
-      isMinimized
-        ? alt("Unminimize", () => {
-            unMinimize();
-            activate(osWindowRef);
-          })
-        : alt("Minimize", () => {
-            minimize();
-            activate({ current: null });
-          }),
-      ////////////////////////////////////////////////
-    ] as const;
-  }, [activate, endProcess, maximize, minimize, process, unMaximize, unMinimize]);
+  // NOTE: `ContextMenuItems` get listed in the order specified here.
+  const alternatives = [
+    ////////////////////////////////////////////////
+    alt("Exit", () => {
+      endProcess(process);
+    }),
+    ////////////////////////////////////////////////
+    isMaximized
+      ? alt("Unmaximize", () => {
+          unMaximize();
+          activate(osWindowRef);
+        })
+      : alt("Maximize", () => {
+          maximize();
+          activate(osWindowRef);
+        }),
+    ////////////////////////////////////////////////
+    isMinimized
+      ? alt("Unminimize", () => {
+          unMinimize();
+          activate(osWindowRef);
+        })
+      : alt("Minimize", () => {
+          minimize();
+          activate({ current: null });
+        }),
+    ////////////////////////////////////////////////
+  ] as const;
 
   return alternatives;
 };
