@@ -146,9 +146,9 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       onMouseDown={handleMouseDown}
       // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
       onMouseDownCapture={handleMouseDownCapture}
-      onMouseUpCapture={handleMouseUpCapture}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
+      onMouseUpCapture={handleMouseUpCapture}
       ref={desktopItemRef}
     >
       <Icon alt={fileName} height={64} src={iconSrc} width={64} />
