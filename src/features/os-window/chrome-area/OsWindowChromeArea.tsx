@@ -16,9 +16,9 @@ import styles from "./OsWindowChromeArea.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate, activeRef }: ActiveState) => ({
-  activate,
+const fromActive = ({ activeRef, setActiveRef }: ActiveState) => ({
   activeRef,
+  setActiveRef,
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -30,7 +30,7 @@ type Props = {
 };
 
 export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
-  const { activate, activeRef } = useActiveState(fromActive);
+  const { activeRef, setActiveRef } = useActiveState(fromActive);
   const chromeAreaRef = useOsRef<HTMLElement>();
   const process = getProcess(chromeAreaRef);
   const { maximize, unMaximize } = useOsWindowControls(process);
@@ -42,7 +42,7 @@ export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
   const handleDoubleClick = () => {
     const { isMaximized, osWindowRef } = process;
 
-    activate(osWindowRef);
+    setActiveRef(osWindowRef);
 
     isMaximized ? unMaximize() : maximize();
   };

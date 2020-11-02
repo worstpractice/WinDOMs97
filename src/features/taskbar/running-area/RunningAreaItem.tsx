@@ -20,9 +20,10 @@ import styles from "./RunningAreaItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate, activeRef }: ActiveState) => ({
-  activate,
+const fromActive = ({ activeRef, setActiveRef, unsetActiveRef }: ActiveState) => ({
   activeRef,
+  setActiveRef,
+  unsetActiveRef,
 });
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
@@ -36,7 +37,7 @@ type Props = {
 };
 
 export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate, activeRef } = useActiveState(fromActive);
+  const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const runningAreaItemRef = useOsRef<HTMLButtonElement>();
   const process = getProcess(runningAreaItemRef);
@@ -48,7 +49,7 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
   });
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
-    // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to activate.
+    // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to setActiveRef.
     e.stopPropagation();
     closeMenus();
 
@@ -56,10 +57,10 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
 
     if (isRef(activeRef, osWindowRef)) {
       minimize();
-      activate({ current: null });
+      unsetActiveRef();
     } else {
       unMinimize();
-      activate(process.osWindowRef);
+      setActiveRef(process.osWindowRef);
       bringToFront(process.osWindowRef);
     }
   });

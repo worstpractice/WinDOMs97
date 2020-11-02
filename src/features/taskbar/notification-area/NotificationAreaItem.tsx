@@ -17,8 +17,8 @@ import styles from "./NotificationAreaItem.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
@@ -32,7 +32,7 @@ type Props = {
 };
 
 export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const notificationAreaItemRef = useOsRef<HTMLLIElement>();
   const process = getProcess(notificationAreaItemRef);
@@ -46,7 +46,7 @@ export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     e.stopPropagation();
     closeMenus();
-    activate(process.osWindowRef);
+    setActiveRef(process.osWindowRef);
     bringToFront(process.osWindowRef);
   });
 

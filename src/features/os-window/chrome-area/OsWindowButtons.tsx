@@ -16,8 +16,9 @@ import styles from "./OsWindowButtons.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => ({
+  setActiveRef,
+  unsetActiveRef,
 });
 
 const fromKernel = ({ endProcess }: KernelState) => ({
@@ -34,19 +35,10 @@ type Props = {
 };
 
 export const OsWindowButtons: FC<Props> = ({ process }) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const { endProcess } = useKernelState(fromKernel);
   const { maximize, minimize, unMaximize } = useOsWindowControls(process);
-
-  /////////////////////////////////////////////////////////////////////////////////////////
-  // Event Handlers
-  /////////////////////////////////////////////////////////////////////////////////////////
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
-    // NOTE: This is necessary to stop the `OsWindow` from starting to move.
-    e.stopPropagation();
-    closeMenus();
-  });
 
   /////////////////////////////////////////////////////////////////////////////////////////
   // Domain-Specific Handlers
@@ -57,14 +49,23 @@ export const OsWindowButtons: FC<Props> = ({ process }) => {
 
   const handleMaximize = onLMB<HTMLButtonElement>(() => {
     const { isMaximized, osWindowRef } = process;
-    activate(osWindowRef);
+    setActiveRef(osWindowRef);
     bringToFront(osWindowRef);
     isMaximized ? unMaximize() : maximize();
   });
 
   const handleMinimize = onLMB<HTMLButtonElement>(() => {
     minimize();
-    activate({ current: null });
+    unsetActiveRef();
+  });
+
+  /////////////////////////////////////////////////////////////////////////////////////////
+  // Event Handlers
+  /////////////////////////////////////////////////////////////////////////////////////////
+  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+    // NOTE: This is necessary to stop the `OsWindow` from starting to move.
+    e.stopPropagation();
+    closeMenus();
   });
 
   //////////////////////////////////////////////////////////////////////////////

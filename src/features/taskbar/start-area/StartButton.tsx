@@ -17,9 +17,10 @@ import styles from "./StartButton.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate, activeRef }: ActiveState) => ({
-  activate,
+const fromActive = ({ activeRef, setActiveRef, unsetActiveRef }: ActiveState) => ({
   activeRef,
+  setActiveRef,
+  unsetActiveRef,
 });
 
 const fromMenu = ({ toggleStartMenu }: MenuState) => ({
@@ -30,7 +31,7 @@ const fromMenu = ({ toggleStartMenu }: MenuState) => ({
 type Props = {};
 
 export const StartButton: FC<Props> = () => {
-  const { activate, activeRef } = useActiveState(fromActive);
+  const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { toggleStartMenu } = useMenuState(fromMenu);
   const startButtonRef = useOsRef<HTMLButtonElement>();
 
@@ -39,10 +40,10 @@ export const StartButton: FC<Props> = () => {
     e.stopPropagation();
 
     if (isRef(activeRef, startButtonRef)) {
-      activate({ current: null });
+      unsetActiveRef();
       toggleStartMenu();
     } else {
-      activate(startButtonRef);
+      setActiveRef(startButtonRef);
       toggleStartMenu();
     }
   };

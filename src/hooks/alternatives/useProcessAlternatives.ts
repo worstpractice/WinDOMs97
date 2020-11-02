@@ -9,8 +9,9 @@ import { alt } from "utils/alt";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => ({
+  setActiveRef,
+  unsetActiveRef,
 });
 
 const fromKernel = ({ endProcess }: KernelState) => ({
@@ -19,7 +20,7 @@ const fromKernel = ({ endProcess }: KernelState) => ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useProcessAlternatives = (process: Process) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { endProcess } = useKernelState(fromKernel);
   const { maximize, minimize, unMaximize, unMinimize } = useOsWindowControls(process);
 
@@ -35,21 +36,21 @@ export const useProcessAlternatives = (process: Process) => {
     isMaximized
       ? alt("Unmaximize", () => {
           unMaximize();
-          activate(osWindowRef);
+          setActiveRef(osWindowRef);
         })
       : alt("Maximize", () => {
           maximize();
-          activate(osWindowRef);
+          setActiveRef(osWindowRef);
         }),
     ////////////////////////////////////////////////
     isMinimized
       ? alt("Unminimize", () => {
           unMinimize();
-          activate(osWindowRef);
+          setActiveRef(osWindowRef);
         })
       : alt("Minimize", () => {
           minimize();
-          activate({ current: null });
+          unsetActiveRef();
         }),
     ////////////////////////////////////////////////
   ] as const;

@@ -19,8 +19,8 @@ import styles from "./TaskMgr.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 
 const fromKernel = ({ endProcess, runningProcesses }: KernelState) => ({
@@ -38,7 +38,7 @@ type Props = {
 };
 
 export const TaskMgr: FC<Props> = ({ getProcess }) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
   const { endProcess, runningProcesses } = useKernelState(fromKernel);
   const { closeMenus } = useMenuState(fromMenu);
   const taskMgrRef = useOsRef<HTMLDivElement>();
@@ -66,7 +66,7 @@ export const TaskMgr: FC<Props> = ({ getProcess }) => {
             const { osWindowRef } = process;
 
             closeMenus();
-            activate(osWindowRef);
+            setActiveRef(osWindowRef);
             bringToFront(osWindowRef);
           });
 

@@ -1,59 +1,59 @@
 import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
-import type { ActiveState } from "typings/state/ActiveState";
+import type { DraggedState } from "typings/state/DraggedState";
 import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  activeRef: OsRef<HTMLElement>;
+  draggedRef: OsRef<HTMLElement>;
 };
 
 export type Actions = {
-  setActiveRef: <T extends HTMLElement>(to: OsRef<T>) => void;
-  unsetActiveRef: () => void;
+  setDraggedRef: <T extends HTMLElement>(to: OsRef<T>) => void;
+  unsetDraggedRef: () => void;
 };
 
 let debugLogCounter = 0;
 
 const nullRef: OsRef<HTMLElement> = { current: null } as const;
 
-export const useActiveState = create<ActiveState>(
+export const useDraggedState = create<DraggedState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      activeRef: nullRef,
+      draggedRef: nullRef,
       ///////////////////////////////////////////
     } as const,
     (set) =>
       ({
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T) => {
-          set(({ activeRef }) => {
-            if (is(activeRef.current, current)) {
-              return { activeRef } as const;
+        setDraggedRef: <T extends HTMLElement>({ current }: OsRef<T>) => {
+          set(({ draggedRef }) => {
+            if (is(draggedRef.current, current)) {
+              return { draggedRef } as const;
             }
 
-            console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
-            console.debug("FROM:", activeRef.current);
+            console.groupCollapsed(`${++debugLogCounter}.  DraggedRef Changed `);
+            console.debug("FROM:", draggedRef.current);
             console.debug("TO:", current);
             console.groupEnd();
 
-            return { activeRef: { current } } as const;
+            return { draggedRef: { current } } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        unsetActiveRef: () => {
-          set(({ activeRef }) => {
-            if (is(activeRef.current, null)) {
-              return { activeRef } as const;
+        unsetDraggedRef: () => {
+          set(({ draggedRef }) => {
+            if (is(draggedRef.current, null)) {
+              return { draggedRef } as const;
             }
 
-            console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
-            console.debug("FROM:", activeRef.current);
+            console.groupCollapsed(`${++debugLogCounter}.  DraggedRef Changed `);
+            console.debug("FROM:", draggedRef.current);
             console.debug("TO:", null);
             console.groupEnd();
 
-            return { activeRef: nullRef } as const;
+            return { draggedRef: nullRef } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -15,8 +15,8 @@ import { listen } from "utils/listen";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
@@ -25,7 +25,7 @@ const fromMenu = ({ closeMenus }: MenuState) => ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
   const [isDragSelecting, setIsDragSelecting] = useState(false);
@@ -44,7 +44,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
 
         setIsDragSelecting(true);
         closeMenus();
-        activate(desktopRef);
+        setActiveRef(desktopRef);
       });
 
       const handleMouseMove: MouseHandler<HTMLElement> = ({ clientX, clientY }) => {
@@ -88,7 +88,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
       isCancelled = true;
       composedFn?.();
     };
-  }, [activate, closeMenus, desktopRef]);
+  }, [setActiveRef, closeMenus, desktopRef]);
 
   return [isDragSelecting, currentPosition] as const;
 };

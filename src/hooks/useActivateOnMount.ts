@@ -7,13 +7,13 @@ import { bringToFront } from "utils/bringToFront";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
 
   useLayoutEffect(() => {
     let isCancelled = false;
@@ -21,7 +21,7 @@ export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
     const effect = (): void => {
       if (isCancelled) return;
 
-      activate(ref);
+      setActiveRef(ref);
       bringToFront(ref);
     };
 
@@ -30,5 +30,5 @@ export const useActivateOnMount = <T extends OsRef<HTMLElement>>(ref: T) => {
     return function cleanup() {
       isCancelled = true;
     };
-  }, [activate, ref]);
+  }, [setActiveRef, ref]);
 };

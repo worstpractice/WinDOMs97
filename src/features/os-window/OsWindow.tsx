@@ -23,8 +23,8 @@ import styles from "./OsWindow.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
@@ -37,7 +37,7 @@ type Props = {
 };
 
 export const OsWindow: FC<Props> = ({ getProcess }) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const osWindowRef = useOsRef<HTMLElement>();
   const process = getProcess(osWindowRef);
@@ -60,7 +60,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
 
   const handleMouseDown = onLMB<HTMLElement>((e) => {
     closeMenus();
-    activate(osWindowRef);
+    setActiveRef(osWindowRef);
     bringToFront(osWindowRef);
 
     // Not resizable at the moment? That means we're done here.

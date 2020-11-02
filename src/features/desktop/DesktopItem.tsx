@@ -10,24 +10,39 @@ import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useLastSequence } from "hooks/useLastSequence";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
+import { default as React, useState } from "react";
 import { useActiveState } from "state/useActiveState";
+import { useDraggedState } from "state/useDraggedState";
+import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
+import { Hash } from "typings/phantom-types/Hash";
 import type { ActiveState } from "typings/state/ActiveState";
+import type { DraggedState } from "typings/state/DraggedState";
+import { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
+import { getBinaryByFileHash } from "utils/getBinaryByFilehash";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate, activeRef }: ActiveState) => ({
-  activate,
+const fromActive = ({ activeRef, setActiveRef }: ActiveState) => ({
   activeRef,
+  setActiveRef,
+});
+
+const fromDragged = ({ draggedRef }: DraggedState) => ({
+  draggedRef,
+});
+
+const fromKernel = ({ installedPrograms, uninstallProgram }: KernelState) => ({
+  installedPrograms,
+  uninstallProgram,
 });
 
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
@@ -36,14 +51,14 @@ const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const activeStyle = css(styles.DesktopItem, styles.Active);
-
 type Props = {
   getBinary: Linker;
 };
 
 export const DesktopItem: FC<Props> = ({ getBinary }) => {
-  const { activate, activeRef } = useActiveState(fromActive);
+  const { activeRef, setActiveRef } = useActiveState(fromActive);
+  const { draggedRef } = useDraggedState(fromDragged);
+  const { installedPrograms, uninstallProgram } = useKernelState(fromKernel);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);
@@ -53,6 +68,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
   // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopItemRef);
   const sequence = useLastSequence(binary);
+  const [isPotentialDropTarget, setIsPotentialDropTarget] = useState(false);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   //  Hook Handlers
@@ -77,15 +93,45 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
     // NOTE: This makes `DesktopItem` selection sticky, which we want.
     e.stopPropagation();
     closeMenus();
-    activate(desktopItemRef);
+    setActiveRef(desktopItemRef);
     handleMove(e);
   });
 
+  const handleMouseOut = () => {
+    setIsPotentialDropTarget(false);
+  };
+
+  const handleMouseOver = () => {
+    const { current } = draggedRef;
+
+    if (!current) return;
+
+    setIsPotentialDropTarget(true);
+  };
+
+  const handleMouseUpCapture = () => {
+    const { current } = draggedRef;
+
+    if (!current) return;
+
+    const { id: fileHash } = current;
+
+    if (!fileHash) return;
+
+    const draggedBinary = getBinaryByFileHash(fileHash as Hash, installedPrograms);
+
+    uninstallProgram(draggedBinary);
+  };
+
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  const desktopItemStyle = isRef(activeRef, desktopItemRef) ? activeStyle : styles.DesktopItem;
+  const desktopItemStyle = css(
+    styles.DesktopItem,
+    isRef(activeRef, desktopItemRef) ? styles.Active : "",
+    isPotentialDropTarget ? styles.DropTarget : "",
+  );
 
-  const { fileName, icon, isBeingRenamed, isFileExtensionRecognized } = binary;
+  const { fileName, fileHash, icon, isBeingRenamed, isFileExtensionRecognized } = binary;
 
   const iconSrc = isFileExtensionRecognized ? icon : png_unrecognized_file_extension;
 
@@ -94,11 +140,15 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
   return (
     <article
       className={desktopItemStyle}
+      id={fileHash}
       onContextMenu={handleContextMenu}
       onDragStart={blockNativeDrag}
       onMouseDown={handleMouseDown}
       // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
       onMouseDownCapture={handleMouseDownCapture}
+      onMouseUpCapture={handleMouseUpCapture}
+      onMouseOver={handleMouseOver}
+      onMouseOut={handleMouseOut}
       ref={desktopItemRef}
     >
       <Icon alt={fileName} height={64} src={iconSrc} width={64} />

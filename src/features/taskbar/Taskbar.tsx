@@ -11,8 +11,8 @@ import styles from "./Taskbar.module.css";
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activate }: ActiveState) => ({
-  activate,
+const fromActive = ({ setActiveRef }: ActiveState) => ({
+  setActiveRef,
 });
 
 const fromMenu = ({ closeMenus }: MenuState) => ({
@@ -25,13 +25,13 @@ type Props = {
 };
 
 export const Taskbar: FC<Props> = ({ children }) => {
-  const { activate } = useActiveState(fromActive);
+  const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const taskbarRef = useOsRef<HTMLElement>();
 
   const handleMouseDown = () => {
     closeMenus();
-    activate(taskbarRef);
+    setActiveRef(taskbarRef);
   };
 
   return (

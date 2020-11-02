@@ -29,3 +29,7 @@
   outline-style: dotted;
   outline-width: 1px;
 }
+
+.DropTarget {
+  background-color: darkslateblue;
+}
