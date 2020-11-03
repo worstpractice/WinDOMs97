@@ -1,29 +1,25 @@
+import { ContextMenuItems } from "collections/ContextMenuItems";
+import { DesktopItems } from "collections/DesktopIcons";
+import { NotificationAreaItems } from "collections/NotificationAreaItems";
+import { OsWindows } from "collections/OsWindows";
+import { QuickstartAreaItems } from "collections/QuickstartAreaItems";
+import { RunningAreaItems } from "collections/RunningAreaItems";
+import { StartMenuItems } from "collections/StartMenuItems";
 import { Bsod } from "features/Bsod";
 import { ContextMenu } from "features/context-menu/ContextMenu";
-import { ContextMenuItem } from "features/context-menu/ContextMenuItem";
 import { Desktop } from "features/desktop/Desktop";
-import { DesktopItem } from "features/desktop/DesktopItem";
-import { OsWindow } from "features/os-window/OsWindow";
 import { NotificationArea } from "features/taskbar/notification-area/NotificationArea";
-import { NotificationAreaItem } from "features/taskbar/notification-area/NotificationAreaItem";
 import { RunningArea } from "features/taskbar/running-area/RunningArea";
-import { RunningAreaItem } from "features/taskbar/running-area/RunningAreaItem";
 import { QuickstartArea } from "features/taskbar/start-area/quickstart-area/QuickstartArea";
-import { QuickstartAreaItem } from "features/taskbar/start-area/quickstart-area/QuickstartAreaItem";
 import { StartMenu } from "features/taskbar/start-area/start-menu/StartMenu";
-import { StartMenuItem } from "features/taskbar/start-area/start-menu/StartMenuItem";
 import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { default as React } from "react";
 import { useErrorState } from "state/useErrorState";
-import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
-import type { Linker } from "typings/Linker";
-import type { ButtonLoader, LiLoader, Loader } from "typings/Loader";
 import type { ErrorState } from "typings/state/ErrorState";
-import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -33,13 +29,7 @@ const fromError = ({ isBsod }: ErrorState) => ({
   isBsod,
 });
 
-const fromKernel = ({ installedPrograms, runningProcesses }: KernelState) => ({
-  installedPrograms,
-  runningProcesses,
-});
-
-const fromMenu = ({ alternatives, openMenu }: MenuState) => ({
-  alternatives,
+const fromMenu = ({ openMenu }: MenuState) => ({
   openMenu,
 });
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -48,8 +38,7 @@ type Props = {};
 
 export const Explorer: FC<Props> = () => {
   const { isBsod } = useErrorState(fromError);
-  const { installedPrograms, runningProcesses } = useKernelState(fromKernel);
-  const { alternatives, openMenu } = useMenuState(fromMenu);
+  const { openMenu } = useMenuState(fromMenu);
 
   if (isBsod) {
     return <Bsod />;
@@ -61,107 +50,39 @@ export const Explorer: FC<Props> = () => {
 
   return (
     <>
+      {/******************************/}
       <Desktop>
-        {isContextMenuOpen && (
+        {isContextMenuOpen ? (
           <ContextMenu>
-            {alternatives.map((alternative) => {
-              const { name } = alternative;
-
-              return <ContextMenuItem alternative={alternative} key={`ContextMenuItem-${name}`} />;
-            })}
+            <ContextMenuItems />
           </ContextMenu>
-        )}
-        {installedPrograms.map((binary) => {
-          const { fileHash, softlinks } = binary;
-          const { isOnDesktop } = softlinks;
-
-          if (!isOnDesktop) {
-            return null;
-          }
-
-          const toDesktopItem: Linker = (desktopItemRef) => {
-            binary.desktopItemRef = desktopItemRef;
-            return binary;
-          };
-
-          return <DesktopItem key={`DesktopItem-${fileHash}`} getBinary={toDesktopItem} />;
-        })}
+        ) : null}
+        <DesktopItems />
       </Desktop>
-      {runningProcesses.map((process) => {
-        const { pid } = process;
-
-        const toOsWindow: Loader = (osWindowRef) => {
-          process.osWindowRef = osWindowRef;
-          return process;
-        };
-
-        return <OsWindow key={`OsWindow-${pid}`} getProcess={toOsWindow} />;
-      })}
-      {isStartMenuOpen && (
+      {/******************************/}
+      <OsWindows />
+      {/******************************/}
+      {isStartMenuOpen ? (
         <StartMenu>
-          {installedPrograms.map((binary) => {
-            const { fileHash, softlinks } = binary;
-            const { isOnStartMenu } = softlinks;
-
-            if (!isOnStartMenu) {
-              return null;
-            }
-
-            const toStartMenuItem: Linker = (startMenuItemRef) => {
-              binary.startMenuItemRef = startMenuItemRef;
-              return binary;
-            };
-
-            return <StartMenuItem key={`StartMenuItem-${fileHash}`} getBinary={toStartMenuItem} />;
-          })}
+          <StartMenuItems />
         </StartMenu>
-      )}
+      ) : null}
+      {/******************************/}
       <Taskbar>
         <StartArea>
           <StartButton />
           <QuickstartArea>
-            {installedPrograms.map((binary) => {
-              const { fileHash, softlinks } = binary;
-              const { isInQuickstartArea } = softlinks;
-
-              if (!isInQuickstartArea) {
-                return null;
-              }
-
-              const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
-                binary.quickstartAreaItemRef = quickstartAreaItem;
-                return binary;
-              };
-
-              return <QuickstartAreaItem key={`QuickstartAreaItem-${fileHash}`} getBinary={toQuickstartAreaItem} />;
-            })}
+            <QuickstartAreaItems />
           </QuickstartArea>
         </StartArea>
         <RunningArea>
-          {runningProcesses.map((process) => {
-            const { pid } = process;
-
-            const toRunningAreaItem: ButtonLoader = (runningAreaItemRef) => {
-              process.runningAreaItemRef = runningAreaItemRef;
-              return process;
-            };
-
-            return <RunningAreaItem key={`RunningAreaItem-${pid}`} getProcess={toRunningAreaItem} />;
-          })}
+          <RunningAreaItems />
         </RunningArea>
         <NotificationArea>
-          {runningProcesses.map((process) => {
-            const { pid } = process;
-
-            const toNotificationAreaItem: LiLoader = (notificationAreaItemRef) => {
-              process.notificationAreaItemRef = notificationAreaItemRef;
-              return process;
-            };
-
-            return <NotificationAreaItem key={`NotificationAreaItem-${pid}`} getProcess={toNotificationAreaItem} />;
-          })}
+          <NotificationAreaItems />
         </NotificationArea>
       </Taskbar>
+      {/******************************/}
     </>
   );
 };

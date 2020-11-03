@@ -12,6 +12,7 @@ const fromError = ({ bluescreen }: ErrorState) => ({
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDesktopAlternatives = () => {
+  console.count("useDesktopAlternatives");
   const { bluescreen } = useErrorState(fromError);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
