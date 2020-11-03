@@ -5,7 +5,6 @@ import { OsWindows } from "collections/OsWindows";
 import { QuickstartAreaItems } from "collections/QuickstartAreaItems";
 import { RunningAreaItems } from "collections/RunningAreaItems";
 import { StartMenuItems } from "collections/StartMenuItems";
-import { Bsod } from "features/Bsod";
 import { ContextMenu } from "features/context-menu/ContextMenu";
 import { Desktop } from "features/desktop/Desktop";
 import { NotificationArea } from "features/taskbar/notification-area/NotificationArea";
@@ -16,19 +15,13 @@ import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
 import { default as React } from "react";
-import { useErrorState } from "state/useErrorState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
-import type { ErrorState } from "typings/state/ErrorState";
 import type { MenuState } from "typings/state/MenuState";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromError = ({ isBsod }: ErrorState) => ({
-  isBsod,
-});
-
 const fromMenu = ({ openMenu }: MenuState) => ({
   openMenu,
 });
@@ -37,12 +30,7 @@ const fromMenu = ({ openMenu }: MenuState) => ({
 type Props = {};
 
 export const Explorer: FC<Props> = () => {
-  const { isBsod } = useErrorState(fromError);
   const { openMenu } = useMenuState(fromMenu);
-
-  if (isBsod) {
-    return <Bsod />;
-  }
 
   const isContextMenuOpen = openMenu === "ContextMenu";
 
