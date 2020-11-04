@@ -55,7 +55,6 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
   const executeBinary = useExecuteBinary(binary);
   const handleMove = useOnDragAndDrop(desktopItemRef);
   const alternatives = useBinaryAlternatives(binary);
-  // NOTE: to work properly, this call depends on the parent component (`Desktop`) calling `useActivateOnMount()` as well.
   useDesktopLayoutOnMount(desktopItemRef);
   const sequence = useLastSequence(binary);
   const [isPotentialDropTarget, setIsPotentialDropTarget] = useState(false);
