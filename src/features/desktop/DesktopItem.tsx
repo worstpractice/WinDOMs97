@@ -13,18 +13,14 @@ import { useOsRef } from "hooks/useOsRef";
 import { default as React, useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useDraggedState } from "state/useDraggedState";
-import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
-import { Hash } from "typings/phantom-types/Hash";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { DraggedState } from "typings/state/DraggedState";
-import { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 import { css } from "utils/css";
-import { getBinaryByFileHash } from "utils/getBinaryByFilehash";
 import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
 import styles from "./DesktopItem.module.css";
 
@@ -40,11 +36,6 @@ const fromDragged = ({ draggedRef }: DraggedState) => ({
   draggedRef,
 });
 
-const fromKernel = ({ installedPrograms, uninstallProgram }: KernelState) => ({
-  installedPrograms,
-  uninstallProgram,
-});
-
 const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
   closeMenus,
   openContextMenu,
@@ -58,7 +49,6 @@ type Props = {
 export const DesktopItem: FC<Props> = ({ getBinary }) => {
   const { activeRef, setActiveRef } = useActiveState(fromActive);
   const { draggedRef } = useDraggedState(fromDragged);
-  const { installedPrograms, uninstallProgram } = useKernelState(fromKernel);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const desktopItemRef = useOsRef<HTMLElement>();
   const binary = getBinary(desktopItemRef);
@@ -114,13 +104,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
     if (!current) return;
 
-    const { id: fileHash } = current;
-
-    if (!fileHash) return;
-
-    const draggedBinary = getBinaryByFileHash(fileHash as Hash, installedPrograms);
-
-    uninstallProgram(draggedBinary);
+    // ...
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -135,7 +119,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
   const iconSrc = isFileExtensionRecognized ? icon : png_unrecognized_file_extension;
 
-  const wordsOf = isBeingRenamed ? sequence : fileName;
+  const text = isBeingRenamed ? sequence : fileName;
 
   return (
     <article
@@ -152,7 +136,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       ref={desktopItemRef}
     >
       <Icon alt={fileName} height={64} src={iconSrc} width={64} />
-      <Words className={styles.Title} of={wordsOf} />
+      <Words className={styles.Title} of={text} />
     </article>
   );
 };

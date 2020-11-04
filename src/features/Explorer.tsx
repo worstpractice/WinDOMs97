@@ -40,21 +40,21 @@ export const Explorer: FC<Props> = () => {
     <>
       {/******************************/}
       <Desktop>
-        {isContextMenuOpen ? (
+        {isContextMenuOpen && (
           <ContextMenu>
             <ContextMenuItems />
           </ContextMenu>
-        ) : null}
+        )}
         <DesktopItems />
       </Desktop>
       {/******************************/}
       <OsWindows />
       {/******************************/}
-      {isStartMenuOpen ? (
+      {isStartMenuOpen && (
         <StartMenu>
           <StartMenuItems />
         </StartMenu>
-      ) : null}
+      )}
       {/******************************/}
       <Taskbar>
         <StartArea>

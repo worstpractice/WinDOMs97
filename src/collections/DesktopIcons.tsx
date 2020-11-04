@@ -3,7 +3,8 @@ import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
-import { KernelState } from "typings/state/KernelState";
+import type { KernelState } from "typings/state/KernelState";
+import { forIsOnDesktop } from "utils/array-helpers/filter/forIsOnDesktop";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
@@ -18,15 +19,12 @@ type Props = {};
 export const DesktopItems: FC<Props> = () => {
   const { installedPrograms } = useKernelState(fromKernel);
 
+  const visibleOnDesktop = installedPrograms.filter(forIsOnDesktop);
+
   return (
     <>
-      {installedPrograms.map((binary) => {
-        const { fileHash, softlinks } = binary;
-        const { isOnDesktop } = softlinks;
-
-        if (!isOnDesktop) {
-          return null;
-        }
+      {visibleOnDesktop.map((binary) => {
+        const { fileHash } = binary;
 
         const toDesktopItem: Linker = (desktopItemRef) => {
           binary.desktopItemRef = desktopItemRef;

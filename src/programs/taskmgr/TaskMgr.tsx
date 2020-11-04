@@ -12,7 +12,7 @@ import type { ActiveState } from "typings/state/ActiveState";
 import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
 import { bringToFront } from "utils/bringToFront";
-import { byPid } from "utils/sort/byPid";
+import { byPid } from "utils/array-helpers/sort/byPid";
 import { sortProcesses } from "utils/sortImmutably";
 import styles from "./TaskMgr.module.css";
 

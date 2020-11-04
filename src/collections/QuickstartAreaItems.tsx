@@ -3,7 +3,8 @@ import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";
-import { KernelState } from "typings/state/KernelState";
+import type { KernelState } from "typings/state/KernelState";
+import { forIsInQuickstartArea } from "utils/array-helpers/filter/forIsInQuickstartArea";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
@@ -18,15 +19,12 @@ type Props = {};
 export const QuickstartAreaItems: FC<Props> = () => {
   const { installedPrograms } = useKernelState(fromKernel);
 
+  const visibleInQuickstartArea = installedPrograms.filter(forIsInQuickstartArea);
+
   return (
     <>
-      {installedPrograms.map((binary) => {
-        const { fileHash, softlinks } = binary;
-        const { isInQuickstartArea } = softlinks;
-
-        if (!isInQuickstartArea) {
-          return null;
-        }
+      {visibleInQuickstartArea.map((binary) => {
+        const { fileHash } = binary;
 
         const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {
           binary.quickstartAreaItemRef = quickstartAreaItem;
