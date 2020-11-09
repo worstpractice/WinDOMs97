@@ -31,7 +31,7 @@ export const StartMenuItems: FC<Props> = () => {
           return binary;
         };
 
-        return <StartMenuItem key={`StartMenuItem-${fileHash}`} getBinary={toStartMenuItem} />;
+        return <StartMenuItem key={fileHash} getBinary={toStartMenuItem} />;
       })}
     </>
   );

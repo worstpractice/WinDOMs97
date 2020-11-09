@@ -28,7 +28,7 @@ export const OsWindows: FC<Props> = () => {
           return process;
         };
 
-        return <OsWindow key={`OsWindow-${pid}`} getProcess={toOsWindow} />;
+        return <OsWindow key={pid} getProcess={toOsWindow} />;
       })}
     </>
   );

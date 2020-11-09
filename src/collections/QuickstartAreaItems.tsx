@@ -31,7 +31,7 @@ export const QuickstartAreaItems: FC<Props> = () => {
           return binary;
         };
 
-        return <QuickstartAreaItem key={`QuickstartAreaItem-${fileHash}`} getBinary={toQuickstartAreaItem} />;
+        return <QuickstartAreaItem key={fileHash} getBinary={toQuickstartAreaItem} />;
       })}
     </>
   );

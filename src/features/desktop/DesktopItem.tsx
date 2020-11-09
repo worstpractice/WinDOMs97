@@ -16,6 +16,7 @@ import { useDraggedState } from "state/useDraggedState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";
+import type { MouseHandler } from "typings/handlers/MouseHandler";
 import type { Linker } from "typings/Linker";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { DraggedState } from "typings/state/DraggedState";
@@ -98,12 +99,13 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
     setIsPotentialDropTarget(true);
   };
 
-  const handleMouseUpCapture = () => {
-    const { current } = draggedRef;
+  const handleMouseUp: MouseHandler<HTMLElement> = ({ target: dropZone }) => {
+    const { current: faller } = draggedRef;
 
-    if (!current) return;
+    if (!faller) return;
 
-    // ...
+    console.log(faller); // I landed on something
+    console.log(dropZone); // Something landed on me
   };
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -131,7 +133,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
       onMouseDownCapture={handleMouseDownCapture}
       onMouseOver={handleMouseOver}
       onMouseOut={handleMouseOut}
-      onMouseUpCapture={handleMouseUpCapture}
+      onMouseUp={handleMouseUp}
       ref={desktopItemRef}
     >
       <Icon alt={fileName} height={64} src={iconSrc} width={64} />

@@ -28,7 +28,7 @@ export const NotificationAreaItems: FC<Props> = () => {
           return process;
         };
 
-        return <NotificationAreaItem key={`NotificationAreaItem-${pid}`} getProcess={toNotificationAreaItem} />;
+        return <NotificationAreaItem key={pid} getProcess={toNotificationAreaItem} />;
       })}
     </>
   );

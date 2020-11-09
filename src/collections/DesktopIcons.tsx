@@ -31,7 +31,7 @@ export const DesktopItems: FC<Props> = () => {
           return binary;
         };
 
-        return <DesktopItem key={`DesktopItem-${fileHash}`} getBinary={toDesktopItem} />;
+        return <DesktopItem key={fileHash} getBinary={toDesktopItem} />;
       })}
     </>
   );

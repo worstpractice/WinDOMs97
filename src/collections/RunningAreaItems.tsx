@@ -28,7 +28,7 @@ export const RunningAreaItems: FC<Props> = () => {
           return process;
         };
 
-        return <RunningAreaItem key={`RunningAreaItem-${pid}`} getProcess={toRunningAreaItem} />;
+        return <RunningAreaItem key={pid} getProcess={toRunningAreaItem} />;
       })}
     </>
   );
