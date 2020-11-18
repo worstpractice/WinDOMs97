@@ -10,16 +10,11 @@ type Props = {
 };
 
 export const NotificationArea: FC<Props> = ({ children }) => {
-  // @ts-expect-error Lying is wrong.
-  const hasChildren = children?.length;
-
-  const iconsStyle = hasChildren ? styles.Icons : "";
-
   return (
     <section className={styles.Wrapper}>
       <Divider dent="in" direction="vertical" />
       <section className={styles.NotificationArea}>
-        <aside className={iconsStyle}>{children}</aside>
+        <aside className={styles.Icons}>{children}</aside>
         <Clock />
       </section>
     </section>
