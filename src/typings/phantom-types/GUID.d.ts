@@ -1,1 +1,1 @@
-export type GUID = string & { brand: "GUID" };
+export type GUID = string & { readonly brand: "GUID" };

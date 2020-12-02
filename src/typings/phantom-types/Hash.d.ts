@@ -1,1 +1,1 @@
-export type Hash = string & { brand: "Hash" };
+export type Hash = string & { readonly brand: "Hash" };
