@@ -3,7 +3,6 @@ import { Bsod } from "features/Bsod";
 import { Explorer } from "features/Explorer";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useLastKeyPress } from "hooks/useLastKeyPress";
-import { default as React } from "react";
 import { useErrorState } from "state/useErrorState";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";

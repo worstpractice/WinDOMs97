@@ -10,9 +10,9 @@
     "disableSourceOfProjectReferenceRedirect": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "importsNotUsedAsValues": "remove",
+    "importsNotUsedAsValues": "error",
     "isolatedModules": true,
-    "jsx": "react",
+    "jsx": "react-jsx",
     "lib": [
       "dom",
       "dom.iterable",
@@ -27,6 +27,7 @@
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noStrictGenericChecks": false,
+    "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "resolveJsonModule": true,
@@ -39,7 +40,8 @@
     "strictPropertyInitialization": true,
     "suppressExcessPropertyErrors": false,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "ESNext"
+    "target": "ESNext",
+    "useDefineForClassFields": true
   },
   "include": [
     "src"

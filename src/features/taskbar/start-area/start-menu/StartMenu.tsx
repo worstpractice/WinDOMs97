@@ -1,7 +1,6 @@
 import { onRMB } from "event-filters/onRMB";
 import { Spine } from "features/taskbar/start-area/start-menu/Spine";
 import type { ReactNode } from "react";
-import { default as React } from "react";
 import type { FC } from "typings/FC";
 import styles from "./StartMenu.module.css";
 

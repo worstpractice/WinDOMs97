@@ -42,9 +42,9 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
   });
 
   const osButtonStyle = css(
-      styles.OsButton,
-      isPressed ? styles.Pressed : "",
-      className ? className : ""
+      styles.OsButton ?? "",
+      (isPressed ? styles.Pressed : "") ?? "",
+      className ? className : "",
     );
   
 

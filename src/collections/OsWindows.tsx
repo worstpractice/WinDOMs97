@@ -1,5 +1,4 @@
 import { OsWindow } from "features/os-window/OsWindow";
-import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";

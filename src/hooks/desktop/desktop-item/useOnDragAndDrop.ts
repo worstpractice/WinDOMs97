@@ -34,11 +34,11 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     bringToFront({ current: desktopItem });
 
     const clone = desktopItem.cloneNode(true) as HTMLDivElement;
-    clone.classList.add(styles.Moving);
+    clone.classList.add(styles.Moving ?? "");
     // Places the transparent clone at the VERY front
     desktopItem.after(clone);
 
-    desktopItem.classList.add(styles.Original);
+    desktopItem.classList.add(styles.Original ?? "");
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB<Document>(({ clientX, clientY, target }) => {
@@ -55,10 +55,10 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     /** `Document`-level event listener. */
     const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {
       // Target here is whatever we DROP ON (will have been the DRAG target atleast once before it shows up here -- gotta be above something first before you can drop over it)
-      clone.classList.remove(styles.Moving);
+      clone.classList.remove(styles.Moving ?? "");
       clone.remove();
 
-      desktopItem.classList.remove(styles.Original);
+      desktopItem.classList.remove(styles.Original ?? "");
 
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;

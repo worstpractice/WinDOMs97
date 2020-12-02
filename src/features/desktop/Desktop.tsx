@@ -5,7 +5,6 @@ import { useDragSelection } from "hooks/desktop/useOnDragSelection";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
-import { default as React } from "react";
 import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";

@@ -1,7 +1,6 @@
 import { useIsRunningAreaFull } from "hooks/taskbar/useIsRunningAreaFull";
 import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
-import { default as React } from "react";
 import type { FC } from "typings/FC";
 import styles from "./RunningArea.module.css";
 

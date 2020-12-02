@@ -4,7 +4,6 @@ import { OsButton } from "components/OsButton";
 import { Title } from "components/Title";
 import { switchOn } from "event-filters/delegate";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
 import { isRef } from "type-predicates/isRef";

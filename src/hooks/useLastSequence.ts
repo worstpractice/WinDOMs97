@@ -37,7 +37,7 @@ export const useLastSequence = (binary: Binary) => {
           return;
         }
 
-        const fileExtension = deriveFileExtension(binary);
+        const fileExtension = deriveFileExtension(binary) ?? "";
 
         const isSameFileExtension = sequenceRef.current.endsWith(fileExtension);
 

@@ -85,7 +85,7 @@ export const useKernelState = create<KernelState>(
 
             enforceMinDimensions(rawBinary);
 
-            const fileExtension = deriveFileExtension(rawBinary);
+            const fileExtension = deriveFileExtension(rawBinary) ?? "";
 
             const binary: Binary = {
               ////////////////////////////////////////////////////////

@@ -1,5 +1,4 @@
 import { RunningAreaItem } from "features/taskbar/running-area/RunningAreaItem";
-import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { ButtonLoader } from "typings/Loader";

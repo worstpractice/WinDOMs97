@@ -4,7 +4,6 @@ import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { isRef } from "type-predicates/isRef";
 import type { FC } from "typings/FC";

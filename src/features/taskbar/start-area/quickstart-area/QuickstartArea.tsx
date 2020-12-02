@@ -1,6 +1,5 @@
 import { Divider } from "components/Divider";
 import type { ReactNode } from "react";
-import { default as React } from "react";
 import type { FC } from "typings/FC";
 import styles from "./QuickstartArea.module.css";
 

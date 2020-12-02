@@ -1,6 +1,5 @@
 import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";

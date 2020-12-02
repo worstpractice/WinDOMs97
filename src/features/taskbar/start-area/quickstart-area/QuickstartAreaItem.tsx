@@ -3,7 +3,6 @@ import { OsButton } from "components/OsButton";
 import { switchOn } from "event-filters/delegate";
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useMenuState } from "state/useMenuState";
 import type { ButtonHandler } from "typings/ButtonHandler";
 import type { FC } from "typings/FC";

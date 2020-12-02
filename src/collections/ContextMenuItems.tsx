@@ -1,5 +1,4 @@
 import { ContextMenuItem } from "features/context-menu/ContextMenuItem";
-import { default as React } from "react";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { MenuState } from "typings/state/MenuState";

@@ -1,5 +1,4 @@
 import { DesktopItem } from "features/desktop/DesktopItem";
-import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";

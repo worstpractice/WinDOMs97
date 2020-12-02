@@ -1,5 +1,4 @@
 import { NotificationAreaItem } from "features/taskbar/notification-area/NotificationAreaItem";
-import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { LiLoader } from "typings/Loader";

@@ -1,4 +1,4 @@
-import { CanvasRef } from "typings/CanvasRef";
+import type { CanvasRef } from "typings/CanvasRef";
 import type { Position } from "typings/Position";
 
 export const drawLine = ({ current: ctx }: CanvasRef, moveTo: Position, lineTo: Position) => {

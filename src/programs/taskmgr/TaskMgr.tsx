@@ -2,7 +2,6 @@ import { OsButton } from "components/OsButton";
 import { onLMB } from "event-filters/onLMB";
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";

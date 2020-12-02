@@ -1,5 +1,4 @@
 import { StartMenuItem } from "features/taskbar/start-area/start-menu/StartMenuItem";
-import { default as React } from "react";
 import { useKernelState } from "state/useKernelState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";

@@ -14,7 +14,6 @@ import { StartMenu } from "features/taskbar/start-area/start-menu/StartMenu";
 import { StartArea } from "features/taskbar/start-area/StartArea";
 import { StartButton } from "features/taskbar/start-area/StartButton";
 import { Taskbar } from "features/taskbar/Taskbar";
-import { default as React } from "react";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { MenuState } from "typings/state/MenuState";

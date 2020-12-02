@@ -98,6 +98,7 @@ const ConvertToWordArray = (str: string) => {
 
     lBytePosition = (lByteCount % 4) * 8;
 
+    // @ts-expect-error
     lWordArray[lWordCount] = lWordArray[lWordCount] | (str.charCodeAt(lByteCount) << lBytePosition);
 
     lByteCount++;
@@ -107,6 +108,7 @@ const ConvertToWordArray = (str: string) => {
 
   lBytePosition = (lByteCount % 4) * 8;
 
+  // @ts-expect-error
   lWordArray[lWordCount] = lWordArray[lWordCount] | (0x80 << lBytePosition);
 
   lWordArray[lNumberOfWords - 2] = lMessageLength << 3;

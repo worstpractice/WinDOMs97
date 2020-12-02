@@ -1,6 +1,5 @@
 import { Words } from "components/Words";
 import type { FC } from "react";
-import { default as React } from "react";
 import { timestamp } from "utils/timestamp";
 import styles from "./Clock.module.css";
 

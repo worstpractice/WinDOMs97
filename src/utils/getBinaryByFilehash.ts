@@ -1,4 +1,4 @@
-import { Binary } from "typings/Binary";
+import type { Binary } from "typings/Binary";
 import type { Hash } from "typings/phantom-types/Hash";
 
 export const getBinaryByFileHash = (targetHash: Hash, installedPrograms: readonly Binary[]) => {

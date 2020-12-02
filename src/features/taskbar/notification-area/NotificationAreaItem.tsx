@@ -4,7 +4,6 @@ import { onLMB } from "event-filters/onLMB";
 import { onRMB } from "event-filters/onRMB";
 import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";

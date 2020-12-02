@@ -3,7 +3,6 @@ import { Words } from "components/Words";
 import { onLMB } from "event-filters/onLMB";
 import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React } from "react";
 import { useMenuState } from "state/useMenuState";
 import type { FC } from "typings/FC";
 import type { Linker } from "typings/Linker";

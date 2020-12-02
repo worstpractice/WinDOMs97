@@ -1,7 +1,6 @@
 import { OsButton } from "components/OsButton";
 import { onLMB } from "event-filters/onLMB";
 import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
-import { default as React } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useKernelState } from "state/useKernelState";
 import { useMenuState } from "state/useMenuState";
