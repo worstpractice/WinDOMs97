@@ -1,5 +1,7 @@
-import type { Collection } from "typings/Collection";
+import type { ImmutableBrand } from "typings/phantom-types/brands/ImmutableBrand";
 
-export type Immutable<T extends Collection> = {
-  readonly [K in keyof T]: T[K] extends Collection ? Immutable<T[K]> : T[K];
-};
+export type Immutable<T> = T extends ImmutableBrand
+  ? never
+  : {
+      readonly [K in keyof T]: T[K] extends never ? T & ImmutableBrand : Immutable<T[K]>;
+    };
