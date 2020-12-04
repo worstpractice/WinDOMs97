@@ -1,4 +1,4 @@
-import type { ImmutableBrand } from "typings/phantom-types/brands/ImmutableBrand";
+import type { ImmutableBrand } from "typings/brands/ImmutableBrand";
 
 export type Immutable<T> = T extends ImmutableBrand
   ? never

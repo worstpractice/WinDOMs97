@@ -1,1 +1,3 @@
-export type ImmutableBrand = { readonly brand: "Immutable" };
+export type ImmutableBrand = {
+  readonly brand: "Immutable";
+};
