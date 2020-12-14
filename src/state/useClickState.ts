@@ -4,11 +4,11 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  lastClickPosition: Position;
+  readonly lastClickPosition: Position;
 };
 
 export type Actions = {
-  setLastClickPosition: (to: Position) => void;
+  readonly setLastClickPosition: (to: Position) => void;
 };
 
 export const useClickState = create<ClickState>(

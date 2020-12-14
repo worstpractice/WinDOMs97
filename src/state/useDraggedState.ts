@@ -5,12 +5,12 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  draggedRef: OsRef<HTMLElement>;
+  readonly draggedRef: OsRef<HTMLElement>;
 };
 
 export type Actions = {
-  setDraggedRef: <T extends HTMLElement>(to: OsRef<T>) => void;
-  unsetDraggedRef: () => void;
+  readonly setDraggedRef: <T extends HTMLElement>(to: OsRef<T>) => void;
+  readonly unsetDraggedRef: () => void;
 };
 
 let debugLogCounter = 0;

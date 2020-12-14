@@ -15,16 +15,16 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  availablePids: readonly PID[];
-  installedPrograms: readonly Binary[];
-  runningProcesses: readonly Process[];
+  readonly availablePids: readonly PID[];
+  readonly installedPrograms: readonly Binary[];
+  readonly runningProcesses: readonly Process[];
 };
 
 export type Actions = {
-  dangerouslyExecuteBinary: (binary: Binary, pid: PID) => void;
-  endProcess: (process: Process) => void;
-  installProgram: (rawBinary: RawBinary) => void;
-  uninstallProgram: (binary: Binary) => void;
+  readonly dangerouslyExecuteBinary: (binary: Binary, pid: PID) => void;
+  readonly endProcess: (process: Process) => void;
+  readonly installProgram: (rawBinary: RawBinary) => void;
+  readonly uninstallProgram: (binary: Binary) => void;
 };
 
 export const useKernelState = create<KernelState>(

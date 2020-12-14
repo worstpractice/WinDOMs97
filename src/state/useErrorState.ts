@@ -4,13 +4,13 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  isBsod: boolean;
-  bsodError: string;
-  bsodMessage: string;
+  readonly isBsod: boolean;
+  readonly bsodError: string;
+  readonly bsodMessage: string;
 };
 
 export type Actions = {
-  bluescreen: (bsod: BSOD) => void;
+  readonly bluescreen: (bsod: BSOD) => void;
 };
 
 export const useErrorState = create<ErrorState>(

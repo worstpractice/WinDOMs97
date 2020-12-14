@@ -4,11 +4,11 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  lastKeyPress: KeyPress;
+  readonly lastKeyPress: KeyPress;
 };
 
 export type Actions = {
-  setLastKeyPress: (to: string) => void;
+  readonly setLastKeyPress: (to: string) => void;
 };
 
 let ORDER_TALLY = 0;

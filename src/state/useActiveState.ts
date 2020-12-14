@@ -5,12 +5,12 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  activeRef: OsRef<HTMLElement>;
+  readonly activeRef: OsRef<HTMLElement>;
 };
 
 export type Actions = {
-  setActiveRef: <T extends HTMLElement>(to: OsRef<T>) => void;
-  unsetActiveRef: () => void;
+  readonly setActiveRef: <T extends HTMLElement>(to: OsRef<T>) => void;
+  readonly unsetActiveRef: () => void;
 };
 
 let debugLogCounter = 0;

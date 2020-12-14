@@ -3,11 +3,11 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  isRunningAreaFull: boolean;
+  readonly isRunningAreaFull: boolean;
 };
 
 export type Actions = {
-  setIsRunningAreaFull: (to: boolean) => void;
+  readonly setIsRunningAreaFull: (to: boolean) => void;
 };
 
 export const useRunningAreaState = create<RunningAreaState>(

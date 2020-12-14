@@ -4,14 +4,14 @@ import create from "zustand";
 import { combine } from "zustand/middleware";
 
 export type Data = {
-  alternatives: readonly Alternative[];
-  openMenu: "ContextMenu" | "StartMenu" | "";
+  readonly alternatives: readonly Alternative[];
+  readonly openMenu: "ContextMenu" | "StartMenu" | "";
 };
 
 export type Actions = {
-  closeMenus: () => void;
-  openContextMenu: (alternatives: readonly Alternative[]) => void;
-  toggleStartMenu: () => void;
+  readonly closeMenus: () => void;
+  readonly openContextMenu: (alternatives: readonly Alternative[]) => void;
+  readonly toggleStartMenu: () => void;
 };
 
 export const useMenuState = create<MenuState>(
