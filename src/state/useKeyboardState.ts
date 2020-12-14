@@ -17,7 +17,11 @@ export const useKeyboardState = create<KeyboardState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      lastKeyPress: { character: "" as any, button: "" as any, order: ORDER_TALLY++ },
+      lastKeyPress: {
+        character: "" as any,
+        button: "" as any,
+        order: ORDER_TALLY++,
+      },
       ///////////////////////////////////////////
     } as const,
     (set) =>
@@ -29,8 +33,8 @@ export const useKeyboardState = create<KeyboardState>(
             const isButton = !isCharacter;
 
             const keyPress: KeyPress = {
-              button: isButton ? to : "" as any,
-              character: isCharacter ? to : "" as any,
+              button: isButton ? to : ("" as any),
+              character: isCharacter ? to : ("" as any),
               order: ORDER_TALLY++,
             } as const;
 
