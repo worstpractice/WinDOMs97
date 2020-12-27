@@ -2,7 +2,7 @@ import { onLMB } from "event-filters/onLMB";
 import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
 import { useOsRef } from "hooks/useOsRef";
 import { useCanvasRef } from "programs/paint/hooks/useCanvasRef";
-import React, { useState } from "react";
+import { useState } from "react";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
 import type { Position } from "typings/Position";

@@ -1,6 +1,6 @@
 import { Boot } from "features/Boot";
 import "normalize.css";
-import React, { StrictMode } from "react";
+import { StrictMode } from "react";
 import { render } from "react-dom";
 import "styles/reset.module.css";
 
