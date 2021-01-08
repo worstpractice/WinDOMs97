@@ -23,12 +23,14 @@
   "eslintConfig": {
     "extends": "react-app"
   },
-  "name": "fakeos",
+  "name": "windoms-97",
   "private": true,
   "scripts": {
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,module.css}",
+    "lint": "eslint ./src --ext .ts,.tsx",
+    "lint:fix": "eslint ./src --ext .ts,.tsx,.json --fix",
     "start": "react-scripts start"
   },
   "version": "0.1.0"

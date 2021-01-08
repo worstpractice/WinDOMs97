@@ -1,5 +1,3 @@
-
-
 // ContextMenu:        singleton        kommer och går
 // Desktop:            singleton        alltid där
 // DesktopItem:        0-n              alltid där (OM en ö.h.t. finns)
@@ -14,8 +12,8 @@
 // Taskbar:            singleton
 // StartMenu:          singleton
 
-// DesktopItem:        0-n           
-// OsWindow:           0-n           
+// DesktopItem:        0-n
+// OsWindow:           0-n
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////
 
