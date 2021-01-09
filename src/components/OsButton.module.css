@@ -30,3 +30,19 @@
 .Pressed:not(:hover) {
   outline-style: outset;
 }
+
+.Discreet {
+  outline-style: none;
+}
+
+.Discreet:-moz-focusring {
+  outline-style: none;
+}
+
+.Discreet:hover {
+  outline-style: none;
+}
+
+.Discreet:not(:hover) {
+  outline-style: none;
+}
