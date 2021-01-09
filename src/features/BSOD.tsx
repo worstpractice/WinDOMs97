@@ -1,4 +1,3 @@
-import { default as React } from "react";
 import { useErrorState } from "state/useErrorState";
 import type { FC } from "typings/FC";
 import type { ErrorState } from "typings/state/ErrorState";

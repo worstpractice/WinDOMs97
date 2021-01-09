@@ -45,6 +45,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
     <li className={styles.QuickstartAreaItem}>
       <OsButton
         className={styles.ButtonOverride}
+        isDiscreet
         onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
         ref={quickstartAreaItemRef}
       >

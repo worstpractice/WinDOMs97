@@ -10,7 +10,7 @@ import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
 import { useLastSequence } from "hooks/useLastSequence";
 import { useOnDoubleClick } from "hooks/useOnDoubleClick";
 import { useOsRef } from "hooks/useOsRef";
-import { default as React, useState } from "react";
+import { useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useDraggedState } from "state/useDraggedState";
 import { useMenuState } from "state/useMenuState";

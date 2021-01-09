@@ -1,4 +1,3 @@
-import { default as React } from "react";
 import { useClickState } from "state/useClickState";
 import type { FC } from "typings/FC";
 import type { Position } from "typings/Position";

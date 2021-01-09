@@ -7,7 +7,7 @@ import { useOnResizeOsWindow } from "hooks/os-window/useOnResizeOsWindow";
 import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
-import { default as React, useState } from "react";
+import { useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
 import { is } from "type-predicates/is";
