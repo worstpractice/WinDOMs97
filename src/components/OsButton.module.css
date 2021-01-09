@@ -3,21 +3,21 @@
 .OsButton {
   background-color: var(--gray);
   font-size: 20px;
-  height: 24px;
+  height: 32px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 24px;
+  width: 32px;
 }
 
 .OsButton:-moz-focusring {
   background-color: var(--gray);
   font-size: 20px;
-  height: 24px;
+  height: 32px;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 24px;
+  width: 32px;
 }
 
 /*** WARN: Must come last ***/
