@@ -1,23 +1,25 @@
 @import "../styles/colors.module.css";
 
 .OsButton {
+  align-items: center;
   background-color: var(--gray);
+  display: flex;
   font-size: 20px;
-  height: 32px;
+  justify-content: center;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 32px;
 }
 
 .OsButton:-moz-focusring {
+  align-items: center;
   background-color: var(--gray);
+  display: flex;
   font-size: 20px;
-  height: 32px;
+  justify-content: center;
   outline-color: var(--oswindow-outline);
   outline-style: outset;
   outline-width: 4px;
-  width: 32px;
 }
 
 /*** WARN: Must come last ***/
