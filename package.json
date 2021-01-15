@@ -11,13 +11,14 @@
     "zustand": "^3.3.1"
   },
   "devDependencies": {
-    "@types/node": "^14.14.20",
+    "@types/node": "^14.14.21",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "eslint-config-react-app": "^6.0.0",
     "prettier": "2.2.1",
     "react-refresh": "^0.9.0",
     "react-scripts": "4.0.1",
+    "ts-prune": "0.8.6",
     "typescript": "4.2.0-beta"
   },
   "eslintConfig": {
@@ -28,13 +29,15 @@
   "private": true,
   "scripts": {
     "build": "react-scripts build",
+    "dce": "pnpx ts-prune > dce.log && node scripts/filter-dce-log.js",
     "deploy": "pnpx gh-pages -d build",
     "eject": "react-scripts eject",
     "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,module.css}",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.json --fix",
     "predeploy": "pnpm run build",
-    "start": "react-scripts start"
+    "start": "react-scripts start",
+    "tidy": "pnpm run lint:fix && pnpm run fmt && pnpm run dce"
   },
   "version": "0.1.0"
 }

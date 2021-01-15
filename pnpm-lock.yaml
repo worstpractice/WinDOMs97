@@ -4,13 +4,14 @@ dependencies:
   react-dom: 17.0.1_react@17.0.1
   zustand: 3.3.1_react@17.0.1
 devDependencies:
-  '@types/node': 14.14.20
+  '@types/node': 14.14.21
   '@types/react': 17.0.0
   '@types/react-dom': 17.0.0
   eslint-config-react-app: 6.0.0
   prettier: 2.2.1
   react-refresh: 0.9.0
   react-scripts: 4.0.1_typescript@4.2.0-beta
+  ts-prune: 0.8.6
   typescript: 4.2.0-beta
 lockfileVersion: 5.2
 packages:
@@ -1279,6 +1280,15 @@ packages:
     dev: true
     resolution:
       integrity: sha512-ij4wRiunFfaJxjB0BdrYHIH8FxBJpOwNPhhAcunlmPdXudL1WQV1qoP9un6JsEBAgQH+7UXyyjh0g7jTxXK6tg==
+  /@dsherret/to-absolute-glob/2.0.2:
+    dependencies:
+      is-absolute: 1.0.0
+      is-negated-glob: 1.0.0
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-H2R13IvZdM6gei2vOGSzF7HdMyw=
   /@eslint/eslintrc/0.2.2:
     dependencies:
       ajv: 6.12.6
@@ -1772,6 +1782,17 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-LjepnS/BSAvelnOnnzr6Gg0GcpLmnZ9ThGFK5WJtm1xOqdBE/1IACZU7MMdVzjyUkfFqGz87eRE4hFaSLiUwYg==
+  /@ts-morph/common/0.5.2:
+    dependencies:
+      '@dsherret/to-absolute-glob': 2.0.2
+      fast-glob: 3.2.4
+      fs-extra: 9.0.1
+      is-negated-glob: 1.0.0
+      multimatch: 4.0.0
+      typescript: 3.9.7
+    dev: true
+    resolution:
+      integrity: sha512-eLmfYV6u6gUgHrB9QV9lpuWg3cD60mhXdv0jvM5exWR/Cor8HG+GziFIj2hPEWHJknqzuU4meZd8DTqIzZfDRQ==
   /@types/anymatch/1.3.1:
     dev: true
     resolution:
@@ -1869,10 +1890,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-vbxr0VZ8exFMMAjCW8rJwaya0dMCDyYW2ZRdTyjtrCvJoENMpdUHOT/eTzvgyA5ZnqRZ/sI0NwqAxNHKYokLJQ==
-  /@types/node/14.14.20:
+  /@types/node/14.14.21:
     dev: true
     resolution:
-      integrity: sha512-Y93R97Ouif9JEOWPIUyU+eyIdyRqQR0I8Ez1dzku4hDx34NWh4HbtIc3WNzwB1Y9ULvNGeu5B8h8bVL5cAk4/A==
+      integrity: sha512-cHYfKsnwllYhjOzuC5q1VpguABBeecUp24yFluHpn/BQaVxB1CuQ1FSRZCzrPxrkIfWISXV2LbeoBthLWg0+0A==
   /@types/normalize-package-data/2.4.0:
     dev: true
     resolution:
@@ -2469,6 +2490,12 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-45sJrqne+Gao8gbiiK9jkZuuOcQ=
+  /array-differ/3.0.0:
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-THtfYS6KtME/yIAhKjZ2ul7XI96lQGHRputJQHO80LAWQnuGP4iCIN8vdMRboGbIEYBwU33q8Tch1os2+X0kMg==
   /array-flatten/1.1.1:
     dev: true
     resolution:
@@ -3425,6 +3452,10 @@ packages:
       node: '>= 4.0'
     resolution:
       integrity: sha512-q5/jG+YQnSy4nRTV4F7lPepBJZ8qBNJJDBuJdoejDyLXgmL7IEo+Le2JDZudFTFt7mrCqIRaSjws4ygRCTCAXA==
+  /code-block-writer/10.1.1:
+    dev: true
+    resolution:
+      integrity: sha512-67ueh2IRGst/51p0n6FvPrnRjAGHY5F8xdjkgrYE7DDzpJe6qA07RYQ9VcoUeo5ATOjSOiWpSL3SWBRRbempMw==
   /collect-v8-coverage/1.0.1:
     dev: true
     resolution:
@@ -3496,6 +3527,12 @@ packages:
       node: '>= 6'
     resolution:
       integrity: sha512-NOKm8xhkzAjzFx8B2v5OAHT+u5pRQc2UCa2Vq9jYL/31o2wi9mxBA7LIFs3sV5VSC49z6pEhfbMULvShKj26WA==
+  /commander/6.2.1:
+    dev: true
+    engines:
+      node: '>= 6'
+    resolution:
+      integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==
   /common-tags/1.8.0:
     dev: true
     engines:
@@ -6140,6 +6177,15 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-opmNIX7uFnS96NtPmhWQgQx6/NYFgsUXYMllcfzwWKUMwfo8kku1TvE6hkNcH+Q1ts5cMVrsY7j0bxXQDciu9Q==
+  /is-absolute/1.0.0:
+    dependencies:
+      is-relative: 1.0.0
+      is-windows: 1.0.2
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-dOWoqflvcydARa360Gvv18DZ/gRuHKi2NU/wU5X1ZFzdYfH29nkiNZsF3mp4OJ3H4yo9Mx8A/uAGNzpzPN3yBA==
   /is-accessor-descriptor/0.1.6:
     dependencies:
       kind-of: 3.2.2
@@ -6336,6 +6382,12 @@ packages:
     dev: true
     resolution:
       integrity: sha1-Mlj7afeMFNW4FdZkM2tM/7ZEFZE=
+  /is-negated-glob/1.0.0:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-aRC8pdqMleeEtXUbl2z1oQ/uNtI=
   /is-negative-zero/2.0.1:
     dev: true
     engines:
@@ -6422,6 +6474,14 @@ packages:
       node: '>=0.10.0'
     resolution:
       integrity: sha1-/S2INUXEa6xaYz57mgnof6LLUGk=
+  /is-relative/1.0.0:
+    dependencies:
+      is-unc-path: 1.0.0
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-Kw/ReK0iqwKeu0MITLFuj0jbPAmEiOsIwyIXvvbfa6QfmN9pkD1M+8pdk7Rl/dTKbH34/XBFMbgD4iMJhLQbGA==
   /is-resolvable/1.1.0:
     dev: true
     resolution:
@@ -6470,6 +6530,14 @@ packages:
     dev: true
     resolution:
       integrity: sha1-5HnICFjfDBsR3dppQPlgEfzaSpo=
+  /is-unc-path/1.0.0:
+    dependencies:
+      unc-path-regex: 0.1.2
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha512-mrGpVd0fs7WWLfVsStvgF6iEJnbjDFZh9/emhRDcGWTduTfNHd9CHeUwH3gYIjdbwo4On6hunkztwOaAw0yllQ==
   /is-windows/1.0.2:
     dev: true
     engines:
@@ -7758,6 +7826,18 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-ji6J5enbMyGRHIAkAOu3WdV8nggqviKCEKtXcOqfphZZtQrmHKycfynJ2V7eVPUA4NhJ6V7Wf4TmGbTwKE9B6g==
+  /multimatch/4.0.0:
+    dependencies:
+      '@types/minimatch': 3.0.3
+      array-differ: 3.0.0
+      array-union: 2.1.0
+      arrify: 2.0.1
+      minimatch: 3.0.4
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-lDmx79y1z6i7RNx0ZGCPq1bzJ6ZoDDKbvh7jxr9SJcWLkShMzXrHbYVpTdnhNM5MXpDUxCQ4DgqVttVXlBgiBQ==
   /nan/2.14.2:
     dev: true
     optional: true
@@ -11151,10 +11231,24 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-3n1qG+/5kg+jrbTzwAykB5yRYtQCTqOGKq5U5PE3b0a1/mzo6snDhjGS0zJVJunO0NrT3Dg1MLy5TjWP/UJppg==
+  /true-myth/4.1.0:
+    dev: true
+    engines:
+      node: 10.* || >= 12.*
+    resolution:
+      integrity: sha512-X4oBf1WOuLMfXpcKLI94dV4Htknv06vMADss3Whcybr85W1ctjZGZOzMMRYXUUBlhV4bDAGeMojzN/dw7N7qWA==
   /tryer/1.0.1:
     dev: true
     resolution:
       integrity: sha512-c3zayb8/kWWpycWYg87P71E1S1ZL6b6IJxfb5fvsUgsf0S2MVGaDhDXXjDMpdCpfWXqptc+4mXwmiy1ypXqRAA==
+  /ts-morph/7.3.0:
+    dependencies:
+      '@dsherret/to-absolute-glob': 2.0.2
+      '@ts-morph/common': 0.5.2
+      code-block-writer: 10.1.1
+    dev: true
+    resolution:
+      integrity: sha512-BUKSoz7AFSKPcYTZODbICW2mOthAN4vc5juD6FL1lD/dLwZ0WvrC3zqBM3/X6f5gHxq3yaz+HmanHGaWm0ddbQ==
   /ts-pnp/1.2.0_typescript@4.2.0-beta:
     dependencies:
       typescript: 4.2.0-beta
@@ -11168,6 +11262,18 @@ packages:
         optional: true
     resolution:
       integrity: sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
+  /ts-prune/0.8.6:
+    dependencies:
+      commander: 6.2.1
+      cosmiconfig: 7.0.0
+      json5: 2.1.3
+      lodash: 4.17.20
+      true-myth: 4.1.0
+      ts-morph: 7.3.0
+    dev: true
+    hasBin: true
+    resolution:
+      integrity: sha512-+vcyMYITZ+K8udNqGMPuOn5aQuXDSon2i0qybiXwKi5GuisllmWBxq1KBAuD9zha2t4KzrLZLOzmCaed59QX3Q==
   /tsconfig-paths/3.9.0:
     dependencies:
       '@types/json5': 0.0.29
@@ -11283,6 +11389,13 @@ packages:
     dev: true
     resolution:
       integrity: sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+  /typescript/3.9.7:
+    dev: true
+    engines:
+      node: '>=4.2.0'
+    hasBin: true
+    resolution:
+      integrity: sha512-BLbiRkiBzAwsjut4x/dsibSTB6yWpwT5qWmC2OfuCg3GgVQCSgMs4vEctYPhsaGtd0AeuuHMkjZ2h2WG8MSzRw==
   /typescript/4.2.0-beta:
     dev: true
     engines:
@@ -11290,6 +11403,12 @@ packages:
     hasBin: true
     resolution:
       integrity: sha512-0nYjpkQ6bKjHoJTQkUHcDtGLNenqc5rfTcl3ISUnJXPkGa0115FcVJABmodfMKHLyDBmzDr8IGLbDv5m7sbYgw==
+  /unc-path-regex/0.1.2:
+    dev: true
+    engines:
+      node: '>=0.10.0'
+    resolution:
+      integrity: sha1-5z3T17DXxe2G+6xrCufYxqadUPo=
   /unicode-canonical-property-names-ecmascript/1.0.4:
     dev: true
     engines:
@@ -12112,7 +12231,7 @@ packages:
     resolution:
       integrity: sha512-o0rgrBsi29nCkPHdhtkAHisCIlmRUoXOV+1AmDMeCgkGG0i5edFSpGU0KiZYBvFmBYycnck4Z07JsLYDjSET9g==
 specifiers:
-  '@types/node': ^14.14.20
+  '@types/node': ^14.14.21
   '@types/react': ^17.0.0
   '@types/react-dom': ^17.0.0
   eslint-config-react-app: ^6.0.0
@@ -12122,5 +12241,6 @@ specifiers:
   react-dom: 17.0.1
   react-refresh: ^0.9.0
   react-scripts: 4.0.1
+  ts-prune: 0.8.6
   typescript: 4.2.0-beta
   zustand: ^3.3.1
