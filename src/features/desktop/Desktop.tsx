@@ -6,7 +6,6 @@ import { useActivateOnMount } from "hooks/useActivateOnMount";
 import { useOsRef } from "hooks/useOsRef";
 import type { ReactNode } from "react";
 import { useMenuState } from "state/useMenuState";
-import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { MenuState } from "typings/state/MenuState";
 import styles from "./Desktop.module.css";
@@ -33,7 +32,7 @@ export const Desktop: FC<Props> = ({ children }) => {
   const handleContextMenu = onRMB<HTMLElement>(({ target }) => {
     const { current: desktop } = desktopRef;
 
-    if (!is(target, desktop)) return;
+    if (target !== desktop) return;
 
     openContextMenu(alternatives);
   });

@@ -1,4 +1,3 @@
-import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
 import type { ActiveState } from "typings/state/ActiveState";
 import create from "zustand";
@@ -29,7 +28,7 @@ export const useActiveState = create<ActiveState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T) => {
           set(({ activeRef }) => {
-            if (is(activeRef.current, current)) {
+            if (activeRef.current === current) {
               return { activeRef } as const;
             }
 
@@ -44,7 +43,7 @@ export const useActiveState = create<ActiveState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         unsetActiveRef: () => {
           set(({ activeRef }) => {
-            if (is(activeRef.current, null)) {
+            if (activeRef.current === null) {
               return { activeRef } as const;
             }
 

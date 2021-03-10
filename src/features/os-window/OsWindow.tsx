@@ -10,7 +10,6 @@ import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
 import { useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
-import { is } from "type-predicates/is";
 import type { FC } from "typings/FC";
 import type { Loader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
@@ -70,7 +69,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
     const { current: osWindow } = osWindowRef;
 
     // Abort resizing if click target was not current `OsWindow`.
-    if (!is(target, osWindow)) return;
+    if (target !== osWindow) return;
 
     handleResize(e);
   });

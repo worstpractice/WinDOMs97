@@ -2,7 +2,6 @@ import { onLMB } from "event-filters/onLMB";
 import { useEffect, useState } from "react";
 import { useActiveState } from "state/useActiveState";
 import { useMenuState } from "state/useMenuState";
-import { is } from "type-predicates/is";
 import type { ComposedFn } from "typings/ComposedFn";
 import type { MouseHandler } from "typings/handlers/MouseHandler";
 import type { OsRef } from "typings/OsRef";
@@ -40,7 +39,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
         const { current } = desktopRef;
 
         // We're only interested in clicks on the actual desktop itself
-        if (!is(current, target)) return;
+        if (current !== target) return;
 
         setCurrentPosition({ x: clientX, y: clientY });
         setIsDragSelecting(true);

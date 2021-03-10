@@ -1,4 +1,3 @@
-import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
 import type { DraggedState } from "typings/state/DraggedState";
 import create from "zustand";
@@ -29,7 +28,7 @@ export const useDraggedState = create<DraggedState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setDraggedRef: <T extends HTMLElement>({ current }: OsRef<T>) => {
           set(({ draggedRef }) => {
-            if (is(draggedRef.current, current)) {
+            if (draggedRef.current === current) {
               return { draggedRef } as const;
             }
 
@@ -44,7 +43,7 @@ export const useDraggedState = create<DraggedState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         unsetDraggedRef: () => {
           set(({ draggedRef }) => {
-            if (is(draggedRef.current, null)) {
+            if (draggedRef.current === null) {
               return { draggedRef } as const;
             }
 

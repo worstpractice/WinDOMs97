@@ -1,6 +1,5 @@
 import { onLMB } from "event-filters/onLMB";
 import { useState } from "react";
-import { is } from "type-predicates/is";
 import type { OsRef } from "typings/OsRef";
 
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
@@ -19,7 +18,7 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
     if (!current) return;
 
     // We only care about clicks on the location of interest.
-    if (!is(current, target)) {
+    if (current !== target) {
       // No consecutive clicks on the location of interest then.
       return setIs2ndClick(false);
     }
