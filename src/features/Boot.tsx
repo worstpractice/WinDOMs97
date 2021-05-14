@@ -1,5 +1,5 @@
 import { programs } from "data";
-import { Bsod } from "features/Bsod";
+import { Bsod } from "features/BSOD";
 import { Explorer } from "features/Explorer";
 import { useLastClickPosition } from "hooks/useLastClickPosition";
 import { useLastKeyPress } from "hooks/useLastKeyPress";

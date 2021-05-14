@@ -2,7 +2,7 @@ import { useErrorState } from "state/useErrorState";
 import type { FC } from "typings/FC";
 import type { ErrorState } from "typings/state/ErrorState";
 import { randomHexQuad } from "utils/randomHexQuad";
-import styles from "./Bsod.module.css";
+import styles from "./BSOD.module.css";
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
