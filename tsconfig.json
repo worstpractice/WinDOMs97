@@ -24,6 +24,7 @@
     "noErrorTruncation": true,
     "noFallthroughCasesInSwitch": true,
     "noImplicitAny": true,
+    "noImplicitOverrides": "true",
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -44,6 +45,10 @@
     "target": "ESNext",
     "useDefineForClassFields": true
   },
+  "exclude": [
+    "**/node_modules",
+    "**/.*/"
+  ],
   "include": [
     "src"
   ],
