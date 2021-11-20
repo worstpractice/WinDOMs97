@@ -1,4 +1,4 @@
-@import "../styles/colors.module.css";
+@import '../styles/colors.module.css';
 
 .Bsod {
   align-items: center;
@@ -19,7 +19,7 @@
 .Headline {
   box-sizing: border-box;
   color: var(--gray);
-  font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
+  font-family: 'Perfect DOS VGA 437 Win', Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 100px;
 }
@@ -33,7 +33,7 @@
 .Text {
   box-sizing: border-box;
   color: var(--gray);
-  font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
+  font-family: 'Perfect DOS VGA 437 Win', Arial, Helvetica, sans-serif;
   font-size: 18px;
   line-height: 100px;
 }
@@ -47,13 +47,13 @@
 
 .Blink {
   animation: blinkingText 1.2s infinite;
-  font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
+  font-family: 'Perfect DOS VGA 437 Win', Arial, Helvetica, sans-serif;
   font-size: 18px;
 }
 
 .Hex {
   color: var(--yellow);
-  font-family: "Perfect DOS VGA 437 Win", Arial, Helvetica, sans-serif;
+  font-family: 'Perfect DOS VGA 437 Win', Arial, Helvetica, sans-serif;
   font-size: 18px;
 }
 

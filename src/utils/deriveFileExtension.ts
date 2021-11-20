@@ -1,11 +1,11 @@
-import type { RawBinary } from "typings/RawBinary";
+import type { RawBinary } from 'typings/RawBinary';
 
 export const deriveFileExtension = <T extends RawBinary>({ fileName }: T) => {
-  if (!fileName.includes(".")) {
-    throw new ReferenceError("What am I to you Erik");
+  if (!fileName.includes('.')) {
+    throw new ReferenceError('What am I to you Erik');
   }
 
-  const fileNameParts = fileName.split(".");
+  const fileNameParts = fileName.split('.');
 
   const lastItemIndex = fileNameParts.length - 1;
 

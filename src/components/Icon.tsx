@@ -1,7 +1,7 @@
-import type { CSSProperties } from "react";
-import type { FC } from "typings/FC";
-import { css } from "utils/css";
-import styles from "./Icon.module.css";
+import type { CSSProperties } from 'react';
+import type { FC } from 'typings/FC';
+import { css } from 'utils/css';
+import styles from './Icon.module.css';
 
 type Props = {
   alt: string;
@@ -12,8 +12,8 @@ type Props = {
   width: number;
 };
 
-export const Icon: FC<Props> = ({ alt, className = "", height, src, style, width }) => {
-  const iconStyle = css(styles.Icon ?? "", className);
+export const Icon: FC<Props> = ({ alt, className = '', height, src, style, width }) => {
+  const iconStyle = css(styles.Icon ?? '', className);
 
   return <img alt={alt} className={iconStyle} height={height} loading="eager" src={src} style={style} width={width} />;
 };

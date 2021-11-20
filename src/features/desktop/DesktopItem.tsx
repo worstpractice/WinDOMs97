@@ -1,46 +1,52 @@
-import png_unrecognized_file_extension from "assets/icons/file_question.png";
-import { Icon } from "components/Icon";
-import { Words } from "components/Words";
-import { onLMB } from "event-filters/onLMB";
-import { onRMB } from "event-filters/onRMB";
-import { useBinaryAlternatives } from "hooks/alternatives/useBinaryAlternatives";
-import { useDesktopLayoutOnMount } from "hooks/desktop/desktop-item/useDesktopLayoutOnMount";
-import { useOnDragAndDrop } from "hooks/desktop/desktop-item/useOnDragAndDrop";
-import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
-import { useLastSequence } from "hooks/useLastSequence";
-import { useOnDoubleClick } from "hooks/useOnDoubleClick";
-import { useOsRef } from "hooks/useOsRef";
-import { useState } from "react";
-import { useActiveState } from "state/useActiveState";
-import { useDraggedState } from "state/useDraggedState";
-import { useMenuState } from "state/useMenuState";
-import { isRef } from "type-predicates/isRef";
-import type { FC } from "typings/FC";
-import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { Linker } from "typings/Linker";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { DraggedState } from "typings/state/DraggedState";
-import type { MenuState } from "typings/state/MenuState";
-import { css } from "utils/css";
-import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
-import styles from "./DesktopItem.module.css";
+import png_unrecognized_file_extension from 'assets/icons/file_question.png';
+import { Icon } from 'components/Icon';
+import { Words } from 'components/Words';
+import { onLMB } from 'event-filters/onLMB';
+import { onRMB } from 'event-filters/onRMB';
+import { useBinaryAlternatives } from 'hooks/alternatives/useBinaryAlternatives';
+import { useDesktopLayoutOnMount } from 'hooks/desktop/desktop-item/useDesktopLayoutOnMount';
+import { useOnDragAndDrop } from 'hooks/desktop/desktop-item/useOnDragAndDrop';
+import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
+import { useLastSequence } from 'hooks/useLastSequence';
+import { useOnDoubleClick } from 'hooks/useOnDoubleClick';
+import { useOsRef } from 'hooks/useOsRef';
+import { useState } from 'react';
+import { useActiveState } from 'state/useActiveState';
+import { useDraggedState } from 'state/useDraggedState';
+import { useMenuState } from 'state/useMenuState';
+import { isRef } from 'type-predicates/isRef';
+import type { FC } from 'typings/FC';
+import type { MouseHandler } from 'typings/handlers/MouseHandler';
+import type { Linker } from 'typings/Linker';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { DraggedState } from 'typings/state/DraggedState';
+import type { MenuState } from 'typings/state/MenuState';
+import { css } from 'utils/css';
+import { blockNativeDrag } from 'utils/os-window/blockNativeDrag';
+import styles from './DesktopItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activeRef, setActiveRef }: ActiveState) => ({
-  activeRef,
-  setActiveRef,
-});
+const fromActive = ({ activeRef, setActiveRef }: ActiveState) => {
+  return {
+    activeRef,
+    setActiveRef,
+  };
+};
 
-const fromDragged = ({ draggedRef }: DraggedState) => ({
-  draggedRef,
-});
+const fromDragged = ({ draggedRef }: DraggedState) => {
+  return {
+    draggedRef,
+  };
+};
 
-const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
-  closeMenus,
-  openContextMenu,
-});
+const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => {
+  return {
+    closeMenus,
+    openContextMenu,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -110,11 +116,7 @@ export const DesktopItem: FC<Props> = ({ getBinary }) => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  const desktopItemStyle = css(
-    styles.DesktopItem,
-    isRef(activeRef, desktopItemRef) ? styles.Active : "",
-    isPotentialDropTarget ? styles.DropTarget : "",
-  );
+  const desktopItemStyle = css(styles.DesktopItem, isRef(activeRef, desktopItemRef) ? styles.Active : '', isPotentialDropTarget ? styles.DropTarget : '');
 
   const { fileName, fileHash, icon, isBeingRenamed, isFileExtensionRecognized } = binary;
 

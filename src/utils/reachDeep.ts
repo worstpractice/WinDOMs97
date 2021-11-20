@@ -7,7 +7,7 @@ export const computer = {
     motherboard: {
       cpu: {
         manufacturer: {
-          name: "Rolands Chark & IT",
+          name: 'Rolands Chark & IT',
         },
       },
     },

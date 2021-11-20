@@ -1,18 +1,18 @@
-import { Pids } from "kernel/Pids";
-import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
-import { recognizedFileExtensions } from "os-constants/recognizedFileExtensions";
-import type { Binary } from "typings/Binary";
-import type { Hash } from "typings/phantom-types/Hash";
-import type { PID } from "typings/phantom-types/PID";
-import type { Process } from "typings/Process";
-import type { RawBinary } from "typings/RawBinary";
-import type { KernelState } from "typings/state/KernelState";
-import { ars256 } from "utils/crypto/ars256";
-import { deriveFileExtension } from "utils/deriveFileExtension";
-import { enforceMinDimensions } from "utils/enforceMinDimensions";
-import { softlinkInAllPlaces } from "utils/softlinkInAllPlaces";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import { Pids } from 'kernel/Pids';
+import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
+import { recognizedFileExtensions } from 'os-constants/recognizedFileExtensions';
+import type { Binary } from 'typings/Binary';
+import type { Hash } from 'typings/phantom-types/Hash';
+import type { PID } from 'typings/phantom-types/Pid';
+import type { Process } from 'typings/Process';
+import type { RawBinary } from 'typings/RawBinary';
+import type { KernelState } from 'typings/state/KernelState';
+import { ars256 } from 'utils/crypto/ars256';
+import { deriveFileExtension } from 'utils/deriveFileExtension';
+import { enforceMinDimensions } from 'utils/enforceMinDimensions';
+import { softlinkInAllPlaces } from 'utils/softlinkInAllPlaces';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly availablePids: readonly PID[];
@@ -37,8 +37,8 @@ export const useKernelState = create<KernelState>(
       ///////////////////////////////////////////
     } as const,
 
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         dangerouslyExecuteBinary: (binary: Binary, pid: PID) => {
           set(({ runningProcesses }) => {
@@ -85,7 +85,7 @@ export const useKernelState = create<KernelState>(
 
             enforceMinDimensions(rawBinary);
 
-            const fileExtension = deriveFileExtension(rawBinary) ?? "";
+            const fileExtension = deriveFileExtension(rawBinary) ?? '';
 
             const binary: Binary = {
               ////////////////////////////////////////////////////////
@@ -101,7 +101,7 @@ export const useKernelState = create<KernelState>(
               quickstartAreaItemRef: { current: null },
               ////////////////////////////////////////////////////////
               // Placeholder until we can hash the entire binary itself a few lines down.
-              fileHash: "" as Hash,
+              fileHash: '' as Hash,
               ////////////////////////////////////////////////////////
             };
 
@@ -123,6 +123,7 @@ export const useKernelState = create<KernelState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

@@ -1,24 +1,26 @@
-import { onLMB } from "event-filters/onLMB";
-import { OsWindowButtons } from "features/os-window/chrome-area/OsWindowButtons";
-import { OsWindowLabel } from "features/os-window/chrome-area/OsWindowLabel";
-import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
-import { useOnDoubleClick } from "hooks/useOnDoubleClick";
-import { useOsRef } from "hooks/useOsRef";
-import { useActiveState } from "state/useActiveState";
-import { isRef } from "type-predicates/isRef";
-import type { FC } from "typings/FC";
-import type { Loader } from "typings/Loader";
-import type { ActiveState } from "typings/state/ActiveState";
-import { css } from "utils/css";
-import styles from "./OsWindowChromeArea.module.css";
+import { onLMB } from 'event-filters/onLMB';
+import { OsWindowButtons } from 'features/os-window/chrome-area/OsWindowButtons';
+import { OsWindowLabel } from 'features/os-window/chrome-area/OsWindowLabel';
+import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
+import { useOnDoubleClick } from 'hooks/useOnDoubleClick';
+import { useOsRef } from 'hooks/useOsRef';
+import { useActiveState } from 'state/useActiveState';
+import { isRef } from 'type-predicates/isRef';
+import type { FC } from 'typings/FC';
+import type { Loader } from 'typings/Loader';
+import type { ActiveState } from 'typings/state/ActiveState';
+import { css } from 'utils/css';
+import styles from './OsWindowChromeArea.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activeRef, setActiveRef }: ActiveState) => ({
-  activeRef,
-  setActiveRef,
-});
+const fromActive = ({ activeRef, setActiveRef }: ActiveState) => {
+  return {
+    activeRef,
+    setActiveRef,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const activeStyle = css(styles.OsWindowChromeArea, styles.Active);

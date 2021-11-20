@@ -11,29 +11,27 @@ const AddUnsigned = (lX: number, lY: number) => {
   let lY8: number;
   let lResult: number;
 
-  lX8 = lX & 0x80000000;
+  lX8 = lX & 0x80_00_00_00;
 
-  lY8 = lY & 0x80000000;
+  lY8 = lY & 0x80_00_00_00;
 
-  lX4 = lX & 0x40000000;
+  lX4 = lX & 0x40_00_00_00;
 
-  lY4 = lY & 0x40000000;
+  lY4 = lY & 0x40_00_00_00;
 
-  lResult = (lX & 0x3fffffff) + (lY & 0x3fffffff);
+  lResult = (lX & 0x3f_ff_ff_ff) + (lY & 0x3f_ff_ff_ff);
 
   if (lX4 & lY4) {
-    return lResult ^ 0x80000000 ^ lX8 ^ lY8;
+    return lResult ^ 0x80_00_00_00 ^ lX8 ^ lY8;
   }
 
   if (lX4 | lY4) {
-    if (lResult & 0x40000000) {
-      return lResult ^ 0xc0000000 ^ lX8 ^ lY8;
-    } else {
-      return lResult ^ 0x40000000 ^ lX8 ^ lY8;
+    if (lResult & 0x40_00_00_00) {
+      return lResult ^ 0xc0_00_00_00 ^ lX8 ^ lY8;
     }
-  } else {
-    return lResult ^ lX8 ^ lY8;
+    return lResult ^ 0x40_00_00_00 ^ lX8 ^ lY8;
   }
+  return lResult ^ lX8 ^ lY8;
 };
 
 const F = (x: number, y: number, z: number) => {
@@ -119,9 +117,9 @@ const ConvertToWordArray = (str: string) => {
 };
 
 const WordToHex = (lValue: number) => {
-  let WordToHexValue = "";
+  let WordToHexValue = '';
 
-  let WordToHexValue_temp = "";
+  let WordToHexValue_temp = '';
 
   let lByte: number;
 
@@ -130,20 +128,20 @@ const WordToHex = (lValue: number) => {
   for (lCount = 0; lCount <= 3; lCount++) {
     lByte = (lValue >>> (lCount * 8)) & 255;
 
-    WordToHexValue_temp = "0" + lByte.toString(16);
+    WordToHexValue_temp = `0${lByte.toString(16)}`;
 
-    WordToHexValue = WordToHexValue + WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
+    WordToHexValue += WordToHexValue_temp.substr(WordToHexValue_temp.length - 2, 2);
   }
 
   return WordToHexValue;
 };
 
 const Utf8Encode = (str: string) => {
-  str = str.replace(/\r\n/g, "\n");
+  str = str.replace(/\r\n/g, '\n');
 
-  let utftext = "";
+  let utftext = '';
 
-  for (var n = 0; n < str.length; n++) {
+  for (let n = 0; n < str.length; n++) {
     const c = str.charCodeAt(n);
 
     if (c < 128) {
@@ -196,13 +194,13 @@ const S42 = 10;
 const S43 = 15;
 const S44 = 21;
 
-a = 0x67452301;
+a = 0x67_45_23_01;
 
-b = 0xefcdab89;
+b = 0xef_cd_ab_89;
 
-c = 0x98badcfe;
+c = 0x98_ba_dc_fe;
 
-d = 0x10325476;
+d = 0x10_32_54_76;
 
 export const md5 = (inputParameter: string) => {
   inputParameter = Utf8Encode(inputParameter);
@@ -217,70 +215,70 @@ export const md5 = (inputParameter: string) => {
     CC = c;
     DD = d;
 
-    a = FF(a, b, c, d, x[k + 0], S11, 0xd76aa478);
-    d = FF(d, a, b, c, x[k + 1], S12, 0xe8c7b756);
-    c = FF(c, d, a, b, x[k + 2], S13, 0x242070db);
-    b = FF(b, c, d, a, x[k + 3], S14, 0xc1bdceee);
-    a = FF(a, b, c, d, x[k + 4], S11, 0xf57c0faf);
-    d = FF(d, a, b, c, x[k + 5], S12, 0x4787c62a);
-    c = FF(c, d, a, b, x[k + 6], S13, 0xa8304613);
-    b = FF(b, c, d, a, x[k + 7], S14, 0xfd469501);
-    a = FF(a, b, c, d, x[k + 8], S11, 0x698098d8);
-    d = FF(d, a, b, c, x[k + 9], S12, 0x8b44f7af);
-    c = FF(c, d, a, b, x[k + 10], S13, 0xffff5bb1);
-    b = FF(b, c, d, a, x[k + 11], S14, 0x895cd7be);
-    a = FF(a, b, c, d, x[k + 12], S11, 0x6b901122);
-    d = FF(d, a, b, c, x[k + 13], S12, 0xfd987193);
-    c = FF(c, d, a, b, x[k + 14], S13, 0xa679438e);
-    b = FF(b, c, d, a, x[k + 15], S14, 0x49b40821);
-    a = GG(a, b, c, d, x[k + 1], S21, 0xf61e2562);
-    d = GG(d, a, b, c, x[k + 6], S22, 0xc040b340);
-    c = GG(c, d, a, b, x[k + 11], S23, 0x265e5a51);
-    b = GG(b, c, d, a, x[k + 0], S24, 0xe9b6c7aa);
-    a = GG(a, b, c, d, x[k + 5], S21, 0xd62f105d);
-    d = GG(d, a, b, c, x[k + 10], S22, 0x2441453);
-    c = GG(c, d, a, b, x[k + 15], S23, 0xd8a1e681);
-    b = GG(b, c, d, a, x[k + 4], S24, 0xe7d3fbc8);
-    a = GG(a, b, c, d, x[k + 9], S21, 0x21e1cde6);
-    d = GG(d, a, b, c, x[k + 14], S22, 0xc33707d6);
-    c = GG(c, d, a, b, x[k + 3], S23, 0xf4d50d87);
-    b = GG(b, c, d, a, x[k + 8], S24, 0x455a14ed);
-    a = GG(a, b, c, d, x[k + 13], S21, 0xa9e3e905);
-    d = GG(d, a, b, c, x[k + 2], S22, 0xfcefa3f8);
-    c = GG(c, d, a, b, x[k + 7], S23, 0x676f02d9);
-    b = GG(b, c, d, a, x[k + 12], S24, 0x8d2a4c8a);
-    a = HH(a, b, c, d, x[k + 5], S31, 0xfffa3942);
-    d = HH(d, a, b, c, x[k + 8], S32, 0x8771f681);
-    c = HH(c, d, a, b, x[k + 11], S33, 0x6d9d6122);
-    b = HH(b, c, d, a, x[k + 14], S34, 0xfde5380c);
-    a = HH(a, b, c, d, x[k + 1], S31, 0xa4beea44);
-    d = HH(d, a, b, c, x[k + 4], S32, 0x4bdecfa9);
-    c = HH(c, d, a, b, x[k + 7], S33, 0xf6bb4b60);
-    b = HH(b, c, d, a, x[k + 10], S34, 0xbebfbc70);
-    a = HH(a, b, c, d, x[k + 13], S31, 0x289b7ec6);
-    d = HH(d, a, b, c, x[k + 0], S32, 0xeaa127fa);
-    c = HH(c, d, a, b, x[k + 3], S33, 0xd4ef3085);
-    b = HH(b, c, d, a, x[k + 6], S34, 0x4881d05);
-    a = HH(a, b, c, d, x[k + 9], S31, 0xd9d4d039);
-    d = HH(d, a, b, c, x[k + 12], S32, 0xe6db99e5);
-    c = HH(c, d, a, b, x[k + 15], S33, 0x1fa27cf8);
-    b = HH(b, c, d, a, x[k + 2], S34, 0xc4ac5665);
-    a = II(a, b, c, d, x[k + 0], S41, 0xf4292244);
-    d = II(d, a, b, c, x[k + 7], S42, 0x432aff97);
-    c = II(c, d, a, b, x[k + 14], S43, 0xab9423a7);
-    b = II(b, c, d, a, x[k + 5], S44, 0xfc93a039);
-    a = II(a, b, c, d, x[k + 12], S41, 0x655b59c3);
-    d = II(d, a, b, c, x[k + 3], S42, 0x8f0ccc92);
-    c = II(c, d, a, b, x[k + 10], S43, 0xffeff47d);
-    b = II(b, c, d, a, x[k + 1], S44, 0x85845dd1);
-    a = II(a, b, c, d, x[k + 8], S41, 0x6fa87e4f);
-    d = II(d, a, b, c, x[k + 15], S42, 0xfe2ce6e0);
-    c = II(c, d, a, b, x[k + 6], S43, 0xa3014314);
-    b = II(b, c, d, a, x[k + 13], S44, 0x4e0811a1);
-    a = II(a, b, c, d, x[k + 4], S41, 0xf7537e82);
-    d = II(d, a, b, c, x[k + 11], S42, 0xbd3af235);
-    c = II(c, d, a, b, x[k + 2], S43, 0x2ad7d2bb);
-    b = II(b, c, d, a, x[k + 9], S44, 0xeb86d391);
+    a = FF(a, b, c, d, x[k + 0], S11, 0xd7_6a_a4_78);
+    d = FF(d, a, b, c, x[k + 1], S12, 0xe8_c7_b7_56);
+    c = FF(c, d, a, b, x[k + 2], S13, 0x24_20_70_db);
+    b = FF(b, c, d, a, x[k + 3], S14, 0xc1_bd_ce_ee);
+    a = FF(a, b, c, d, x[k + 4], S11, 0xf5_7c_0f_af);
+    d = FF(d, a, b, c, x[k + 5], S12, 0x47_87_c6_2a);
+    c = FF(c, d, a, b, x[k + 6], S13, 0xa8_30_46_13);
+    b = FF(b, c, d, a, x[k + 7], S14, 0xfd_46_95_01);
+    a = FF(a, b, c, d, x[k + 8], S11, 0x69_80_98_d8);
+    d = FF(d, a, b, c, x[k + 9], S12, 0x8b_44_f7_af);
+    c = FF(c, d, a, b, x[k + 10], S13, 0xff_ff_5b_b1);
+    b = FF(b, c, d, a, x[k + 11], S14, 0x89_5c_d7_be);
+    a = FF(a, b, c, d, x[k + 12], S11, 0x6b_90_11_22);
+    d = FF(d, a, b, c, x[k + 13], S12, 0xfd_98_71_93);
+    c = FF(c, d, a, b, x[k + 14], S13, 0xa6_79_43_8e);
+    b = FF(b, c, d, a, x[k + 15], S14, 0x49_b4_08_21);
+    a = GG(a, b, c, d, x[k + 1], S21, 0xf6_1e_25_62);
+    d = GG(d, a, b, c, x[k + 6], S22, 0xc0_40_b3_40);
+    c = GG(c, d, a, b, x[k + 11], S23, 0x26_5e_5a_51);
+    b = GG(b, c, d, a, x[k + 0], S24, 0xe9_b6_c7_aa);
+    a = GG(a, b, c, d, x[k + 5], S21, 0xd6_2f_10_5d);
+    d = GG(d, a, b, c, x[k + 10], S22, 0x2_44_14_53);
+    c = GG(c, d, a, b, x[k + 15], S23, 0xd8_a1_e6_81);
+    b = GG(b, c, d, a, x[k + 4], S24, 0xe7_d3_fb_c8);
+    a = GG(a, b, c, d, x[k + 9], S21, 0x21_e1_cd_e6);
+    d = GG(d, a, b, c, x[k + 14], S22, 0xc3_37_07_d6);
+    c = GG(c, d, a, b, x[k + 3], S23, 0xf4_d5_0d_87);
+    b = GG(b, c, d, a, x[k + 8], S24, 0x45_5a_14_ed);
+    a = GG(a, b, c, d, x[k + 13], S21, 0xa9_e3_e9_05);
+    d = GG(d, a, b, c, x[k + 2], S22, 0xfc_ef_a3_f8);
+    c = GG(c, d, a, b, x[k + 7], S23, 0x67_6f_02_d9);
+    b = GG(b, c, d, a, x[k + 12], S24, 0x8d_2a_4c_8a);
+    a = HH(a, b, c, d, x[k + 5], S31, 0xff_fa_39_42);
+    d = HH(d, a, b, c, x[k + 8], S32, 0x87_71_f6_81);
+    c = HH(c, d, a, b, x[k + 11], S33, 0x6d_9d_61_22);
+    b = HH(b, c, d, a, x[k + 14], S34, 0xfd_e5_38_0c);
+    a = HH(a, b, c, d, x[k + 1], S31, 0xa4_be_ea_44);
+    d = HH(d, a, b, c, x[k + 4], S32, 0x4b_de_cf_a9);
+    c = HH(c, d, a, b, x[k + 7], S33, 0xf6_bb_4b_60);
+    b = HH(b, c, d, a, x[k + 10], S34, 0xbe_bf_bc_70);
+    a = HH(a, b, c, d, x[k + 13], S31, 0x28_9b_7e_c6);
+    d = HH(d, a, b, c, x[k + 0], S32, 0xea_a1_27_fa);
+    c = HH(c, d, a, b, x[k + 3], S33, 0xd4_ef_30_85);
+    b = HH(b, c, d, a, x[k + 6], S34, 0x4_88_1d_05);
+    a = HH(a, b, c, d, x[k + 9], S31, 0xd9_d4_d0_39);
+    d = HH(d, a, b, c, x[k + 12], S32, 0xe6_db_99_e5);
+    c = HH(c, d, a, b, x[k + 15], S33, 0x1f_a2_7c_f8);
+    b = HH(b, c, d, a, x[k + 2], S34, 0xc4_ac_56_65);
+    a = II(a, b, c, d, x[k + 0], S41, 0xf4_29_22_44);
+    d = II(d, a, b, c, x[k + 7], S42, 0x43_2a_ff_97);
+    c = II(c, d, a, b, x[k + 14], S43, 0xab_94_23_a7);
+    b = II(b, c, d, a, x[k + 5], S44, 0xfc_93_a0_39);
+    a = II(a, b, c, d, x[k + 12], S41, 0x65_5b_59_c3);
+    d = II(d, a, b, c, x[k + 3], S42, 0x8f_0c_cc_92);
+    c = II(c, d, a, b, x[k + 10], S43, 0xff_ef_f4_7d);
+    b = II(b, c, d, a, x[k + 1], S44, 0x85_84_5d_d1);
+    a = II(a, b, c, d, x[k + 8], S41, 0x6f_a8_7e_4f);
+    d = II(d, a, b, c, x[k + 15], S42, 0xfe_2c_e6_e0);
+    c = II(c, d, a, b, x[k + 6], S43, 0xa3_01_43_14);
+    b = II(b, c, d, a, x[k + 13], S44, 0x4e_08_11_a1);
+    a = II(a, b, c, d, x[k + 4], S41, 0xf7_53_7e_82);
+    d = II(d, a, b, c, x[k + 11], S42, 0xbd_3a_f2_35);
+    c = II(c, d, a, b, x[k + 2], S43, 0x2a_d7_d2_bb);
+    b = II(b, c, d, a, x[k + 9], S44, 0xeb_86_d3_91);
 
     a = AddUnsigned(a, AA);
     b = AddUnsigned(b, BB);

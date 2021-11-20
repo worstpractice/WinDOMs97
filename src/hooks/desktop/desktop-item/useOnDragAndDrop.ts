@@ -1,20 +1,23 @@
-import { onLMB } from "event-filters/onLMB";
-import { useDraggedState } from "state/useDraggedState";
-import type { CleanupFn } from "typings/CleanupFn";
-import type { OsRef } from "typings/OsRef";
-import type { DraggedState } from "typings/state/DraggedState";
-import { bringToFront } from "utils/bringToFront";
-import { compose } from "utils/compose";
-import { listen } from "utils/listen";
-import styles from "./useOnDragAndDrop.module.css";
+import { onLMB } from 'event-filters/onLMB';
+import { useDraggedState } from 'state/useDraggedState';
+import type { CleanupFn } from 'typings/CleanupFn';
+import type { OsRef } from 'typings/OsRef';
+import type { DraggedState } from 'typings/state/DraggedState';
+import { bringToFront } from 'utils/bringToFront';
+import { compose } from 'utils/compose';
+import { listen } from 'utils/listen';
+import yoloStyles from './useOnDragAndDrop.module.css';
+const styles = yoloStyles as { readonly [key in PropertyKey]-?: string };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromDragged = ({ setDraggedRef, unsetDraggedRef }: DraggedState) => ({
-  setDraggedRef,
-  unsetDraggedRef,
-});
+const fromDragged = ({ setDraggedRef, unsetDraggedRef }: DraggedState) => {
+  return {
+    setDraggedRef,
+    unsetDraggedRef,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
@@ -34,11 +37,11 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     bringToFront({ current: desktopItem });
 
     const clone = desktopItem.cloneNode(true) as HTMLDivElement;
-    clone.classList.add(styles.Moving ?? "");
+    clone.classList.add(styles.Moving ?? '');
     // Places the transparent clone at the VERY front
     desktopItem.after(clone);
 
-    desktopItem.classList.add(styles.Original ?? "");
+    desktopItem.classList.add(styles.Original ?? '');
 
     /** `Document`-level event listener. */
     const onMouseMove = onLMB<Document>(({ clientX, clientY, target }) => {
@@ -55,10 +58,10 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     /** `Document`-level event listener. */
     const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {
       // Target here is whatever we DROP ON (will have been the DRAG target atleast once before it shows up here -- gotta be above something first before you can drop over it)
-      clone.classList.remove(styles.Moving ?? "");
+      clone.classList.remove(styles.Moving ?? '');
       clone.remove();
 
-      desktopItem.classList.remove(styles.Original ?? "");
+      desktopItem.classList.remove(styles.Original ?? '');
 
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;
@@ -70,10 +73,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       cleanup();
     });
 
-    cleanup = compose(
-      listen({ event: "mousemove", handler: onMouseMove, on: document }),
-      listen({ event: "mouseup", handler: onMouseUp, on: document }),
-    );
+    cleanup = compose(listen({ event: 'mousemove', handler: onMouseMove, on: document }), listen({ event: 'mouseup', handler: onMouseUp, on: document }));
   });
 
   return handleMouseDown;

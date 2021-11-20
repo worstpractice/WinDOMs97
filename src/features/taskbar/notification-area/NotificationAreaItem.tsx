@@ -1,29 +1,33 @@
-import { Icon } from "components/Icon";
-import { OsButton } from "components/OsButton";
-import { onLMB } from "event-filters/onLMB";
-import { onRMB } from "event-filters/onRMB";
-import { useProcessAlternatives } from "hooks/alternatives/useProcessAlternatives";
-import { useOsRef } from "hooks/useOsRef";
-import { useActiveState } from "state/useActiveState";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { LiLoader } from "typings/Loader";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { MenuState } from "typings/state/MenuState";
-import { bringToFront } from "utils/bringToFront";
-import styles from "./NotificationAreaItem.module.css";
+import { Icon } from 'components/Icon';
+import { OsButton } from 'components/OsButton';
+import { onLMB } from 'event-filters/onLMB';
+import { onRMB } from 'event-filters/onRMB';
+import { useProcessAlternatives } from 'hooks/alternatives/useProcessAlternatives';
+import { useOsRef } from 'hooks/useOsRef';
+import { useActiveState } from 'state/useActiveState';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { LiLoader } from 'typings/Loader';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { MenuState } from 'typings/state/MenuState';
+import { bringToFront } from 'utils/bringToFront';
+import styles from './NotificationAreaItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => ({
-  setActiveRef,
-});
+const fromActive = ({ setActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+  };
+};
 
-const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => ({
-  closeMenus,
-  openContextMenu,
-});
+const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => {
+  return {
+    closeMenus,
+    openContextMenu,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

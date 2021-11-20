@@ -1,16 +1,18 @@
-import { useEffect } from "react";
-import { useKeyboardState } from "state/useKeyboardState";
-import type { CleanupFn } from "typings/CleanupFn";
-import type { KeyboardHandler } from "typings/handlers/KeyboardHandler";
-import type { KeyboardState } from "typings/state/KeyboardState";
-import { listen } from "utils/listen";
+import { useEffect } from 'react';
+import { useKeyboardState } from 'state/useKeyboardState';
+import type { CleanupFn } from 'typings/CleanupFn';
+import type { KeyboardHandler } from 'typings/handlers/KeyboardHandler';
+import type { KeyboardState } from 'typings/state/KeyboardState';
+import { listen } from 'utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKeyboard = ({ setLastKeyPress }: KeyboardState) => ({
-  setLastKeyPress,
-});
+const fromKeyboard = ({ setLastKeyPress }: KeyboardState) => {
+  return {
+    setLastKeyPress,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastKeyPress = () => {
@@ -28,7 +30,7 @@ export const useLastKeyPress = () => {
 
       // NOTE: It's subtle, but we're passing a cleanup function to `useEffect`.
       return listen({
-        event: "keydown",
+        event: 'keydown',
         handler: handleKeyDown,
         on: document,
       });

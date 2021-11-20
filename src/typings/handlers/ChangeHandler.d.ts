@@ -1,3 +1,3 @@
-import type { ChangeEventHandler } from "react";
+import type { ChangeEventHandler } from 'react';
 
 export type ChangeHandler = ChangeEventHandler<HTMLInputElement>;

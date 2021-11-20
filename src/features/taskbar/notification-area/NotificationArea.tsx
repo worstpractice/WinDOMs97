@@ -1,8 +1,8 @@
-import { Divider } from "components/Divider";
-import { Clock } from "features/taskbar/notification-area/Clock";
-import type { ReactNode } from "react";
-import type { FC } from "typings/FC";
-import styles from "./NotificationArea.module.css";
+import { Divider } from 'components/Divider';
+import { Clock } from 'features/taskbar/notification-area/Clock';
+import type { ReactNode } from 'react';
+import type { FC } from 'typings/FC';
+import styles from './NotificationArea.module.css';
 
 type Props = {
   children: ReactNode;

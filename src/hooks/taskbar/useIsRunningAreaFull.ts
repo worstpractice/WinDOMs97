@@ -1,20 +1,24 @@
-import { useLayoutEffect } from "react";
-import { useKernelState } from "state/useKernelState";
-import { useRunningAreaState } from "state/useRunningAreaState";
-import type { OsRef } from "typings/OsRef";
-import type { KernelState } from "typings/state/KernelState";
-import type { RunningAreaState } from "typings/state/RunningAreaState";
+import { useLayoutEffect } from 'react';
+import { useKernelState } from 'state/useKernelState';
+import { useRunningAreaState } from 'state/useRunningAreaState';
+import type { OsRef } from 'typings/OsRef';
+import type { KernelState } from 'typings/state/KernelState';
+import type { RunningAreaState } from 'typings/state/RunningAreaState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ runningProcesses }: KernelState) => ({
-  runningProcesses,
-});
+const fromKernel = ({ runningProcesses }: KernelState) => {
+  return {
+    runningProcesses,
+  };
+};
 
-const fromRunningArea = ({ setIsRunningAreaFull }: RunningAreaState) => ({
-  setIsRunningAreaFull,
-});
+const fromRunningArea = ({ setIsRunningAreaFull }: RunningAreaState) => {
+  return {
+    setIsRunningAreaFull,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /** Magic number. */

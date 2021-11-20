@@ -1,10 +1,10 @@
-import { onLMB } from "event-filters/onLMB";
-import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
-import type { OsRef } from "typings/OsRef";
-import { bringToFront } from "utils/bringToFront";
-import { compose } from "utils/compose";
-import { listen } from "utils/listen";
-import { getResizeLatitude } from "utils/os-window/getResizeLatitude";
+import { onLMB } from 'event-filters/onLMB';
+import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
+import type { OsRef } from 'typings/OsRef';
+import { bringToFront } from 'utils/bringToFront';
+import { compose } from 'utils/compose';
+import { listen } from 'utils/listen';
+import { getResizeLatitude } from 'utils/os-window/getResizeLatitude';
 
 export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   /** Drag start event. */
@@ -35,17 +35,17 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
       const currentWidth = osWindow.getBoundingClientRect().width;
       const currentHeight = osWindow.getBoundingClientRect().height;
 
-      let left = "";
-      let top = "";
+      let left = '';
+      let top = '';
 
-      let width = "";
-      let height = "";
+      let width = '';
+      let height = '';
 
       // LEFT
       switch (latitude) {
-        case "W":
-        case "NW":
-        case "SW": {
+        case 'W':
+        case 'NW':
+        case 'SW': {
           const availableWidth = currentWidth - MIN_WIDTH;
 
           // We're actively concerned about negative values here.
@@ -66,9 +66,9 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
 
       // TOP
       switch (latitude) {
-        case "N":
-        case "NE":
-        case "NW": {
+        case 'N':
+        case 'NE':
+        case 'NW': {
           const availableHeight = currentHeight - MIN_HEIGHT;
 
           // We're actively concerned about negative values here.
@@ -89,9 +89,9 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
 
       // WIDTH
       switch (latitude) {
-        case "E":
-        case "NE":
-        case "SE": {
+        case 'E':
+        case 'NE':
+        case 'SE': {
           const newWidth = clientX - currentLeft;
 
           if (newWidth > MIN_WIDTH) {
@@ -99,9 +99,9 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
           }
           break;
         }
-        case "W":
-        case "NW":
-        case "SW": {
+        case 'W':
+        case 'NW':
+        case 'SW': {
           const deltaLeft = startingLeft - currentLeft;
 
           const newWidth = startingWidth + deltaLeft;
@@ -115,9 +115,9 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
 
       // HEIGHT
       switch (latitude) {
-        case "N":
-        case "NE":
-        case "NW": {
+        case 'N':
+        case 'NE':
+        case 'NW': {
           const deltaTop = startingTop - currentTop;
 
           const newHeight = startingHeight + deltaTop;
@@ -127,9 +127,9 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
           }
           break;
         }
-        case "S":
-        case "SE":
-        case "SW": {
+        case 'S':
+        case 'SE':
+        case 'SW': {
           const newHeight = clientY - currentTop;
 
           if (newHeight > MIN_HEIGHT) {
@@ -153,10 +153,7 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
       cleanup();
     });
 
-    cleanup = compose(
-      listen({ event: "mousemove", handler: onMouseMove, on: document }),
-      listen({ event: "mouseup", handler: onMouseUp, on: document }),
-    );
+    cleanup = compose(listen({ event: 'mousemove', handler: onMouseMove, on: document }), listen({ event: 'mouseup', handler: onMouseUp, on: document }));
   });
 
   return handleMouseDown;

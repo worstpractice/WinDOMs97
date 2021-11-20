@@ -1,8 +1,8 @@
-import { useIsRunningAreaFull } from "hooks/taskbar/useIsRunningAreaFull";
-import { useOsRef } from "hooks/useOsRef";
-import type { ReactNode } from "react";
-import type { FC } from "typings/FC";
-import styles from "./RunningArea.module.css";
+import { useIsRunningAreaFull } from 'hooks/taskbar/useIsRunningAreaFull';
+import { useOsRef } from 'hooks/useOsRef';
+import type { ReactNode } from 'react';
+import type { FC } from 'typings/FC';
+import styles from './RunningArea.module.css';
 
 type Props = {
   children: ReactNode;

@@ -1,11 +1,11 @@
-import type { Alternative } from "typings/Alternative";
-import type { MenuState } from "typings/state/MenuState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { Alternative } from 'typings/Alternative';
+import type { MenuState } from 'typings/state/MenuState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly alternatives: readonly Alternative[];
-  readonly openMenu: "ContextMenu" | "StartMenu" | "";
+  readonly openMenu: 'ContextMenu' | 'StartMenu' | '';
 };
 
 export type Actions = {
@@ -19,36 +19,37 @@ export const useMenuState = create<MenuState>(
     {
       ///////////////////////////////////////////
       alternatives: [],
-      openMenu: "",
+      openMenu: '',
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         closeMenus: () => {
           set(() => {
-            return { openMenu: "" } as const;
+            return { openMenu: '' } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         openContextMenu: (alternatives: readonly Alternative[]) => {
           set(() => {
             if (!alternatives.length) {
-              console.error("The array of alternatives was empty!");
+              console.error('The array of alternatives was empty!');
             }
 
-            return { openMenu: "ContextMenu", alternatives: [...alternatives] } as const;
+            return { openMenu: 'ContextMenu', alternatives: [...alternatives] } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         toggleStartMenu: () => {
           set(({ openMenu }) => {
-            const newMenu = openMenu === "StartMenu" ? "" : "StartMenu";
+            const newMenu = openMenu === 'StartMenu' ? '' : 'StartMenu';
 
             return { openMenu: newMenu } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

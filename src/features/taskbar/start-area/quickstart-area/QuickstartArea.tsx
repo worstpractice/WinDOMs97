@@ -1,7 +1,7 @@
-import { Divider } from "components/Divider";
-import type { ReactNode } from "react";
-import type { FC } from "typings/FC";
-import styles from "./QuickstartArea.module.css";
+import { Divider } from 'components/Divider';
+import type { ReactNode } from 'react';
+import type { FC } from 'typings/FC';
+import styles from './QuickstartArea.module.css';
 
 type Props = {
   children: ReactNode;

@@ -1,1 +1,1 @@
-export const recognizedFileExtensions = ["exe"];
+export const recognizedFileExtensions = ['exe'];

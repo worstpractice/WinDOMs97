@@ -1,16 +1,18 @@
-import { StartMenuItem } from "features/taskbar/start-area/start-menu/StartMenuItem";
-import { useKernelState } from "state/useKernelState";
-import type { FC } from "typings/FC";
-import type { Linker } from "typings/Linker";
-import type { KernelState } from "typings/state/KernelState";
-import { forIsOnStartMenu } from "utils/array-helpers/filter/forIsOnStartMenu";
+import { StartMenuItem } from 'features/taskbar/start-area/start-menu/StartMenuItem';
+import { useKernelState } from 'state/useKernelState';
+import type { FC } from 'typings/FC';
+import type { Linker } from 'typings/Linker';
+import type { KernelState } from 'typings/state/KernelState';
+import { forIsOnStartMenu } from 'utils/array-helpers/filter/forIsOnStartMenu';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ installedPrograms }: KernelState) => ({
-  installedPrograms,
-});
+const fromKernel = ({ installedPrograms }: KernelState) => {
+  return {
+    installedPrograms,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};

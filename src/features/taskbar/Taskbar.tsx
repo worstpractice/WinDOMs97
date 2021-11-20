@@ -1,22 +1,26 @@
-import { useOsRef } from "hooks/useOsRef";
-import type { ReactNode } from "react";
-import { useActiveState } from "state/useActiveState";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { MenuState } from "typings/state/MenuState";
-import styles from "./Taskbar.module.css";
+import { useOsRef } from 'hooks/useOsRef';
+import type { ReactNode } from 'react';
+import { useActiveState } from 'state/useActiveState';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { MenuState } from 'typings/state/MenuState';
+import styles from './Taskbar.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => ({
-  setActiveRef,
-});
+const fromActive = ({ setActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

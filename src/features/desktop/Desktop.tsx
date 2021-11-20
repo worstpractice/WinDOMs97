@@ -1,21 +1,23 @@
-import { onRMB } from "event-filters/onRMB";
-import { DragSelection } from "features/desktop/DragSelection";
-import { useDesktopAlternatives } from "hooks/alternatives/useDesktopAlternatives";
-import { useDragSelection } from "hooks/desktop/useOnDragSelection";
-import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useOsRef } from "hooks/useOsRef";
-import type { ReactNode } from "react";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { MenuState } from "typings/state/MenuState";
-import styles from "./Desktop.module.css";
+import { onRMB } from 'event-filters/onRMB';
+import { DragSelection } from 'features/desktop/DragSelection';
+import { useDesktopAlternatives } from 'hooks/alternatives/useDesktopAlternatives';
+import { useDragSelection } from 'hooks/desktop/useOnDragSelection';
+import { useActivateOnMount } from 'hooks/useActivateOnMount';
+import { useOsRef } from 'hooks/useOsRef';
+import type { ReactNode } from 'react';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { MenuState } from 'typings/state/MenuState';
+import styles from './Desktop.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ openContextMenu }: MenuState) => ({
-  openContextMenu,
-});
+const fromMenu = ({ openContextMenu }: MenuState) => {
+  return {
+    openContextMenu,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

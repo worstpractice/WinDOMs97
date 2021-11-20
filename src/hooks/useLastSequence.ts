@@ -1,21 +1,23 @@
-import { recognizedFileExtensions } from "os-constants/recognizedFileExtensions";
-import { useLayoutEffect, useRef } from "react";
-import { useKeyboardState } from "state/useKeyboardState";
-import type { Binary } from "typings/Binary";
-import type { KeyboardState } from "typings/state/KeyboardState";
-import { deriveFileExtension } from "utils/deriveFileExtension";
+import { recognizedFileExtensions } from 'os-constants/recognizedFileExtensions';
+import { useLayoutEffect, useRef } from 'react';
+import { useKeyboardState } from 'state/useKeyboardState';
+import type { Binary } from 'typings/Binary';
+import type { KeyboardState } from 'typings/state/KeyboardState';
+import { deriveFileExtension } from 'utils/deriveFileExtension';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKeyboard = ({ lastKeyPress }: KeyboardState) => ({
-  lastKeyPress,
-});
+const fromKeyboard = ({ lastKeyPress }: KeyboardState) => {
+  return {
+    lastKeyPress,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastSequence = (binary: Binary) => {
   const { lastKeyPress } = useKeyboardState(fromKeyboard);
-  const sequenceRef = useRef("");
+  const sequenceRef = useRef('');
 
   useLayoutEffect(() => {
     let isCancelled = false;
@@ -29,22 +31,22 @@ export const useLastSequence = (binary: Binary) => {
 
       const { button, character } = lastKeyPress;
 
-      if (button === "Enter") {
+      if (button === 'Enter') {
         binary.isBeingRenamed = false;
 
         if (!sequenceRef.current.trim().length) {
-          sequenceRef.current = "";
+          sequenceRef.current = '';
           return;
         }
 
-        const fileExtension = deriveFileExtension(binary) ?? "";
+        const fileExtension = deriveFileExtension(binary) ?? '';
 
         const isSameFileExtension = sequenceRef.current.endsWith(fileExtension);
 
         if (isSameFileExtension) {
           binary.fileName = sequenceRef.current;
         } else {
-          const isChangingFileExtension = window.confirm("Do you really want to change the file extension?");
+          const isChangingFileExtension = window.confirm('Do you really want to change the file extension?');
 
           if (isChangingFileExtension) {
             binary.isFileExtensionRecognized = recognizedFileExtensions.includes(fileExtension);
@@ -53,7 +55,7 @@ export const useLastSequence = (binary: Binary) => {
         }
 
         binary.isBeingRenamed = false;
-        sequenceRef.current = "";
+        sequenceRef.current = '';
       } else {
         sequenceRef.current += character;
       }

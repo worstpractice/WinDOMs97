@@ -1,15 +1,17 @@
-import { useLayoutEffect, useState } from "react";
-import { useClickState } from "state/useClickState";
-import type { OsRef } from "typings/OsRef";
-import type { Position } from "typings/Position";
-import type { ClickState } from "typings/state/ClickState";
+import { useLayoutEffect, useState } from 'react';
+import { useClickState } from 'state/useClickState';
+import type { OsRef } from 'typings/OsRef';
+import type { Position } from 'typings/Position';
+import type { ClickState } from 'typings/state/ClickState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ lastClickPosition }: ClickState) => ({
-  lastClickPosition,
-});
+const fromClick = ({ lastClickPosition }: ClickState) => {
+  return {
+    lastClickPosition,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useStayInSight = (contextMenuRef: OsRef<HTMLElement>) => {

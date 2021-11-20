@@ -1,19 +1,21 @@
-import { Icon } from "components/Icon";
-import { Title } from "components/Title";
-import { useActiveState } from "state/useActiveState";
-import { isRef } from "type-predicates/isRef";
-import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
-import type { ActiveState } from "typings/state/ActiveState";
-import { css } from "utils/css";
-import styles from "./OsWindowLabel.module.css";
+import { Icon } from 'components/Icon';
+import { Title } from 'components/Title';
+import { useActiveState } from 'state/useActiveState';
+import { isRef } from 'type-predicates/isRef';
+import type { FC } from 'typings/FC';
+import type { Process } from 'typings/Process';
+import type { ActiveState } from 'typings/state/ActiveState';
+import { css } from 'utils/css';
+import styles from './OsWindowLabel.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activeRef }: ActiveState) => ({
-  activeRef,
-});
+const fromActive = ({ activeRef }: ActiveState) => {
+  return {
+    activeRef,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const activeStyle = css(styles.Title, styles.Active);

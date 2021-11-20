@@ -1,4 +1,4 @@
-import type { MutableRefObject } from "react";
+import type { MutableRefObject } from 'react';
 
 type Default = NonNullable<CanvasRenderingContext2D>;
 

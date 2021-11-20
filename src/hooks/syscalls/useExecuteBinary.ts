@@ -1,29 +1,35 @@
-import { OUT_OF_PIDS, OUT_OF_TASKBAR } from "errors";
-import { Pids } from "kernel/Pids";
-import { useErrorState } from "state/useErrorState";
-import { useKernelState } from "state/useKernelState";
-import { useRunningAreaState } from "state/useRunningAreaState";
-import { isNull } from "type-predicates/isNull";
-import type { Binary } from "typings/Binary";
-import type { ErrorState } from "typings/state/ErrorState";
-import type { KernelState } from "typings/state/KernelState";
-import type { RunningAreaState } from "typings/state/RunningAreaState";
+import { OUT_OF_PIDS, OUT_OF_TASKBAR } from 'errors';
+import { Pids } from 'kernel/Pids';
+import { useErrorState } from 'state/useErrorState';
+import { useKernelState } from 'state/useKernelState';
+import { useRunningAreaState } from 'state/useRunningAreaState';
+import { isNull } from 'type-predicates/isNull';
+import type { Binary } from 'typings/Binary';
+import type { ErrorState } from 'typings/state/ErrorState';
+import type { KernelState } from 'typings/state/KernelState';
+import type { RunningAreaState } from 'typings/state/RunningAreaState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromError = ({ bluescreen }: ErrorState) => ({
-  bluescreen,
-});
+const fromError = ({ bluescreen }: ErrorState) => {
+  return {
+    bluescreen,
+  };
+};
 
-const fromKernel = ({ dangerouslyExecuteBinary, runningProcesses }: KernelState) => ({
-  dangerouslyExecuteBinary,
-  runningProcesses,
-});
+const fromKernel = ({ dangerouslyExecuteBinary, runningProcesses }: KernelState) => {
+  return {
+    dangerouslyExecuteBinary,
+    runningProcesses,
+  };
+};
 
-const fromRunningArea = ({ isRunningAreaFull }: RunningAreaState) => ({
-  isRunningAreaFull,
-});
+const fromRunningArea = ({ isRunningAreaFull }: RunningAreaState) => {
+  return {
+    isRunningAreaFull,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useExecuteBinary = (binary: Binary) => {

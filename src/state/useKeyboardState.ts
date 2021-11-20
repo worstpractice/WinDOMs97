@@ -1,7 +1,7 @@
-import type { KeyPress } from "typings/KeyboardCharacter";
-import type { KeyboardState } from "typings/state/KeyboardState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { KeyPress } from 'typings/KeyboardCharacter';
+import type { KeyboardState } from 'typings/state/KeyboardState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly lastKeyPress: KeyPress;
@@ -18,14 +18,14 @@ export const useKeyboardState = create<KeyboardState>(
     {
       ///////////////////////////////////////////
       lastKeyPress: {
-        character: "" as any,
-        button: "" as any,
+        button: '' as any,
+        character: '' as any,
         order: ORDER_TALLY++,
       },
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setLastKeyPress: (to: string) => {
           set(() => {
@@ -33,8 +33,8 @@ export const useKeyboardState = create<KeyboardState>(
             const isButton = !isCharacter;
 
             const keyPress: KeyPress = {
-              button: isButton ? to : ("" as any),
-              character: isCharacter ? to : ("" as any),
+              button: isButton ? to : ('' as any),
+              character: isCharacter ? to : ('' as any),
               order: ORDER_TALLY++,
             } as const;
 
@@ -42,6 +42,7 @@ export const useKeyboardState = create<KeyboardState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

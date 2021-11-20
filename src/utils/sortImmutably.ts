@@ -1,5 +1,5 @@
-import type { Process } from "typings/Process";
-import type { ComparePid } from "typings/sorting/ComparePid";
+import type { Process } from 'typings/Process';
+import type { ComparePid } from 'typings/sorting/ComparePid';
 
 export const sortProcesses = <T extends Process>(immutable: readonly T[], by: ComparePid) => {
   // @ts-expect-error To mutable...

@@ -1,34 +1,38 @@
-import { onLMB } from "event-filters/onLMB";
-import { OsWindowChromeArea } from "features/os-window/chrome-area/OsWindowChromeArea";
-import { ProgramArea } from "features/os-window/program-area/ProgramArea";
-import { ProgramContent } from "features/os-window/program-area/ProgramContent";
-import { useOnMoveOsWindow } from "hooks/os-window/useOnMoveOsWindow";
-import { useOnResizeOsWindow } from "hooks/os-window/useOnResizeOsWindow";
-import { useActivateOnMount } from "hooks/useActivateOnMount";
-import { useOsRef } from "hooks/useOsRef";
-import { MIN_HEIGHT, MIN_WIDTH } from "os-constants/OsWindow";
-import { useState } from "react";
-import { useActiveState } from "state/useActiveState";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { Loader } from "typings/Loader";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { MenuState } from "typings/state/MenuState";
-import { bringToFront } from "utils/bringToFront";
-import { css } from "utils/css";
-import { blockNativeDrag } from "utils/os-window/blockNativeDrag";
-import styles from "./OsWindow.module.css";
+import { onLMB } from 'event-filters/onLMB';
+import { OsWindowChromeArea } from 'features/os-window/chrome-area/OsWindowChromeArea';
+import { ProgramArea } from 'features/os-window/program-area/ProgramArea';
+import { ProgramContent } from 'features/os-window/program-area/ProgramContent';
+import { useOnMoveOsWindow } from 'hooks/os-window/useOnMoveOsWindow';
+import { useOnResizeOsWindow } from 'hooks/os-window/useOnResizeOsWindow';
+import { useActivateOnMount } from 'hooks/useActivateOnMount';
+import { useOsRef } from 'hooks/useOsRef';
+import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
+import { useState } from 'react';
+import { useActiveState } from 'state/useActiveState';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { Loader } from 'typings/Loader';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { MenuState } from 'typings/state/MenuState';
+import { bringToFront } from 'utils/bringToFront';
+import { css } from 'utils/css';
+import { blockNativeDrag } from 'utils/os-window/blockNativeDrag';
+import styles from './OsWindow.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => ({
-  setActiveRef,
-});
+const fromActive = ({ setActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -94,12 +98,7 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
 
   const Program = binaryImage.instructions;
 
-  const style = css(
-    styles.OsWindow,
-    isMaximized ? styles.Maximized : "",
-    isMinimized ? styles.Minimized : "",
-    isResizable ? styles.Resizable : "",
-  );
+  const style = css(styles.OsWindow, isMaximized ? styles.Maximized : '', isMinimized ? styles.Minimized : '', isResizable ? styles.Resizable : '');
 
   const left = 30 * pid;
   const top = 20 * pid;

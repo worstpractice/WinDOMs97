@@ -1,4 +1,4 @@
-@import "../styles/colors.module.css";
+@import '../styles/colors.module.css';
 
 .Divider {
   outline-color: var(--oswindow-outline);

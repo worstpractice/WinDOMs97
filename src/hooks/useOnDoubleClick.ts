@@ -1,13 +1,13 @@
-import { onLMB } from "event-filters/onLMB";
-import { useState } from "react";
-import type { OsRef } from "typings/OsRef";
+import { onLMB } from 'event-filters/onLMB';
+import { useState } from 'react';
+import type { OsRef } from 'typings/OsRef';
 
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
 const MAX_DELAY = 250 as const;
 
 /** Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF). Think of this as regular `onDoubleClick`. */
 export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDoubleClick: () => void) => {
-  const [lastTime, setLastTime] = useState(Infinity);
+  const [lastTime, setLastTime] = useState(Number.POSITIVE_INFINITY);
   const [is2ndClick, setIs2ndClick] = useState(false);
 
   ///////////////////////////////////////////////////////////////////////////////////////////
@@ -41,7 +41,7 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
 
     if (!current) return;
 
-    const now = new Date().getTime();
+    const now = Date.now();
 
     const elapsed = now - lastTime;
 
@@ -49,7 +49,9 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
       handleConsecutiveClicks(target);
     }
 
-    setLastTime(() => now);
+    setLastTime(() => {
+      return now;
+    });
   });
 
   ///////////////////////////////////////////////////////////////////////////////////////////

@@ -1,8 +1,8 @@
-import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
-import { useOsRef } from "hooks/useOsRef";
-import type { FC } from "typings/FC";
-import type { Loader } from "typings/Loader";
-import styles from "./Notepad.module.css";
+import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
+import { useOsRef } from 'hooks/useOsRef';
+import type { FC } from 'typings/FC';
+import type { Loader } from 'typings/Loader';
+import styles from './Notepad.module.css';
 
 type Props = {
   getProcess: Loader;

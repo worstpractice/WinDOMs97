@@ -1,23 +1,21 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "allowSyntheticDefaultImports": true,
-    "allowUnusedLabels": true,
+    "allowSyntheticDefaultImports": false,
+    "allowUnusedLabels": false,
     "assumeChangesOnlyAffectDirectDependencies": false,
     "baseUrl": "src",
     "disableSizeLimit": true,
     "disableSolutionSearching": false,
     "disableSourceOfProjectReferenceRedirect": false,
-    "esModuleInterop": true,
+    "downlevelIteration": true,
+    "esModuleInterop": false,
+    "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
+    "importHelpers": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
     "jsx": "react-jsx",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -32,8 +30,9 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "preserveValueImports": false,
+    "pretty": true,
     "resolveJsonModule": true,
-    "skipDefaultLibCheck": false,
     "skipLibCheck": false,
     "strict": true,
     "strictBindCallApply": true,
@@ -42,17 +41,11 @@
     "strictPropertyInitialization": true,
     "suppressExcessPropertyErrors": false,
     "suppressImplicitAnyIndexErrors": false,
-    "target": "ESNext",
-    "useDefineForClassFields": true
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "useUnknownInCatchVariables": true
   },
-  "exclude": [
-    "**/node_modules",
-    "**/.*/"
-  ],
   "include": [
     "src"
-  ],
-  "typeAcquisition": {
-    "enable": true
-  }
+  ]
 }

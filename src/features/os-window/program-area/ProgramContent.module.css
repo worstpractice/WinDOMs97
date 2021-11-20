@@ -1,4 +1,4 @@
-@import "../../../styles/colors.module.css";
+@import '../../../styles/colors.module.css';
 
 .ProgramContent {
   background-color: var(--programcontent-background);

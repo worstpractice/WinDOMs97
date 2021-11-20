@@ -1,7 +1,7 @@
-import type { Position } from "typings/Position";
-import type { ClickState } from "typings/state/ClickState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { Position } from 'typings/Position';
+import type { ClickState } from 'typings/state/ClickState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly lastClickPosition: Position;
@@ -18,8 +18,8 @@ export const useClickState = create<ClickState>(
       lastClickPosition: { x: 0, y: 0 },
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setLastClickPosition: ({ x, y }: Position) => {
           set(() => {
@@ -27,6 +27,7 @@ export const useClickState = create<ClickState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

@@ -1,16 +1,18 @@
-import { DesktopItem } from "features/desktop/DesktopItem";
-import { useKernelState } from "state/useKernelState";
-import type { FC } from "typings/FC";
-import type { Linker } from "typings/Linker";
-import type { KernelState } from "typings/state/KernelState";
-import { forIsOnDesktop } from "utils/array-helpers/filter/forIsOnDesktop";
+import { DesktopItem } from 'features/desktop/DesktopItem';
+import { useKernelState } from 'state/useKernelState';
+import type { FC } from 'typings/FC';
+import type { Linker } from 'typings/Linker';
+import type { KernelState } from 'typings/state/KernelState';
+import { forIsOnDesktop } from 'utils/array-helpers/filter/forIsOnDesktop';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ installedPrograms }: KernelState) => ({
-  installedPrograms,
-});
+const fromKernel = ({ installedPrograms }: KernelState) => {
+  return {
+    installedPrograms,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};

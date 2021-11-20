@@ -1,14 +1,16 @@
-import { ContextMenuItem } from "features/context-menu/ContextMenuItem";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { MenuState } from "typings/state/MenuState";
+import { ContextMenuItem } from 'features/context-menu/ContextMenuItem';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { MenuState } from 'typings/state/MenuState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ alternatives }: MenuState) => ({
-  alternatives,
-});
+const fromMenu = ({ alternatives }: MenuState) => {
+  return {
+    alternatives,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};

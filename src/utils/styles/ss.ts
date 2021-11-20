@@ -1,4 +1,4 @@
-import type { CSSProperties } from "react";
+import type { CSSProperties } from 'react';
 
 type NamedStyles<T> = {
   readonly [Key in keyof T]: CSSProperties;

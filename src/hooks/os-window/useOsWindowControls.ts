@@ -1,4 +1,4 @@
-import type { Process } from "typings/Process";
+import type { Process } from 'typings/Process';
 
 export const useOsWindowControls = (process: Process) => {
   const maximize = () => {

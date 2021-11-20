@@ -1,16 +1,18 @@
-import { QuickstartAreaItem } from "features/taskbar/start-area/quickstart-area/QuickstartAreaItem";
-import { useKernelState } from "state/useKernelState";
-import type { FC } from "typings/FC";
-import type { Linker } from "typings/Linker";
-import type { KernelState } from "typings/state/KernelState";
-import { forIsInQuickstartArea } from "utils/array-helpers/filter/forIsInQuickstartArea";
+import { QuickstartAreaItem } from 'features/taskbar/start-area/quickstart-area/QuickstartAreaItem';
+import { useKernelState } from 'state/useKernelState';
+import type { FC } from 'typings/FC';
+import type { Linker } from 'typings/Linker';
+import type { KernelState } from 'typings/state/KernelState';
+import { forIsInQuickstartArea } from 'utils/array-helpers/filter/forIsInQuickstartArea';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ installedPrograms }: KernelState) => ({
-  installedPrograms,
-});
+const fromKernel = ({ installedPrograms }: KernelState) => {
+  return {
+    installedPrograms,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};

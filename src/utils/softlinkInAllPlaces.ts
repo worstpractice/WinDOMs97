@@ -1,4 +1,4 @@
-import type { Softlinks } from "typings/Softlinks";
+import type { Softlinks } from 'typings/Softlinks';
 
 /** For convenience. All `OsLocation`s at once. */
 export const softlinkInAllPlaces = (): Softlinks => {

@@ -1,18 +1,20 @@
-import { Icon } from "components/Icon";
-import { Words } from "components/Words";
-import { onLMB } from "event-filters/onLMB";
-import { useMenuState } from "state/useMenuState";
-import type { Alternative } from "typings/Alternative";
-import type { FC } from "typings/FC";
-import type { MenuState } from "typings/state/MenuState";
-import styles from "./ContextMenuItem.module.css";
+import { Icon } from 'components/Icon';
+import { Words } from 'components/Words';
+import { onLMB } from 'event-filters/onLMB';
+import { useMenuState } from 'state/useMenuState';
+import type { Alternative } from 'typings/Alternative';
+import type { FC } from 'typings/FC';
+import type { MenuState } from 'typings/state/MenuState';
+import styles from './ContextMenuItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

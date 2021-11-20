@@ -1,32 +1,38 @@
-import { OsButton } from "components/OsButton";
-import { onLMB } from "event-filters/onLMB";
-import { useOsWindowControls } from "hooks/os-window/useOsWindowControls";
-import { useActiveState } from "state/useActiveState";
-import { useKernelState } from "state/useKernelState";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { Process } from "typings/Process";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { KernelState } from "typings/state/KernelState";
-import type { MenuState } from "typings/state/MenuState";
-import { bringToFront } from "utils/bringToFront";
-import styles from "./OsWindowButtons.module.css";
+import { OsButton } from 'components/OsButton';
+import { onLMB } from 'event-filters/onLMB';
+import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
+import { useActiveState } from 'state/useActiveState';
+import { useKernelState } from 'state/useKernelState';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { Process } from 'typings/Process';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { KernelState } from 'typings/state/KernelState';
+import type { MenuState } from 'typings/state/MenuState';
+import { bringToFront } from 'utils/bringToFront';
+import styles from './OsWindowButtons.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => ({
-  setActiveRef,
-  unsetActiveRef,
-});
+const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+    unsetActiveRef,
+  };
+};
 
-const fromKernel = ({ endProcess }: KernelState) => ({
-  endProcess,
-});
+const fromKernel = ({ endProcess }: KernelState) => {
+  return {
+    endProcess,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

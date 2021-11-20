@@ -1,5 +1,5 @@
-@import "../../../../styles/colors.module.css";
-@import "../../../../styles/layout.module.css";
+@import '../../../../styles/colors.module.css';
+@import '../../../../styles/layout.module.css';
 
 .ContentList {
   display: flex;

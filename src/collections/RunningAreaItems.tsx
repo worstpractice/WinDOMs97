@@ -1,15 +1,17 @@
-import { RunningAreaItem } from "features/taskbar/running-area/RunningAreaItem";
-import { useKernelState } from "state/useKernelState";
-import type { FC } from "typings/FC";
-import type { ButtonLoader } from "typings/Loader";
-import type { KernelState } from "typings/state/KernelState";
+import { RunningAreaItem } from 'features/taskbar/running-area/RunningAreaItem';
+import { useKernelState } from 'state/useKernelState';
+import type { FC } from 'typings/FC';
+import type { ButtonLoader } from 'typings/Loader';
+import type { KernelState } from 'typings/state/KernelState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ runningProcesses }: KernelState) => ({
-  runningProcesses,
-});
+const fromKernel = ({ runningProcesses }: KernelState) => {
+  return {
+    runningProcesses,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {};

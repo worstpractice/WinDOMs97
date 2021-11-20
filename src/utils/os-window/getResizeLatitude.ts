@@ -1,6 +1,6 @@
-import type { MouseEvent } from "react";
-import type { Latitude } from "typings/Latitude";
-import { getDistanceAlongOsWindow } from "utils/os-window/getDistanceAlongOsWindow";
+import type { MouseEvent } from 'react';
+import type { Latitude } from 'typings/Latitude';
+import { getDistanceAlongOsWindow } from 'utils/os-window/getDistanceAlongOsWindow';
 
 // prettier-ignore
 export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends MouseEvent<T>>(osWindowRef: T, e: U): Latitude => {
@@ -23,21 +23,21 @@ export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends 
 
     if (x >= 10 && x <= width - 10 && y <= 10) {
       return "N";
-    } else if (x >= width - 10 && y <= 10) {
+    } if (x >= width - 10 && y <= 10) {
       return "NE";
-    } else if (x >= width - 10 && y >= 10 && y <= height - 10) {
+    } if (x >= width - 10 && y >= 10 && y <= height - 10) {
       return "E";
-    } else if (x >= width - 10 && y >= height - 10) {
+    } if (x >= width - 10 && y >= height - 10) {
       return "SE";
-    } else if (x >= 10 && x <= width - 10 && y >= height - 10) {
+    } if (x >= 10 && x <= width - 10 && y >= height - 10) {
       return "S";
-    } else if (x <= 10 && y >= height - 10) {
+    } if (x <= 10 && y >= height - 10) {
       return "SW";
-    } else if (x <= 10 && y >= 10 && y <= height - 10) {
+    } if (x <= 10 && y >= 10 && y <= height - 10) {
       return "W";
-    } else if (x <= 10 && y <= 10) {
+    } if (x <= 10 && y <= 10) {
       return "NW";
-    } else {
+    } 
       throw new RangeError(`
         x: ${x}
         y: ${y}
@@ -59,5 +59,5 @@ export const getResizeLatitude = <T extends NonNullable<HTMLElement>, U extends 
         isXBelowWidthMinus10: ${x <= width - 10}
         isYBelowHeightMinus10: ${y <= height - 10}
       `);
-    }
+    
 };

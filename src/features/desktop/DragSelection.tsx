@@ -1,15 +1,17 @@
-import { useClickState } from "state/useClickState";
-import type { FC } from "typings/FC";
-import type { Position } from "typings/Position";
-import type { ClickState } from "typings/state/ClickState";
-import style from "./DragSelection.module.css";
+import { useClickState } from 'state/useClickState';
+import type { FC } from 'typings/FC';
+import type { Position } from 'typings/Position';
+import type { ClickState } from 'typings/state/ClickState';
+import style from './DragSelection.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ lastClickPosition }: ClickState) => ({
-  lastClickPosition,
-});
+const fromClick = ({ lastClickPosition }: ClickState) => {
+  return {
+    lastClickPosition,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

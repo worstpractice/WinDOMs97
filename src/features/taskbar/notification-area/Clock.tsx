@@ -1,7 +1,7 @@
-import { Words } from "components/Words";
-import type { FC } from "react";
-import { timestamp } from "utils/timestamp";
-import styles from "./Clock.module.css";
+import { Words } from 'components/Words';
+import type { FC } from 'react';
+import { timestamp } from 'utils/timestamp';
+import styles from './Clock.module.css';
 
 type Props = {};
 

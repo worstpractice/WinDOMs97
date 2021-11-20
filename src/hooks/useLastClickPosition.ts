@@ -1,22 +1,26 @@
-import { useEffect } from "react";
-import { useClickState } from "state/useClickState";
-import { useMenuState } from "state/useMenuState";
-import type { CleanupFn } from "typings/CleanupFn";
-import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { ClickState } from "typings/state/ClickState";
-import type { MenuState } from "typings/state/MenuState";
-import { listen } from "utils/listen";
+import { useEffect } from 'react';
+import { useClickState } from 'state/useClickState';
+import { useMenuState } from 'state/useMenuState';
+import type { CleanupFn } from 'typings/CleanupFn';
+import type { MouseHandler } from 'typings/handlers/MouseHandler';
+import type { ClickState } from 'typings/state/ClickState';
+import type { MenuState } from 'typings/state/MenuState';
+import { listen } from 'utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ setLastClickPosition }: ClickState) => ({
-  setLastClickPosition,
-});
+const fromClick = ({ setLastClickPosition }: ClickState) => {
+  return {
+    setLastClickPosition,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastClickPosition = () => {
@@ -36,7 +40,7 @@ export const useLastClickPosition = () => {
 
       // NOTE: It's subtle, but we're passing a cleanup function to `useEffect`.
       return listen({
-        event: "mousedown",
+        event: 'mousedown',
         handler: handleMouseDown,
         on: document,
       });

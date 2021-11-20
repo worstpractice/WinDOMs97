@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { useRef } from 'react';
 
 // prettier-ignore
 export const useCanvasRef = <T extends NonNullable<CanvasRenderingContext2D>>(initialValue: T | null = null) => {

@@ -1,13 +1,8 @@
-@import "../../../../styles/colors.module.css";
+@import '../../../../styles/colors.module.css';
 
 .Spine {
   align-items: flex-end;
-  background: linear-gradient(
-    0deg,
-    var(--startmenu-spine-bright) 55%,
-    var(--startmenu-spine-dim) 90%,
-    var(--startmenu-spine-bright) 100%
-  );
+  background: linear-gradient(0deg, var(--startmenu-spine-bright) 55%, var(--startmenu-spine-dim) 90%, var(--startmenu-spine-bright) 100%);
   display: flex;
   flex-shrink: 0;
   pointer-events: none;

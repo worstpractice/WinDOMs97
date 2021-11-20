@@ -1,5 +1,5 @@
-import { useEffect } from "react";
-import type { Process } from "typings/Process";
+import { useEffect } from 'react';
+import type { Process } from 'typings/Process';
 
 export const useStartingDimensions = (process: Process) => {
   // NOTE: For whatever reason, this doesn't work with `useLayoutEffect`. So be it.

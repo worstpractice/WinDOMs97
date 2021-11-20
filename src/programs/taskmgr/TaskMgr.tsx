@@ -1,35 +1,41 @@
-import { OsButton } from "components/OsButton";
-import { onLMB } from "event-filters/onLMB";
-import { useStartingDimensions } from "hooks/programs/useStartingDimensions";
-import { useOsRef } from "hooks/useOsRef";
-import { useActiveState } from "state/useActiveState";
-import { useKernelState } from "state/useKernelState";
-import { useMenuState } from "state/useMenuState";
-import type { FC } from "typings/FC";
-import type { Loader } from "typings/Loader";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { KernelState } from "typings/state/KernelState";
-import type { MenuState } from "typings/state/MenuState";
-import { byPid } from "utils/array-helpers/sort/byPid";
-import { bringToFront } from "utils/bringToFront";
-import { sortProcesses } from "utils/sortImmutably";
-import styles from "./TaskMgr.module.css";
+import { OsButton } from 'components/OsButton';
+import { onLMB } from 'event-filters/onLMB';
+import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
+import { useOsRef } from 'hooks/useOsRef';
+import { useActiveState } from 'state/useActiveState';
+import { useKernelState } from 'state/useKernelState';
+import { useMenuState } from 'state/useMenuState';
+import type { FC } from 'typings/FC';
+import type { Loader } from 'typings/Loader';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { KernelState } from 'typings/state/KernelState';
+import type { MenuState } from 'typings/state/MenuState';
+import { byPid } from 'utils/array-helpers/sort/byPid';
+import { bringToFront } from 'utils/bringToFront';
+import { sortProcesses } from 'utils/sortImmutably';
+import styles from './TaskMgr.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => ({
-  setActiveRef,
-});
+const fromActive = ({ setActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+  };
+};
 
-const fromKernel = ({ endProcess, runningProcesses }: KernelState) => ({
-  endProcess,
-  runningProcesses,
-});
+const fromKernel = ({ endProcess, runningProcesses }: KernelState) => {
+  return {
+    endProcess,
+    runningProcesses,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {

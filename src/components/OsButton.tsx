@@ -1,9 +1,9 @@
-import { onLMB } from "event-filters/onLMB";
-import type { CSSProperties, ReactNode } from "react";
-import { forwardRef, useState } from "react";
-import type { ButtonHandler } from "typings/ButtonHandler";
-import { css } from "utils/css";
-import styles from "./OsButton.module.css";
+import { onLMB } from 'event-filters/onLMB';
+import type { CSSProperties, ReactNode } from 'react';
+import { forwardRef, useState } from 'react';
+import type { ButtonHandler } from 'typings/ButtonHandler';
+import { css } from 'utils/css';
+import styles from './OsButton.module.css';
 
 type Props = {
   children?: ReactNode;
@@ -46,7 +46,7 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
     const osButtonStyle = css(
       styles.OsButton ?? "",
       (isPressed ? styles.Pressed : "") ?? "",
-      className ? className : "",
+      className || "",
       isDiscreet ? styles.Discreet : "",
     );
 
@@ -67,4 +67,4 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>(({ children, classN
   },
 );
 
-OsButton.displayName = "OsButton";
+OsButton.displayName = 'OsButton';

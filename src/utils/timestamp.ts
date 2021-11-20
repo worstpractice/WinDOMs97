@@ -1,4 +1,4 @@
-import { formatTimeString } from "./formatTimeString";
+import { formatTimeString } from './formatTimeString';
 
 export const timestamp = () => {
   const now = new Date();
@@ -6,5 +6,5 @@ export const timestamp = () => {
   const hour = now.getHours();
   const minute = now.getMinutes();
 
-  return [formatTimeString(hour), formatTimeString(minute)].join(":");
+  return [formatTimeString(hour), formatTimeString(minute)].join(':');
 };

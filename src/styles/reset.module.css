@@ -1,9 +1,9 @@
-@import "./fonts.module.css";
-@import "./colors.module.css";
+@import './fonts.module.css';
+@import './colors.module.css';
 
 * {
   box-sizing: border-box;
-  font-family: "W95FA", Arial, Helvetica, sans-serif;
+  font-family: 'W95FA', Arial, Helvetica, sans-serif;
 
   /* Chrome & Co */
   image-rendering: pixelated;

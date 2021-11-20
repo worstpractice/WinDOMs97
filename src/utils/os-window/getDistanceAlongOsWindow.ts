@@ -1,4 +1,4 @@
-import type { MouseEvent } from "react";
+import type { MouseEvent } from 'react';
 
 // prettier-ignore
 export const getDistanceAlongOsWindow = <T extends NonNullable<HTMLElement>, U extends MouseEvent<T>>(osWindow: T, { clientX, clientY }: U) => {

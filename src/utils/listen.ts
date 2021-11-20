@@ -1,5 +1,5 @@
-import type { CleanupFn } from "typings/CleanupFn";
-import type { Handler } from "typings/handlers/Handler";
+import type { CleanupFn } from 'typings/CleanupFn';
+import type { Handler } from 'typings/handlers/Handler';
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
   event: keyof WindowEventMap;

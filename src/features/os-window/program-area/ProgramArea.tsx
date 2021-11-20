@@ -1,6 +1,6 @@
-import type { ReactNode } from "react";
-import type { FC } from "typings/FC";
-import styles from "./ProgramArea.module.css";
+import type { ReactNode } from 'react';
+import type { FC } from 'typings/FC';
+import styles from './ProgramArea.module.css';
 
 type Props = {
   children: ReactNode;

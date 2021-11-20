@@ -1,3 +1,3 @@
 export type ImmutableBrand = {
-  readonly brand: "Immutable";
+  readonly brand: 'Immutable';
 };

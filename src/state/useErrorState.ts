@@ -1,7 +1,7 @@
-import type { BSOD } from "typings/BSOD";
-import type { ErrorState } from "typings/state/ErrorState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { BSOD } from 'typings/BSOD';
+import type { ErrorState } from 'typings/state/ErrorState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly isBsod: boolean;
@@ -18,12 +18,12 @@ export const useErrorState = create<ErrorState>(
     {
       ///////////////////////////////////////////
       isBsod: false,
-      bsodError: "",
-      bsodMessage: "",
+      bsodError: '',
+      bsodMessage: '',
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         bluescreen: ({ error, message }: BSOD) => {
           set(() => {
@@ -35,6 +35,7 @@ export const useErrorState = create<ErrorState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

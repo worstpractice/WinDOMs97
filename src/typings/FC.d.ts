@@ -1,4 +1,4 @@
-import type { ReactElement, ValidationMap, WeakValidationMap } from "react";
+import type { ReactElement, ValidationMap, WeakValidationMap } from 'react';
 
 export type FC<P extends {}> = {
   (props: P, context?: unknown): ReactElement<P, any> | null;

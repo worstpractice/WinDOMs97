@@ -1,1 +1,1 @@
-export type OsLocations = "QuickstartArea" | "StartMenu" | "Desktop";
+export type OsLocations = 'QuickstartArea' | 'StartMenu' | 'Desktop';

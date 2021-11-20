@@ -1,26 +1,30 @@
-import { onLMB } from "event-filters/onLMB";
-import { useEffect, useState } from "react";
-import { useActiveState } from "state/useActiveState";
-import { useMenuState } from "state/useMenuState";
-import type { ComposedFn } from "typings/ComposedFn";
-import type { MouseHandler } from "typings/handlers/MouseHandler";
-import type { OsRef } from "typings/OsRef";
-import type { Position } from "typings/Position";
-import type { ActiveState } from "typings/state/ActiveState";
-import type { MenuState } from "typings/state/MenuState";
-import { compose } from "utils/compose";
-import { listen } from "utils/listen";
+import { onLMB } from 'event-filters/onLMB';
+import { useEffect, useState } from 'react';
+import { useActiveState } from 'state/useActiveState';
+import { useMenuState } from 'state/useMenuState';
+import type { ComposedFn } from 'typings/ComposedFn';
+import type { MouseHandler } from 'typings/handlers/MouseHandler';
+import type { OsRef } from 'typings/OsRef';
+import type { Position } from 'typings/Position';
+import type { ActiveState } from 'typings/state/ActiveState';
+import type { MenuState } from 'typings/state/MenuState';
+import { compose } from 'utils/compose';
+import { listen } from 'utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => ({
-  setActiveRef,
-});
+const fromActive = ({ setActiveRef }: ActiveState) => {
+  return {
+    setActiveRef,
+  };
+};
 
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) => {
@@ -61,21 +65,21 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
       return compose(
         /////////////////////////////
         listen({
-          event: "mousedown",
+          event: 'mousedown',
           handler: handleMouseDown,
           on: document,
           options: { capture: true },
         }),
         /////////////////////////////
         listen({
-          event: "mousemove",
+          event: 'mousemove',
           handler: handleMouseMove,
           on: document,
           options: { capture: true },
         }),
         /////////////////////////////
         listen({
-          event: "mouseup",
+          event: 'mouseup',
           handler: handleMouseUp,
           on: document,
           options: { capture: true },

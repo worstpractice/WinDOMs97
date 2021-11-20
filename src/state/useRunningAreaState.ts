@@ -1,6 +1,6 @@
-import type { RunningAreaState } from "typings/state/RunningAreaState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { RunningAreaState } from 'typings/state/RunningAreaState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly isRunningAreaFull: boolean;
@@ -17,8 +17,8 @@ export const useRunningAreaState = create<RunningAreaState>(
       isRunningAreaFull: false,
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setIsRunningAreaFull: (to: boolean) => {
           set(() => {
@@ -26,6 +26,7 @@ export const useRunningAreaState = create<RunningAreaState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

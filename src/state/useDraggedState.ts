@@ -1,7 +1,7 @@
-import type { OsRef } from "typings/OsRef";
-import type { DraggedState } from "typings/state/DraggedState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { OsRef } from 'typings/OsRef';
+import type { DraggedState } from 'typings/state/DraggedState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly draggedRef: OsRef<HTMLElement>;
@@ -23,8 +23,8 @@ export const useDraggedState = create<DraggedState>(
       draggedRef: nullRef,
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setDraggedRef: <T extends HTMLElement>({ current }: OsRef<T>) => {
           set(({ draggedRef }) => {
@@ -33,8 +33,8 @@ export const useDraggedState = create<DraggedState>(
             }
 
             console.groupCollapsed(`${++debugLogCounter}.  DraggedRef Changed `);
-            console.debug("FROM:", draggedRef.current);
-            console.debug("TO:", current);
+            console.debug('FROM:', draggedRef.current);
+            console.debug('TO:', current);
             console.groupEnd();
 
             return { draggedRef: { current } } as const;
@@ -48,14 +48,15 @@ export const useDraggedState = create<DraggedState>(
             }
 
             console.groupCollapsed(`${++debugLogCounter}.  DraggedRef Changed `);
-            console.debug("FROM:", draggedRef.current);
-            console.debug("TO:", null);
+            console.debug('FROM:', draggedRef.current);
+            console.debug('TO:', null);
             console.groupEnd();
 
             return { draggedRef: nullRef } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

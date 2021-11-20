@@ -1,21 +1,23 @@
-import { Icon } from "components/Icon";
-import { OsButton } from "components/OsButton";
-import { switchOn } from "event-filters/delegate";
-import { useExecuteBinary } from "hooks/syscalls/useExecuteBinary";
-import { useOsRef } from "hooks/useOsRef";
-import { useMenuState } from "state/useMenuState";
-import type { ButtonHandler } from "typings/ButtonHandler";
-import type { FC } from "typings/FC";
-import type { Linker } from "typings/Linker";
-import type { MenuState } from "typings/state/MenuState";
-import styles from "./QuickstartAreaItem.module.css";
+import { Icon } from 'components/Icon';
+import { OsButton } from 'components/OsButton';
+import { switchOn } from 'event-filters/delegate';
+import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
+import { useOsRef } from 'hooks/useOsRef';
+import { useMenuState } from 'state/useMenuState';
+import type { ButtonHandler } from 'typings/ButtonHandler';
+import type { FC } from 'typings/FC';
+import type { Linker } from 'typings/Linker';
+import type { MenuState } from 'typings/state/MenuState';
+import styles from './QuickstartAreaItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ closeMenus }: MenuState) => ({
-  closeMenus,
-});
+const fromMenu = ({ closeMenus }: MenuState) => {
+  return {
+    closeMenus,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -43,12 +45,7 @@ export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
 
   return (
     <li className={styles.QuickstartAreaItem}>
-      <OsButton
-        className={styles.ButtonOverride}
-        isDiscreet
-        onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })}
-        ref={quickstartAreaItemRef}
-      >
+      <OsButton className={styles.ButtonOverride} isDiscreet onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })} ref={quickstartAreaItemRef}>
         <Icon alt={programName} height={32} src={icon} width={32} />
       </OsButton>
     </li>

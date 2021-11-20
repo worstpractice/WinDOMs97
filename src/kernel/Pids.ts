@@ -1,6 +1,6 @@
-import { isUndefined } from "type-predicates/isUndefined";
-import type { PID } from "typings/phantom-types/PID";
-import { from } from "utils/range";
+import { isUndefined } from 'type-predicates/isUndefined';
+import type { PID } from 'typings/phantom-types/Pid';
+import { from } from 'utils/range';
 
 /** Inclusive. */
 const MAX = 16 as const;
@@ -32,11 +32,11 @@ export const Pids = {
     const pid = availablePids.pop();
 
     if (isUndefined(pid)) {
-      throw new ReferenceError("We just ran out of pids!");
+      throw new ReferenceError('We just ran out of pids!');
     }
 
     backingSet.delete(pid);
 
-    return pid as PID;
+    return pid;
   },
 } as const;

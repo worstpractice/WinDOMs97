@@ -1,7 +1,7 @@
-import type { OsRef } from "typings/OsRef";
-import type { ActiveState } from "typings/state/ActiveState";
-import create from "zustand";
-import { combine } from "zustand/middleware";
+import type { OsRef } from 'typings/OsRef';
+import type { ActiveState } from 'typings/state/ActiveState';
+import create from 'zustand';
+import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly activeRef: OsRef<HTMLElement>;
@@ -23,8 +23,8 @@ export const useActiveState = create<ActiveState>(
       activeRef: nullRef,
       ///////////////////////////////////////////
     } as const,
-    (set) =>
-      ({
+    (set) => {
+      return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T) => {
           set(({ activeRef }) => {
@@ -33,8 +33,8 @@ export const useActiveState = create<ActiveState>(
             }
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
-            console.debug("FROM:", activeRef.current);
-            console.debug("TO:", current);
+            console.debug('FROM:', activeRef.current);
+            console.debug('TO:', current);
             console.groupEnd();
 
             return { activeRef: { current } } as const;
@@ -48,14 +48,15 @@ export const useActiveState = create<ActiveState>(
             }
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
-            console.debug("FROM:", activeRef.current);
-            console.debug("TO:", null);
+            console.debug('FROM:', activeRef.current);
+            console.debug('TO:', null);
             console.groupEnd();
 
             return { activeRef: nullRef } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      } as const),
+      } as const;
+    },
   ),
 );

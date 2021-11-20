@@ -1,16 +1,18 @@
-import { useErrorState } from "state/useErrorState";
-import type { FC } from "typings/FC";
-import type { ErrorState } from "typings/state/ErrorState";
-import { randomHexQuad } from "utils/randomHexQuad";
-import styles from "./BSOD.module.css";
+import { useErrorState } from 'state/useErrorState';
+import type { FC } from 'typings/FC';
+import type { ErrorState } from 'typings/state/ErrorState';
+import { randomHexQuad } from 'utils/randomHexQuad';
+import styles from './BSOD.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromError = ({ bsodError, bsodMessage }: ErrorState) => ({
-  bsodError,
-  bsodMessage,
-});
+const fromError = ({ bsodError, bsodMessage }: ErrorState) => {
+  return {
+    bsodError,
+    bsodMessage,
+  };
+};
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const ERRNO = randomHexQuad().slice(0, 2).toUpperCase();
