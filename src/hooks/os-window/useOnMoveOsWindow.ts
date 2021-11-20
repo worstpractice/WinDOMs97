@@ -1,8 +1,8 @@
 import { onLMB } from "event-filters/onLMB";
 import type { OsRef } from "typings/OsRef";
+import { bringToFront } from "utils/bringToFront";
 import { compose } from "utils/compose";
 import { listen } from "utils/listen";
-import { bringToFront } from "utils/bringToFront";
 
 export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {

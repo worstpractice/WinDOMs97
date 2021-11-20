@@ -10,8 +10,8 @@ import type { Loader } from "typings/Loader";
 import type { ActiveState } from "typings/state/ActiveState";
 import type { KernelState } from "typings/state/KernelState";
 import type { MenuState } from "typings/state/MenuState";
-import { bringToFront } from "utils/bringToFront";
 import { byPid } from "utils/array-helpers/sort/byPid";
+import { bringToFront } from "utils/bringToFront";
 import { sortProcesses } from "utils/sortImmutably";
 import styles from "./TaskMgr.module.css";
 

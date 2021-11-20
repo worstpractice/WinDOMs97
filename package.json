@@ -1,29 +1,27 @@
 {
-  "browserslist": [
-    "last 1 chrome version",
-    "last 1 firefox version",
-    "last 1 safari version"
-  ],
   "dependencies": {
-    "normalize.css": "^8.0.1",
+    "modern-normalize": "1.1.0",
     "react": "17.0.2",
     "react-dom": "17.0.2",
-    "zustand": "^3.5.1"
+    "zustand": "3.6.5"
   },
   "devDependencies": {
-    "@types/node": "^15.0.3",
-    "@types/react": "^17.0.5",
-    "@types/react-dom": "^17.0.5",
-    "eslint": "^7.26.0",
-    "eslint-config-react-app": "^6.0.0",
-    "prettier": "2.3.0",
-    "react-refresh": "^0.10.0",
-    "react-scripts": "4.0.3",
-    "ts-prune": "0.9.1",
-    "typescript": "4.3.1-rc"
-  },
-  "eslintConfig": {
-    "extends": "react-app"
+    "@types/node": "16.11.9",
+    "@types/react": "17.0.35",
+    "@types/react-dom": "17.0.11",
+    "@typescript-eslint/eslint-plugin": "5.4.0",
+    "@typescript-eslint/parser": "5.4.0",
+    "eslint": "8.2.0",
+    "eslint-plugin-react": "7.27.1",
+    "eslint-plugin-react-hooks": "4.3.0",
+    "eslint-plugin-unicorn": "38.0.1",
+    "prettier": "2.4.1",
+    "prettier-plugin-jsdoc": "0.3.30",
+    "prettier-plugin-organize-imports": "2.3.4",
+    "react-refresh": "0.11.0",
+    "react-scripts": "5.0.0-next.47",
+    "ts-prune": "0.10.1",
+    "typescript": "4.6.0-dev.20211120"
   },
   "homepage": "https://worstpractice.github.io/WinDOMs97",
   "name": "windoms97",
@@ -32,7 +30,7 @@
     "build": "react-scripts build",
     "dce": "pnpx ts-prune > dce.log && node scripts/filter-dce-log.js",
     "eject": "react-scripts eject",
-    "fmt": "prettier -u --config .prettierrc -w src/**/*.{d.ts,ts,tsx,module.css}",
+    "fmt": "prettier -u --config .prettierrc --plugin=prettier-plugin-jsdoc --plugin=prettier-plugin-organize-imports -w ./src/**/*.{css,d.ts,module.css,ts,tsx,json}",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.json --fix",
     "predeploy": "pnpm run build",

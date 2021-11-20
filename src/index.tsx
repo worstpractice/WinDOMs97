@@ -1,5 +1,5 @@
 import { Boot } from "features/Boot";
-import "normalize.css";
+import "modern-normalize";
 import { StrictMode } from "react";
 import { render } from "react-dom";
 import "styles/reset.module.css";
