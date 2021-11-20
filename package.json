@@ -6,9 +6,12 @@
     "zustand": "3.6.5"
   },
   "devDependencies": {
+    "@snowpack/plugin-react-refresh": "2.5.0",
+    "@snowpack/plugin-typescript": "1.2.1",
     "@types/node": "16.11.9",
     "@types/react": "17.0.35",
     "@types/react-dom": "17.0.11",
+    "@types/snowpack-env": "2.3.4",
     "@typescript-eslint/eslint-plugin": "5.4.0",
     "@typescript-eslint/parser": "5.4.0",
     "eslint": "8.2.0",
@@ -18,8 +21,7 @@
     "prettier": "2.4.1",
     "prettier-plugin-jsdoc": "0.3.30",
     "prettier-plugin-organize-imports": "2.3.4",
-    "react-refresh": "0.11.0",
-    "react-scripts": "5.0.0-next.47",
+    "snowpack": "3.8.8",
     "ts-prune": "0.10.1",
     "typescript": "4.6.0-dev.20211120"
   },
@@ -27,14 +29,14 @@
   "name": "windoms97",
   "private": true,
   "scripts": {
-    "build": "react-scripts build",
-    "dce": "pnpx ts-prune > dce.log && node scripts/filter-dce-log.js",
-    "eject": "react-scripts eject",
+    "build": "snowpack build",
+    "dce": "pnpx ts-prune > ./dce.log && node ./scripts/filter-dce-log.js",
     "fmt": "prettier -u --config .prettierrc --plugin=prettier-plugin-jsdoc --plugin=prettier-plugin-organize-imports -w ./src/**/*.{css,d.ts,module.css,ts,tsx,json}",
     "lint": "eslint ./src --ext .ts,.tsx",
     "lint:fix": "eslint ./src --ext .ts,.tsx,.json --fix",
-    "predeploy": "pnpm run build",
-    "start": "react-scripts start",
+    "nuke": "node ./scripts/nuke.mjs",
+    "postinstall": "pnpm nuke",
+    "start": "snowpack dev",
     "tidy": "pnpm run lint:fix && pnpm run fmt && pnpm run dce"
   },
   "version": "0.1.0"

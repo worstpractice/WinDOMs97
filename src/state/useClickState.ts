@@ -1,5 +1,5 @@
-import type { Position } from 'typings/Position';
-import type { ClickState } from 'typings/state/ClickState';
+import type { Position } from 'src/typings/Position';
+import type { ClickState } from 'src/typings/state/ClickState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

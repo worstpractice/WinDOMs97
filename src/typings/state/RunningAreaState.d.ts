@@ -1,3 +1,3 @@
-import type { Actions, Data } from 'state/useRunningAreaState';
+import type { Actions, Data } from 'src/state/useRunningAreaState';
 
 export type RunningAreaState = Data & Actions;

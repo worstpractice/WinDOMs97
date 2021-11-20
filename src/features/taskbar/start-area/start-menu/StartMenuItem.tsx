@@ -1,11 +1,15 @@
-import { Icon } from 'components/Icon';
-import { Words } from 'components/Words';
-import { onLMB } from 'event-filters/onLMB';
-import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
-import { useOsRef } from 'hooks/useOsRef';
-import { useMenuState } from 'state/useMenuState';
-import type { Linker } from 'typings/Linker';
-import type { MenuState } from 'typings/state/MenuState';
+// <div aria-hidden="true" style={{ fontSize: "8px" }}>
+//  ►
+// </div>
+import { default as React } from 'react';
+import { Icon } from 'src/components/Icon';
+import { Words } from 'src/components/Words';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useMenuState } from 'src/state/useMenuState';
+import type { Linker } from 'src/typings/Linker';
+import type { MenuState } from 'src/typings/state/MenuState';
 import styles from './StartMenuItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -42,7 +46,3 @@ export const StartMenuItem = ({ getBinary }: Props) => {
     </li>
   );
 };
-
-// <div aria-hidden="true" style={{ fontSize: "8px" }}>
-//  ►
-// </div>

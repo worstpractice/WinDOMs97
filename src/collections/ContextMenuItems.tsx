@@ -1,6 +1,7 @@
-import { ContextMenuItem } from 'features/context-menu/ContextMenuItem';
-import { useMenuState } from 'state/useMenuState';
-import type { MenuState } from 'typings/state/MenuState';
+import { default as React } from 'react';
+import { ContextMenuItem } from 'src/features/context-menu/ContextMenuItem';
+import { useMenuState } from 'src/state/useMenuState';
+import type { MenuState } from 'src/typings/state/MenuState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

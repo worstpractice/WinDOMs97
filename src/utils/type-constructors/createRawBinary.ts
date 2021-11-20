@@ -1,4 +1,4 @@
-import type { RawBinary } from 'typings/RawBinary';
-import { create } from 'utils/create';
+import type { RawBinary } from 'src/typings/RawBinary';
+import { create } from 'src/utils/create';
 
 export const createRawBinary = create<RawBinary>();

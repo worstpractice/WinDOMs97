@@ -1,12 +1,13 @@
-import { Icon } from 'components/Icon';
-import { OsButton } from 'components/OsButton';
-import { switchOn } from 'event-filters/delegate';
-import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
-import { useOsRef } from 'hooks/useOsRef';
-import { useMenuState } from 'state/useMenuState';
-import type { ButtonHandler } from 'typings/ButtonHandler';
-import type { Linker } from 'typings/Linker';
-import type { MenuState } from 'typings/state/MenuState';
+import { default as React } from 'react';
+import { Icon } from 'src/components/Icon';
+import { OsButton } from 'src/components/OsButton';
+import { switchOn } from 'src/event-filters/delegate';
+import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useMenuState } from 'src/state/useMenuState';
+import type { ButtonHandler } from 'src/typings/ButtonHandler';
+import type { Linker } from 'src/typings/Linker';
+import type { MenuState } from 'src/typings/state/MenuState';
 import styles from './QuickstartAreaItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

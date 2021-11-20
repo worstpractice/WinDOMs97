@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
-import { useKeyboardState } from 'state/useKeyboardState';
-import type { CleanupFn } from 'typings/CleanupFn';
-import type { KeyboardHandler } from 'typings/handlers/KeyboardHandler';
-import type { KeyboardState } from 'typings/state/KeyboardState';
-import { listen } from 'utils/listen';
+import { useKeyboardState } from 'src/state/useKeyboardState';
+import type { CleanupFn } from 'src/typings/CleanupFn';
+import type { KeyboardHandler } from 'src/typings/handlers/KeyboardHandler';
+import type { KeyboardState } from 'src/typings/state/KeyboardState';
+import { listen } from 'src/utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

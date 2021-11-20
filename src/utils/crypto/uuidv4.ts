@@ -1,4 +1,4 @@
-import type { GUID } from 'typings/phantom-types/Guid';
+import type { GUID } from 'src/typings/phantom-types/Guid';
 
 export const uuidv4 = () => {
   // @ts-expect-error PH'NGLUI MGLW'NAFH C'THULHU

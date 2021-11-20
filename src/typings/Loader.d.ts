@@ -1,5 +1,5 @@
-import type { OsRef } from 'typings/OsRef';
-import type { Process } from 'typings/Process';
+import type { OsRef } from 'src/typings/OsRef';
+import type { Process } from 'src/typings/Process';
 
 export type Loader = <T extends HTMLElement>(ref: OsRef<T>) => Process;
 

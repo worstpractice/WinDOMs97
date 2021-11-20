@@ -1,8 +1,9 @@
-import { QuickstartAreaItem } from 'features/taskbar/start-area/quickstart-area/QuickstartAreaItem';
-import { useKernelState } from 'state/useKernelState';
-import type { Linker } from 'typings/Linker';
-import type { KernelState } from 'typings/state/KernelState';
-import { forIsInQuickstartArea } from 'utils/array-helpers/filter/forIsInQuickstartArea';
+import { default as React } from 'react';
+import { QuickstartAreaItem } from 'src/features/taskbar/start-area/quickstart-area/QuickstartAreaItem';
+import { useKernelState } from 'src/state/useKernelState';
+import type { Linker } from 'src/typings/Linker';
+import type { KernelState } from 'src/typings/state/KernelState';
+import { forIsInQuickstartArea } from 'src/utils/array-helpers/filter/forIsInQuickstartArea';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

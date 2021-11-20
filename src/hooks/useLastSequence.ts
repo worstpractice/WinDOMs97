@@ -1,9 +1,9 @@
-import { recognizedFileExtensions } from 'os-constants/recognizedFileExtensions';
 import { useLayoutEffect, useRef } from 'react';
-import { useKeyboardState } from 'state/useKeyboardState';
-import type { Binary } from 'typings/Binary';
-import type { KeyboardState } from 'typings/state/KeyboardState';
-import { deriveFileExtension } from 'utils/deriveFileExtension';
+import { recognizedFileExtensions } from 'src/os-constants/recognizedFileExtensions';
+import { useKeyboardState } from 'src/state/useKeyboardState';
+import type { Binary } from 'src/typings/Binary';
+import type { KeyboardState } from 'src/typings/state/KeyboardState';
+import { deriveFileExtension } from 'src/utils/deriveFileExtension';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

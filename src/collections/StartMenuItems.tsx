@@ -1,8 +1,9 @@
-import { StartMenuItem } from 'features/taskbar/start-area/start-menu/StartMenuItem';
-import { useKernelState } from 'state/useKernelState';
-import type { Linker } from 'typings/Linker';
-import type { KernelState } from 'typings/state/KernelState';
-import { forIsOnStartMenu } from 'utils/array-helpers/filter/forIsOnStartMenu';
+import { default as React } from 'react';
+import { StartMenuItem } from 'src/features/taskbar/start-area/start-menu/StartMenuItem';
+import { useKernelState } from 'src/state/useKernelState';
+import type { Linker } from 'src/typings/Linker';
+import type { KernelState } from 'src/typings/state/KernelState';
+import { forIsOnStartMenu } from 'src/utils/array-helpers/filter/forIsOnStartMenu';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

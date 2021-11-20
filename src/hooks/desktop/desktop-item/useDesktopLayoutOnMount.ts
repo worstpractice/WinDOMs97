@@ -1,5 +1,5 @@
 import { useLayoutEffect } from 'react';
-import type { OsRef } from 'typings/OsRef';
+import type { OsRef } from 'src/typings/OsRef';
 
 /** Denotes how many hundred pixels. */
 let x = 0;

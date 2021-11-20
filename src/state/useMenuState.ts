@@ -1,5 +1,5 @@
-import type { Alternative } from 'typings/Alternative';
-import type { MenuState } from 'typings/state/MenuState';
+import type { Alternative } from 'src/typings/Alternative';
+import type { MenuState } from 'src/typings/state/MenuState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

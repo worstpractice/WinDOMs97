@@ -1,5 +1,5 @@
-import type { KeyPress } from 'typings/KeyboardCharacter';
-import type { KeyboardState } from 'typings/state/KeyboardState';
+import type { KeyPress } from 'src/typings/KeyboardCharacter';
+import type { KeyboardState } from 'src/typings/state/KeyboardState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

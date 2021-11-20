@@ -1,4 +1,4 @@
-import type { MouseHandler } from 'typings/handlers/MouseHandler';
+import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
   LMB?: MouseHandler<T>;

@@ -1,5 +1,5 @@
-import type { CanvasRef } from 'typings/CanvasRef';
-import type { Position } from 'typings/Position';
+import type { CanvasRef } from 'src/typings/CanvasRef';
+import type { Position } from 'src/typings/Position';
 
 export const drawLine = ({ current: ctx }: CanvasRef, moveTo: Position, lineTo: Position) => {
   if (!ctx) return;

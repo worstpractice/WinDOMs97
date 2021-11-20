@@ -1,14 +1,15 @@
-import { onLMB } from 'event-filters/onLMB';
-import { OsWindowButtons } from 'features/os-window/chrome-area/OsWindowButtons';
-import { OsWindowLabel } from 'features/os-window/chrome-area/OsWindowLabel';
-import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
-import { useOnDoubleClick } from 'hooks/useOnDoubleClick';
-import { useOsRef } from 'hooks/useOsRef';
-import { useActiveState } from 'state/useActiveState';
-import { isRef } from 'type-predicates/isRef';
-import type { Loader } from 'typings/Loader';
-import type { ActiveState } from 'typings/state/ActiveState';
-import { css } from 'utils/css';
+import { default as React } from 'react';
+import { onLMB } from 'src/event-filters/onLMB';
+import { OsWindowButtons } from 'src/features/os-window/chrome-area/OsWindowButtons';
+import { OsWindowLabel } from 'src/features/os-window/chrome-area/OsWindowLabel';
+import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
+import { useOnDoubleClick } from 'src/hooks/useOnDoubleClick';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useActiveState } from 'src/state/useActiveState';
+import { isRef } from 'src/type-predicates/isRef';
+import type { Loader } from 'src/typings/Loader';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import { css } from 'src/utils/css';
 import styles from './OsWindowChromeArea.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

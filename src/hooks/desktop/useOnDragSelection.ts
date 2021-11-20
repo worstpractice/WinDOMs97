@@ -1,15 +1,15 @@
-import { onLMB } from 'event-filters/onLMB';
 import { useEffect, useState } from 'react';
-import { useActiveState } from 'state/useActiveState';
-import { useMenuState } from 'state/useMenuState';
-import type { ComposedFn } from 'typings/ComposedFn';
-import type { MouseHandler } from 'typings/handlers/MouseHandler';
-import type { OsRef } from 'typings/OsRef';
-import type { Position } from 'typings/Position';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { MenuState } from 'typings/state/MenuState';
-import { compose } from 'utils/compose';
-import { listen } from 'utils/listen';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useActiveState } from 'src/state/useActiveState';
+import { useMenuState } from 'src/state/useMenuState';
+import type { ComposedFn } from 'src/typings/ComposedFn';
+import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
+import type { OsRef } from 'src/typings/OsRef';
+import type { Position } from 'src/typings/Position';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { MenuState } from 'src/typings/state/MenuState';
+import { compose } from 'src/utils/compose';
+import { listen } from 'src/utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

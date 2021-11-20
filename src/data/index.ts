@@ -5,15 +5,15 @@ import png_minesweeper from 'assets/icons/game_mine_1-0.png';
 import png_ie from 'assets/icons/msie2-2.png';
 import png_notepad from 'assets/icons/notepad-2.png';
 import png_paint from 'assets/icons/paint_file-5.png';
-import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
-import { Calc } from 'programs/calc/Calc';
-import { Cmd } from 'programs/cmd/Cmd';
-import { IE } from 'programs/ie/IE';
-import { Minesweeper } from 'programs/minesweeper/Minesweeper';
-import { Notepad } from 'programs/notepad/Notepad';
-import { Paint } from 'programs/paint/Paint';
-import { TaskMgr } from 'programs/taskmgr/TaskMgr';
-import { createRawBinary } from 'utils/type-constructors/createRawBinary';
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
+import { Calc } from 'src/programs/calc/Calc';
+import { Cmd } from 'src/programs/cmd/Cmd';
+import { IE } from 'src/programs/ie/IE';
+import { Minesweeper } from 'src/programs/minesweeper/Minesweeper';
+import { Notepad } from 'src/programs/notepad/Notepad';
+import { Paint } from 'src/programs/paint/Paint';
+import { TaskMgr } from 'src/programs/taskmgr/TaskMgr';
+import { createRawBinary } from 'src/utils/type-constructors/createRawBinary';
 
 export const programs = [
   createRawBinary({

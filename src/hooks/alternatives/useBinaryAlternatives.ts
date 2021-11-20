@@ -1,8 +1,8 @@
-import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
-import { useKernelState } from 'state/useKernelState';
-import type { Binary } from 'typings/Binary';
-import type { KernelState } from 'typings/state/KernelState';
-import { alt } from 'utils/alt';
+import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
+import { useKernelState } from 'src/state/useKernelState';
+import type { Binary } from 'src/typings/Binary';
+import type { KernelState } from 'src/typings/state/KernelState';
+import { alt } from 'src/utils/alt';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

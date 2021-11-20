@@ -1,8 +1,8 @@
-import { OsButton } from 'components/OsButton';
-import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
-import { useOsRef } from 'hooks/useOsRef';
-import { useState } from 'react';
-import type { Loader } from 'typings/Loader';
+import { default as React, useState } from 'react';
+import { OsButton } from 'src/components/OsButton';
+import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useOsRef } from 'src/hooks/useOsRef';
+import type { Loader } from 'src/typings/Loader';
 import styles from './Calc.module.css';
 
 type Props = {

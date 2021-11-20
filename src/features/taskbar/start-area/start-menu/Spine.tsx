@@ -1,4 +1,5 @@
-import { Title } from 'components/Title';
+import { default as React } from 'react';
+import { Title } from 'src/components/Title';
 import styles from './Spine.module.css';
 
 type Props = {};

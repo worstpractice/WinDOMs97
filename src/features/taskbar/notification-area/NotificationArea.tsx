@@ -1,6 +1,7 @@
-import { Divider } from 'components/Divider';
-import { Clock } from 'features/taskbar/notification-area/Clock';
 import type { ReactNode } from 'react';
+import { default as React } from 'react';
+import { Divider } from 'src/components/Divider';
+import { Clock } from 'src/features/taskbar/notification-area/Clock';
 import styles from './NotificationArea.module.css';
 
 type Props = {

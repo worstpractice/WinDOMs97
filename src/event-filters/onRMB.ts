@@ -1,4 +1,4 @@
-import type { MouseHandler } from 'typings/handlers/MouseHandler';
+import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 
 export const onRMB = <T extends NonNullable<HTMLElement>>(fn: MouseHandler<T>) => {
   const inner: MouseHandler<T> = (e) => {

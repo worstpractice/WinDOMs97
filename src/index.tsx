@@ -1,8 +1,8 @@
-import { Boot } from 'features/Boot';
 import 'modern-normalize';
-import { StrictMode } from 'react';
+import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
-import 'styles/reset.module.css';
+import { Boot } from 'src/features/Boot';
+import 'src/styles/reset.module.css';
 
 // Disable the default context menu globally
 window.oncontextmenu = () => {

@@ -1,9 +1,9 @@
 import { useLayoutEffect } from 'react';
-import { useKernelState } from 'state/useKernelState';
-import { useRunningAreaState } from 'state/useRunningAreaState';
-import type { OsRef } from 'typings/OsRef';
-import type { KernelState } from 'typings/state/KernelState';
-import type { RunningAreaState } from 'typings/state/RunningAreaState';
+import { useKernelState } from 'src/state/useKernelState';
+import { useRunningAreaState } from 'src/state/useRunningAreaState';
+import type { OsRef } from 'src/typings/OsRef';
+import type { KernelState } from 'src/typings/state/KernelState';
+import type { RunningAreaState } from 'src/typings/state/RunningAreaState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

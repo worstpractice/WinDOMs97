@@ -1,6 +1,6 @@
-import { onLMB } from 'event-filters/onLMB';
 import { useState } from 'react';
-import type { OsRef } from 'typings/OsRef';
+import { onLMB } from 'src/event-filters/onLMB';
+import type { OsRef } from 'src/typings/OsRef';
 
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
 const MAX_DELAY = 250 as const;

@@ -1,5 +1,6 @@
-import { Divider } from 'components/Divider';
 import type { ReactNode } from 'react';
+import { default as React } from 'react';
+import { Divider } from 'src/components/Divider';
 import styles from './QuickstartArea.module.css';
 
 type Props = {

@@ -1,15 +1,16 @@
-import { Icon } from 'components/Icon';
-import { OsButton } from 'components/OsButton';
-import { onLMB } from 'event-filters/onLMB';
-import { onRMB } from 'event-filters/onRMB';
-import { useProcessAlternatives } from 'hooks/alternatives/useProcessAlternatives';
-import { useOsRef } from 'hooks/useOsRef';
-import { useActiveState } from 'state/useActiveState';
-import { useMenuState } from 'state/useMenuState';
-import type { LiLoader } from 'typings/Loader';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { MenuState } from 'typings/state/MenuState';
-import { bringToFront } from 'utils/bringToFront';
+import { default as React } from 'react';
+import { Icon } from 'src/components/Icon';
+import { OsButton } from 'src/components/OsButton';
+import { onLMB } from 'src/event-filters/onLMB';
+import { onRMB } from 'src/event-filters/onRMB';
+import { useProcessAlternatives } from 'src/hooks/alternatives/useProcessAlternatives';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useActiveState } from 'src/state/useActiveState';
+import { useMenuState } from 'src/state/useMenuState';
+import type { LiLoader } from 'src/typings/Loader';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { MenuState } from 'src/typings/state/MenuState';
+import { bringToFront } from 'src/utils/bringToFront';
 import styles from './NotificationAreaItem.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

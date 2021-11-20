@@ -1,6 +1,7 @@
-import { useErrorState } from 'state/useErrorState';
-import type { ErrorState } from 'typings/state/ErrorState';
-import { randomHexQuad } from 'utils/randomHexQuad';
+import { default as React } from 'react';
+import { useErrorState } from 'src/state/useErrorState';
+import type { ErrorState } from 'src/typings/state/ErrorState';
+import { randomHexQuad } from 'src/utils/randomHexQuad';
 import styles from './BSOD.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -17,7 +18,6 @@ const fromError = ({ bsodError, bsodMessage }: ErrorState) => {
 const ERRNO = randomHexQuad().slice(0, 2).toUpperCase();
 
 const MEMADDR = `0x${randomHexQuad()}`;
-
 type Props = {};
 
 export const Bsod = ({}: Props) => {

@@ -1,17 +1,18 @@
-import { OsButton } from 'components/OsButton';
-import { onLMB } from 'event-filters/onLMB';
-import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
-import { useOsRef } from 'hooks/useOsRef';
-import { useActiveState } from 'state/useActiveState';
-import { useKernelState } from 'state/useKernelState';
-import { useMenuState } from 'state/useMenuState';
-import type { Loader } from 'typings/Loader';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { KernelState } from 'typings/state/KernelState';
-import type { MenuState } from 'typings/state/MenuState';
-import { byPid } from 'utils/array-helpers/sort/byPid';
-import { bringToFront } from 'utils/bringToFront';
-import { sortProcesses } from 'utils/sortImmutably';
+import { default as React } from 'react';
+import { OsButton } from 'src/components/OsButton';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useActiveState } from 'src/state/useActiveState';
+import { useKernelState } from 'src/state/useKernelState';
+import { useMenuState } from 'src/state/useMenuState';
+import type { Loader } from 'src/typings/Loader';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { KernelState } from 'src/typings/state/KernelState';
+import type { MenuState } from 'src/typings/state/MenuState';
+import { byPid } from 'src/utils/array-helpers/sort/byPid';
+import { bringToFront } from 'src/utils/bringToFront';
+import { sortProcesses } from 'src/utils/sortImmutably';
 import styles from './TaskMgr.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

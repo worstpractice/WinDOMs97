@@ -1,10 +1,11 @@
-import { Icon } from 'components/Icon';
-import { Title } from 'components/Title';
-import { useActiveState } from 'state/useActiveState';
-import { isRef } from 'type-predicates/isRef';
-import type { Process } from 'typings/Process';
-import type { ActiveState } from 'typings/state/ActiveState';
-import { css } from 'utils/css';
+import { default as React } from 'react';
+import { Icon } from 'src/components/Icon';
+import { Title } from 'src/components/Title';
+import { useActiveState } from 'src/state/useActiveState';
+import { isRef } from 'src/type-predicates/isRef';
+import type { Process } from 'src/typings/Process';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import { css } from 'src/utils/css';
 import styles from './OsWindowLabel.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

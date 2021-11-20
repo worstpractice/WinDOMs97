@@ -1,5 +1,5 @@
-import type { OsRef } from 'typings/OsRef';
-import type { DraggedState } from 'typings/state/DraggedState';
+import type { OsRef } from 'src/typings/OsRef';
+import type { DraggedState } from 'src/typings/state/DraggedState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

@@ -1,21 +1,22 @@
-import { ContextMenuItems } from 'collections/ContextMenuItems';
-import { DesktopItems } from 'collections/DesktopIcons';
-import { NotificationAreaItems } from 'collections/NotificationAreaItems';
-import { OsWindows } from 'collections/OsWindows';
-import { QuickstartAreaItems } from 'collections/QuickstartAreaItems';
-import { RunningAreaItems } from 'collections/RunningAreaItems';
-import { StartMenuItems } from 'collections/StartMenuItems';
-import { ContextMenu } from 'features/context-menu/ContextMenu';
-import { Desktop } from 'features/desktop/Desktop';
-import { NotificationArea } from 'features/taskbar/notification-area/NotificationArea';
-import { RunningArea } from 'features/taskbar/running-area/RunningArea';
-import { QuickstartArea } from 'features/taskbar/start-area/quickstart-area/QuickstartArea';
-import { StartMenu } from 'features/taskbar/start-area/start-menu/StartMenu';
-import { StartArea } from 'features/taskbar/start-area/StartArea';
-import { StartButton } from 'features/taskbar/start-area/StartButton';
-import { Taskbar } from 'features/taskbar/Taskbar';
-import { useMenuState } from 'state/useMenuState';
-import type { MenuState } from 'typings/state/MenuState';
+import { default as React } from 'react';
+import { ContextMenuItems } from 'src/collections/ContextMenuItems';
+import { DesktopItems } from 'src/collections/DesktopIcons';
+import { NotificationAreaItems } from 'src/collections/NotificationAreaItems';
+import { OsWindows } from 'src/collections/OsWindows';
+import { QuickstartAreaItems } from 'src/collections/QuickstartAreaItems';
+import { RunningAreaItems } from 'src/collections/RunningAreaItems';
+import { StartMenuItems } from 'src/collections/StartMenuItems';
+import { ContextMenu } from 'src/features/context-menu/ContextMenu';
+import { Desktop } from 'src/features/desktop/Desktop';
+import { NotificationArea } from 'src/features/taskbar/notification-area/NotificationArea';
+import { RunningArea } from 'src/features/taskbar/running-area/RunningArea';
+import { QuickstartArea } from 'src/features/taskbar/start-area/quickstart-area/QuickstartArea';
+import { StartMenu } from 'src/features/taskbar/start-area/start-menu/StartMenu';
+import { StartArea } from 'src/features/taskbar/start-area/StartArea';
+import { StartButton } from 'src/features/taskbar/start-area/StartButton';
+import { Taskbar } from 'src/features/taskbar/Taskbar';
+import { useMenuState } from 'src/state/useMenuState';
+import type { MenuState } from 'src/typings/state/MenuState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

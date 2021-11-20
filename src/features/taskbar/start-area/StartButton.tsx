@@ -1,15 +1,16 @@
 import logo from 'assets/icons/windows-0.png';
-import { Icon } from 'components/Icon';
-import { OsButton } from 'components/OsButton';
-import { Title } from 'components/Title';
-import { switchOn } from 'event-filters/delegate';
-import { useOsRef } from 'hooks/useOsRef';
-import { useActiveState } from 'state/useActiveState';
-import { useMenuState } from 'state/useMenuState';
-import { isRef } from 'type-predicates/isRef';
-import type { ButtonHandler } from 'typings/ButtonHandler';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { MenuState } from 'typings/state/MenuState';
+import { default as React } from 'react';
+import { Icon } from 'src/components/Icon';
+import { OsButton } from 'src/components/OsButton';
+import { Title } from 'src/components/Title';
+import { switchOn } from 'src/event-filters/delegate';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useActiveState } from 'src/state/useActiveState';
+import { useMenuState } from 'src/state/useMenuState';
+import { isRef } from 'src/type-predicates/isRef';
+import type { ButtonHandler } from 'src/typings/ButtonHandler';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { MenuState } from 'src/typings/state/MenuState';
 import styles from './StartButton.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

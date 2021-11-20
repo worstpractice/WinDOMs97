@@ -1,4 +1,4 @@
-import type { RunningAreaState } from 'typings/state/RunningAreaState';
+import type { RunningAreaState } from 'src/typings/state/RunningAreaState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

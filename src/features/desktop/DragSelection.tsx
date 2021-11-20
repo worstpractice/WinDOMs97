@@ -1,6 +1,7 @@
-import { useClickState } from 'state/useClickState';
-import type { Position } from 'typings/Position';
-import type { ClickState } from 'typings/state/ClickState';
+import { default as React } from 'react';
+import { useClickState } from 'src/state/useClickState';
+import type { Position } from 'src/typings/Position';
+import type { ClickState } from 'src/typings/state/ClickState';
 import style from './DragSelection.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

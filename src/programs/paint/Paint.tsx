@@ -1,10 +1,10 @@
-import { onLMB } from 'event-filters/onLMB';
-import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
-import { useOsRef } from 'hooks/useOsRef';
-import { useCanvasRef } from 'programs/paint/hooks/useCanvasRef';
-import { useState } from 'react';
-import type { Loader } from 'typings/Loader';
-import type { Position } from 'typings/Position';
+import { default as React, useState } from 'react';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useCanvasRef } from 'src/programs/paint/hooks/useCanvasRef';
+import type { Loader } from 'src/typings/Loader';
+import type { Position } from 'src/typings/Position';
 import styles from './Paint.module.css';
 import { drawLine } from './utils/drawLine';
 

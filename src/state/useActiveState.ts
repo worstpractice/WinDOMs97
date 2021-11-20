@@ -1,5 +1,5 @@
-import type { OsRef } from 'typings/OsRef';
-import type { ActiveState } from 'typings/state/ActiveState';
+import type { OsRef } from 'src/typings/OsRef';
+import type { ActiveState } from 'src/typings/state/ActiveState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

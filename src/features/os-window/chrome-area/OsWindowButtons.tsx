@@ -1,14 +1,15 @@
-import { OsButton } from 'components/OsButton';
-import { onLMB } from 'event-filters/onLMB';
-import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
-import { useActiveState } from 'state/useActiveState';
-import { useKernelState } from 'state/useKernelState';
-import { useMenuState } from 'state/useMenuState';
-import type { Process } from 'typings/Process';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { KernelState } from 'typings/state/KernelState';
-import type { MenuState } from 'typings/state/MenuState';
-import { bringToFront } from 'utils/bringToFront';
+import { default as React } from 'react';
+import { OsButton } from 'src/components/OsButton';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
+import { useActiveState } from 'src/state/useActiveState';
+import { useKernelState } from 'src/state/useKernelState';
+import { useMenuState } from 'src/state/useMenuState';
+import type { Process } from 'src/typings/Process';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { KernelState } from 'src/typings/state/KernelState';
+import type { MenuState } from 'src/typings/state/MenuState';
+import { bringToFront } from 'src/utils/bringToFront';
 import styles from './OsWindowButtons.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

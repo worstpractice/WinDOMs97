@@ -1,7 +1,8 @@
-import { OsWindow } from 'features/os-window/OsWindow';
-import { useKernelState } from 'state/useKernelState';
-import type { Loader } from 'typings/Loader';
-import type { KernelState } from 'typings/state/KernelState';
+import { default as React } from 'react';
+import { OsWindow } from 'src/features/os-window/OsWindow';
+import { useKernelState } from 'src/state/useKernelState';
+import type { Loader } from 'src/typings/Loader';
+import type { KernelState } from 'src/typings/state/KernelState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

@@ -1,10 +1,10 @@
-import { onLMB } from 'event-filters/onLMB';
-import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
-import type { OsRef } from 'typings/OsRef';
-import { bringToFront } from 'utils/bringToFront';
-import { compose } from 'utils/compose';
-import { listen } from 'utils/listen';
-import { getResizeLatitude } from 'utils/os-window/getResizeLatitude';
+import { onLMB } from 'src/event-filters/onLMB';
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
+import type { OsRef } from 'src/typings/OsRef';
+import { bringToFront } from 'src/utils/bringToFront';
+import { compose } from 'src/utils/compose';
+import { listen } from 'src/utils/listen';
+import { getResizeLatitude } from 'src/utils/os-window/getResizeLatitude';
 
 export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   /** Drag start event. */

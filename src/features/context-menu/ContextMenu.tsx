@@ -1,8 +1,9 @@
-import { useStayInSight } from 'hooks/context-menu/useStayInSight';
-import { useActivateOnMount } from 'hooks/useActivateOnMount';
-import { useOsRef } from 'hooks/useOsRef';
 import type { ReactNode } from 'react';
-import { css } from 'utils/css';
+import { default as React } from 'react';
+import { useStayInSight } from 'src/hooks/context-menu/useStayInSight';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { css } from 'src/utils/css';
 import styles from './ContextMenu.module.css';
 
 const tooFarDownStyle = css(styles.ContentList ?? '', styles.Outside ?? '');

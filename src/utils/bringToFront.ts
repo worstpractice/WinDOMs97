@@ -1,4 +1,4 @@
-import type { OsRef } from 'typings/OsRef';
+import type { OsRef } from 'src/typings/OsRef';
 
 /** Places the provided element topmost of its sibling elements. */
 export const bringToFront = <T extends OsRef<HTMLElement>>(osWindowRef: T) => {

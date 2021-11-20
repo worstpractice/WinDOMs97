@@ -1,10 +1,10 @@
-import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
-import { useActiveState } from 'state/useActiveState';
-import { useKernelState } from 'state/useKernelState';
-import type { Process } from 'typings/Process';
-import type { ActiveState } from 'typings/state/ActiveState';
-import type { KernelState } from 'typings/state/KernelState';
-import { alt } from 'utils/alt';
+import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
+import { useActiveState } from 'src/state/useActiveState';
+import { useKernelState } from 'src/state/useKernelState';
+import type { Process } from 'src/typings/Process';
+import type { ActiveState } from 'src/typings/state/ActiveState';
+import type { KernelState } from 'src/typings/state/KernelState';
+import { alt } from 'src/utils/alt';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

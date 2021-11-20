@@ -1,11 +1,11 @@
-import { onLMB } from 'event-filters/onLMB';
-import { useDraggedState } from 'state/useDraggedState';
-import type { CleanupFn } from 'typings/CleanupFn';
-import type { OsRef } from 'typings/OsRef';
-import type { DraggedState } from 'typings/state/DraggedState';
-import { bringToFront } from 'utils/bringToFront';
-import { compose } from 'utils/compose';
-import { listen } from 'utils/listen';
+import { onLMB } from 'src/event-filters/onLMB';
+import { useDraggedState } from 'src/state/useDraggedState';
+import type { CleanupFn } from 'src/typings/CleanupFn';
+import type { OsRef } from 'src/typings/OsRef';
+import type { DraggedState } from 'src/typings/state/DraggedState';
+import { bringToFront } from 'src/utils/bringToFront';
+import { compose } from 'src/utils/compose';
+import { listen } from 'src/utils/listen';
 import yoloStyles from './useOnDragAndDrop.module.css';
 const styles = yoloStyles as { readonly [key in PropertyKey]-?: string };
 

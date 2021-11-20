@@ -2,20 +2,19 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#000000" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Babbys First Skyrim</title>
   <link rel="icon" href="data:;base64,iVBORwOKGO=" />
-  <style>
-    body {
-      background-color: black;
-    }
-  </style>
-  <title>FakeOS</title>
+  <link rel="modulepreload" href="./dist/index.js" />
+  <link rel="stylesheet" type="text/css" href="base.css">
+  <script src="./dist/index.js" type="module">
+  </script>
 </head>
 
 <body>
-  <div id="root"></div>
+  <canvas id="canvas"></canvas>
+  <div class="root" id="root"></div>
 </body>
 
 </html>

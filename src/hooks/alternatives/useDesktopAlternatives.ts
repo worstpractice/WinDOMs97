@@ -1,7 +1,7 @@
-import { HALT_AND_CATCH_FIRE } from 'errors';
-import { useErrorState } from 'state/useErrorState';
-import type { ErrorState } from 'typings/state/ErrorState';
-import { alt } from 'utils/alt';
+import { HALT_AND_CATCH_FIRE } from 'src/errors';
+import { useErrorState } from 'src/state/useErrorState';
+import type { ErrorState } from 'src/typings/state/ErrorState';
+import { alt } from 'src/utils/alt';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

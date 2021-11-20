@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
-import { useClickState } from 'state/useClickState';
-import { useMenuState } from 'state/useMenuState';
-import type { CleanupFn } from 'typings/CleanupFn';
-import type { MouseHandler } from 'typings/handlers/MouseHandler';
-import type { ClickState } from 'typings/state/ClickState';
-import type { MenuState } from 'typings/state/MenuState';
-import { listen } from 'utils/listen';
+import { useClickState } from 'src/state/useClickState';
+import { useMenuState } from 'src/state/useMenuState';
+import type { CleanupFn } from 'src/typings/CleanupFn';
+import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
+import type { ClickState } from 'src/typings/state/ClickState';
+import type { MenuState } from 'src/typings/state/MenuState';
+import { listen } from 'src/utils/listen';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

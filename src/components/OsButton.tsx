@@ -1,8 +1,8 @@
-import { onLMB } from 'event-filters/onLMB';
 import type { CSSProperties, ReactNode } from 'react';
-import { forwardRef, useState } from 'react';
-import type { ButtonHandler } from 'typings/ButtonHandler';
-import { css } from 'utils/css';
+import { default as React, forwardRef, useState } from 'react';
+import { onLMB } from 'src/event-filters/onLMB';
+import type { ButtonHandler } from 'src/typings/ButtonHandler';
+import { css } from 'src/utils/css';
 import styles from './OsButton.module.css';
 
 type Props = {

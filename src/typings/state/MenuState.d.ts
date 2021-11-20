@@ -1,3 +1,3 @@
-import type { Actions, Data } from 'state/useMenuState';
+import type { Actions, Data } from 'src/state/useMenuState';
 
 export type MenuState = Data & Actions;

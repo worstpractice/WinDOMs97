@@ -1,12 +1,12 @@
-import { OUT_OF_PIDS, OUT_OF_TASKBAR } from 'errors';
-import { Pids } from 'kernel/Pids';
-import { useErrorState } from 'state/useErrorState';
-import { useKernelState } from 'state/useKernelState';
-import { useRunningAreaState } from 'state/useRunningAreaState';
-import type { Binary } from 'typings/Binary';
-import type { ErrorState } from 'typings/state/ErrorState';
-import type { KernelState } from 'typings/state/KernelState';
-import type { RunningAreaState } from 'typings/state/RunningAreaState';
+import { OUT_OF_PIDS, OUT_OF_TASKBAR } from 'src/errors';
+import { Pids } from 'src/kernel/Pids';
+import { useErrorState } from 'src/state/useErrorState';
+import { useKernelState } from 'src/state/useKernelState';
+import { useRunningAreaState } from 'src/state/useRunningAreaState';
+import type { Binary } from 'src/typings/Binary';
+import type { ErrorState } from 'src/typings/state/ErrorState';
+import type { KernelState } from 'src/typings/state/KernelState';
+import type { RunningAreaState } from 'src/typings/state/RunningAreaState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

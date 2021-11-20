@@ -1,7 +1,8 @@
-import { NotificationAreaItem } from 'features/taskbar/notification-area/NotificationAreaItem';
-import { useKernelState } from 'state/useKernelState';
-import type { LiLoader } from 'typings/Loader';
-import type { KernelState } from 'typings/state/KernelState';
+import { default as React } from 'react';
+import { NotificationAreaItem } from 'src/features/taskbar/notification-area/NotificationAreaItem';
+import { useKernelState } from 'src/state/useKernelState';
+import type { LiLoader } from 'src/typings/Loader';
+import type { KernelState } from 'src/typings/state/KernelState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

@@ -1,12 +1,13 @@
-import { programs } from 'data';
-import { Bsod } from 'features/Bsod';
-import { Explorer } from 'features/Explorer';
-import { useLastClickPosition } from 'hooks/useLastClickPosition';
-import { useLastKeyPress } from 'hooks/useLastKeyPress';
-import { useErrorState } from 'state/useErrorState';
-import { useKernelState } from 'state/useKernelState';
-import type { ErrorState } from 'typings/state/ErrorState';
-import type { KernelState } from 'typings/state/KernelState';
+import { default as React } from 'react';
+import { programs } from 'src/data';
+import { Bsod } from 'src/features/Bsod';
+import { Explorer } from 'src/features/Explorer';
+import { useLastClickPosition } from 'src/hooks/useLastClickPosition';
+import { useLastKeyPress } from 'src/hooks/useLastKeyPress';
+import { useErrorState } from 'src/state/useErrorState';
+import { useKernelState } from 'src/state/useKernelState';
+import type { ErrorState } from 'src/typings/state/ErrorState';
+import type { KernelState } from 'src/typings/state/KernelState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

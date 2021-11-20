@@ -1,4 +1,4 @@
-import type { BSOD } from 'typings/BSOD';
+import type { BSOD } from 'src/typings/BSOD';
 
 export const HALT_AND_CATCH_FIRE: BSOD = {
   error: 'HALT_AND_CATCH_FIRE',

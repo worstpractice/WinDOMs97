@@ -1,4 +1,4 @@
-import type { RawBinary } from 'typings/RawBinary';
+import type { RawBinary } from 'src/typings/RawBinary';
 
 export const deriveFileExtension = <T extends RawBinary>({ fileName }: T) => {
   if (!fileName.includes('.')) {

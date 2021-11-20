@@ -1,6 +1,6 @@
-import type { PID } from 'typings/phantom-types/Pid';
-import { ascending } from 'utils/compare/ascending';
-import { from } from 'utils/range';
+import type { PID } from 'src/typings/phantom-types/Pid';
+import { ascending } from 'src/utils/compare/ascending';
+import { from } from 'src/utils/range';
 
 /** Inclusive. */
 const HIGHEST_PID = 16 as const;

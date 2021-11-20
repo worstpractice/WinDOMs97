@@ -1,3 +1,3 @@
-import type { Actions, Data } from 'state/useClickState';
+import type { Actions, Data } from 'src/state/useClickState';
 
 export type ClickState = Data & Actions;

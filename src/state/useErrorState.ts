@@ -1,5 +1,5 @@
-import type { BSOD } from 'typings/BSOD';
-import type { ErrorState } from 'typings/state/ErrorState';
+import type { BSOD } from 'src/typings/BSOD';
+import type { ErrorState } from 'src/typings/state/ErrorState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 

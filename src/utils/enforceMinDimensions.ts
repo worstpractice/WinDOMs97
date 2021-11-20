@@ -1,5 +1,5 @@
-import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
-import type { RawBinary } from 'typings/RawBinary';
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
+import type { RawBinary } from 'src/typings/RawBinary';
 
 export const enforceMinDimensions = ({ fileName, startingDimensions }: RawBinary) => {
   if (startingDimensions) {

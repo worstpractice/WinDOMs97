@@ -1,4 +1,4 @@
-import type { Alternative } from 'typings/Alternative';
+import type { Alternative } from 'src/typings/Alternative';
 
 export const alt = (name: string, action: () => void): Alternative => {
   return {

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { default as React } from 'react';
 import styles from './ProgramArea.module.css';
 
 type Props = {

@@ -1,6 +1,7 @@
-import { useIsRunningAreaFull } from 'hooks/taskbar/useIsRunningAreaFull';
-import { useOsRef } from 'hooks/useOsRef';
 import type { ReactNode } from 'react';
+import { default as React } from 'react';
+import { useIsRunningAreaFull } from 'src/hooks/taskbar/useIsRunningAreaFull';
+import { useOsRef } from 'src/hooks/useOsRef';
 import styles from './RunningArea.module.css';
 
 type Props = {

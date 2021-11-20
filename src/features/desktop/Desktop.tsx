@@ -1,12 +1,13 @@
-import { onRMB } from 'event-filters/onRMB';
-import { DragSelection } from 'features/desktop/DragSelection';
-import { useDesktopAlternatives } from 'hooks/alternatives/useDesktopAlternatives';
-import { useDragSelection } from 'hooks/desktop/useOnDragSelection';
-import { useActivateOnMount } from 'hooks/useActivateOnMount';
-import { useOsRef } from 'hooks/useOsRef';
 import type { ReactNode } from 'react';
-import { useMenuState } from 'state/useMenuState';
-import type { MenuState } from 'typings/state/MenuState';
+import { default as React } from 'react';
+import { onRMB } from 'src/event-filters/onRMB';
+import { DragSelection } from 'src/features/desktop/DragSelection';
+import { useDesktopAlternatives } from 'src/hooks/alternatives/useDesktopAlternatives';
+import { useDragSelection } from 'src/hooks/desktop/useOnDragSelection';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
+import { useOsRef } from 'src/hooks/useOsRef';
+import { useMenuState } from 'src/state/useMenuState';
+import type { MenuState } from 'src/typings/state/MenuState';
 import styles from './Desktop.module.css';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

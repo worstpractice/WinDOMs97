@@ -1,10 +1,10 @@
 {
   "compilerOptions": {
     "allowJs": false,
-    "allowSyntheticDefaultImports": false,
+    "allowSyntheticDefaultImports": true,
     "allowUnusedLabels": false,
     "assumeChangesOnlyAffectDirectDependencies": false,
-    "baseUrl": "src",
+    "baseUrl": ".",
     "disableSizeLimit": true,
     "disableSolutionSearching": false,
     "disableSourceOfProjectReferenceRedirect": false,
@@ -15,7 +15,7 @@
     "importHelpers": true,
     "importsNotUsedAsValues": "error",
     "isolatedModules": true,
-    "jsx": "react-jsx",
+    "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
     "noEmit": true,
@@ -30,6 +30,11 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": false,
     "noUnusedParameters": false,
+    "paths": {
+      "*": [
+        "./*"
+      ]
+    },
     "preserveValueImports": false,
     "pretty": true,
     "resolveJsonModule": true,

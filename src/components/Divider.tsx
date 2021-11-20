@@ -1,5 +1,6 @@
 import type { CSSProperties } from 'react';
-import { css } from 'utils/css';
+import { default as React } from 'react';
+import { css } from 'src/utils/css';
 import styles from './Divider.module.css';
 
 type Props = {
