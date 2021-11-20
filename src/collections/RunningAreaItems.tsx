@@ -1,6 +1,5 @@
 import { RunningAreaItem } from 'features/taskbar/running-area/RunningAreaItem';
 import { useKernelState } from 'state/useKernelState';
-import type { FC } from 'typings/FC';
 import type { ButtonLoader } from 'typings/Loader';
 import type { KernelState } from 'typings/state/KernelState';
 
@@ -16,7 +15,7 @@ const fromKernel = ({ runningProcesses }: KernelState) => {
 
 type Props = {};
 
-export const RunningAreaItems: FC<Props> = () => {
+export const RunningAreaItems = ({}: Props) => {
   const { runningProcesses } = useKernelState(fromKernel);
 
   return (

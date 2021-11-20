@@ -15,7 +15,6 @@ import { StartArea } from 'features/taskbar/start-area/StartArea';
 import { StartButton } from 'features/taskbar/start-area/StartButton';
 import { Taskbar } from 'features/taskbar/Taskbar';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { MenuState } from 'typings/state/MenuState';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -30,7 +29,7 @@ const fromMenu = ({ openMenu }: MenuState) => {
 
 type Props = {};
 
-export const Explorer: FC<Props> = () => {
+export const Explorer = ({}: Props) => {
   const { openMenu } = useMenuState(fromMenu);
 
   const isContextMenuOpen = openMenu === 'ContextMenu';

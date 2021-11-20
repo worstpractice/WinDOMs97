@@ -21,7 +21,7 @@ export const useClickState = create<ClickState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setLastClickPosition: ({ x, y }: Position) => {
+        setLastClickPosition: ({ x, y }: Position): void => {
           set(() => {
             return { lastClickPosition: { x, y } } as const;
           });

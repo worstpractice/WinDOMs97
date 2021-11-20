@@ -8,7 +8,6 @@ import { useActiveState } from 'state/useActiveState';
 import { useMenuState } from 'state/useMenuState';
 import { isRef } from 'type-predicates/isRef';
 import type { ButtonHandler } from 'typings/ButtonHandler';
-import type { FC } from 'typings/FC';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { MenuState } from 'typings/state/MenuState';
 import styles from './StartButton.module.css';
@@ -31,15 +30,9 @@ const fromMenu = ({ toggleStartMenu }: MenuState) => {
 };
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const handleRMB: ButtonHandler = (e) => {
-  // NOTE: This is here because we want `StartButton` to support `ContextMenu` clicks.
-  e.stopPropagation();
-  // TODO: Import `Alternative` and get cracking on context menu options!
-};
-
 type Props = {};
 
-export const StartButton: FC<Props> = () => {
+export const StartButton = ({}: Props) => {
   const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { toggleStartMenu } = useMenuState(fromMenu);
   const startButtonRef = useOsRef<HTMLButtonElement>();
@@ -55,6 +48,12 @@ export const StartButton: FC<Props> = () => {
       setActiveRef(startButtonRef);
       toggleStartMenu();
     }
+  };
+
+  const handleRMB: ButtonHandler = (e) => {
+    // NOTE: This is here because we want `StartButton` to support `ContextMenu` clicks.
+    e.stopPropagation();
+    // TODO: Import `Alternative` and get cracking on context menu options!
   };
 
   return (

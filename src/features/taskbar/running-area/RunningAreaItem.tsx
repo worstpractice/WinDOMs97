@@ -9,7 +9,6 @@ import { useOsRef } from 'hooks/useOsRef';
 import { useActiveState } from 'state/useActiveState';
 import { useMenuState } from 'state/useMenuState';
 import { isRef } from 'type-predicates/isRef';
-import type { FC } from 'typings/FC';
 import type { ButtonLoader } from 'typings/Loader';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { MenuState } from 'typings/state/MenuState';
@@ -39,7 +38,7 @@ type Props = {
   getProcess: ButtonLoader;
 };
 
-export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
+export const RunningAreaItem = ({ getProcess }: Props) => {
   const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const runningAreaItemRef = useOsRef<HTMLButtonElement>();
@@ -63,8 +62,8 @@ export const RunningAreaItem: FC<Props> = ({ getProcess }) => {
       unsetActiveRef();
     } else {
       unMinimize();
-      setActiveRef(process.osWindowRef);
-      bringToFront(process.osWindowRef);
+      setActiveRef(osWindowRef);
+      bringToFront(osWindowRef);
     }
   });
 

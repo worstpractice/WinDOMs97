@@ -5,7 +5,6 @@ import { useOsRef } from 'hooks/useOsRef';
 import { useActiveState } from 'state/useActiveState';
 import { useKernelState } from 'state/useKernelState';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { KernelState } from 'typings/state/KernelState';
@@ -42,7 +41,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const TaskMgr: FC<Props> = ({ getProcess }) => {
+export const TaskMgr = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { endProcess, runningProcesses } = useKernelState(fromKernel);
   const { closeMenus } = useMenuState(fromMenu);

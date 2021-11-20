@@ -6,7 +6,6 @@ import { useOnDoubleClick } from 'hooks/useOnDoubleClick';
 import { useOsRef } from 'hooks/useOsRef';
 import { useActiveState } from 'state/useActiveState';
 import { isRef } from 'type-predicates/isRef';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import type { ActiveState } from 'typings/state/ActiveState';
 import { css } from 'utils/css';
@@ -30,7 +29,7 @@ type Props = {
   handleMove: any;
 };
 
-export const OsWindowChromeArea: FC<Props> = ({ getProcess, handleMove }) => {
+export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
   const { activeRef, setActiveRef } = useActiveState(fromActive);
   const chromeAreaRef = useOsRef<HTMLElement>();
   const process = getProcess(chromeAreaRef);

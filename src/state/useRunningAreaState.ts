@@ -20,7 +20,7 @@ export const useRunningAreaState = create<RunningAreaState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setIsRunningAreaFull: (to: boolean) => {
+        setIsRunningAreaFull: (to: boolean): void => {
           set(() => {
             return { isRunningAreaFull: to } as const;
           });

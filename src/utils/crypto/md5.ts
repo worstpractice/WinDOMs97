@@ -1,3 +1,6 @@
+/* eslint-disable unicorn/no-abusive-eslint-disable */
+/* eslint-disable */
+
 /** NOTE: Send your hate mail to https://css-tricks.com/snippets/javascript/javascript-md5/ */
 
 const RotateLeft = (lValue: number, iShiftBits: number) => {

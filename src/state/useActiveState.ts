@@ -26,7 +26,7 @@ export const useActiveState = create<ActiveState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T) => {
+        setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T): void => {
           set(({ activeRef }) => {
             if (activeRef.current === current) {
               return { activeRef } as const;
@@ -41,7 +41,7 @@ export const useActiveState = create<ActiveState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        unsetActiveRef: () => {
+        unsetActiveRef: (): void => {
           set(({ activeRef }) => {
             if (activeRef.current === null) {
               return { activeRef } as const;

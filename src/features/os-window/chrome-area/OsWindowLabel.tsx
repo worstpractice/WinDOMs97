@@ -2,7 +2,6 @@ import { Icon } from 'components/Icon';
 import { Title } from 'components/Title';
 import { useActiveState } from 'state/useActiveState';
 import { isRef } from 'type-predicates/isRef';
-import type { FC } from 'typings/FC';
 import type { Process } from 'typings/Process';
 import type { ActiveState } from 'typings/state/ActiveState';
 import { css } from 'utils/css';
@@ -24,7 +23,7 @@ type Props = {
   process: Process;
 };
 
-export const OsWindowLabel: FC<Props> = ({ process }) => {
+export const OsWindowLabel = ({ process }: Props) => {
   const { activeRef } = useActiveState(fromActive);
 
   const { binaryImage, osWindowRef } = process;

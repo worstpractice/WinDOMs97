@@ -14,11 +14,17 @@ export const switchOn = <T extends NonNullable<HTMLElement | Document>>(params: 
       case 0: {
         return LMB?.(e);
       }
+
       case 1: {
         return MMB?.(e);
       }
+
       case 2: {
         return RMB?.(e);
+      }
+
+      default: {
+        return;
       }
     }
   };

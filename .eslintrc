@@ -306,6 +306,7 @@
       }
     ],
     "symbol-description": "warn",
+    "unicorn/consistent-function-scoping": "off",
     "unicorn/empty-brace-spaces": "off",
     "unicorn/explicit-length-check": "off",
     "unicorn/filename-case": [
@@ -321,6 +322,7 @@
       }
     ],
     "unicorn/no-array-callback-reference": "off",
+    "unicorn/no-empty-file": "off",
     "unicorn/no-for-loop": "off",
     "unicorn/no-nested-ternary": "off",
     "unicorn/no-new-array": "off",

@@ -1,11 +1,10 @@
 import { programs } from 'data';
-import { Bsod } from 'features/BSOD';
+import { Bsod } from 'features/Bsod';
 import { Explorer } from 'features/Explorer';
 import { useLastClickPosition } from 'hooks/useLastClickPosition';
 import { useLastKeyPress } from 'hooks/useLastKeyPress';
 import { useErrorState } from 'state/useErrorState';
 import { useKernelState } from 'state/useKernelState';
-import type { FC } from 'typings/FC';
 import type { ErrorState } from 'typings/state/ErrorState';
 import type { KernelState } from 'typings/state/KernelState';
 
@@ -28,7 +27,7 @@ const fromKernel = ({ installedPrograms, installProgram }: KernelState) => {
 
 type Props = {};
 
-export const Boot: FC<Props> = () => {
+export const Boot = ({}: Props) => {
   const { isBsod } = useErrorState(fromError);
   const { installedPrograms, installProgram } = useKernelState(fromKernel);
   useLastClickPosition();

@@ -1,6 +1,5 @@
 import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
 import { useOsRef } from 'hooks/useOsRef';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import styles from './Cmd.module.css';
 
@@ -8,7 +7,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const Cmd: FC<Props> = ({ getProcess }) => {
+export const Cmd = ({ getProcess }: Props) => {
   const cmdRef = useOsRef<HTMLElement>();
   const process = getProcess(cmdRef);
   useStartingDimensions(process);

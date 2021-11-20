@@ -53,7 +53,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       clone.style.top = `${newTop}px`;
     });
 
-    let cleanup: CleanupFn;
+    let cleanup: CleanupFn; // eslint-disable-line prefer-const
 
     /** `Document`-level event listener. */
     const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {

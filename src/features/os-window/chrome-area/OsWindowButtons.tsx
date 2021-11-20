@@ -4,7 +4,6 @@ import { useOsWindowControls } from 'hooks/os-window/useOsWindowControls';
 import { useActiveState } from 'state/useActiveState';
 import { useKernelState } from 'state/useKernelState';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { Process } from 'typings/Process';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { KernelState } from 'typings/state/KernelState';
@@ -39,7 +38,7 @@ type Props = {
   process: Process;
 };
 
-export const OsWindowButtons: FC<Props> = ({ process }) => {
+export const OsWindowButtons = ({ process }: Props) => {
   const { setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const { endProcess } = useKernelState(fromKernel);

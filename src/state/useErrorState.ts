@@ -17,20 +17,20 @@ export const useErrorState = create<ErrorState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      isBsod: false,
       bsodError: '',
       bsodMessage: '',
+      isBsod: false,
       ///////////////////////////////////////////
     } as const,
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        bluescreen: ({ error, message }: BSOD) => {
+        bluescreen: ({ error, message }: BSOD): void => {
           set(() => {
             return {
-              isBsod: true,
               bsodError: error,
               bsodMessage: message,
+              isBsod: true,
             } as const;
           });
         },

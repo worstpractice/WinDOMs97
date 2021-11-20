@@ -1,5 +1,4 @@
 import { useClickState } from 'state/useClickState';
-import type { FC } from 'typings/FC';
 import type { Position } from 'typings/Position';
 import type { ClickState } from 'typings/state/ClickState';
 import style from './DragSelection.module.css';
@@ -18,7 +17,7 @@ type Props = {
   currentPosition: Position;
 };
 
-export const DragSelection: FC<Props> = ({ currentPosition }) => {
+export const DragSelection = ({ currentPosition }: Props) => {
   const { lastClickPosition } = useClickState(fromClick);
 
   const { x: startX, y: startY } = lastClickPosition;
@@ -31,5 +30,15 @@ export const DragSelection: FC<Props> = ({ currentPosition }) => {
   const width = currentX - startX;
   const height = currentY - startY;
 
-  return <div className={style.DragSelection} style={{ top, left, width, height }} />;
+  return (
+    <div
+      className={style.DragSelection}
+      style={{
+        height,
+        left,
+        top,
+        width,
+      }}
+    />
+  );
 };

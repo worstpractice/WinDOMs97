@@ -1,13 +1,12 @@
 import { Divider } from 'components/Divider';
 import type { ReactNode } from 'react';
-import type { FC } from 'typings/FC';
 import styles from './QuickstartArea.module.css';
 
 type Props = {
   children: ReactNode;
 };
 
-export const QuickstartArea: FC<Props> = ({ children }) => {
+export const QuickstartArea = ({ children }: Props) => {
   return (
     <div className={styles.Wrapper}>
       <Divider dent="in" direction="vertical" />

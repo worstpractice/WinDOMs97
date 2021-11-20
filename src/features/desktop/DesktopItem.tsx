@@ -15,7 +15,6 @@ import { useActiveState } from 'state/useActiveState';
 import { useDraggedState } from 'state/useDraggedState';
 import { useMenuState } from 'state/useMenuState';
 import { isRef } from 'type-predicates/isRef';
-import type { FC } from 'typings/FC';
 import type { MouseHandler } from 'typings/handlers/MouseHandler';
 import type { Linker } from 'typings/Linker';
 import type { ActiveState } from 'typings/state/ActiveState';
@@ -53,7 +52,7 @@ type Props = {
   getBinary: Linker;
 };
 
-export const DesktopItem: FC<Props> = ({ getBinary }) => {
+export const DesktopItem = ({ getBinary }: Props) => {
   const { activeRef, setActiveRef } = useActiveState(fromActive);
   const { draggedRef } = useDraggedState(fromDragged);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);

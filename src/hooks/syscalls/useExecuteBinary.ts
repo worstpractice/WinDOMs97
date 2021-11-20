@@ -3,7 +3,6 @@ import { Pids } from 'kernel/Pids';
 import { useErrorState } from 'state/useErrorState';
 import { useKernelState } from 'state/useKernelState';
 import { useRunningAreaState } from 'state/useRunningAreaState';
-import { isNull } from 'type-predicates/isNull';
 import type { Binary } from 'typings/Binary';
 import type { ErrorState } from 'typings/state/ErrorState';
 import type { KernelState } from 'typings/state/KernelState';
@@ -68,7 +67,7 @@ export const useExecuteBinary = (binary: Binary) => {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const pid = Pids.use();
 
-    if (isNull(pid)) {
+    if (pid === null) {
       return bluescreen(OUT_OF_PIDS);
     }
 

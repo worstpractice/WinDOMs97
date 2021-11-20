@@ -1,6 +1,5 @@
 import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
 import { useOsRef } from 'hooks/useOsRef';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import styles from './Notepad.module.css';
 
@@ -8,7 +7,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const Notepad: FC<Props> = ({ getProcess }) => {
+export const Notepad = ({ getProcess }: Props) => {
   const notepadRef = useOsRef<HTMLDivElement>();
   const process = getProcess(notepadRef);
   useStartingDimensions(process);

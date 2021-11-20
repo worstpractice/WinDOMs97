@@ -1,6 +1,5 @@
 import { DesktopItem } from 'features/desktop/DesktopItem';
 import { useKernelState } from 'state/useKernelState';
-import type { FC } from 'typings/FC';
 import type { Linker } from 'typings/Linker';
 import type { KernelState } from 'typings/state/KernelState';
 import { forIsOnDesktop } from 'utils/array-helpers/filter/forIsOnDesktop';
@@ -17,7 +16,7 @@ const fromKernel = ({ installedPrograms }: KernelState) => {
 
 type Props = {};
 
-export const DesktopItems: FC<Props> = () => {
+export const DesktopItems = ({}: Props) => {
   const { installedPrograms } = useKernelState(fromKernel);
 
   const visibleOnDesktop = installedPrograms.filter(forIsOnDesktop);

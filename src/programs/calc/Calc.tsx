@@ -2,7 +2,6 @@ import { OsButton } from 'components/OsButton';
 import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
 import { useOsRef } from 'hooks/useOsRef';
 import { useState } from 'react';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import styles from './Calc.module.css';
 
@@ -10,7 +9,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const Calc: FC<Props> = ({ getProcess }) => {
+export const Calc = ({ getProcess }: Props) => {
   const calcRef = useOsRef<HTMLElement>();
   const process = getProcess(calcRef);
   useStartingDimensions(process);

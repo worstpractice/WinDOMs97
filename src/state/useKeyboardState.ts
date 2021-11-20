@@ -18,8 +18,8 @@ export const useKeyboardState = create<KeyboardState>(
     {
       ///////////////////////////////////////////
       lastKeyPress: {
-        button: '' as any,
-        character: '' as any,
+        button: '' as never,
+        character: '' as never,
         order: ORDER_TALLY++,
       },
       ///////////////////////////////////////////
@@ -27,14 +27,14 @@ export const useKeyboardState = create<KeyboardState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setLastKeyPress: (to: string) => {
-          set(() => {
+        setLastKeyPress: (to: string): void => {
+          set((): Data => {
             const isCharacter = to.length === 1;
             const isButton = !isCharacter;
 
             const keyPress: KeyPress = {
-              button: isButton ? to : ('' as any),
-              character: isCharacter ? to : ('' as any),
+              button: (isButton ? to : '') as never,
+              character: (isCharacter ? to : '') as never,
               order: ORDER_TALLY++,
             } as const;
 

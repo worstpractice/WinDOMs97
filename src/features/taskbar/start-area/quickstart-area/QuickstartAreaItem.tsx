@@ -5,7 +5,6 @@ import { useExecuteBinary } from 'hooks/syscalls/useExecuteBinary';
 import { useOsRef } from 'hooks/useOsRef';
 import { useMenuState } from 'state/useMenuState';
 import type { ButtonHandler } from 'typings/ButtonHandler';
-import type { FC } from 'typings/FC';
 import type { Linker } from 'typings/Linker';
 import type { MenuState } from 'typings/state/MenuState';
 import styles from './QuickstartAreaItem.module.css';
@@ -24,7 +23,7 @@ type Props = {
   getBinary: Linker;
 };
 
-export const QuickstartAreaItem: FC<Props> = ({ getBinary }) => {
+export const QuickstartAreaItem = ({ getBinary }: Props) => {
   const { closeMenus } = useMenuState(fromMenu);
   const quickstartAreaItemRef = useOsRef<HTMLButtonElement>();
   const binary = getBinary(quickstartAreaItemRef);

@@ -6,7 +6,6 @@ import { useProcessAlternatives } from 'hooks/alternatives/useProcessAlternative
 import { useOsRef } from 'hooks/useOsRef';
 import { useActiveState } from 'state/useActiveState';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { LiLoader } from 'typings/Loader';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { MenuState } from 'typings/state/MenuState';
@@ -34,7 +33,7 @@ type Props = {
   getProcess: LiLoader;
 };
 
-export const NotificationAreaItem: FC<Props> = ({ getProcess }) => {
+export const NotificationAreaItem = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const notificationAreaItemRef = useOsRef<HTMLLIElement>();

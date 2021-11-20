@@ -6,7 +6,6 @@ import { useActivateOnMount } from 'hooks/useActivateOnMount';
 import { useOsRef } from 'hooks/useOsRef';
 import type { ReactNode } from 'react';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { MenuState } from 'typings/state/MenuState';
 import styles from './Desktop.module.css';
 
@@ -24,7 +23,7 @@ type Props = {
   children: ReactNode;
 };
 
-export const Desktop: FC<Props> = ({ children }) => {
+export const Desktop = ({ children }: Props) => {
   const { openContextMenu } = useMenuState(fromMenu);
   const desktopRef = useOsRef<HTMLElement>();
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);

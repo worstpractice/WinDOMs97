@@ -1,6 +1,5 @@
 import { OsWindow } from 'features/os-window/OsWindow';
 import { useKernelState } from 'state/useKernelState';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import type { KernelState } from 'typings/state/KernelState';
 
@@ -16,7 +15,7 @@ const fromKernel = ({ runningProcesses }: KernelState) => {
 
 type Props = {};
 
-export const OsWindows: FC<Props> = () => {
+export const OsWindows = ({}: Props) => {
   const { runningProcesses } = useKernelState(fromKernel);
 
   return (

@@ -3,7 +3,6 @@ import { Words } from 'components/Words';
 import { onLMB } from 'event-filters/onLMB';
 import { useMenuState } from 'state/useMenuState';
 import type { Alternative } from 'typings/Alternative';
-import type { FC } from 'typings/FC';
 import type { MenuState } from 'typings/state/MenuState';
 import styles from './ContextMenuItem.module.css';
 
@@ -21,7 +20,7 @@ type Props = {
   alternative: Alternative;
 };
 
-export const ContextMenuItem: FC<Props> = ({ alternative }) => {
+export const ContextMenuItem = ({ alternative }: Props) => {
   const { closeMenus } = useMenuState(fromMenu);
 
   const { action, icon, name } = alternative;

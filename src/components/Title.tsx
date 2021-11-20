@@ -1,15 +1,14 @@
 import type { CSSProperties } from 'react';
-import type { FC } from 'typings/FC';
 import { css } from 'utils/css';
 import styles from './Title.module.css';
 
 type Props = {
-  className?: string;
+  className?: string | undefined;
   of: string;
   style?: CSSProperties;
 };
 
-export const Title: FC<Props> = ({ className = '', of, style }) => {
+export const Title = ({ className = '', of, style }: Props) => {
   const titleStyle = css(styles.Title ?? '', className);
 
   return (

@@ -3,7 +3,6 @@ import { useStartingDimensions } from 'hooks/programs/useStartingDimensions';
 import { useOsRef } from 'hooks/useOsRef';
 import { useCanvasRef } from 'programs/paint/hooks/useCanvasRef';
 import { useState } from 'react';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import type { Position } from 'typings/Position';
 import styles from './Paint.module.css';
@@ -13,7 +12,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const Paint: FC<Props> = ({ getProcess }) => {
+export const Paint = ({ getProcess }: Props) => {
   const paintRef = useOsRef<HTMLElement>();
   const process = getProcess(paintRef);
   const [isDrawing, setIsDrawing] = useState(false);

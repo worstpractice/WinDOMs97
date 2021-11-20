@@ -10,7 +10,6 @@ import { MIN_HEIGHT, MIN_WIDTH } from 'os-constants/OsWindow';
 import { useState } from 'react';
 import { useActiveState } from 'state/useActiveState';
 import { useMenuState } from 'state/useMenuState';
-import type { FC } from 'typings/FC';
 import type { Loader } from 'typings/Loader';
 import type { ActiveState } from 'typings/state/ActiveState';
 import type { MenuState } from 'typings/state/MenuState';
@@ -39,7 +38,7 @@ type Props = {
   getProcess: Loader;
 };
 
-export const OsWindow: FC<Props> = ({ getProcess }) => {
+export const OsWindow = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const osWindowRef = useOsRef<HTMLElement>();
@@ -113,9 +112,9 @@ export const OsWindow: FC<Props> = ({ getProcess }) => {
       ref={osWindowRef}
       style={{
         left,
-        top,
         minHeight: MIN_HEIGHT,
         minWidth: MIN_WIDTH,
+        top,
       }}
     >
       <OsWindowChromeArea getProcess={toChromeArea} handleMove={handleMove} />

@@ -62,6 +62,10 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
           }
           break;
         }
+
+        default: {
+          break;
+        }
       }
 
       // TOP
@@ -83,6 +87,10 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
               top = `${newTop}px`;
             }
           }
+          break;
+        }
+
+        default: {
           break;
         }
       }
@@ -111,6 +119,10 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
           }
           break;
         }
+
+        default: {
+          break;
+        }
       }
 
       // HEIGHT
@@ -137,6 +149,10 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
           }
           break;
         }
+
+        default: {
+          break;
+        }
       }
 
       if (left) osWindow.style.left = left;
@@ -146,7 +162,7 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
       if (height) osWindow.style.height = height;
     });
 
-    let cleanup: () => void;
+    let cleanup: () => void; // eslint-disable-line prefer-const
 
     /** Drag stop event. */
     const onMouseUp = onLMB<Document>(() => {

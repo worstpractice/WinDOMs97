@@ -1,6 +1,5 @@
 import { NotificationAreaItem } from 'features/taskbar/notification-area/NotificationAreaItem';
 import { useKernelState } from 'state/useKernelState';
-import type { FC } from 'typings/FC';
 import type { LiLoader } from 'typings/Loader';
 import type { KernelState } from 'typings/state/KernelState';
 
@@ -16,7 +15,7 @@ const fromKernel = ({ runningProcesses }: KernelState) => {
 
 type Props = {};
 
-export const NotificationAreaItems: FC<Props> = () => {
+export const NotificationAreaItems = ({}: Props) => {
   const { runningProcesses } = useKernelState(fromKernel);
 
   return (

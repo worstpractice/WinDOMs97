@@ -26,7 +26,7 @@ export const useDraggedState = create<DraggedState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        setDraggedRef: <T extends HTMLElement>({ current }: OsRef<T>) => {
+        setDraggedRef: <T extends HTMLElement>({ current }: OsRef<T>): void => {
           set(({ draggedRef }) => {
             if (draggedRef.current === current) {
               return { draggedRef } as const;
@@ -41,7 +41,7 @@ export const useDraggedState = create<DraggedState>(
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        unsetDraggedRef: () => {
+        unsetDraggedRef: (): void => {
           set(({ draggedRef }) => {
             if (draggedRef.current === null) {
               return { draggedRef } as const;

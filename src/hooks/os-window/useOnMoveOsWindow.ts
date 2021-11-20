@@ -24,7 +24,7 @@ export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osW
       osWindow.style.top = `${newTop}px`;
     });
 
-    let cleanup: () => void;
+    let cleanup: () => void; // eslint-disable-line prefer-const
 
     /** `Document`-level event listener. */
     const onMouseUp = onLMB<Document>(() => {

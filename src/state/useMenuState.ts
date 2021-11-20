@@ -25,23 +25,23 @@ export const useMenuState = create<MenuState>(
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        closeMenus: () => {
+        closeMenus: (): void => {
           set(() => {
             return { openMenu: '' } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        openContextMenu: (alternatives: readonly Alternative[]) => {
+        openContextMenu: (alternatives: readonly Alternative[]): void => {
           set(() => {
             if (!alternatives.length) {
               console.error('The array of alternatives was empty!');
             }
 
-            return { openMenu: 'ContextMenu', alternatives: [...alternatives] } as const;
+            return { alternatives: [...alternatives], openMenu: 'ContextMenu' } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        toggleStartMenu: () => {
+        toggleStartMenu: (): void => {
           set(({ openMenu }) => {
             const newMenu = openMenu === 'StartMenu' ? '' : 'StartMenu';
 
