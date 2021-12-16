@@ -1,18 +1,15 @@
 import { useLayoutEffect, useRef } from 'react';
-import { recognizedFileExtensions } from 'src/os-constants/recognizedFileExtensions';
+import { RECOGNIZED_FILE_EXTENSIONS } from 'src/os-constants/recognizedFileExtensions';
 import { useKeyboardState } from 'src/state/useKeyboardState';
 import type { Binary } from 'src/typings/Binary';
 import type { KeyboardState } from 'src/typings/state/KeyboardState';
 import { deriveFileExtension } from 'src/utils/deriveFileExtension';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKeyboard = ({ lastKeyPress }: KeyboardState) => {
-  return {
-    lastKeyPress,
-  };
-};
+const fromKeyboard = from<KeyboardState>().select('lastKeyPress');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastSequence = (binary: Binary) => {
@@ -49,7 +46,7 @@ export const useLastSequence = (binary: Binary) => {
           const isChangingFileExtension = window.confirm('Do you really want to change the file extension?');
 
           if (isChangingFileExtension) {
-            binary.isFileExtensionRecognized = recognizedFileExtensions.includes(fileExtension);
+            binary.isFileExtensionRecognized = RECOGNIZED_FILE_EXTENSIONS.includes(fileExtension);
             binary.fileName = sequenceRef.current;
           }
         }

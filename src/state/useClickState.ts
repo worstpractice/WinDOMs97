@@ -8,14 +8,17 @@ export type Data = {
 };
 
 export type Actions = {
-  readonly setLastClickPosition: (to: Position) => void;
+  readonly setLastClickPosition: (this: void, to: Position) => void;
 };
 
 export const useClickState = create<ClickState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////
-      lastClickPosition: { x: 0, y: 0 },
+      lastClickPosition: {
+        x: 0,
+        y: 0,
+      },
       ///////////////////////////////////////////
     } as const,
     (set) => {
@@ -23,7 +26,12 @@ export const useClickState = create<ClickState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setLastClickPosition: ({ x, y }: Position): void => {
           set(() => {
-            return { lastClickPosition: { x, y } } as const;
+            return {
+              lastClickPosition: {
+                x,
+                y,
+              },
+            } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

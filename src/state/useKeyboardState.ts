@@ -8,7 +8,7 @@ export type Data = {
 };
 
 export type Actions = {
-  readonly setLastKeyPress: (to: string) => void;
+  readonly setLastKeyPress: (this: void, to: string) => void;
 };
 
 let ORDER_TALLY = 0;

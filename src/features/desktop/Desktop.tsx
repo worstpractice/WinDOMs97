@@ -5,28 +5,25 @@ import { DragSelection } from 'src/features/desktop/DragSelection';
 import { useDesktopAlternatives } from 'src/hooks/alternatives/useDesktopAlternatives';
 import { useDragSelection } from 'src/hooks/desktop/useOnDragSelection';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
-import { useOsRef } from 'src/hooks/useOsRef';
+import { useRef } from 'react';
 import { useMenuState } from 'src/state/useMenuState';
 import type { MenuState } from 'src/typings/state/MenuState';
-import styles from './Desktop.module.css';
+import { css } from 'src/utils/as/css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ openContextMenu }: MenuState) => {
-  return {
-    openContextMenu,
-  };
-};
+const fromMenu = from<MenuState>().select('openContextMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 
 export const Desktop = ({ children }: Props) => {
   const { openContextMenu } = useMenuState(fromMenu);
-  const desktopRef = useOsRef<HTMLElement>();
+  const desktopRef = useRef<HTMLElement>(null);
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
   const alternatives = useDesktopAlternatives();
   useActivateOnMount(desktopRef);
@@ -40,9 +37,23 @@ export const Desktop = ({ children }: Props) => {
   });
 
   return (
-    <main className={styles.Desktop} onContextMenu={handleContextMenu} ref={desktopRef}>
+    <main style={styles.Desktop} onContextMenu={handleContextMenu} ref={desktopRef}>
       {children}
       {isDragSelecting && <DragSelection currentPosition={currentPosition} />}
     </main>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Desktop: css({
+    backgroundColor: 'var(--desktop-wallpaper)',
+    bottom: 0,
+    left: 0,
+    position: 'absolute',
+    right: 0,
+    top: 0,
+  } as const),
+} as const;

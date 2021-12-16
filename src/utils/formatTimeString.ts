@@ -1,3 +1,4 @@
-export const formatTimeString = (time: number) => {
-  return time > 9 ? `${time}` : `0${time}`;
-};
+// prettier-ignore
+export const formatTimeString = (time: number) => time > 9
+  ? `${time}`
+  : `0${time}`;

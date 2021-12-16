@@ -1,4 +1,4 @@
-import { default as React, useState } from 'react';
+import { default as React, useRef, useState } from 'react';
 import { onLMB } from 'src/event-filters/onLMB';
 import { OsWindowChromeArea } from 'src/features/os-window/chrome-area/OsWindowChromeArea';
 import { ProgramArea } from 'src/features/os-window/program-area/ProgramArea';
@@ -6,42 +6,34 @@ import { ProgramContent } from 'src/features/os-window/program-area/ProgramConte
 import { useOnMoveOsWindow } from 'src/hooks/os-window/useOnMoveOsWindow';
 import { useOnResizeOsWindow } from 'src/hooks/os-window/useOnResizeOsWindow';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
-import { useOsRef } from 'src/hooks/useOsRef';
 import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
 import type { Loader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
+import { css } from 'src/utils/as/css';
 import { bringToFront } from 'src/utils/bringToFront';
-import { css } from 'src/utils/css';
 import { blockNativeDrag } from 'src/utils/os-window/blockNativeDrag';
-import styles from './OsWindow.module.css';
+import { toFalse } from 'src/utils/setters/toFalse';
+import { toTrue } from 'src/utils/setters/toTrue';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-  };
-};
-
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef');
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  getProcess: Loader;
+  readonly getProcess: Loader;
 };
 
 export const OsWindow = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
-  const osWindowRef = useOsRef<HTMLElement>();
+  const osWindowRef = useRef<HTMLElement>(null);
   const process = getProcess(osWindowRef);
   const handleResize = useOnResizeOsWindow(osWindowRef);
   const [isResizable, setIsResizable] = useState(false);
@@ -51,16 +43,15 @@ export const OsWindow = ({ getProcess }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleEnter = () => {
-    setIsResizable(true);
+  const handleEnter = (): void => {
+    setIsResizable(toTrue);
   };
 
-  const handleLeave = () => {
-    setIsResizable(false);
+  const handleLeave = (): void => {
+    setIsResizable(toFalse);
   };
 
-  const handleMouseDown = onLMB<HTMLElement>((e) => {
+  const handleMouseDown = onLMB<HTMLElement>((event): void => {
     closeMenus();
     setActiveRef(osWindowRef);
     bringToFront(osWindowRef);
@@ -68,19 +59,18 @@ export const OsWindow = ({ getProcess }: Props) => {
     // Not resizable at the moment? That means we're done here.
     if (!isResizable) return;
 
-    const { target } = e;
+    const { target } = event;
     const { current: osWindow } = osWindowRef;
 
     // Abort resizing if click target was not current `OsWindow`.
     if (target !== osWindow) return;
 
-    handleResize(e);
+    handleResize(event);
   });
 
   /////////////////////////////////////////////////////////////////////////////////////////
   // Loaders
   /////////////////////////////////////////////////////////////////////////////////////////
-
   const toChromeArea: Loader = (chromeAreaRef) => {
     process.chromeAreaRef = chromeAreaRef;
     return process;
@@ -92,30 +82,30 @@ export const OsWindow = ({ getProcess }: Props) => {
   };
 
   ///////////////////////////////////////////////////////////////////////////////////
-
   const { binaryImage, isMaximized, isMinimized, pid } = process;
 
   const Program = binaryImage.instructions;
 
-  const style = css(styles.OsWindow, isMaximized ? styles.Maximized : '', isMinimized ? styles.Minimized : '', isResizable ? styles.Resizable : '');
-
-  const left = 30 * pid;
-  const top = 20 * pid;
+  const style = css({
+    ...styles.OsWindow,
+    ...(isResizable && styles.Resizable),
+    ...(isMinimized && styles.Minimized),
+    ...(isMaximized && styles.Maximized),
+    left: 30 * pid,
+    minHeight: MIN_HEIGHT,
+    minWidth: MIN_WIDTH,
+    top: 20 * pid,
+  } as const);
 
   return (
     <article
-      className={style}
+      //
       onDragStart={blockNativeDrag}
       onMouseDown={handleMouseDown}
       onMouseEnter={handleEnter}
       onMouseLeave={handleLeave}
       ref={osWindowRef}
-      style={{
-        left,
-        minHeight: MIN_HEIGHT,
-        minWidth: MIN_WIDTH,
-        top,
-      }}
+      style={style}
     >
       <OsWindowChromeArea getProcess={toChromeArea} handleMove={handleMove} />
       <ProgramArea>
@@ -126,3 +116,36 @@ export const OsWindow = ({ getProcess }: Props) => {
     </article>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Maximized: css({
+    height: 'calc(100vh - var(--taskbar-height)) !important',
+    left: '0 !important',
+    top: '0 !important',
+    width: '100vw !important',
+  } as const),
+
+  Minimized: css({
+    display: 'none',
+  } as const),
+
+  OsWindow: css({
+    backgroundColor: 'transparent',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '500px',
+    left: '40vw',
+    padding: '6px',
+    position: 'absolute',
+    top: '400px',
+    width: '600px',
+    zIndex: 30,
+  } as const),
+
+  Resizable: css({
+    cursor: 'move',
+  } as const),
+} as const;

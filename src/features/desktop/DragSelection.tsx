@@ -2,20 +2,17 @@ import { default as React } from 'react';
 import { useClickState } from 'src/state/useClickState';
 import type { Position } from 'src/typings/Position';
 import type { ClickState } from 'src/typings/state/ClickState';
-import style from './DragSelection.module.css';
+import { css } from 'src/utils/as/css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ lastClickPosition }: ClickState) => {
-  return {
-    lastClickPosition,
-  };
-};
+const fromClick = from<ClickState>().select('lastClickPosition');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  currentPosition: Position;
+  readonly currentPosition: Position;
 };
 
 export const DragSelection = ({ currentPosition }: Props) => {
@@ -33,8 +30,8 @@ export const DragSelection = ({ currentPosition }: Props) => {
 
   return (
     <div
-      className={style.DragSelection}
       style={{
+        ...styles.DragSelection,
         height,
         left,
         top,
@@ -43,3 +40,14 @@ export const DragSelection = ({ currentPosition }: Props) => {
     />
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  DragSelection: css({
+    background: `var(--blue-transparent)`,
+    position: 'absolute',
+    zIndex: 10,
+  } as const),
+} as const;

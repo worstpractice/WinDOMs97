@@ -8,8 +8,8 @@ export type Data = {
 };
 
 export type Actions = {
-  readonly setActiveRef: <T extends HTMLElement>(to: OsRef<T>) => void;
-  readonly unsetActiveRef: () => void;
+  readonly setActiveRef: <T extends HTMLElement>(this: void, to: OsRef<T>) => void;
+  readonly unsetActiveRef: (this: void) => void;
 };
 
 let debugLogCounter = 0;
@@ -28,9 +28,7 @@ export const useActiveState = create<ActiveState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T): void => {
           set(({ activeRef }) => {
-            if (activeRef.current === current) {
-              return { activeRef } as const;
-            }
+            if (activeRef.current === current) return { activeRef } as const;
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
             console.debug('FROM:', activeRef.current);
@@ -43,9 +41,7 @@ export const useActiveState = create<ActiveState>(
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         unsetActiveRef: (): void => {
           set(({ activeRef }) => {
-            if (activeRef.current === null) {
-              return { activeRef } as const;
-            }
+            if (activeRef.current === null) return { activeRef } as const;
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
             console.debug('FROM:', activeRef.current);

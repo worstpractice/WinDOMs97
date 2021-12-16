@@ -10,8 +10,8 @@ export type Data = {
 
 export type Actions = {
   readonly closeMenus: () => void;
-  readonly openContextMenu: (alternatives: readonly Alternative[]) => void;
-  readonly toggleStartMenu: () => void;
+  readonly openContextMenu: (this: void, alternatives: readonly Alternative[]) => void;
+  readonly toggleStartMenu: (this: void) => void;
 };
 
 export const useMenuState = create<MenuState>(

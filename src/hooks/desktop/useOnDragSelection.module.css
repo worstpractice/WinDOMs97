@@ -1,4 +1,4 @@
-@import '../../styles/colors.module.css';
+/* @import '../../styles/colors.css'; */
 
 .useOnDragSelection {
   background-color: var(--blue-transparent);

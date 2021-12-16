@@ -1,27 +1,23 @@
 import { onLMB } from 'src/event-filters/onLMB';
-import { useDraggedState } from 'src/state/useDraggedState';
+import { useDragState } from 'src/state/useDragState';
 import type { CleanupFn } from 'src/typings/CleanupFn';
 import type { OsRef } from 'src/typings/OsRef';
-import type { DraggedState } from 'src/typings/state/DraggedState';
+import type { DragState } from 'src/typings/state/DragState';
 import { bringToFront } from 'src/utils/bringToFront';
 import { compose } from 'src/utils/compose';
 import { listen } from 'src/utils/listen';
+import { from } from 'src/utils/state/from';
 import yoloStyles from './useOnDragAndDrop.module.css';
 const styles = yoloStyles as { readonly [key in PropertyKey]-?: string };
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromDragged = ({ setDraggedRef, unsetDraggedRef }: DraggedState) => {
-  return {
-    setDraggedRef,
-    unsetDraggedRef,
-  };
-};
+const fromDrag = from<DragState>().select('setDragRef', 'unsetDragRef');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
-  const { setDraggedRef, unsetDraggedRef } = useDraggedState(fromDragged);
+  const { setDragRef, unsetDragRef } = useDragState(fromDrag);
 
   const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
     // Target here is whatever we START DRAGGING.
@@ -29,7 +25,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
 
     if (!desktopItem) return;
 
-    setDraggedRef(desktopItemRef);
+    setDragRef(desktopItemRef);
 
     const shiftX = clientX - desktopItem.getBoundingClientRect().left;
     const shiftY = clientY - desktopItem.getBoundingClientRect().top;
@@ -69,7 +65,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
       desktopItem.style.left = `${newLeft}px`;
       desktopItem.style.top = `${newTop}px`;
 
-      unsetDraggedRef();
+      unsetDragRef();
       cleanup();
     });
 

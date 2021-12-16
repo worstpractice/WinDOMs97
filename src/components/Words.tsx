@@ -1,23 +1,31 @@
 import type { CSSProperties } from 'react';
 import { default as React } from 'react';
-import { css } from 'src/utils/css';
-import styles from './Words.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
-  className?: string | undefined;
-  of: string;
-  style?: CSSProperties;
+  readonly of: string;
+  readonly style?: CSSProperties;
 };
 
 /** I would name this component `Text`, but `Text` is already namesquatted by a DOM type, sending me straight to auto-import hell if I use that name too.
  *
  * So `Words` it is. */
-export const Words = ({ className = '', of, style }: Props) => {
-  const wordsStyle = css(styles.Words ?? '', className);
-
+export const Words = ({ of, style }: Props) => {
   return (
-    <p className={wordsStyle} style={style}>
+    <p
+      //
+      style={style ? { ...styles.Words, ...style } : styles.Words}
+    >
       {of}
     </p>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Words: css({
+    pointerEvents: 'none',
+  } as const),
+} as const;

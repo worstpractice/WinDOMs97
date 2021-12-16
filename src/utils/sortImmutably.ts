@@ -1,7 +1,7 @@
 import type { Process } from 'src/typings/Process';
 import type { ComparePid } from 'src/typings/sorting/ComparePid';
 
-export const sortProcesses = <T extends Process>(immutable: readonly T[], by: ComparePid) => {
+export const sortProcesses = <T extends Process, U extends ComparePid>(immutable: readonly T[], by: U) => {
   // @ts-expect-error To mutable...
   const mutable: T[] = immutable;
 

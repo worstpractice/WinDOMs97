@@ -1,9 +1,0 @@
-@import '../../../styles/colors.module.css';
-
-.ButtonRow {
-  align-items: center;
-  cursor: pointer;
-  display: flex;
-  gap: 16px;
-  justify-content: center;
-}

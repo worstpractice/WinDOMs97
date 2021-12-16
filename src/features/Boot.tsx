@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { programs } from 'src/data';
+import { binaries } from 'src/programs/binaries';
 import { Bsod } from 'src/features/Bsod';
 import { Explorer } from 'src/features/Explorer';
 import { useLastClickPosition } from 'src/hooks/useLastClickPosition';
@@ -8,25 +8,18 @@ import { useErrorState } from 'src/state/useErrorState';
 import { useKernelState } from 'src/state/useKernelState';
 import type { ErrorState } from 'src/typings/state/ErrorState';
 import type { KernelState } from 'src/typings/state/KernelState';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromError = ({ isBsod }: ErrorState) => {
-  return {
-    isBsod,
-  };
-};
-
-const fromKernel = ({ installedPrograms, installProgram }: KernelState) => {
-  return {
-    installedPrograms,
-    installProgram,
-  };
-};
+const fromError = from<ErrorState>().select('isBsod');
+const fromKernel = from<KernelState>().select('installedPrograms', 'installProgram');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]-?: never;
+};
 
 export const Boot = ({}: Props) => {
   const { isBsod } = useErrorState(fromError);
@@ -35,8 +28,8 @@ export const Boot = ({}: Props) => {
   useLastKeyPress();
 
   if (!installedPrograms.length) {
-    for (const each of programs) {
-      installProgram(each);
+    for (const binary of binaries) {
+      installProgram(binary);
     }
   }
 

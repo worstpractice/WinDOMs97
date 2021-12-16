@@ -1,43 +1,33 @@
-import { default as React } from 'react';
+import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
 import { onLMB } from 'src/event-filters/onLMB';
 import { onRMB } from 'src/event-filters/onRMB';
 import { useProcessAlternatives } from 'src/hooks/alternatives/useProcessAlternatives';
-import { useOsRef } from 'src/hooks/useOsRef';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
 import type { LiLoader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
+import { css } from 'src/utils/as/css';
 import { bringToFront } from 'src/utils/bringToFront';
-import styles from './NotificationAreaItem.module.css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-  };
-};
-
-const fromMenu = ({ closeMenus, openContextMenu }: MenuState) => {
-  return {
-    closeMenus,
-    openContextMenu,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef');
+const fromMenu = from<MenuState>().select('closeMenus', 'openContextMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  getProcess: LiLoader;
+  readonly getProcess: LiLoader;
 };
 
 export const NotificationAreaItem = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus, openContextMenu } = useMenuState(fromMenu);
-  const notificationAreaItemRef = useOsRef<HTMLLIElement>();
+  const notificationAreaItemRef = useRef<HTMLLIElement>(null);
   const process = getProcess(notificationAreaItemRef);
   const alternatives = useProcessAlternatives(process);
 
@@ -45,9 +35,9 @@ export const NotificationAreaItem = ({ getProcess }: Props) => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLMB<HTMLButtonElement>((event) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
-    e.stopPropagation();
+    event.stopPropagation();
     closeMenus();
     setActiveRef(process.osWindowRef);
     bringToFront(process.osWindowRef);
@@ -56,10 +46,26 @@ export const NotificationAreaItem = ({ getProcess }: Props) => {
   const { icon, programName } = process.binaryImage;
 
   return (
-    <li className={styles.NotificationAreaItem} ref={notificationAreaItemRef}>
-      <OsButton className={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
+    <li style={styles.NotificationAreaItem} ref={notificationAreaItemRef}>
+      <OsButton style={styles.ButtonOverride} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown}>
         <Icon alt={programName} height={24} src={icon} width={24} />
       </OsButton>
     </li>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  ButtonOverride: css({
+    outlineStyle: 'none',
+  } as const),
+
+  NotificationAreaItem: css({
+    alignItems: 'center',
+    display: 'flex',
+    justifyContent: 'center',
+    maxWidth: '32px',
+  } as const),
+} as const;

@@ -1,0 +1,21 @@
+@keyframes blinkingText {
+  0% {
+    color: var(--gray);
+  }
+
+  49% {
+    color: var(--gray);
+  }
+
+  60% {
+    color: transparent;
+  }
+
+  99% {
+    color: transparent;
+  }
+
+  100% {
+    color: var(--gray);
+  }
+}

@@ -1,41 +1,34 @@
-import type { PID } from 'src/typings/phantom-types/Pid';
-import { ascending } from 'src/utils/compare/ascending';
-import { from } from 'src/utils/range';
+import type { Pid } from 'src/typings/phantom-types/Pid';
+import { ascending } from 'src/utils/sort/ascending';
+import { panic } from 'src/utils/panic';
+import { rangeFrom } from 'src/utils/rangeFrom';
 
 /** Inclusive. */
 const HIGHEST_PID = 16 as const;
 
-const backingSet = new Set<PID>(from(0).to(HIGHEST_PID) as PID[]);
+const BACKING_SET = new Set<Pid>(rangeFrom(0).to(HIGHEST_PID) as Pid[]);
 
 export const Pids = {
-  get available(): readonly PID[] {
-    return [...backingSet].sort(ascending);
+  get available(): readonly Pid[] {
+    // NOTE: Sorting here is CRUCIAL, or (for starters:) random buttons start controlling random `OsWindow`s!
+    return [...BACKING_SET].sort(ascending);
   },
 
-  free(pid: PID): void {
+  free(pid: Pid): void {
     if (pid < 0) throw new RangeError(`Pids below 0 cannot be used! (Pid was ${pid})`);
     if (pid > HIGHEST_PID) throw new RangeError(`Pids above ${HIGHEST_PID} cannot be used! (Pid was ${pid})`);
 
-    if (backingSet.has(pid)) {
-      console.warn(`Trying to free a pid that was not in use! (Pid was ${pid})`);
-    }
+    if (BACKING_SET.has(pid)) console.warn(`Trying to free a pid that was not in use! (Pid was ${pid})`);
 
-    backingSet.add(pid);
+    BACKING_SET.add(pid);
   },
 
-  use(): PID | null {
-    if (!backingSet.size) return null;
+  use(): Pid | null {
+    if (!BACKING_SET.size) return null;
 
-    // NOTE: Sorting here is CRUCIAL, or (for starters:) random buttons start controlling random `OsWindow`s!
-    const availablePids = [...backingSet].sort(ascending);
+    const pid = Pids.available.at(-1) ?? panic(new ReferenceError('We just ran out of pids!'));
 
-    const pid = availablePids.pop();
-
-    if (pid === undefined) {
-      throw new ReferenceError('We just ran out of pids!');
-    }
-
-    backingSet.delete(pid);
+    BACKING_SET.delete(pid);
 
     return pid;
   },

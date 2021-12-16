@@ -10,7 +10,7 @@ export type Data = {
 };
 
 export type Actions = {
-  readonly bluescreen: (bsod: BSOD) => void;
+  readonly bluescreen: (this: void, bsod: BSOD) => void;
 };
 
 export const useErrorState = create<ErrorState>(

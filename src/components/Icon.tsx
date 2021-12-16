@@ -1,19 +1,35 @@
 import type { CSSProperties } from 'react';
 import { default as React } from 'react';
-import { css } from 'src/utils/css';
-import styles from './Icon.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
-  alt: string;
-  className?: string | undefined;
-  height: number;
-  src: string;
-  style?: CSSProperties;
-  width: number;
+  readonly alt: string;
+  readonly height: number;
+  readonly src: string;
+  readonly style?: CSSProperties;
+  readonly width: number;
 };
 
-export const Icon = ({ alt, className = '', height, src, style, width }: Props) => {
-  const iconStyle = css(styles.Icon ?? '', className);
-
-  return <img alt={alt} className={iconStyle} height={height} loading="eager" src={src} style={style} width={width} />;
+export const Icon = ({ alt, height, src, style, width }: Props) => {
+  return (
+    <img
+      //
+      alt={alt}
+      draggable={false}
+      height={height}
+      loading="eager"
+      src={src}
+      style={{ ...styles.Icon, ...style }}
+      width={width}
+    />
+  );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Icon: css({
+    objectFit: 'contain',
+  } as const),
+} as const;

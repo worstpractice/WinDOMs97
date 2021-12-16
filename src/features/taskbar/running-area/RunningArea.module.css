@@ -1,9 +1,0 @@
-.RunningArea {
-  display: flex;
-  flex-direction: row;
-  flex: 1;
-  gap: 12px;
-  height: 100%;
-  padding-bottom: 2px;
-  padding-top: 2px;
-}

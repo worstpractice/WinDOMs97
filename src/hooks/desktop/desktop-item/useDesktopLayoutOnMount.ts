@@ -7,7 +7,7 @@ let x = 0;
 let y = 0;
 
 /** Current screen height, in pixels. */
-const clientHeight = Number(document.documentElement.clientHeight.toString());
+const CLIENT_HEIGHT = Number(document.documentElement.clientHeight.toString());
 
 export const useDesktopLayoutOnMount = <T extends HTMLElement>(desktopItemRef: OsRef<T>) => {
   useLayoutEffect(() => {
@@ -21,7 +21,7 @@ export const useDesktopLayoutOnMount = <T extends HTMLElement>(desktopItemRef: O
       if (!current) return;
 
       /** Since we don't want any icons placed UNDER the taskbar, we bail at `clientHeight` minus `--desktopitem-height` pixels. */
-      const maxDistanceDown = clientHeight - 160;
+      const maxDistanceDown = CLIENT_HEIGHT - 160;
 
       if (x >= maxDistanceDown) {
         /** We reset `x`, meaning we start from the top of the screen next time around. */

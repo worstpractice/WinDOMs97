@@ -1,8 +1,0 @@
-@import '../../styles/colors.module.css';
-
-.Desktop {
-  background-color: var(--desktop-wallpaper);
-  height: 100%;
-  position: absolute;
-  width: 100%;
-}

@@ -2,57 +2,49 @@ import type { CSSProperties, ReactNode } from 'react';
 import { default as React, forwardRef, useState } from 'react';
 import { onLMB } from 'src/event-filters/onLMB';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
-import { css } from 'src/utils/css';
-import styles from './OsButton.module.css';
+import { css } from 'src/utils/as/css';
+import { toFalse } from 'src/utils/setters/toFalse';
+import { toTrue } from 'src/utils/setters/toTrue';
 
 type Props = {
-  children?: ReactNode;
-  className?: string | undefined;
+  readonly children?: ReactNode;
   /** NOTE: This hides the button outline. */
-  isDiscreet?: boolean;
-  onContextMenu?: ButtonHandler;
-  onMouseDown?: ButtonHandler;
-  onMouseLeave?: ButtonHandler;
-  onMouseUp?: ButtonHandler;
-  style?: CSSProperties;
+  readonly discreet?: boolean;
+  readonly onContextMenu?: ButtonHandler;
+  readonly onMouseDown?: ButtonHandler;
+  readonly onMouseUp?: ButtonHandler;
+  readonly pressed?: boolean;
+  readonly style?: CSSProperties;
 };
 
 export const OsButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const { children, className, isDiscreet, onMouseDown, onMouseLeave, onMouseUp, style, ...rest } = props;
+  const { children, discreet, onMouseDown, onMouseUp, pressed, style, ...rest } = props;
   const [isPressed, setIsPressed] = useState(false);
 
   const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
-    setIsPressed(true);
+    setIsPressed(toTrue);
 
     onMouseDown?.(e);
   });
 
-  const handleMouseLeave: ButtonHandler = (e) => {
-    if (!isPressed) return;
-
-    setIsPressed(false);
-
-    onMouseLeave?.(e);
-  };
-
   const handleMouseUp = onLMB<HTMLButtonElement>((e) => {
-    if (!isPressed) return;
-
-    setIsPressed(false);
+    setIsPressed(toFalse);
 
     onMouseUp?.(e);
   });
 
-  const osButtonStyle = css(styles.OsButton ?? '', (isPressed ? styles.Pressed : '') ?? '', className || '', isDiscreet ? styles.Discreet : '');
-
   return (
     <button
-      className={osButtonStyle}
+      //
       onMouseDown={handleMouseDown}
-      onMouseLeave={handleMouseLeave}
       onMouseUp={handleMouseUp}
       ref={ref}
-      style={style}
+      style={{
+        //
+        ...styles.OsButton,
+        outlineStyle: (pressed || isPressed) ? 'outset' : 'inset' ,
+        ...style,
+      }}
       type="button"
       {...rest}
     >
@@ -61,4 +53,21 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   );
 });
 
+/** NOTE: `forwardRef`s require this. */
 OsButton.displayName = 'OsButton';
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  OsButton: css({
+    alignItems: 'center',
+    backgroundColor: 'var(--gray)',
+    display: 'flex',
+    fontSize: '20px',
+    justifyContent: 'center',
+    outlineColor: 'var(--oswindow-outline)',
+    outlineStyle: 'inset',
+    outlineWidth: '4px',
+  } as const),
+} as const;

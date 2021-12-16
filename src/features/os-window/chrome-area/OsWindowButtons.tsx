@@ -9,34 +9,20 @@ import type { Process } from 'src/typings/Process';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { KernelState } from 'src/typings/state/KernelState';
 import type { MenuState } from 'src/typings/state/MenuState';
+import { css } from 'src/utils/as/css';
 import { bringToFront } from 'src/utils/bringToFront';
-import styles from './OsWindowButtons.module.css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-    unsetActiveRef,
-  };
-};
-
-const fromKernel = ({ endProcess }: KernelState) => {
-  return {
-    endProcess,
-  };
-};
-
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef', 'unsetActiveRef');
+const fromKernel = from<KernelState>().select('endProcess');
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  process: Process;
+  readonly process: Process;
 };
 
 export const OsWindowButtons = ({ process }: Props) => {
@@ -48,18 +34,18 @@ export const OsWindowButtons = ({ process }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Domain-Specific Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-  const handleExit = onLMB<HTMLButtonElement>(() => {
+  const handleExit = onLMB<HTMLButtonElement>((): void => {
     endProcess(process);
   });
 
-  const handleMaximize = onLMB<HTMLButtonElement>(() => {
+  const handleMaximize = onLMB<HTMLButtonElement>((): void => {
     const { isMaximized, osWindowRef } = process;
     setActiveRef(osWindowRef);
     bringToFront(osWindowRef);
     isMaximized ? unMaximize() : maximize();
   });
 
-  const handleMinimize = onLMB<HTMLButtonElement>(() => {
+  const handleMinimize = onLMB<HTMLButtonElement>((): void => {
     minimize();
     unsetActiveRef();
   });
@@ -67,16 +53,16 @@ export const OsWindowButtons = ({ process }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLMB<HTMLButtonElement>((event): void => {
     // NOTE: This is necessary to stop the `OsWindow` from starting to move.
-    e.stopPropagation();
+    event.stopPropagation();
     closeMenus();
   });
 
   //////////////////////////////////////////////////////////////////////////////
 
   return (
-    <section className={styles.ButtonRow}>
+    <section style={styles.ButtonRow}>
       <OsButton onMouseDown={handleMouseDown} onMouseUp={handleMinimize}>
         _
       </OsButton>
@@ -89,3 +75,16 @@ export const OsWindowButtons = ({ process }: Props) => {
     </section>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  ButtonRow: css({
+    alignItems: 'center',
+    cursor: 'pointer',
+    display: 'flex',
+    gap: '16px',
+    justifyContent: 'center',
+  } as const),
+} as const;

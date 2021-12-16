@@ -3,28 +3,25 @@ import { QuickstartAreaItem } from 'src/features/taskbar/start-area/quickstart-a
 import { useKernelState } from 'src/state/useKernelState';
 import type { Linker } from 'src/typings/Linker';
 import type { KernelState } from 'src/typings/state/KernelState';
-import { forIsInQuickstartArea } from 'src/utils/array-helpers/filter/forIsInQuickstartArea';
+import { isInQuickstartArea } from 'src/utils/filter/isInQuickstartArea';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ installedPrograms }: KernelState) => {
-  return {
-    installedPrograms,
-  };
-};
+const fromKernel = from<KernelState>().select('installedPrograms');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]-?: never;
+};
 
 export const QuickstartAreaItems = ({}: Props) => {
   const { installedPrograms } = useKernelState(fromKernel);
 
-  const visibleInQuickstartArea = installedPrograms.filter(forIsInQuickstartArea);
-
   return (
     <>
-      {visibleInQuickstartArea.map((binary) => {
+      {installedPrograms.filter(isInQuickstartArea).map((binary) => {
         const { fileHash } = binary;
 
         const toQuickstartAreaItem: Linker = (quickstartAreaItem) => {

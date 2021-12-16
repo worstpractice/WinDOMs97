@@ -6,21 +6,13 @@ import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 import type { ClickState } from 'src/typings/state/ClickState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { listen } from 'src/utils/listen';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromClick = ({ setLastClickPosition }: ClickState) => {
-  return {
-    setLastClickPosition,
-  };
-};
-
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromClick = from<ClickState>().select('setLastClickPosition');
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useLastClickPosition = () => {

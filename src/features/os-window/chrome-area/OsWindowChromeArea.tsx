@@ -1,46 +1,37 @@
-import { default as React } from 'react';
+import { default as React, useRef } from 'react';
 import { onLMB } from 'src/event-filters/onLMB';
 import { OsWindowButtons } from 'src/features/os-window/chrome-area/OsWindowButtons';
 import { OsWindowLabel } from 'src/features/os-window/chrome-area/OsWindowLabel';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useOnDoubleClick } from 'src/hooks/useOnDoubleClick';
-import { useOsRef } from 'src/hooks/useOsRef';
 import { useActiveState } from 'src/state/useActiveState';
 import { isRef } from 'src/type-predicates/isRef';
 import type { Loader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
-import { css } from 'src/utils/css';
-import styles from './OsWindowChromeArea.module.css';
+import { css } from 'src/utils/as/css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ activeRef, setActiveRef }: ActiveState) => {
-  return {
-    activeRef,
-    setActiveRef,
-  };
-};
+const fromActive = from<ActiveState>().select('activeRef', 'setActiveRef');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-const activeStyle = css(styles.OsWindowChromeArea, styles.Active);
-
 type Props = {
-  getProcess: Loader;
-  handleMove: any;
+  readonly getProcess: Loader;
+  readonly handleMove: (event: React.MouseEvent<HTMLSpanElement, MouseEvent>) => void;
 };
 
 export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
   const { activeRef, setActiveRef } = useActiveState(fromActive);
-  const chromeAreaRef = useOsRef<HTMLElement>();
+  const chromeAreaRef = useRef<HTMLElement>(null);
   const process = getProcess(chromeAreaRef);
   const { maximize, unMaximize } = useOsWindowControls(process);
 
   /////////////////////////////////////////////////////////////////////////////////////////
   //  Hook Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleDoubleClick = () => {
+  const handleDoubleClick = (): void => {
     const { isMaximized, osWindowRef } = process;
 
     setActiveRef(osWindowRef);
@@ -54,14 +45,13 @@ export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleMouseDown = onLMB<HTMLSpanElement>((e) => {
+  const handleMouseDown = onLMB<HTMLSpanElement>((event): void => {
     const { isMaximized } = process;
 
-    // Trying to drag on a maximized `OsWindow`? That's a paddling.
+    // Trying to drag a maximized `OsWindow`? That's a paddling.
     if (isMaximized) return;
 
-    handleMove(e);
+    handleMove(event);
   });
 
   /////////////////////////////////////////////////////////////////////////////////////////
@@ -72,15 +62,48 @@ export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
 
   return (
     <span
-      className={styles.Outline}
+      style={styles.Outline}
       // Workaround for Chrome event handling. Think of this as `onDoubleClick`.
       onMouseDownCapture={handleMouseDownCapture}
       onMouseDown={handleMouseDown}
     >
-      <header className={style} ref={chromeAreaRef}>
+      <header style={style} ref={chromeAreaRef}>
         <OsWindowLabel process={process} />
         <OsWindowButtons process={process} />
       </header>
     </span>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Active: css({
+    background: 'linear-gradient(90deg, var(--titlebar-active-dim), var(--titlebar-active-bright))',
+  } as const),
+
+  OsWindowChromeArea: css({
+    alignItems: 'center',
+    background: 'linear-gradient(90deg, var(--titlebar-passive-dim), var(--gray))',
+    cursor: 'grab',
+    display: 'flex',
+    gap: '10px',
+    justifyContent: 'space-between',
+    minHeight: '48px',
+    paddingBottom: '4px',
+    paddingLeft: '10px',
+    paddingRight: '10px',
+  } as const),
+
+  Outline: css({
+    outlineColor: 'var(--oswindow-outline)',
+    outlineStyle: 'inset',
+    outlineWidth: '4px',
+  } as const),
+} as const;
+
+const activeStyle = css({
+  ...styles.OsWindowChromeArea,
+  ...styles.Active,
+} as const);

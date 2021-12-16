@@ -100,10 +100,7 @@
         "checkForEach": true
       }
     ],
-    "arrow-body-style": [
-      "warn",
-      "always"
-    ],
+    "arrow-body-style": "off",
     "arrow-parens": [
       "error",
       "always"

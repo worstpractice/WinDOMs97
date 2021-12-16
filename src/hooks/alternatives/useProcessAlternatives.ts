@@ -5,22 +5,13 @@ import type { Process } from 'src/typings/Process';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { KernelState } from 'src/typings/state/KernelState';
 import { alt } from 'src/utils/alt';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef, unsetActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-    unsetActiveRef,
-  };
-};
-
-const fromKernel = ({ endProcess }: KernelState) => {
-  return {
-    endProcess,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef', 'unsetActiveRef');
+const fromKernel = from<KernelState>().select('endProcess');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useProcessAlternatives = (process: Process) => {

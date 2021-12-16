@@ -7,7 +7,7 @@ export type Data = {
 };
 
 export type Actions = {
-  readonly setIsRunningAreaFull: (to: boolean) => void;
+  readonly setIsRunningAreaFull: (this: void, to: boolean) => void;
 };
 
 export const useRunningAreaState = create<RunningAreaState>(

@@ -1,24 +1,26 @@
 import type { Process } from 'src/typings/Process';
 
 export const useOsWindowControls = (process: Process) => {
-  const maximize = () => {
+  const maximize = (): void => {
     process.isMaximized = true;
   };
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const minimize = () => {
+  const minimize = (): void => {
     process.isMinimized = true;
   };
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const unMaximize = () => {
+  const unMaximize = (): void => {
     process.isMaximized = false;
   };
 
-  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  const unMinimize = () => {
+  const unMinimize = (): void => {
     process.isMinimized = false;
   };
 
-  return { maximize, minimize, unMaximize, unMinimize } as const;
+  return {
+    maximize,
+    minimize,
+    unMaximize,
+    unMinimize,
+  } as const;
 };

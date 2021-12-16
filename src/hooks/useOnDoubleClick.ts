@@ -11,7 +11,6 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
   const [is2ndClick, setIs2ndClick] = useState(false);
 
   ///////////////////////////////////////////////////////////////////////////////////////////
-
   const handleConsecutiveClicks = (target: EventTarget) => {
     const { current } = ref;
 
@@ -35,7 +34,6 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
   };
 
   ///////////////////////////////////////////////////////////////////////////////////////////
-
   const handleMouseDownCapture = onLMB<T>(({ target }) => {
     const { current } = ref;
 
@@ -55,6 +53,5 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
   });
 
   ///////////////////////////////////////////////////////////////////////////////////////////
-
   return handleMouseDownCapture;
 };

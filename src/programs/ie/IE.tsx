@@ -1,15 +1,26 @@
-import { default as React } from 'react';
+import type { CSSProperties } from 'react';
+import { default as React, useRef } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
-import { useOsRef } from 'src/hooks/useOsRef';
 import type { Loader } from 'src/typings/Loader';
-import style from './IE.module.css';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles: { readonly [key in string]: CSSProperties } = new Proxy(
+  {},
+  {
+    get() {
+      return {};
+    },
+  },
+);
+// import styles from './BSOD.module.css';
 
 type Props = {
-  getProcess: Loader;
+  readonly getProcess: Loader;
 };
 
-export const IE = ({ getProcess }: Props) => {
-  const ieRef = useOsRef<HTMLIFrameElement>();
+export const Ie = ({ getProcess }: Props) => {
+  const ieRef = useRef<HTMLIFrameElement>(null);
   const process = getProcess(ieRef);
   useStartingDimensions(process);
 
@@ -17,7 +28,7 @@ export const IE = ({ getProcess }: Props) => {
 
   return (
     <iframe
-      className={style.IE}
+      style={styles.IE}
       frameBorder="0"
       loading="eager"
       // src="http://nineties.website/"

@@ -1,18 +1,18 @@
 import type { CSSProperties } from 'react';
 import { default as React } from 'react';
-import { css } from 'src/utils/css';
-import styles from './Divider.module.css';
+import { css } from 'src/utils/as/css';
+import { keyOf } from 'src/utils/as/keyOf';
 
 type Props = {
-  direction: 'horizontal' | 'vertical';
+  readonly direction: 'horizontal' | 'vertical';
 } & (
   | {
-      dent: 'in' | 'out';
-      isStocky?: never;
+      readonly dent: 'in' | 'out';
+      readonly stocky?: never;
     }
   | {
-      dent?: never;
-      isStocky: boolean;
+      readonly dent?: never;
+      readonly stocky: boolean;
     }
 );
 
@@ -25,30 +25,54 @@ const STOCKY_LENGTH = '80%';
 /** Maps visually to free space surrounding the divider. Set via paddingTop or paddingLeft depending on direction (horizontal or vertical). */
 const STOCKY_FREE_SPACE = '5px';
 
-export const Divider = ({ dent, direction, isStocky = false }: Props) => {
-  const isDentedIn = dent === 'in';
+export const Divider = ({ dent, direction, stocky }: Props) => {
   const isHorizontal = direction === 'horizontal';
 
-  const style = css(
-    styles.Divider ?? '',
-    (isDentedIn ? styles.In : styles.Out) ?? '',
-    (isHorizontal ? styles.Horizontal : styles.Vertical) ?? '',
-    (isStocky ? styles.Stocky : '') ?? '',
+  const style = css({
+    ...styles.Divider,
+    ...(dent === 'in' && styles.In),
+    ...(dent === 'out' && styles.Out),
+    ...(isHorizontal ? styles.Horizontal : styles.Vertical),
+    ...(stocky &&
+      ({
+        height: isHorizontal ? STOCKY_BREADTH : STOCKY_LENGTH,
+        outlineStyle: 'inset',
+        [isHorizontal ? keyOf<CSSProperties>('paddingLeft') : keyOf<CSSProperties>('paddingTop')]: STOCKY_FREE_SPACE,
+        width: isHorizontal ? STOCKY_LENGTH : STOCKY_BREADTH,
+      } as const)),
+  } as const);
+
+  return (
+    <aside
+      //
+      style={style}
+    />
   );
-
-  const override: CSSProperties = {};
-
-  if (isStocky) {
-    if (isHorizontal) {
-      override.paddingLeft = STOCKY_FREE_SPACE;
-      override.width = STOCKY_LENGTH;
-      override.height = STOCKY_BREADTH;
-    } else {
-      override.paddingTop = STOCKY_FREE_SPACE;
-      override.height = STOCKY_LENGTH;
-      override.width = STOCKY_BREADTH;
-    }
-  }
-
-  return <aside className={style} style={override} />;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Divider: css({
+    outlineColor: 'var(--oswindow-outline)',
+    outlineWidth: '2px',
+    pointerEvents: 'none',
+  } as const),
+
+  Horizontal: css({
+    width: '100%',
+  } as const),
+
+  In: css({
+    outlineStyle: 'outset',
+  } as const),
+
+  Out: css({
+    outlineStyle: 'inset',
+  } as const),
+
+  Vertical: css({
+    height: '100%',
+  } as const),
+} as const;

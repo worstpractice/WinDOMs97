@@ -1,20 +1,28 @@
 import type { CSSProperties } from 'react';
 import { default as React } from 'react';
-import { css } from 'src/utils/css';
-import styles from './Title.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
-  className?: string | undefined;
-  of: string;
-  style?: CSSProperties;
+  readonly of: string;
+  readonly style?: CSSProperties;
 };
 
-export const Title = ({ className = '', of, style }: Props) => {
-  const titleStyle = css(styles.Title ?? '', className);
-
+export const Title = ({ of, style }: Props) => {
   return (
-    <h1 className={titleStyle} style={style}>
+    <h1
+      //
+      style={style ? { ...styles.Title, ...style } : styles.Title}
+    >
       {of}
     </h1>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Title: css({
+    pointerEvents: 'none',
+  } as const),
+} as const;

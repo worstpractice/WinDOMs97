@@ -1,27 +1,54 @@
 import type { ReactNode } from 'react';
-import { default as React } from 'react';
+import { default as React, useRef } from 'react';
 import { useStayInSight } from 'src/hooks/context-menu/useStayInSight';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
-import { useOsRef } from 'src/hooks/useOsRef';
-import { css } from 'src/utils/css';
-import styles from './ContextMenu.module.css';
-
-const tooFarDownStyle = css(styles.ContentList ?? '', styles.Outside ?? '');
+import { css } from 'src/utils/as/css';
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 
 export const ContextMenu = ({ children }: Props) => {
-  const contextMenuRef = useOsRef<HTMLElement>();
+  const contextMenuRef = useRef<HTMLElement>(null);
   const [isTooFarDown, { x: left, y: top }] = useStayInSight(contextMenuRef);
   useActivateOnMount(contextMenuRef);
 
   const contentListStyle = isTooFarDown ? tooFarDownStyle : styles.ContentList;
 
   return (
-    <section className={styles.ContextMenu} ref={contextMenuRef} style={{ left, top }}>
-      <ul className={contentListStyle}>{children}</ul>
+    <section ref={contextMenuRef} style={{ ...styles.ContextMenu, left, top }}>
+      <ul style={contentListStyle}>{children}</ul>
     </section>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  ContentList: css({
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    width: '100%',
+  } as const),
+
+  ContextMenu: css({
+    backgroundColor: 'var(--oswindow-background)',
+    outlineColor: 'var(--oswindow-outline)',
+    outlineStyle: 'inset',
+    outlineWidth: '4px',
+    position: 'absolute',
+    width: '350px',
+    zIndex: '50',
+  } as const),
+
+  Outside: css({
+    flexDirection: 'column-reverse',
+  } as const),
+} as const;
+
+const tooFarDownStyle = css({
+  ...styles.ContentList,
+  ...styles.Outside,
+} as const);

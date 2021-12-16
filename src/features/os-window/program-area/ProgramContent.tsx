@@ -1,11 +1,25 @@
 import type { ReactNode } from 'react';
 import { default as React } from 'react';
-import styles from './ProgramContent.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 
 export const ProgramContent = ({ children }: Props) => {
-  return <section className={styles.ProgramContent}>{children}</section>;
+  return <section style={styles.ProgramContent}>{children}</section>;
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  ProgramContent: css({
+    backgroundColor: 'var(--programcontent-background)',
+    height: '100%',
+    outlineColor: 'var(--gray-bright)',
+    outlineStyle: 'inset',
+    outlineWidth: '2px',
+    width: '100%',
+  } as const),
+} as const;

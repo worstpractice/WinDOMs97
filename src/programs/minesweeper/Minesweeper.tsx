@@ -1,17 +1,28 @@
-import { default as React } from 'react';
+import type { CSSProperties } from 'react';
+import { default as React, useRef } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
-import { useOsRef } from 'src/hooks/useOsRef';
 import type { Loader } from 'src/typings/Loader';
-import styles from './Minesweeper.module.css';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles: { readonly [key in string]: CSSProperties } = new Proxy(
+  {},
+  {
+    get() {
+      return {};
+    },
+  },
+);
+// import styles from './Minesweeper.module.css';
 
 type Props = {
-  getProcess: Loader;
+  readonly getProcess: Loader;
 };
 
 export const Minesweeper = ({ getProcess }: Props) => {
-  const minesweeperRef = useOsRef<HTMLDivElement>();
+  const minesweeperRef = useRef<HTMLDivElement>(null);
   const process = getProcess(minesweeperRef);
   useStartingDimensions(process);
 
-  return <div className={styles.Minesweeper} ref={minesweeperRef}></div>;
+  return <div style={styles.Minesweeper} ref={minesweeperRef}></div>;
 };

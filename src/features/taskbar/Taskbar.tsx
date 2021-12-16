@@ -1,45 +1,62 @@
 import type { ReactNode } from 'react';
-import { default as React } from 'react';
-import { useOsRef } from 'src/hooks/useOsRef';
+import { default as React, useRef } from 'react';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
-import styles from './Taskbar.module.css';
+import { css } from 'src/utils/as/css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-  };
-};
-
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef');
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  children: ReactNode;
+  readonly children: ReactNode;
 };
 
 export const Taskbar = ({ children }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
-  const taskbarRef = useOsRef<HTMLElement>();
+  const taskbarRef = useRef<HTMLElement>(null);
 
-  const handleMouseDown = () => {
+  const handleMouseDown = (): void => {
     closeMenus();
     setActiveRef(taskbarRef);
   };
 
   return (
-    <footer className={styles.Taskbar} onMouseDown={handleMouseDown} ref={taskbarRef}>
+    <footer style={styles.Taskbar} onMouseDown={handleMouseDown} ref={taskbarRef}>
       {children}
     </footer>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Taskbar: css({
+    alignItems: 'center',
+    backgroundColor: 'var(--gray)',
+    bottom: 0,
+    display: 'flex',
+    gap: '10px',
+    height: 'var(--taskbar-height)',
+    justifyContent: 'center',
+    left: 0,
+    outlineColor: 'var(--oswindow-outline)',
+    outlineStyle: 'inset',
+    outlineWidth: '4px',
+    paddingBottom: 'var(--taskbar-padding-elsewhere)',
+    paddingLeft: 'var(--taskbar-padding-left)',
+    paddingRight: 'var(--taskbar-padding-elsewhere)',
+    paddingTop: 'var(--taskbar-padding-elsewhere)',
+    position: 'absolute',
+    right: 0,
+    zIndex: 20,
+  } as const),
+} as const;

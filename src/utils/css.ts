@@ -1,4 +1,8 @@
+/* eslint-disable unicorn/no-array-reduce */
+/* eslint-disable unicorn/prefer-object-from-entries */
 // import type { CSSProperties } from "react";
+
+import type { CSSProperties } from 'react';
 
 // const toCssProperties = (acc: CSSProperties, cssProperties: CSSProperties) => {
 //   return {
@@ -13,6 +17,12 @@
 //   return withoutBools.reduce<CSSProperties>(toCssProperties, {} as const);
 // };
 
-export const css = (...args: (string | undefined)[]) => {
-  return args.filter(Boolean).join(' ').trim();
+export const oldCss = (...args: (CSSProperties | string | undefined)[]): CSSProperties => {
+  return (
+    args.filter(Boolean).filter((arg) => {
+      return typeof arg !== 'string';
+    }) as readonly CSSProperties[]
+  ).reduce((acc, arg) => {
+    return { ...acc, ...arg };
+  }, {});
 };

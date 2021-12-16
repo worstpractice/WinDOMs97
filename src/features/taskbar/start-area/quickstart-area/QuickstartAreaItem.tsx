@@ -1,32 +1,28 @@
-import { default as React } from 'react';
+import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { switchOn } from 'src/event-filters/delegate';
+import { switchOn } from 'src/event-filters/switchOn';
 import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
-import { useOsRef } from 'src/hooks/useOsRef';
 import { useMenuState } from 'src/state/useMenuState';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import type { Linker } from 'src/typings/Linker';
 import type { MenuState } from 'src/typings/state/MenuState';
-import styles from './QuickstartAreaItem.module.css';
+import { css } from 'src/utils/as/css';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
-  getBinary: Linker;
+  readonly getBinary: Linker;
 };
 
 export const QuickstartAreaItem = ({ getBinary }: Props) => {
   const { closeMenus } = useMenuState(fromMenu);
-  const quickstartAreaItemRef = useOsRef<HTMLButtonElement>();
+  const quickstartAreaItemRef = useRef<HTMLButtonElement>(null);
   const binary = getBinary(quickstartAreaItemRef);
   const executeBinary = useExecuteBinary(binary);
 
@@ -35,19 +31,40 @@ export const QuickstartAreaItem = ({ getBinary }: Props) => {
     closeMenus();
   };
 
-  const handleRMB: ButtonHandler = (e) => {
+  const handleRMB: ButtonHandler = (event) => {
     // NOTE: This is here because we want `QuickstartAreaItem` to support `ContextMenu` clicks.
-    e.stopPropagation();
+    event.stopPropagation();
     // TODO: Get cracking on context menu `Alternative`s!
   };
 
   const { icon, programName } = binary;
 
   return (
-    <li className={styles.QuickstartAreaItem}>
-      <OsButton className={styles.ButtonOverride} isDiscreet onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })} ref={quickstartAreaItemRef}>
+    <li style={styles.QuickstartAreaItem}>
+      <OsButton style={styles.ButtonOverride} discreet onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })} ref={quickstartAreaItemRef}>
         <Icon alt={programName} height={32} src={icon} width={32} />
       </OsButton>
     </li>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  ButtonOverride: css({
+    outlineColor: 'none',
+    outlineStyle: 'none',
+    outlineWidth: 'none',
+  } as const),
+
+  QuickstartAreaItem: css({
+    alignItems: 'center',
+    cursor: 'pointer',
+    display: 'flex',
+    justifyContent: 'center',
+    outlineColor: 'none',
+    outlineStyle: 'none',
+    outlineWidth: 'none',
+  } as const),
+} as const;

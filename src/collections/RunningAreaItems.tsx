@@ -3,18 +3,17 @@ import { RunningAreaItem } from 'src/features/taskbar/running-area/RunningAreaIt
 import { useKernelState } from 'src/state/useKernelState';
 import type { ButtonLoader } from 'src/typings/Loader';
 import type { KernelState } from 'src/typings/state/KernelState';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromKernel = ({ runningProcesses }: KernelState) => {
-  return {
-    runningProcesses,
-  };
-};
+const fromKernel = from<KernelState>().select('runningProcesses');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]-?: never;
+};
 
 export const RunningAreaItems = ({}: Props) => {
   const { runningProcesses } = useKernelState(fromKernel);

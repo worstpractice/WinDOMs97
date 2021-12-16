@@ -1,20 +1,31 @@
-import { default as React } from 'react';
+import type { CSSProperties } from 'react';
+import { default as React, useRef } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
-import { useOsRef } from 'src/hooks/useOsRef';
 import type { Loader } from 'src/typings/Loader';
-import styles from './Cmd.module.css';
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles: { readonly [key in string]: CSSProperties } = new Proxy(
+  {},
+  {
+    get() {
+      return {};
+    },
+  },
+);
+// import styles from './Cmd.module.css';
 
 type Props = {
-  getProcess: Loader;
+  readonly getProcess: Loader;
 };
 
 export const Cmd = ({ getProcess }: Props) => {
-  const cmdRef = useOsRef<HTMLElement>();
+  const cmdRef = useRef<HTMLElement>(null);
   const process = getProcess(cmdRef);
   useStartingDimensions(process);
 
   return (
-    <main className={styles.Cmd} ref={cmdRef}>
+    <main style={styles.Cmd} ref={cmdRef}>
       <p>Mircosoft WinDOMs [Version 10.0.1337.1234]</p>
       <p>(c) 1997 Mircosoft Corporation. All rights reversed.</p>
     </main>

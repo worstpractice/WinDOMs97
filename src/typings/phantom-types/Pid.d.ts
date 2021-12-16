@@ -1,1 +1,1 @@
-export type PID = number & { readonly brand: 'PID' };
+export type Pid = number & { readonly brand: 'Pid' };

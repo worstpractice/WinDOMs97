@@ -10,27 +10,22 @@ import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { compose } from 'src/utils/compose';
 import { listen } from 'src/utils/listen';
+import { toFalse } from 'src/utils/setters/toFalse';
+import { toInitialPosition } from 'src/utils/setters/toInitialPosition';
+import { toTrue } from 'src/utils/setters/toTrue';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromActive = ({ setActiveRef }: ActiveState) => {
-  return {
-    setActiveRef,
-  };
-};
-
-const fromMenu = ({ closeMenus }: MenuState) => {
-  return {
-    closeMenus,
-  };
-};
+const fromActive = from<ActiveState>().select('setActiveRef');
+const fromMenu = from<MenuState>().select('closeMenus');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
-  const [currentPosition, setCurrentPosition] = useState<Position>({ x: 0, y: 0 });
+  const [currentPosition, setCurrentPosition] = useState<Position>(toInitialPosition);
   const [isDragSelecting, setIsDragSelecting] = useState(false);
 
   useEffect(() => {
@@ -40,25 +35,26 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
       if (isCancelled) return;
 
       const handleMouseDown: MouseHandler<HTMLElement> = onLMB<T>(({ clientX, clientY, target }) => {
-        const { current } = desktopRef;
+        if (isCancelled) return;
+        if (desktopRef.current !== target) return; // We're only interested in clicks on the actual desktop itself
 
-        // We're only interested in clicks on the actual desktop itself
-        if (current !== target) return;
-
-        setCurrentPosition({ x: clientX, y: clientY });
-        setIsDragSelecting(true);
+        setCurrentPosition(() => ({ x: clientX, y: clientY } as const));
+        setIsDragSelecting(toTrue);
         closeMenus();
         setActiveRef(desktopRef);
       });
 
       const handleMouseMove: MouseHandler<HTMLElement> = ({ clientX, clientY }) => {
+        if (isCancelled) return;
         if (!isDragSelecting) return;
 
-        setCurrentPosition({ x: clientX, y: clientY });
+        setCurrentPosition(() => ({ x: clientX, y: clientY } as const));
       };
 
       const handleMouseUp: MouseHandler<HTMLElement> = onLMB<T>(() => {
-        setIsDragSelecting(false);
+        if (isCancelled) return;
+
+        setIsDragSelecting(toFalse);
       });
 
       // NOTE: It's subtle, but we ARE providing `useEffect` with a cleanup function.

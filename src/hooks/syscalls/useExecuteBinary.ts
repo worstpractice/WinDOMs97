@@ -7,28 +7,14 @@ import type { Binary } from 'src/typings/Binary';
 import type { ErrorState } from 'src/typings/state/ErrorState';
 import type { KernelState } from 'src/typings/state/KernelState';
 import type { RunningAreaState } from 'src/typings/state/RunningAreaState';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromError = ({ bluescreen }: ErrorState) => {
-  return {
-    bluescreen,
-  };
-};
-
-const fromKernel = ({ dangerouslyExecuteBinary, runningProcesses }: KernelState) => {
-  return {
-    dangerouslyExecuteBinary,
-    runningProcesses,
-  };
-};
-
-const fromRunningArea = ({ isRunningAreaFull }: RunningAreaState) => {
-  return {
-    isRunningAreaFull,
-  };
-};
+const fromError = from<ErrorState>().select('bluescreen');
+const fromKernel = from<KernelState>().select('dangerouslyExecuteBinary', 'runningProcesses');
+const fromRunningArea = from<RunningAreaState>().select('isRunningAreaFull');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 export const useExecuteBinary = (binary: Binary) => {
@@ -36,13 +22,11 @@ export const useExecuteBinary = (binary: Binary) => {
   const { dangerouslyExecuteBinary, runningProcesses } = useKernelState(fromKernel);
   const { isRunningAreaFull } = useRunningAreaState(fromRunningArea);
 
-  const safelyExecuteBinary = () => {
+  const safelyExecuteBinary = (): void => {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Check if taskbar full
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    if (isRunningAreaFull) {
-      return bluescreen(OUT_OF_TASKBAR);
-    }
+    if (isRunningAreaFull) return bluescreen(OUT_OF_TASKBAR);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Check if `singleInstanceOnly` && already running
@@ -55,10 +39,8 @@ export const useExecuteBinary = (binary: Binary) => {
       for (const { binaryImage } of runningProcesses) {
         const { fileHash } = binaryImage;
 
-        if (fileHash === targetHash) {
-          // If the process is `singleInstanceOnly` AND is already running, we quietly abort the launch
-          return;
-        }
+        // If the process is `singleInstanceOnly` AND is already running, we quietly abort the launch
+        if (fileHash === targetHash) return;
       }
     }
 
@@ -67,9 +49,7 @@ export const useExecuteBinary = (binary: Binary) => {
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const pid = Pids.use();
 
-    if (pid === null) {
-      return bluescreen(OUT_OF_PIDS);
-    }
+    if (pid === null) return bluescreen(OUT_OF_PIDS);
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // Confetti, we launch the process

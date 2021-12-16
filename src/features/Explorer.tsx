@@ -17,18 +17,17 @@ import { StartButton } from 'src/features/taskbar/start-area/StartButton';
 import { Taskbar } from 'src/features/taskbar/Taskbar';
 import { useMenuState } from 'src/state/useMenuState';
 import type { MenuState } from 'src/typings/state/MenuState';
+import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = ({ openMenu }: MenuState) => {
-  return {
-    openMenu,
-  };
-};
+const fromMenu = from<MenuState>().select('openMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-type Props = {};
+type Props = {
+  readonly [key in PropertyKey]-?: never;
+};
 
 export const Explorer = ({}: Props) => {
   const { openMenu } = useMenuState(fromMenu);
