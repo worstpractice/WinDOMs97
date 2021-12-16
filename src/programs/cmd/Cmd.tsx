@@ -1,19 +1,7 @@
-import type { CSSProperties } from 'react';
 import { default as React, useRef } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
 import type { Loader } from 'src/typings/Loader';
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// * Styles *
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const styles: { readonly [key in string]: CSSProperties } = new Proxy(
-  {},
-  {
-    get() {
-      return {};
-    },
-  },
-);
-// import styles from './Cmd.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
   readonly getProcess: Loader;
@@ -31,3 +19,16 @@ export const Cmd = ({ getProcess }: Props) => {
     </main>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Cmd: css({
+    backgroundColor: 'black',
+    color: 'white',
+    fontSize: '32px',
+    height: '100%',
+    width: '100%',
+  } as const),
+} as const;

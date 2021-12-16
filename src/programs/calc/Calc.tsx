@@ -1,20 +1,8 @@
-import type { CSSProperties } from 'react';
 import { default as React, useRef, useState } from 'react';
 import { OsButton } from 'src/components/OsButton';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
 import type { Loader } from 'src/typings/Loader';
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// * Styles *
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const styles: { readonly [key in string]: CSSProperties } = new Proxy(
-  {},
-  {
-    get() {
-      return {};
-    },
-  },
-);
-// import styles from './Calc.module.css';
+import { css } from 'src/utils/as/css';
 
 type Props = {
   readonly getProcess: Loader;
@@ -39,3 +27,26 @@ export const Calc = ({ getProcess }: Props) => {
     </main>
   );
 };
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// * Styles *
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+const styles = {
+  Calc: css({
+    alignItems: 'center',
+    backgroundColor: 'var(--oswindow-background)',
+    display: 'flex',
+    flexDirection: 'column',
+    height: '100%',
+    padding: '10px',
+    width: '100%',
+  } as const),
+
+  CalculatorResults: css({
+    // add some styles bro
+  } as const),
+
+  GridContainer: css({
+    // add some styles bro
+  } as const),
+} as const;

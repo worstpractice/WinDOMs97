@@ -1,3 +1,1 @@
-export const as = <T>(value: T): T => {
-  return value;
-};
+export const as = <T>(value: T): T => value;

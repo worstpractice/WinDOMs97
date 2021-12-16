@@ -42,7 +42,7 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
       style={{
         //
         ...styles.OsButton,
-        outlineStyle: (pressed || isPressed) ? 'outset' : 'inset' ,
+        outlineStyle: pressed || isPressed ? 'outset' : 'inset',
         ...style,
       }}
       type="button"

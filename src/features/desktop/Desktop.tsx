@@ -1,11 +1,10 @@
 import type { ReactNode } from 'react';
-import { default as React } from 'react';
+import { default as React, useRef } from 'react';
 import { onRMB } from 'src/event-filters/onRMB';
 import { DragSelection } from 'src/features/desktop/DragSelection';
 import { useDesktopAlternatives } from 'src/hooks/alternatives/useDesktopAlternatives';
 import { useDragSelection } from 'src/hooks/desktop/useOnDragSelection';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
-import { useRef } from 'react';
 import { useMenuState } from 'src/state/useMenuState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';

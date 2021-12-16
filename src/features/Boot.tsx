@@ -1,9 +1,9 @@
 import { default as React } from 'react';
-import { binaries } from 'src/programs/binaries';
 import { Bsod } from 'src/features/Bsod';
 import { Explorer } from 'src/features/Explorer';
 import { useLastClickPosition } from 'src/hooks/useLastClickPosition';
 import { useLastKeyPress } from 'src/hooks/useLastKeyPress';
+import { binaries } from 'src/programs/binaries';
 import { useErrorState } from 'src/state/useErrorState';
 import { useKernelState } from 'src/state/useKernelState';
 import type { ErrorState } from 'src/typings/state/ErrorState';
