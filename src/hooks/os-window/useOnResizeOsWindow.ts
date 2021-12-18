@@ -1,4 +1,4 @@
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
 import type { OsRef } from 'src/typings/OsRef';
 import { bringToFront } from 'src/utils/bringToFront';
@@ -8,7 +8,7 @@ import { getResizeLatitude } from 'src/utils/os-window/getResizeLatitude';
 
 export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
   /** Drag start event. */
-  const handleMouseDown = onLMB<U>((e) => {
+  const handleMouseDown = onLmb<U>((e) => {
     const { current: osWindow } = osWindowRef;
     if (!osWindow) return;
 
@@ -28,7 +28,7 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
     const startingHeight = osWindow.getBoundingClientRect().height;
 
     /** Stream of events while dragging. */
-    const onMouseMove = onLMB<Document>(({ clientX, clientY }) => {
+    const onMouseMove = onLmb<Document>(({ clientX, clientY }) => {
       const currentLeft = osWindow.getBoundingClientRect().left;
       const currentTop = osWindow.getBoundingClientRect().top;
 
@@ -165,7 +165,7 @@ export const useOnResizeOsWindow = <T extends OsRef<U>, U extends HTMLElement>(o
     let cleanup: () => void; // eslint-disable-line prefer-const
 
     /** Drag stop event. */
-    const onMouseUp = onLMB<Document>(() => {
+    const onMouseUp = onLmb<Document>(() => {
       cleanup();
     });
 

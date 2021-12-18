@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-import { Title } from 'src/components/Title';
 import { css } from 'src/utils/as/css';
 
 type Props = {
@@ -9,7 +8,7 @@ type Props = {
 export const Spine = ({}: Props) => {
   return (
     <header aria-orientation="vertical" style={styles.Spine}>
-      <Title style={styles.Title} of={'WinDOMs 97'} />
+      <p style={styles.Title}>WinDOMs 97</p>
     </header>
   );
 };
@@ -23,7 +22,6 @@ const styles = {
     background: 'linear-gradient(0deg, var(--startmenu-spine-bright) 55%, var(--startmenu-spine-dim) 90%, var(--startmenu-spine-bright) 100%)',
     display: 'flex',
     flexShrink: '0',
-    pointerEvents: 'none',
     transform: 'rotate(180deg)',
     width: '80px',
   } as const),

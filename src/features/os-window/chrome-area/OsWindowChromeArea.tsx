@@ -1,10 +1,11 @@
 import { default as React, useRef } from 'react';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { OsWindowButtons } from 'src/features/os-window/chrome-area/OsWindowButtons';
 import { OsWindowLabel } from 'src/features/os-window/chrome-area/OsWindowLabel';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useOnDoubleClick } from 'src/hooks/useOnDoubleClick';
 import { useActiveState } from 'src/state/useActiveState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import { isRef } from 'src/type-predicates/isRef';
 import type { Loader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
@@ -45,7 +46,7 @@ export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-  const handleMouseDown = onLMB<HTMLSpanElement>((event): void => {
+  const handleMouseDown = onLmb<HTMLSpanElement>((event): void => {
     const { isMaximized } = process;
 
     // Trying to drag a maximized `OsWindow`? That's a paddling.
@@ -81,6 +82,7 @@ export const OsWindowChromeArea = ({ getProcess, handleMove }: Props) => {
 const styles = {
   Active: css({
     background: 'linear-gradient(90deg, var(--titlebar-active-dim), var(--titlebar-active-bright))',
+    ...INTERACTIVE,
   } as const),
 
   OsWindowChromeArea: css({
@@ -94,16 +96,19 @@ const styles = {
     paddingBottom: '4px',
     paddingLeft: '10px',
     paddingRight: '10px',
+    ...INTERACTIVE,
   } as const),
 
   Outline: css({
     outlineColor: 'var(--oswindow-outline)',
     outlineStyle: 'inset',
     outlineWidth: '4px',
+    ...INTERACTIVE,
   } as const),
 } as const;
 
 const activeStyle = css({
   ...styles.OsWindowChromeArea,
   ...styles.Active,
+  ...INTERACTIVE,
 } as const);

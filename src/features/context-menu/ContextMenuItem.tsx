@@ -1,8 +1,8 @@
 import { default as React, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { Words } from 'src/components/Words';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { useMenuState } from 'src/state/useMenuState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { Alternative } from 'src/typings/Alternative';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
@@ -26,7 +26,7 @@ export const ContextMenuItem = ({ alternative }: Props) => {
 
   const { action, icon, name } = alternative;
 
-  const handleMouseDown = onLMB<HTMLLIElement>((): void => {
+  const handleMouseDown = onLmb<HTMLLIElement>((): void => {
     closeMenus();
     action();
   });
@@ -42,7 +42,7 @@ export const ContextMenuItem = ({ alternative }: Props) => {
   return (
     <li onMouseDown={handleMouseDown} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} style={isHovering ? hoverStyle : style}>
       {icon && <Icon alt={name} height={32} src={icon} width={32} />}
-      <Words of={name} />
+      <p>{name}</p>
     </li>
   );
 };
@@ -58,6 +58,7 @@ const style = css({
   paddingBottom: '2px',
   paddingLeft: '8px',
   paddingTop: '2px',
+  ...INTERACTIVE,
 } as const);
 
 const hoverStyle = css({

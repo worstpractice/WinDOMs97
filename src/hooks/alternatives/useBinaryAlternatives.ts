@@ -16,7 +16,7 @@ export const useBinaryAlternatives = (binary: Binary) => {
   const executeBinary = useExecuteBinary(binary);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
-  const alternatives = [
+  return [
     ////////////////////////////////////////////////
     alt('Open', () => {
       executeBinary();
@@ -31,6 +31,4 @@ export const useBinaryAlternatives = (binary: Binary) => {
     }),
     ////////////////////////////////////////////////
   ] as const;
-
-  return alternatives;
 };

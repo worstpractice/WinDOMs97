@@ -14,7 +14,7 @@ export const useDesktopAlternatives = () => {
   const { bluescreen } = useErrorState(fromError);
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
-  const alternatives = [
+  return [
     ////////////////////////////////////////////////
     alt('New folder', () => {
       console.log('We create a new folder');
@@ -25,6 +25,4 @@ export const useDesktopAlternatives = () => {
     }),
     ////////////////////////////////////////////////
   ] as const;
-
-  return alternatives;
 };

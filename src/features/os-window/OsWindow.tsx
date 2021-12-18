@@ -1,5 +1,5 @@
 import { default as React, useRef, useState } from 'react';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { OsWindowChromeArea } from 'src/features/os-window/chrome-area/OsWindowChromeArea';
 import { ProgramArea } from 'src/features/os-window/program-area/ProgramArea';
 import { ProgramContent } from 'src/features/os-window/program-area/ProgramContent';
@@ -51,7 +51,7 @@ export const OsWindow = ({ getProcess }: Props) => {
     setIsResizable(toFalse);
   };
 
-  const handleMouseDown = onLMB<HTMLElement>((event): void => {
+  const handleMouseDown = onLmb<HTMLElement>((event): void => {
     closeMenus();
     setActiveRef(osWindowRef);
     bringToFront(osWindowRef);

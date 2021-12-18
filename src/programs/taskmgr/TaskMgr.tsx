@@ -1,6 +1,6 @@
 import { default as React, useRef } from 'react';
 import { OsButton } from 'src/components/OsButton';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
 import { useActiveState } from 'src/state/useActiveState';
 import { useKernelState } from 'src/state/useKernelState';
@@ -45,7 +45,7 @@ export const TaskMgr = ({ getProcess }: Props) => {
             endProcess(process);
           };
 
-          const handleMouseDown = onLMB<HTMLParagraphElement>((event): void => {
+          const handleMouseDown = onLmb<HTMLParagraphElement>((event): void => {
             // NOTE: This is required to prevent the taskmgr's own `OsWindow` from immediately stealing back the focus.
             event.stopPropagation();
 

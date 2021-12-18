@@ -9,6 +9,16 @@ const HIGHEST_PID = 16 as const;
 const BACKING_SET = new Set<Pid>(rangeFrom(0).to(HIGHEST_PID) as Pid[]);
 
 export const Pids = {
+  alloc(): Pid | null {
+    if (!BACKING_SET.size) return null;
+
+    const pid = Pids.available.at(-1) ?? panic(new ReferenceError('We just ran out of pids!'));
+
+    BACKING_SET.delete(pid);
+
+    return pid;
+  },
+
   get available(): readonly Pid[] {
     // NOTE: Sorting here is CRUCIAL, or (for starters:) random buttons start controlling random `OsWindow`s!
     return [...BACKING_SET].sort(ascending);
@@ -21,15 +31,5 @@ export const Pids = {
     if (BACKING_SET.has(pid)) console.warn(`Trying to free a pid that was not in use! (Pid was ${pid})`);
 
     BACKING_SET.add(pid);
-  },
-
-  use(): Pid | null {
-    if (!BACKING_SET.size) return null;
-
-    const pid = Pids.available.at(-1) ?? panic(new ReferenceError('We just ran out of pids!'));
-
-    BACKING_SET.delete(pid);
-
-    return pid;
   },
 } as const;

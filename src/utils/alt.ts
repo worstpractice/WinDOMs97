@@ -1,8 +1,7 @@
 import type { Alternative } from 'src/typings/Alternative';
 
-export const alt = (name: string, action: () => void): Alternative => {
-  return {
-    action,
-    name,
-  } as const;
-};
+// prettier-ignore
+export const alt = <T extends string>(name: T, action: () => void): Alternative => ({
+  action,
+  name,
+} as const);

@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 import { default as React, useRef } from 'react';
 import { useStayInSight } from 'src/hooks/context-menu/useStayInSight';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import { css } from 'src/utils/as/css';
 
 type Props = {
@@ -31,6 +32,7 @@ const styles = {
     flexDirection: 'column',
     justifyContent: 'center',
     width: '100%',
+    ...INTERACTIVE,
   } as const),
 
   ContextMenu: css({
@@ -41,6 +43,7 @@ const styles = {
     position: 'absolute',
     width: '350px',
     zIndex: '50',
+    ...INTERACTIVE,
   } as const),
 
   Outside: css({

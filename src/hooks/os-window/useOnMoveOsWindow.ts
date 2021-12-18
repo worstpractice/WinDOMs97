@@ -1,11 +1,11 @@
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import type { OsRef } from 'src/typings/OsRef';
 import { bringToFront } from 'src/utils/bringToFront';
 import { compose } from 'src/utils/compose';
 import { listen } from 'src/utils/listen';
 
 export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {
-  const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
+  const handleMouseDown = onLmb<U>(({ clientX, clientY }) => {
     const { current: osWindow } = osWindowRef;
 
     if (!osWindow) return;
@@ -16,7 +16,7 @@ export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osW
     const shiftY = clientY - osWindow.getBoundingClientRect().top;
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB<Document>(({ clientX, clientY }) => {
+    const onMouseMove = onLmb<Document>(({ clientX, clientY }) => {
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;
 
@@ -27,7 +27,7 @@ export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osW
     let cleanup: () => void; // eslint-disable-line prefer-const
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB<Document>(() => {
+    const onMouseUp = onLmb<Document>(() => {
       cleanup();
     });
 

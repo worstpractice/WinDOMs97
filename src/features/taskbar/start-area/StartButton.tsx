@@ -2,17 +2,18 @@ import logo from 'assets/icons/windows-0.png';
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { Title } from 'src/components/Title';
 import { switchOn } from 'src/event-filters/switchOn';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
-import { usePressState } from 'src/state/usePressState';
+import { usePressedState } from 'src/state/usePressedState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import { isRef } from 'src/type-predicates/isRef';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
-import type { PressState } from 'src/typings/state/PressState';
+import type { PressedState } from 'src/typings/state/PressedState';
 import { css } from 'src/utils/as/css';
+import { snitchTo } from 'src/utils/snitchTo';
 import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -20,22 +21,24 @@ import { from } from 'src/utils/state/from';
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const fromActive = from<ActiveState>().select('activeRef', 'setActiveRef', 'unsetActiveRef');
 const fromMenu = from<MenuState>().select('openMenu', 'toggleStartMenu');
-const fromPress = from<PressState>().select('isLmbPressed');
+const fromPressed = from<PressedState>().select('isLmbPressed');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   readonly [key in PropertyKey]-?: never;
 };
 
+const snitch = snitchTo(console.log);
+
 export const StartButton = ({}: Props) => {
   const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { openMenu, toggleStartMenu } = useMenuState(fromMenu);
-  const { isLmbPressed } = usePressState(fromPress);
+  const { isLmbPressed } = usePressedState(fromPressed);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleLMB: ButtonHandler = (e) => {
-    // NOTE: Since the Taskbar under us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
-    e.stopPropagation();
+  const handleLmb: ButtonHandler = (event) => {
+    // NOTE: Since the `Taskbar` under us runs `closeMenu` on mousedown, it's vital that we stop this event here -- or the Start menu cannot open.
+    event.stopPropagation();
 
     // prettier-ignore
     isRef(activeRef, startButtonRef)
@@ -45,16 +48,26 @@ export const StartButton = ({}: Props) => {
     toggleStartMenu();
   };
 
-  const handleRMB: ButtonHandler = (e) => {
+  const handleRmb: ButtonHandler = (event) => {
     // NOTE: This is here because we want `StartButton` to support `ContextMenu` clicks.
-    e.stopPropagation();
+    event.stopPropagation();
     // TODO: Import `Alternative` and get cracking on context menu options!
   };
 
   return (
-    <OsButton style={styles.StartButton} onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })} pressed={openMenu === 'StartMenu'} ref={startButtonRef}>
+    <OsButton
+      //
+      // onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb })}
+      onMouseDown={snitch(switchOn({ lmb: handleLmb, rmb: handleRmb }))}
+      // depress={openMenu === 'StartMenu'}
+      ref={startButtonRef}
+      style={{
+        ...styles.StartButton,
+        outlineStyle: openMenu === 'StartMenu' ? 'outset' : 'inset',
+      }}
+    >
       <Icon alt={'Start'} height={38} src={logo} width={38} />
-      <Title of={'Start'} style={{ fontSize: 28, paddingTop: 4 }} />
+      <p style={styles.Title}>Start</p>
     </OsButton>
   );
 };
@@ -71,5 +84,11 @@ const styles = {
     height: '100%',
     justifyContent: 'center',
     width: '100px',
+    ...INTERACTIVE,
+  } as const),
+
+  Title: css({
+    fontSize: 28,
+    paddingTop: 4,
   } as const),
 } as const;

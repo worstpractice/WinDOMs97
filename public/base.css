@@ -1,3 +1,10 @@
+*,
+*::after,
+*::before {
+  pointer-events: none;
+  user-select: none;
+}
+
 html,
 body {
   background-size: cover;

@@ -1,9 +1,8 @@
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { Words } from 'src/components/Words';
-import { onLMB } from 'src/event-filters/onLMB';
-import { onRMB } from 'src/event-filters/onRMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { onRmb } from 'src/event-filters/onRmb';
 import { useProcessAlternatives } from 'src/hooks/alternatives/useProcessAlternatives';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useActiveState } from 'src/state/useActiveState';
@@ -35,11 +34,11 @@ export const RunningAreaItem = ({ getProcess }: Props) => {
   const alternatives = useProcessAlternatives(process);
   const { minimize, unMinimize } = useOsWindowControls(process);
 
-  const handleContextMenu = onRMB<HTMLButtonElement>(() => {
+  const handleContextMenu = onRmb<HTMLButtonElement>(() => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((event) => {
+  const handleMouseDown = onLmb<HTMLButtonElement>((event) => {
     // NOTE: This event should not reach the `Taskbar` below, or it will become active instead of the `OsWindow` we meant to setActiveRef.
     event.stopPropagation();
     closeMenus();
@@ -62,7 +61,7 @@ export const RunningAreaItem = ({ getProcess }: Props) => {
   return (
     <OsButton style={styles.RunningAreaItem} onContextMenu={handleContextMenu} onMouseDown={handleMouseDown} ref={runningAreaItemRef}>
       <Icon alt={programName} height={20} src={icon} width={20} />
-      <Words of={programName} style={{ fontSize: '18px' }} />
+      <p style={styles.Title}>{programName}</p>
     </OsButton>
   );
 };
@@ -80,5 +79,9 @@ const styles = {
     paddingLeft: '10px',
     paddingRight: '10px',
     width: '240px',
+  } as const),
+
+  Title: css({
+    fontSize: '18px',
   } as const),
 } as const;

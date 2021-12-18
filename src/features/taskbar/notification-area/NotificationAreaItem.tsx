@@ -1,8 +1,8 @@
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { onLMB } from 'src/event-filters/onLMB';
-import { onRMB } from 'src/event-filters/onRMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { onRmb } from 'src/event-filters/onRmb';
 import { useProcessAlternatives } from 'src/hooks/alternatives/useProcessAlternatives';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
@@ -31,11 +31,11 @@ export const NotificationAreaItem = ({ getProcess }: Props) => {
   const process = getProcess(notificationAreaItemRef);
   const alternatives = useProcessAlternatives(process);
 
-  const handleContextMenu = onRMB<HTMLButtonElement>(() => {
+  const handleContextMenu = onRmb<HTMLButtonElement>(() => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((event) => {
+  const handleMouseDown = onLmb<HTMLButtonElement>((event) => {
     // NOTE: This is required since the event would bubble up and hand control back over to the taskbar (which we don't want).
     event.stopPropagation();
     closeMenus();

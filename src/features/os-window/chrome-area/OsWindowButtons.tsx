@@ -1,6 +1,6 @@
 import { default as React } from 'react';
 import { OsButton } from 'src/components/OsButton';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useActiveState } from 'src/state/useActiveState';
 import { useKernelState } from 'src/state/useKernelState';
@@ -34,18 +34,18 @@ export const OsWindowButtons = ({ process }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Domain-Specific Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-  const handleExit = onLMB<HTMLButtonElement>((): void => {
+  const quitApplication = onLmb<HTMLButtonElement>((): void => {
     endProcess(process);
   });
 
-  const handleMaximize = onLMB<HTMLButtonElement>((): void => {
+  const maximizeWindow = onLmb<HTMLButtonElement>((): void => {
     const { isMaximized, osWindowRef } = process;
     setActiveRef(osWindowRef);
     bringToFront(osWindowRef);
     isMaximized ? unMaximize() : maximize();
   });
 
-  const handleMinimize = onLMB<HTMLButtonElement>((): void => {
+  const minimizeWindow = onLmb<HTMLButtonElement>((): void => {
     minimize();
     unsetActiveRef();
   });
@@ -53,7 +53,7 @@ export const OsWindowButtons = ({ process }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-  const handleMouseDown = onLMB<HTMLButtonElement>((event): void => {
+  const handleMouseDown = onLmb<HTMLButtonElement>((event): void => {
     // NOTE: This is necessary to stop the `OsWindow` from starting to move.
     event.stopPropagation();
     closeMenus();
@@ -63,13 +63,13 @@ export const OsWindowButtons = ({ process }: Props) => {
 
   return (
     <section style={styles.ButtonRow}>
-      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleMinimize}>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={minimizeWindow} style={styles.Button}>
         _
       </OsButton>
-      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleMaximize}>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={maximizeWindow} style={styles.Button}>
         #
       </OsButton>
-      <OsButton onMouseDown={handleMouseDown} onMouseUp={handleExit}>
+      <OsButton onMouseDown={handleMouseDown} onMouseUp={quitApplication} style={styles.Button}>
         X
       </OsButton>
     </section>
@@ -80,6 +80,12 @@ export const OsWindowButtons = ({ process }: Props) => {
 // * Styles *
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
+  Button: css({
+    height: '25px',
+    paddingTop: '4px',
+    width: '25px',
+  } as const),
+
   ButtonRow: css({
     alignItems: 'center',
     cursor: 'pointer',

@@ -18,7 +18,7 @@ const styles = {
     backgroundColor: 'var(--programcontent-background)',
     height: '100%',
     outlineColor: 'var(--gray-bright)',
-    outlineStyle: 'inset',
+    outlineStyle: 'outset',
     outlineWidth: '2px',
     width: '100%',
   } as const),

@@ -1,9 +1,12 @@
 import { default as React, useRef, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { Words } from 'src/components/Words';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { onRmb } from 'src/event-filters/onRmb';
+import { switchOn } from 'src/event-filters/switchOn';
+import { useBinaryAlternatives } from 'src/hooks/alternatives/useBinaryAlternatives';
 import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
 import { useMenuState } from 'src/state/useMenuState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { Linker } from 'src/typings/Linker';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
@@ -14,7 +17,7 @@ import { from } from 'src/utils/state/from';
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = from<MenuState>().select('closeMenus');
+const fromMenu = from<MenuState>().select('closeMenus', 'openContextMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -22,13 +25,18 @@ type Props = {
 };
 
 export const StartMenuItem = ({ getBinary }: Props) => {
-  const { closeMenus } = useMenuState(fromMenu);
+  const { closeMenus, openContextMenu } = useMenuState(fromMenu);
   const startMenuItemRef = useRef<HTMLLIElement>(null);
   const binary = getBinary(startMenuItemRef);
   const executeBinary = useExecuteBinary(binary);
   const [isHovering, setIsHovering] = useState(false);
+  const alternatives = useBinaryAlternatives(binary);
 
-  const handleLaunch = onLMB<HTMLLIElement>(() => {
+  const handleContextMenu = onRmb<HTMLElement>((): void => {
+    openContextMenu(alternatives);
+  });
+
+  const handleLaunch = onLmb<HTMLLIElement>(() => {
     closeMenus();
     executeBinary();
   });
@@ -45,14 +53,14 @@ export const StartMenuItem = ({ getBinary }: Props) => {
 
   return (
     <li
-      onMouseDown={handleLaunch}
+      onMouseDown={switchOn({ lmb: handleLaunch, rmb: handleContextMenu } as const)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={startMenuItemRef}
       style={isHovering ? hoverStyle : style}
     >
       <Icon alt={fileName} height={64} src={icon} width={64} />
-      <Words of={programName} />
+      <p>{programName}</p>
     </li>
   );
 };
@@ -67,6 +75,7 @@ const style = css({
   fontSize: '32px',
   gap: '20px',
   padding: '10px',
+  ...INTERACTIVE,
 } as const);
 
 const hoverStyle = css({

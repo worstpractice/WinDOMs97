@@ -1,5 +1,4 @@
 import { default as React } from 'react';
-import { Words } from 'src/components/Words';
 import { css } from 'src/utils/as/css';
 import { timestamp } from 'src/utils/timestamp';
 
@@ -8,7 +7,7 @@ type Props = {
 };
 
 export const Clock = ({}: Props) => {
-  return <Words style={styles.Clock} of={timestamp()} />;
+  return <p style={styles.Clock}>{timestamp()}</p>;
 };
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

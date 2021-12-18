@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import type { OsRef } from 'src/typings/OsRef';
 
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
@@ -34,7 +34,7 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
   };
 
   ///////////////////////////////////////////////////////////////////////////////////////////
-  const handleMouseDownCapture = onLMB<T>(({ target }) => {
+  const handleMouseDownCapture = onLmb<T>(({ target }) => {
     const { current } = ref;
 
     if (!current) return;

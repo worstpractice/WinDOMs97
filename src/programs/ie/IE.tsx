@@ -19,8 +19,8 @@ export const Ie = ({ getProcess }: Props) => {
       style={styles.IE}
       frameBorder="0"
       loading="eager"
-      src="http://nineties.website/"
-      // src="page.html"
+      // src="http://nineties.website/"
+      src="page.html"
       title={programName}
       ref={ieRef}
     />
@@ -32,7 +32,6 @@ export const Ie = ({ getProcess }: Props) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const styles = {
   IE: css({
-    /* This ensures that otherwise unstyled html will atleast default to a white background. */
     backgroundColor: 'white',
     height: '100%',
     width: '100%',

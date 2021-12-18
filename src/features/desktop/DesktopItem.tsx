@@ -1,9 +1,8 @@
 import png_unrecognized_file_extension from 'assets/icons/file_question.png';
 import { default as React, useRef, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { Words } from 'src/components/Words';
-import { onLMB } from 'src/event-filters/onLMB';
-import { onRMB } from 'src/event-filters/onRMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { onRmb } from 'src/event-filters/onRmb';
 import { useBinaryAlternatives } from 'src/hooks/alternatives/useBinaryAlternatives';
 import { useDesktopLayoutOnMount } from 'src/hooks/desktop/desktop-item/useDesktopLayoutOnMount';
 import { useOnDragAndDrop } from 'src/hooks/desktop/desktop-item/useOnDragAndDrop';
@@ -13,6 +12,7 @@ import { useOnDoubleClick } from 'src/hooks/useOnDoubleClick';
 import { useActiveState } from 'src/state/useActiveState';
 import { useDragState } from 'src/state/useDragState';
 import { useMenuState } from 'src/state/useMenuState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import { isRef } from 'src/type-predicates/isRef';
 import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 import type { Linker } from 'src/typings/Linker';
@@ -20,7 +20,6 @@ import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { DragState } from 'src/typings/state/DragState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
-import { oldCss } from 'src/utils/css';
 import { blockNativeDrag } from 'src/utils/os-window/blockNativeDrag';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toTrue } from 'src/utils/setters/toTrue';
@@ -54,8 +53,7 @@ export const DesktopItem = ({ getBinary }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   //  Hook Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleDoubleClick = () => {
+  const handleDoubleClick = (): void => {
     executeBinary();
   };
 
@@ -65,17 +63,16 @@ export const DesktopItem = ({ getBinary }: Props) => {
   /////////////////////////////////////////////////////////////////////////////////////////
   // Event Handlers
   /////////////////////////////////////////////////////////////////////////////////////////
-
-  const handleContextMenu = onRMB<HTMLElement>(() => {
+  const handleContextMenu = onRmb<HTMLElement>((): void => {
     openContextMenu(alternatives);
   });
 
-  const handleMouseDown = onLMB<HTMLElement>((e) => {
+  const handleMouseDown = onLmb<HTMLElement>((event): void => {
     // NOTE: This makes `DesktopItem` selection sticky, which we want.
-    e.stopPropagation();
+    event.stopPropagation();
     closeMenus();
     setActiveRef(desktopItemRef);
-    handleMove(e);
+    handleMove(event);
   });
 
   const handleMouseOut = () => {
@@ -90,7 +87,7 @@ export const DesktopItem = ({ getBinary }: Props) => {
     setIsPotentialDropTarget(toTrue);
   };
 
-  const handleMouseUp: MouseHandler<HTMLElement> = ({ target: dropZone }) => {
+  const handleMouseUp: MouseHandler<HTMLElement> = ({ target: dropZone }): void => {
     const { current: faller } = dragRef;
 
     if (!faller) return;
@@ -101,7 +98,11 @@ export const DesktopItem = ({ getBinary }: Props) => {
 
   /////////////////////////////////////////////////////////////////////////////////////////
 
-  const desktopItemStyle = oldCss(styles.DesktopItem, isRef(activeRef, desktopItemRef) ? styles.Active : '', isPotentialDropTarget ? styles.DropTarget : '');
+  const desktopItemStyle = css({
+    ...styles.DesktopItem,
+    ...(isRef(activeRef, desktopItemRef) && styles.Active),
+    ...(isPotentialDropTarget && styles.DropTarget),
+  } as const);
 
   const { fileName, fileHash, icon, isBeingRenamed, isFileExtensionRecognized } = binary;
 
@@ -130,11 +131,7 @@ export const DesktopItem = ({ getBinary }: Props) => {
         src={iconSrc}
         width={64}
       />
-      <Words
-        //
-        style={styles.Title}
-        of={text}
-      />
+      <p style={styles.Title}>{text}</p>
     </article>
   );
 };
@@ -150,6 +147,7 @@ const styles = {
     outlineColor: 'var(--white-transparent)',
     outlineStyle: 'dotted',
     outlineWidth: '1px',
+    ...INTERACTIVE,
   } as const),
 
   DesktopItem: css({
@@ -163,10 +161,12 @@ const styles = {
     justifyContent: 'center',
     position: 'absolute',
     width: 'var(--desktopitem-width)',
+    ...INTERACTIVE,
   } as const),
 
   DropTarget: css({
     backgroundColor: 'darkslateblue',
+    ...INTERACTIVE,
   } as const),
 
   Title: css({
@@ -174,5 +174,6 @@ const styles = {
     overflowWrap: 'break-word',
     textAlign: 'center',
     width: '100%',
+    ...INTERACTIVE,
   } as const),
 } as const;

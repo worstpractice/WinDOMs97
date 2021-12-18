@@ -22,7 +22,7 @@ export const useProcessAlternatives = (process: Process) => {
   const { isMaximized, isMinimized, osWindowRef } = process;
 
   // NOTE: `ContextMenuItems` get listed in the order specified here.
-  const alternatives = [
+  return [
     ////////////////////////////////////////////////
     alt('Exit', () => {
       endProcess(process);
@@ -49,6 +49,4 @@ export const useProcessAlternatives = (process: Process) => {
         }),
     ////////////////////////////////////////////////
   ] as const;
-
-  return alternatives;
 };

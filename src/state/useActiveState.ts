@@ -27,8 +27,10 @@ export const useActiveState = create<ActiveState>(
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         setActiveRef: <T extends OsRef<HTMLElement>>({ current }: T): void => {
-          set(({ activeRef }) => {
-            if (activeRef.current === current) return { activeRef } as const;
+          set((data) => {
+            const { activeRef } = data;
+
+            if (activeRef.current === current) return data;
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
             console.debug('FROM:', activeRef.current);
@@ -40,8 +42,10 @@ export const useActiveState = create<ActiveState>(
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         unsetActiveRef: (): void => {
-          set(({ activeRef }) => {
-            if (activeRef.current === null) return { activeRef } as const;
+          set((data) => {
+            const { activeRef } = data;
+
+            if (activeRef.current === null) return data;
 
             console.groupCollapsed(`${++debugLogCounter}.  ActiveRef Changed `);
             console.debug('FROM:', activeRef.current);

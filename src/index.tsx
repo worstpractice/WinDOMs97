@@ -2,20 +2,16 @@ import 'modern-normalize';
 import { default as React, StrictMode } from 'react';
 import { render } from 'react-dom';
 import { Boot } from 'src/features/Boot';
-import { usePressState } from 'src/state/usePressState';
+import { usePressedState } from 'src/state/usePressedState';
 
 // Disable the default context menu globally
-window.oncontextmenu = () => {
-  return false;
-};
-document.oncontextmenu = () => {
-  return false;
-};
+window.oncontextmenu = () => false;
+document.oncontextmenu = () => false;
 
-const { setIsLmbPressed, setIsRmbPressed } = usePressState.getState();
+const { setIsLmbPressed, setIsRmbPressed } = usePressedState.getState();
 
 window.addEventListener(
-  'mouseup',
+  'mousedown',
   ({ button }) => {
     if (button === 0) setIsLmbPressed(true);
     if (button === 2) setIsRmbPressed(true);
@@ -27,7 +23,7 @@ window.addEventListener(
 );
 
 window.addEventListener(
-  'mousedown',
+  'mouseup',
   ({ button }) => {
     if (button === 0) setIsLmbPressed(false);
     if (button === 2) setIsRmbPressed(false);

@@ -1,7 +1,8 @@
 import type { ReactNode } from 'react';
 import { default as React } from 'react';
-import { onRMB } from 'src/event-filters/onRMB';
+import { onRmb } from 'src/event-filters/onRmb';
 import { Spine } from 'src/features/taskbar/start-area/start-menu/Spine';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import { css } from 'src/utils/as/css';
 
 type Props = {
@@ -9,7 +10,7 @@ type Props = {
 };
 
 export const StartMenu = ({ children }: Props) => {
-  const handleContextMenu = onRMB<HTMLElement>((event) => {
+  const handleContextMenu = onRmb<HTMLElement>((event) => {
     // NOTE: This is here because we want `StartMenu` to support showing a context menu.
     event.stopPropagation();
     // TODO: Get cracking on context menu `Alternative`s!
@@ -31,6 +32,7 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     width: '100%',
+    ...INTERACTIVE,
   } as const),
 
   StartMenu: css({
@@ -46,5 +48,6 @@ const styles = {
     position: 'absolute',
     width: '100%',
     zIndex: 40,
+    ...INTERACTIVE,
   } as const),
 } as const;

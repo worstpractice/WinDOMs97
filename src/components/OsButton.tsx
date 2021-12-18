@@ -1,6 +1,8 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { default as React, forwardRef, useState } from 'react';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { useIsPressed } from 'src/hooks/useIsPressed';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import { css } from 'src/utils/as/css';
 import { toFalse } from 'src/utils/setters/toFalse';
@@ -8,45 +10,57 @@ import { toTrue } from 'src/utils/setters/toTrue';
 
 type Props = {
   readonly children?: ReactNode;
-  /** NOTE: This hides the button outline. */
+  /** NOTE: this hides the button outline. */
   readonly discreet?: boolean;
   readonly onContextMenu?: ButtonHandler;
   readonly onMouseDown?: ButtonHandler;
   readonly onMouseUp?: ButtonHandler;
-  readonly pressed?: boolean;
   readonly style?: CSSProperties;
 };
 
 export const OsButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
-  const { children, discreet, onMouseDown, onMouseUp, pressed, style, ...rest } = props;
-  const [isPressed, setIsPressed] = useState(false);
+  const { children, discreet, onMouseDown, onMouseUp, style, ...remainingProps } = props;
+  const [isPressed, setIsPressed] = useIsPressed(false);
+  const [isHovered, setIsHovered] = useState(false);
 
-  const handleMouseDown = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseDown = onLmb<HTMLButtonElement>((event): void => {
     setIsPressed(toTrue);
 
-    onMouseDown?.(e);
+    onMouseDown?.(event);
   });
 
-  const handleMouseUp = onLMB<HTMLButtonElement>((e) => {
+  const handleMouseUp = onLmb<HTMLButtonElement>((event): void => {
+    if (!isPressed) return;
+
     setIsPressed(toFalse);
 
-    onMouseUp?.(e);
+    onMouseUp?.(event);
   });
+
+  const handleMouseEnter = (): void => {
+    setIsHovered(toTrue);
+  };
+
+  const handleMouseLeave = (): void => {
+    setIsHovered(toFalse);
+  };
 
   return (
     <button
       //
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
       ref={ref}
       style={{
         //
         ...styles.OsButton,
-        outlineStyle: pressed || isPressed ? 'outset' : 'inset',
+        outlineStyle: isPressed ? (isHovered ? 'outset' : 'inset') : 'inset',
         ...style,
       }}
       type="button"
-      {...rest}
+      {...remainingProps}
     >
       {children}
     </button>
@@ -69,5 +83,7 @@ const styles = {
     outlineColor: 'var(--oswindow-outline)',
     outlineStyle: 'inset',
     outlineWidth: '4px',
+    textAlign: 'center',
+    ...INTERACTIVE,
   } as const),
 } as const;

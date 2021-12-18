@@ -1,4 +1,4 @@
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
 import { useDragState } from 'src/state/useDragState';
 import type { CleanupFn } from 'src/typings/CleanupFn';
 import type { OsRef } from 'src/typings/OsRef';
@@ -19,7 +19,7 @@ const fromDrag = from<DragState>().select('setDragRef', 'unsetDragRef');
 export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desktopItemRef: T) => {
   const { setDragRef, unsetDragRef } = useDragState(fromDrag);
 
-  const handleMouseDown = onLMB<U>(({ clientX, clientY }) => {
+  const handleMouseDown = onLmb<U>(({ clientX, clientY }) => {
     // Target here is whatever we START DRAGGING.
     const { current: desktopItem } = desktopItemRef;
 
@@ -40,7 +40,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     desktopItem.classList.add(styles.Original ?? '');
 
     /** `Document`-level event listener. */
-    const onMouseMove = onLMB<Document>(({ clientX, clientY, target }) => {
+    const onMouseMove = onLmb<Document>(({ clientX, clientY, target }) => {
       // Target here is whatever we DRAG OVER (but not necessarily what we DROP on)
       const newLeft = clientX - shiftX;
       const newTop = clientY - shiftY;
@@ -52,7 +52,7 @@ export const useOnDragAndDrop = <T extends OsRef<U>, U extends HTMLElement>(desk
     let cleanup: CleanupFn; // eslint-disable-line prefer-const
 
     /** `Document`-level event listener. */
-    const onMouseUp = onLMB<Document>(({ clientX, clientY }) => {
+    const onMouseUp = onLmb<Document>(({ clientX, clientY }) => {
       // Target here is whatever we DROP ON (will have been the DRAG target atleast once before it shows up here -- gotta be above something first before you can drop over it)
       clone.classList.remove(styles.Moving ?? '');
       clone.remove();

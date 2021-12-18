@@ -41,7 +41,7 @@ export const QuickstartAreaItem = ({ getBinary }: Props) => {
 
   return (
     <li style={styles.QuickstartAreaItem}>
-      <OsButton style={styles.ButtonOverride} discreet onMouseDown={switchOn({ LMB: handleLMB, RMB: handleRMB })} ref={quickstartAreaItemRef}>
+      <OsButton style={styles.ButtonOverride} discreet onMouseDown={switchOn({ lmb: handleLMB, rmb: handleRMB })} ref={quickstartAreaItemRef}>
         <Icon alt={programName} height={32} src={icon} width={32} />
       </OsButton>
     </li>

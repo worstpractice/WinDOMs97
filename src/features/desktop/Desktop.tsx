@@ -1,11 +1,12 @@
 import type { ReactNode } from 'react';
 import { default as React, useRef } from 'react';
-import { onRMB } from 'src/event-filters/onRMB';
+import { onRmb } from 'src/event-filters/onRmb';
 import { DragSelection } from 'src/features/desktop/DragSelection';
 import { useDesktopAlternatives } from 'src/hooks/alternatives/useDesktopAlternatives';
 import { useDragSelection } from 'src/hooks/desktop/useOnDragSelection';
 import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
 import { useMenuState } from 'src/state/useMenuState';
+import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
 import { from } from 'src/utils/state/from';
@@ -27,7 +28,7 @@ export const Desktop = ({ children }: Props) => {
   const alternatives = useDesktopAlternatives();
   useActivateOnMount(desktopRef);
 
-  const handleContextMenu = onRMB<HTMLElement>(({ target }) => {
+  const handleContextMenu = onRmb<HTMLElement>(({ target }) => {
     const { current: desktop } = desktopRef;
 
     if (target !== desktop) return;
@@ -54,5 +55,6 @@ const styles = {
     position: 'absolute',
     right: 0,
     top: 0,
+    ...INTERACTIVE,
   } as const),
 } as const;

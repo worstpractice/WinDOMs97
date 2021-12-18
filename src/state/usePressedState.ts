@@ -1,4 +1,4 @@
-import type { PressState } from 'src/typings/state/PressState';
+import type { PressedState } from 'src/typings/state/PressedState';
 import create from 'zustand';
 import { combine } from 'zustand/middleware';
 
@@ -12,7 +12,7 @@ export type Actions = {
   setIsRmbPressed: (this: void, to: boolean) => void;
 };
 
-export const usePressState = create<PressState>(
+export const usePressedState = create<PressedState>(
   combine<Data, Actions>(
     {
       ///////////////////////////////////////////

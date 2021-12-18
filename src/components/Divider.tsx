@@ -57,7 +57,6 @@ const styles = {
   Divider: css({
     outlineColor: 'var(--oswindow-outline)',
     outlineWidth: '2px',
-    pointerEvents: 'none',
   } as const),
 
   Horizontal: css({

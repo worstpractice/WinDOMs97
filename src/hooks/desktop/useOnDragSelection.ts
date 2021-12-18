@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { onLMB } from 'src/event-filters/onLMB';
+import { onLmb } from 'src/event-filters/onLmb';
+import { useIsPressed } from 'src/hooks/useIsPressed';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
 import type { ComposedFn } from 'src/typings/ComposedFn';
@@ -26,7 +27,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
   const { setActiveRef } = useActiveState(fromActive);
   const { closeMenus } = useMenuState(fromMenu);
   const [currentPosition, setCurrentPosition] = useState<Position>(toInitialPosition);
-  const [isDragSelecting, setIsDragSelecting] = useState(false);
+  const [isDragSelecting, setIsDragSelecting] = useIsPressed(false);
 
   useEffect(() => {
     let isCancelled = false;
@@ -34,7 +35,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
     const effect = (): ComposedFn | undefined => {
       if (isCancelled) return;
 
-      const handleMouseDown: MouseHandler<HTMLElement> = onLMB<T>(({ clientX, clientY, target }) => {
+      const handleMouseDown: MouseHandler<HTMLElement> = onLmb<T>(({ clientX, clientY, target }) => {
         if (isCancelled) return;
         if (desktopRef.current !== target) return; // We're only interested in clicks on the actual desktop itself
 
@@ -51,7 +52,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
         setCurrentPosition(() => ({ x: clientX, y: clientY } as const));
       };
 
-      const handleMouseUp: MouseHandler<HTMLElement> = onLMB<T>(() => {
+      const handleMouseUp: MouseHandler<HTMLElement> = onLmb<T>(() => {
         if (isCancelled) return;
 
         setIsDragSelecting(toFalse);
@@ -90,7 +91,7 @@ export const useDragSelection = <T extends HTMLElement>(desktopRef: OsRef<T>) =>
       isCancelled = true;
       composedFn?.();
     };
-  }, [setActiveRef, closeMenus, desktopRef, isDragSelecting]);
+  }, [closeMenus, desktopRef, isDragSelecting, setActiveRef, setIsDragSelecting]);
 
   return [isDragSelecting, currentPosition] as const;
 };
