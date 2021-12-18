@@ -1,6 +1,7 @@
 import { default as React, useRef } from 'react';
 import { OsButton } from 'src/components/OsButton';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
 import { useActiveState } from 'src/state/useActiveState';
 import { useKernelState } from 'src/state/useKernelState';
 import { useMenuState } from 'src/state/useMenuState';
@@ -30,12 +31,13 @@ export const TaskMgr = ({ getProcess }: Props) => {
   const { setActiveRef } = useActiveState(fromActive);
   const { endProcess, runningProcesses } = useKernelState(fromKernel);
   const { closeMenus } = useMenuState(fromMenu);
-  const taskMgrRef = useRef<HTMLDivElement>(null);
-  const process = getProcess(taskMgrRef);
+  const programRef = useRef<HTMLDivElement>(null);
+  const process = getProcess(programRef);
+  useActivateOnMount(programRef);
   useStartingDimensions(process);
 
   return (
-    <div style={styles.TaskMgr} ref={taskMgrRef}>
+    <div style={styles.TaskMgr} ref={programRef}>
       <ul style={styles.ProcessList}>
         {[...runningProcesses].sort(byPid).map((process) => {
           const { binaryImage, pid } = process;

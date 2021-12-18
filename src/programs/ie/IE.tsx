@@ -1,5 +1,6 @@
 import { default as React, useRef } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
 import type { Loader } from 'src/typings/Loader';
 import { css } from 'src/utils/as/css';
 
@@ -8,8 +9,9 @@ type Props = {
 };
 
 export const Ie = ({ getProcess }: Props) => {
-  const ieRef = useRef<HTMLIFrameElement>(null);
-  const process = getProcess(ieRef);
+  const programRef = useRef<HTMLIFrameElement>(null);
+  const process = getProcess(programRef);
+  useActivateOnMount(programRef);
   useStartingDimensions(process);
 
   const { programName } = process.binaryImage;
@@ -22,7 +24,7 @@ export const Ie = ({ getProcess }: Props) => {
       // src="http://nineties.website/"
       src="page.html"
       title={programName}
-      ref={ieRef}
+      ref={programRef}
     />
   );
 };

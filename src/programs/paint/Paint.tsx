@@ -1,5 +1,6 @@
 import { default as React, useEffect, useRef, useState } from 'react';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
 import { useIsPressed } from 'src/hooks/useIsPressed';
 import type { Loader } from 'src/typings/Loader';
 import type { Position } from 'src/typings/Position';
@@ -13,12 +14,13 @@ type Props = {
 };
 
 export const Paint = ({ getProcess }: Props) => {
-  const paintRef = useRef<HTMLElement>(null);
-  const process = getProcess(paintRef);
+  const programRef = useRef<HTMLElement>(null);
+  const process = getProcess(programRef);
   const [isDrawing, setIsDrawing] = useIsPressed(false);
   const [position, setPosition] = useState<Position>({ x: 0, y: 0 });
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const ctxRef = useRef<CanvasRenderingContext2D | null>(canvasRef.current?.getContext('2d') ?? null);
+  useActivateOnMount(programRef);
   useStartingDimensions(process);
 
   useEffect(() => {
@@ -85,11 +87,11 @@ export const Paint = ({ getProcess }: Props) => {
   });
 
   // TODO: ???
-  const width = paintRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
-  const height = paintRef.current?.getBoundingClientRect().height ?? 286; // ditto
+  const width = programRef.current?.getBoundingClientRect().width ?? 386; // magic numbers lol
+  const height = programRef.current?.getBoundingClientRect().height ?? 286; // ditto
 
   return (
-    <main ref={paintRef} style={styles.Frame}>
+    <main ref={programRef} style={styles.Frame}>
       <canvas
         // TODO: Make this not be complete bullshit
         height={height}

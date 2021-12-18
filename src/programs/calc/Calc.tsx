@@ -1,6 +1,7 @@
 import { default as React, useRef, useState } from 'react';
 import { OsButton } from 'src/components/OsButton';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
+import { useActivateOnMount } from 'src/hooks/useActivateOnMount';
 import type { Loader } from 'src/typings/Loader';
 import { css } from 'src/utils/as/css';
 
@@ -9,8 +10,9 @@ type Props = {
 };
 
 export const Calc = ({ getProcess }: Props) => {
-  const calcRef = useRef<HTMLElement>(null);
-  const process = getProcess(calcRef);
+  const programRef = useRef<HTMLElement>(null);
+  const process = getProcess(programRef);
+  useActivateOnMount(programRef);
   useStartingDimensions(process);
   const [sum, setSum] = useState(12);
 
@@ -19,7 +21,7 @@ export const Calc = ({ getProcess }: Props) => {
   };
 
   return (
-    <main style={styles.Calc} ref={calcRef}>
+    <main style={styles.Calc} ref={programRef}>
       <header style={styles.CalculatorResults}>{sum}</header>
       <section style={styles.GridContainer}>
         <OsButton onMouseUp={handleMouseUp}>C</OsButton>
