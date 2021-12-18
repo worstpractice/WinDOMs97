@@ -1,6 +1,6 @@
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/constants/OsWindow';
+import { RECOGNIZED_FILE_EXTENSIONS } from 'src/constants/recognizedFileExtensions';
 import { Pids } from 'src/kernel/Pids';
-import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
-import { RECOGNIZED_FILE_EXTENSIONS } from 'src/os-constants/recognizedFileExtensions';
 import type { Binary } from 'src/typings/Binary';
 import type { Pid } from 'src/typings/phantom-types/Pid';
 import type { Process } from 'src/typings/Process';

@@ -12,3 +12,5 @@ export const snitchTo = <T extends SyntheticEvent>(fn: (event: T) => void) => {
 
   return acceptsHandlerFn;
 };
+
+// const snitch = snitchTo(console.log);

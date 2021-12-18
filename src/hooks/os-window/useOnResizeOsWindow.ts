@@ -1,8 +1,8 @@
-import { onLmb } from 'src/event-filters/onLmb';
-import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/constants/OsWindow';
 import type { OsRef } from 'src/typings/OsRef';
 import { bringToFront } from 'src/utils/bringToFront';
 import { compose } from 'src/utils/compose';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { listen } from 'src/utils/listen';
 import { getResizeLatitude } from 'src/utils/os-window/getResizeLatitude';
 

@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { onLmb } from 'src/event-filters/onLmb';
 import { useIsPressed } from 'src/hooks/useIsPressed';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
@@ -10,6 +9,7 @@ import type { Position } from 'src/typings/Position';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { compose } from 'src/utils/compose';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { listen } from 'src/utils/listen';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toInitialPosition } from 'src/utils/setters/toInitialPosition';

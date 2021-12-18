@@ -1,13 +1,13 @@
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { switchOn } from 'src/event-filters/switchOn';
 import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
 import { useMenuState } from 'src/state/useMenuState';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import type { Linker } from 'src/typings/Linker';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { switchOn } from 'src/utils/event-filters/switchOn';
 import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

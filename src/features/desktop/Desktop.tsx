@@ -1,6 +1,5 @@
 import type { ReactNode } from 'react';
 import { default as React, useRef } from 'react';
-import { onRmb } from 'src/event-filters/onRmb';
 import { DragSelection } from 'src/features/desktop/DragSelection';
 import { useDesktopAlternatives } from 'src/hooks/alternatives/useDesktopAlternatives';
 import { useDragSelection } from 'src/hooks/desktop/useOnDragSelection';
@@ -9,6 +8,7 @@ import { useMenuState } from 'src/state/useMenuState';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { onRmb } from 'src/utils/event-filters/onRmb';
 import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

@@ -1,16 +1,16 @@
 import { default as React, useRef } from 'react';
-import { onLmb } from 'src/event-filters/onLmb';
 import { OsWindowButtons } from 'src/features/os-window/chrome-area/OsWindowButtons';
 import { OsWindowLabel } from 'src/features/os-window/chrome-area/OsWindowLabel';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useOnDoubleClick } from 'src/hooks/useOnDoubleClick';
 import { useActiveState } from 'src/state/useActiveState';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
-import { isRef } from 'src/type-predicates/isRef';
 import type { Loader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import { css } from 'src/utils/as/css';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { from } from 'src/utils/state/from';
+import { isRef } from 'src/utils/type-predicates/isRef';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

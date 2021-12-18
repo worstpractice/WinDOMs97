@@ -1,7 +1,7 @@
-import { onLmb } from 'src/event-filters/onLmb';
 import type { OsRef } from 'src/typings/OsRef';
 import { bringToFront } from 'src/utils/bringToFront';
 import { compose } from 'src/utils/compose';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { listen } from 'src/utils/listen';
 
 export const useOnMoveOsWindow = <T extends OsRef<U>, U extends HTMLElement>(osWindowRef: T) => {

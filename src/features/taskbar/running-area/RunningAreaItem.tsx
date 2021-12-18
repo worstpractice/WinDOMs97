@@ -1,19 +1,19 @@
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { onLmb } from 'src/event-filters/onLmb';
-import { onRmb } from 'src/event-filters/onRmb';
 import { useProcessAlternatives } from 'src/hooks/alternatives/useProcessAlternatives';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
-import { isRef } from 'src/type-predicates/isRef';
 import type { ButtonLoader } from 'src/typings/Loader';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
 import { bringToFront } from 'src/utils/bringToFront';
+import { onLmb } from 'src/utils/event-filters/onLmb';
+import { onRmb } from 'src/utils/event-filters/onRmb';
 import { from } from 'src/utils/state/from';
+import { isRef } from 'src/utils/type-predicates/isRef';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

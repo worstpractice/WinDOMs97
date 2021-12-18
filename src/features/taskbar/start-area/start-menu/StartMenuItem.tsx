@@ -1,8 +1,5 @@
 import { default as React, useRef, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { onLmb } from 'src/event-filters/onLmb';
-import { onRmb } from 'src/event-filters/onRmb';
-import { switchOn } from 'src/event-filters/switchOn';
 import { useBinaryAlternatives } from 'src/hooks/alternatives/useBinaryAlternatives';
 import { useExecuteBinary } from 'src/hooks/syscalls/useExecuteBinary';
 import { useMenuState } from 'src/state/useMenuState';
@@ -10,6 +7,7 @@ import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { Linker } from 'src/typings/Linker';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { switchOn } from 'src/utils/event-filters/switchOn';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toTrue } from 'src/utils/setters/toTrue';
 import { from } from 'src/utils/state/from';
@@ -32,20 +30,20 @@ export const StartMenuItem = ({ getBinary }: Props) => {
   const [isHovering, setIsHovering] = useState(false);
   const alternatives = useBinaryAlternatives(binary);
 
-  const handleContextMenu = onRmb<HTMLElement>((): void => {
+  const handleRmb = (): void => {
     openContextMenu(alternatives);
-  });
+  };
 
-  const handleLaunch = onLmb<HTMLLIElement>(() => {
+  const handleLmb = (): void => {
     closeMenus();
     executeBinary();
-  });
+  };
 
-  const handleMouseEnter = () => {
+  const handleMouseEnter = (): void => {
     setIsHovering(toTrue);
   };
 
-  const handleMouseLeave = () => {
+  const handleMouseLeave = (): void => {
     setIsHovering(toFalse);
   };
 
@@ -53,7 +51,7 @@ export const StartMenuItem = ({ getBinary }: Props) => {
 
   return (
     <li
-      onMouseDown={switchOn({ lmb: handleLaunch, rmb: handleContextMenu } as const)}
+      onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb } as const)}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       ref={startMenuItemRef}

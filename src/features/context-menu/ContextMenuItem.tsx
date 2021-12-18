@@ -1,11 +1,11 @@
 import { default as React, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { onLmb } from 'src/event-filters/onLmb';
 import { useMenuState } from 'src/state/useMenuState';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { Alternative } from 'src/typings/Alternative';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toTrue } from 'src/utils/setters/toTrue';
 import { from } from 'src/utils/state/from';

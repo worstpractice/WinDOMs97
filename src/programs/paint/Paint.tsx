@@ -1,10 +1,10 @@
 import { default as React, useEffect, useRef, useState } from 'react';
-import { onLmb } from 'src/event-filters/onLmb';
 import { useStartingDimensions } from 'src/hooks/programs/useStartingDimensions';
 import { useIsPressed } from 'src/hooks/useIsPressed';
 import type { Loader } from 'src/typings/Loader';
 import type { Position } from 'src/typings/Position';
 import { css } from 'src/utils/as/css';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { toTrue } from 'src/utils/setters/toTrue';
 import { drawLine } from './utils/drawLine';
 

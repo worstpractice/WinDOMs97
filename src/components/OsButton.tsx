@@ -1,10 +1,10 @@
 import type { CSSProperties, ReactNode } from 'react';
 import { default as React, forwardRef, useState } from 'react';
-import { onLmb } from 'src/event-filters/onLmb';
 import { useIsPressed } from 'src/hooks/useIsPressed';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import { css } from 'src/utils/as/css';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toTrue } from 'src/utils/setters/toTrue';
 
@@ -30,8 +30,6 @@ export const OsButton = forwardRef<HTMLButtonElement, Props>((props, ref) => {
   });
 
   const handleMouseUp = onLmb<HTMLButtonElement>((event): void => {
-    if (!isPressed) return;
-
     setIsPressed(toFalse);
 
     onMouseUp?.(event);

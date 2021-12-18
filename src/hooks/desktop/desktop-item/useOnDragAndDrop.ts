@@ -1,10 +1,10 @@
-import { onLmb } from 'src/event-filters/onLmb';
 import { useDragState } from 'src/state/useDragState';
 import type { CleanupFn } from 'src/typings/CleanupFn';
 import type { OsRef } from 'src/typings/OsRef';
 import type { DragState } from 'src/typings/state/DragState';
 import { bringToFront } from 'src/utils/bringToFront';
 import { compose } from 'src/utils/compose';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { listen } from 'src/utils/listen';
 import { from } from 'src/utils/state/from';
 import yoloStyles from './useOnDragAndDrop.module.css';

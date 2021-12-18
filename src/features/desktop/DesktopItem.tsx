@@ -1,8 +1,6 @@
 import png_unrecognized_file_extension from 'assets/icons/file_question.png';
 import { default as React, useRef, useState } from 'react';
 import { Icon } from 'src/components/Icon';
-import { onLmb } from 'src/event-filters/onLmb';
-import { onRmb } from 'src/event-filters/onRmb';
 import { useBinaryAlternatives } from 'src/hooks/alternatives/useBinaryAlternatives';
 import { useDesktopLayoutOnMount } from 'src/hooks/desktop/desktop-item/useDesktopLayoutOnMount';
 import { useOnDragAndDrop } from 'src/hooks/desktop/desktop-item/useOnDragAndDrop';
@@ -13,17 +11,19 @@ import { useActiveState } from 'src/state/useActiveState';
 import { useDragState } from 'src/state/useDragState';
 import { useMenuState } from 'src/state/useMenuState';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
-import { isRef } from 'src/type-predicates/isRef';
 import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 import type { Linker } from 'src/typings/Linker';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { DragState } from 'src/typings/state/DragState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { onLmb } from 'src/utils/event-filters/onLmb';
+import { onRmb } from 'src/utils/event-filters/onRmb';
 import { blockNativeDrag } from 'src/utils/os-window/blockNativeDrag';
 import { toFalse } from 'src/utils/setters/toFalse';
 import { toTrue } from 'src/utils/setters/toTrue';
 import { from } from 'src/utils/state/from';
+import { isRef } from 'src/utils/type-predicates/isRef';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

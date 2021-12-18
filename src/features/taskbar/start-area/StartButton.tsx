@@ -2,38 +2,31 @@ import logo from 'assets/icons/windows-0.png';
 import { default as React, useRef } from 'react';
 import { Icon } from 'src/components/Icon';
 import { OsButton } from 'src/components/OsButton';
-import { switchOn } from 'src/event-filters/switchOn';
 import { useActiveState } from 'src/state/useActiveState';
 import { useMenuState } from 'src/state/useMenuState';
-import { usePressedState } from 'src/state/usePressedState';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
-import { isRef } from 'src/type-predicates/isRef';
 import type { ButtonHandler } from 'src/typings/ButtonHandler';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
-import type { PressedState } from 'src/typings/state/PressedState';
 import { css } from 'src/utils/as/css';
-import { snitchTo } from 'src/utils/snitchTo';
+import { switchOn } from 'src/utils/event-filters/switchOn';
 import { from } from 'src/utils/state/from';
+import { isRef } from 'src/utils/type-predicates/isRef';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const fromActive = from<ActiveState>().select('activeRef', 'setActiveRef', 'unsetActiveRef');
 const fromMenu = from<MenuState>().select('openMenu', 'toggleStartMenu');
-const fromPressed = from<PressedState>().select('isLmbPressed');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
   readonly [key in PropertyKey]-?: never;
 };
 
-const snitch = snitchTo(console.log);
-
 export const StartButton = ({}: Props) => {
   const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
   const { openMenu, toggleStartMenu } = useMenuState(fromMenu);
-  const { isLmbPressed } = usePressedState(fromPressed);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleLmb: ButtonHandler = (event) => {
@@ -58,7 +51,7 @@ export const StartButton = ({}: Props) => {
     <OsButton
       //
       // onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb })}
-      onMouseDown={snitch(switchOn({ lmb: handleLmb, rmb: handleRmb }))}
+      onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb })}
       // depress={openMenu === 'StartMenu'}
       ref={startButtonRef}
       style={{

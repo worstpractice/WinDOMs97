@@ -1,5 +1,5 @@
 import { useLayoutEffect, useRef } from 'react';
-import { RECOGNIZED_FILE_EXTENSIONS } from 'src/os-constants/recognizedFileExtensions';
+import { RECOGNIZED_FILE_EXTENSIONS } from 'src/constants/recognizedFileExtensions';
 import { useKeyboardState } from 'src/state/useKeyboardState';
 import type { Binary } from 'src/typings/Binary';
 import type { KeyboardState } from 'src/typings/state/KeyboardState';

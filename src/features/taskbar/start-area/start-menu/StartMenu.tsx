@@ -1,23 +1,24 @@
 import type { ReactNode } from 'react';
 import { default as React } from 'react';
-import { onRmb } from 'src/event-filters/onRmb';
 import { Spine } from 'src/features/taskbar/start-area/start-menu/Spine';
 import { INTERACTIVE } from 'src/styles/INTERACTIVE';
+import type { MouseHandler } from 'src/typings/handlers/MouseHandler';
 import { css } from 'src/utils/as/css';
+import { switchOn } from 'src/utils/event-filters/switchOn';
 
 type Props = {
   readonly children: ReactNode;
 };
 
 export const StartMenu = ({ children }: Props) => {
-  const handleContextMenu = onRmb<HTMLElement>((event) => {
+  const handleRmb: MouseHandler<HTMLElement> = (event) => {
     // NOTE: This is here because we want `StartMenu` to support showing a context menu.
     event.stopPropagation();
     // TODO: Get cracking on context menu `Alternative`s!
-  });
+  };
 
   return (
-    <section style={styles.StartMenu} onMouseDown={handleContextMenu}>
+    <section style={styles.StartMenu} onMouseDown={switchOn({ rmb: handleRmb })}>
       <Spine />
       <ul style={styles.ContentList}>{children}</ul>
     </section>

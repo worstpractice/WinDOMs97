@@ -1,11 +1,11 @@
 import { default as React } from 'react';
 import { Icon } from 'src/components/Icon';
 import { useActiveState } from 'src/state/useActiveState';
-import { isRef } from 'src/type-predicates/isRef';
 import type { Process } from 'src/typings/Process';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import { css } from 'src/utils/as/css';
 import { from } from 'src/utils/state/from';
+import { isRef } from 'src/utils/type-predicates/isRef';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *

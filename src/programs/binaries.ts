@@ -6,7 +6,7 @@ import png_ie from 'assets/icons/msie2-2.png';
 import png_notepad from 'assets/icons/notepad-2.png';
 import png_paint from 'assets/icons/paint_file-5.png';
 import { ObSet } from 'obset';
-import { MIN_HEIGHT, MIN_WIDTH } from 'src/os-constants/OsWindow';
+import { MIN_HEIGHT, MIN_WIDTH } from 'src/constants/OsWindow';
 import { Calc } from 'src/programs/calc/Calc';
 import { Cmd } from 'src/programs/cmd/Cmd';
 import { Ie } from 'src/programs/ie/Ie';

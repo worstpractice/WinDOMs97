@@ -1,6 +1,5 @@
 import { default as React } from 'react';
 import { OsButton } from 'src/components/OsButton';
-import { onLmb } from 'src/event-filters/onLmb';
 import { useOsWindowControls } from 'src/hooks/os-window/useOsWindowControls';
 import { useActiveState } from 'src/state/useActiveState';
 import { useKernelState } from 'src/state/useKernelState';
@@ -11,6 +10,7 @@ import type { KernelState } from 'src/typings/state/KernelState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
 import { bringToFront } from 'src/utils/bringToFront';
+import { onLmb } from 'src/utils/event-filters/onLmb';
 import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

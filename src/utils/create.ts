@@ -3,9 +3,3 @@ export const create = <T>() => {
 
   return as;
 };
-
-export const convert = <From, To>(converter: <T extends From>(from: T & From) => To) => {
-  const innerConvert = <T extends From>(from: T & From) => converter(from);
-
-  return innerConvert;
-};
