@@ -12,7 +12,6 @@ type Props = {
 
 export const StartMenu = ({ children }: Props) => {
   const handleRmb: MouseHandler<HTMLElement> = (event) => {
-    // NOTE: This is here because we want `StartMenu` to support showing a context menu.
     event.stopPropagation();
     // TODO: Get cracking on context menu `Alternative`s!
   };

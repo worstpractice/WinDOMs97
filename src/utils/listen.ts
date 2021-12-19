@@ -12,11 +12,11 @@ type Params<T extends NonNullable<HTMLElement | Document>> = {
 type Listen = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => CleanupFn;
 
 /** A more typesafe `addEventListener` that returns a convenient cleanup function. */
-export const listen: Listen = ({ event, handler, options, on }) => {
+export const listen: Listen = ({ event, handler, options = { passive: true }, on }) => {
   on.addEventListener(event, handler as unknown as EventListener, options);
 
   const cleanup = () => {
-    on.removeEventListener(event, handler as unknown as EventListener);
+    on.removeEventListener(event, handler as unknown as EventListener, options);
   };
 
   return cleanup;

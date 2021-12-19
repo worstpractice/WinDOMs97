@@ -14,7 +14,7 @@ import { from } from 'src/utils/state/from';
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const fromMenu = from<MenuState>().select('openContextMenu');
+const fromMenu = from<MenuState>().select('closeStartMenu', 'openContextMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -22,7 +22,7 @@ type Props = {
 };
 
 export const Desktop = ({ children }: Props) => {
-  const { openContextMenu } = useMenuState(fromMenu);
+  const { closeStartMenu, openContextMenu } = useMenuState(fromMenu);
   const desktopRef = useRef<HTMLElement>(null);
   const [isDragSelecting, currentPosition] = useDragSelection(desktopRef);
   const alternatives = useDesktopAlternatives();
@@ -33,11 +33,12 @@ export const Desktop = ({ children }: Props) => {
 
     if (target !== desktop) return;
 
+    closeStartMenu();
     openContextMenu(alternatives);
   });
 
   return (
-    <main style={styles.Desktop} onContextMenu={handleContextMenu} ref={desktopRef}>
+    <main style={styles.Desktop} onMouseDown={handleContextMenu} ref={desktopRef}>
       {children}
       {isDragSelecting && <DragSelection currentPosition={currentPosition} />}
     </main>

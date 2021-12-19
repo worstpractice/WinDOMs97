@@ -5,11 +5,14 @@ import { combine } from 'zustand/middleware';
 
 export type Data = {
   readonly alternatives: readonly Alternative[];
-  readonly openMenu: 'ContextMenu' | 'StartMenu' | '';
+  readonly isStartMenuOpen: boolean;
+  readonly isContextMenuOpen: boolean;
 };
 
 export type Actions = {
-  readonly closeMenus: () => void;
+  readonly closeContextMenu: (this: void) => void;
+  readonly closeMenus: (this: void) => void;
+  readonly closeStartMenu: (this: void) => void;
   readonly openContextMenu: (this: void, alternatives: readonly Alternative[]) => void;
   readonly toggleStartMenu: (this: void) => void;
 };
@@ -19,33 +22,42 @@ export const useMenuState = create<MenuState>(
     {
       ///////////////////////////////////////////
       alternatives: [],
-      openMenu: '',
+      isContextMenuOpen: false,
+      isStartMenuOpen: false,
       ///////////////////////////////////////////
     } as const,
     (set) => {
       return {
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        closeContextMenu: (): void => {
+          set(() => {
+            return { alternatives: [], isContextMenuOpen: false } as const;
+          });
+        },
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         closeMenus: (): void => {
           set(() => {
-            return { openMenu: '' } as const;
+            return { alternatives: [], isContextMenuOpen: false, isStartMenuOpen: false } as const;
+          });
+        },
+        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        closeStartMenu: (): void => {
+          set(() => {
+            return { isStartMenuOpen: false } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         openContextMenu: (alternatives: readonly Alternative[]): void => {
           set(() => {
-            if (!alternatives.length) {
-              console.error('The array of alternatives was empty!');
-            }
+            if (!alternatives.length) console.error('The array of alternatives was empty!');
 
-            return { alternatives: [...alternatives], openMenu: 'ContextMenu' } as const;
+            return { alternatives: [...alternatives], isContextMenuOpen: true } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         toggleStartMenu: (): void => {
-          set(({ openMenu }) => {
-            const newMenu = openMenu === 'StartMenu' ? '' : 'StartMenu';
-
-            return { openMenu: newMenu } as const;
+          set(({ isStartMenuOpen }) => {
+            return { isContextMenuOpen: false, isStartMenuOpen: !isStartMenuOpen } as const;
           });
         },
         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

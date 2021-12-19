@@ -17,7 +17,7 @@ import { isRef } from 'src/utils/type-predicates/isRef';
 //* Selectors *
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const fromActive = from<ActiveState>().select('activeRef', 'setActiveRef', 'unsetActiveRef');
-const fromMenu = from<MenuState>().select('openMenu', 'toggleStartMenu');
+const fromMenu = from<MenuState>().select('isStartMenuOpen', 'toggleStartMenu');
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 type Props = {
@@ -26,7 +26,7 @@ type Props = {
 
 export const StartButton = ({}: Props) => {
   const { activeRef, setActiveRef, unsetActiveRef } = useActiveState(fromActive);
-  const { openMenu, toggleStartMenu } = useMenuState(fromMenu);
+  const { isStartMenuOpen, toggleStartMenu } = useMenuState(fromMenu);
   const startButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleLmb: ButtonHandler = (event) => {
@@ -52,11 +52,11 @@ export const StartButton = ({}: Props) => {
       //
       // onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb })}
       onMouseDown={switchOn({ lmb: handleLmb, rmb: handleRmb })}
-      // depress={openMenu === 'StartMenu'}
+      // depress={isStartMenuOpen}
       ref={startButtonRef}
       style={{
         ...styles.StartButton,
-        outlineStyle: openMenu === 'StartMenu' ? 'outset' : 'inset',
+        outlineStyle: isStartMenuOpen ? 'outset' : 'inset',
       }}
     >
       <Icon alt={'Start'} height={38} src={logo} width={38} />

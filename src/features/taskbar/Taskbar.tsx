@@ -5,6 +5,7 @@ import { useMenuState } from 'src/state/useMenuState';
 import type { ActiveState } from 'src/typings/state/ActiveState';
 import type { MenuState } from 'src/typings/state/MenuState';
 import { css } from 'src/utils/as/css';
+import { switchOn } from 'src/utils/event-filters/switchOn';
 import { from } from 'src/utils/state/from';
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -23,13 +24,13 @@ export const Taskbar = ({ children }: Props) => {
   const { closeMenus } = useMenuState(fromMenu);
   const taskbarRef = useRef<HTMLElement>(null);
 
-  const handleMouseDown = (): void => {
+  const handleLmb = (): void => {
     closeMenus();
     setActiveRef(taskbarRef);
   };
 
   return (
-    <footer style={styles.Taskbar} onMouseDown={handleMouseDown} ref={taskbarRef}>
+    <footer style={styles.Taskbar} onMouseDown={switchOn({ lmb: handleLmb })} ref={taskbarRef}>
       {children}
     </footer>
   );
