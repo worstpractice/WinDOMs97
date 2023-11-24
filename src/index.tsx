@@ -1,6 +1,6 @@
 import 'modern-normalize';
 import { default as React, StrictMode } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Boot } from 'src/features/Boot';
 import { usePressedState } from 'src/state/usePressedState';
 
@@ -34,9 +34,14 @@ window.addEventListener(
   },
 );
 
-render(
+const container = document.getElementById('root');
+
+if (!container) throw new ReferenceError(`missing container`);
+
+const root = createRoot(container);
+
+root.render(
   <StrictMode>
     <Boot />
   </StrictMode>,
-  document.getElementById('root'),
 );

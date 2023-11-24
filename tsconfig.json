@@ -13,8 +13,6 @@
     "exactOptionalPropertyTypes": true,
     "forceConsistentCasingInFileNames": true,
     "importHelpers": true,
-    "importsNotUsedAsValues": "error",
-    "isolatedModules": true,
     "jsx": "react",
     "module": "esnext",
     "moduleResolution": "node",
@@ -48,7 +46,8 @@
     "suppressImplicitAnyIndexErrors": false,
     "target": "esnext",
     "useDefineForClassFields": true,
-    "useUnknownInCatchVariables": true
+    "useUnknownInCatchVariables": true,
+    "verbatimModuleSyntax": true
   },
   "include": [
     "src"

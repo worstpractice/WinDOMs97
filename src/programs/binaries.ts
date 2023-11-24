@@ -9,7 +9,7 @@ import { ObSet } from 'obset';
 import { MIN_HEIGHT, MIN_WIDTH } from 'src/constants/OsWindow';
 import { Calc } from 'src/programs/calc/Calc';
 import { Cmd } from 'src/programs/cmd/Cmd';
-import { Ie } from 'src/programs/ie/Ie';
+import { Ie } from 'src/programs/ie/IE';
 import { Minesweeper } from 'src/programs/minesweeper/Minesweeper';
 import { Notepad } from 'src/programs/notepad/Notepad';
 import { Paint } from 'src/programs/paint/Paint';
@@ -25,9 +25,8 @@ export const binaries = [
     programName: 'Calculator',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`calc.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`calc.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`calc.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`calc.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`calc.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -40,9 +39,8 @@ export const binaries = [
     programName: 'Command Prompt',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`cmd.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`cmd.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`cmd.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`cmd.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`cmd.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -59,9 +57,8 @@ export const binaries = [
     programName: 'Internet Exploder',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`ie.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`ie.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`ie.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`ie.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`ie.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -74,9 +71,8 @@ export const binaries = [
     programName: 'Minesweeper',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`minesweeper.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`minesweeper.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`minesweeper.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`minesweeper.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`minesweeper.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -89,9 +85,8 @@ export const binaries = [
     programName: 'Notepad',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`notepad.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`notepad.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`notepad.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`notepad.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`notepad.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -104,9 +99,8 @@ export const binaries = [
     programName: 'Paint',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`paint.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`paint.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`paint.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`paint.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`paint.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),
@@ -120,9 +114,8 @@ export const binaries = [
     programName: 'Task Manager',
     softlinks: new ObSet<Softlink>() //
       .on('add', (value, operation) => console.log(`taskmgr.exe: ${operation} ${value}`))
-      .on('delete', (value, operation) => console.log(`taskmgr.exe: ${operation} ${value}`))
+      .on('remove', (value, operation) => console.log(`taskmgr.exe: ${operation} ${value}`))
       .on('empty', (value, operation) => console.log(`taskmgr.exe: ${operation} ${value}`))
-      .on('full', (value, operation) => console.log(`taskmgr.exe: ${operation} ${value}`))
       .add('desktop')
       .add('quickstartarea')
       .add('startmenu'),

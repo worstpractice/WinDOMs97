@@ -1,5 +1,5 @@
 import { default as React } from 'react';
-import { Bsod } from 'src/features/Bsod';
+import { Bsod } from 'src/features/BSOD';
 import { Explorer } from 'src/features/Explorer';
 import { useLastClickPosition } from 'src/hooks/useLastClickPosition';
 import { useLastKeyPress } from 'src/hooks/useLastKeyPress';
