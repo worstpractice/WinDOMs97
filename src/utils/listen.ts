@@ -2,11 +2,11 @@ import type { CleanupFn } from 'src/typings/CleanupFn';
 import type { Handler } from 'src/typings/handlers/Handler';
 
 type Params<T extends NonNullable<HTMLElement | Document>> = {
-  event: keyof WindowEventMap;
-  handler: Handler<T>;
-  options?: AddEventListenerOptions;
+  readonly event: keyof WindowEventMap;
+  readonly handler: Handler<T>;
+  readonly options?: AddEventListenerOptions;
   /** Defaults to the `document` object. */
-  on: EventTarget;
+  readonly on: EventTarget;
 };
 
 type Listen = <T extends NonNullable<HTMLElement | Document>>(params: Params<T>) => CleanupFn;

@@ -1,6 +1,6 @@
 import type { OsRef } from 'src/typings/OsRef';
 import type { DragState } from 'src/typings/state/DragState';
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 
 export type Data = {
@@ -19,13 +19,13 @@ const nullRef: OsRef<HTMLElement> = { current: null } as const;
 export const useDragState = create<DragState>(
   combine<Data, Actions>(
     {
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
       dragRef: nullRef,
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
     } as const,
     (set) => {
       return {
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         setDragRef: <T extends HTMLElement>({ current }: OsRef<T>): void => {
           set(({ dragRef }) => {
             if (dragRef.current === current) return { dragRef } as const;
@@ -38,7 +38,7 @@ export const useDragState = create<DragState>(
             return { dragRef: { current } } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         unsetDragRef: (): void => {
           set(({ dragRef }) => {
             if (dragRef.current === null) return { dragRef } as const;
@@ -51,7 +51,7 @@ export const useDragState = create<DragState>(
             return { dragRef: nullRef } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
       } as const;
     },
   ),

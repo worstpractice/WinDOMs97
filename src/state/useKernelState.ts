@@ -10,7 +10,7 @@ import type { Unhashed } from 'src/typings/Unhashed';
 import { ars256 } from 'src/utils/crypto/ars256';
 import { deriveFileExtension } from 'src/utils/deriveFileExtension';
 import { enforceMinDimensions } from 'src/utils/enforceMinDimensions';
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 
 export type Data = {
@@ -29,16 +29,16 @@ export type Actions = {
 export const useKernelState = create<KernelState>(
   combine<Data, Actions>(
     {
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
       availablePids: Pids.available,
       installedPrograms: [],
       runningProcesses: [],
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
     } as const,
 
     (set) => {
       return {
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         dangerouslyExecuteBinary: (binary: Binary, pid: Pid): void => {
           set(({ runningProcesses }) => {
             const spawnedProcess: Process = {
@@ -56,7 +56,7 @@ export const useKernelState = create<KernelState>(
             return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         endProcess: ({ pid: targetPid }: Process): void => {
           set(({ runningProcesses }) => {
             // We spare every process whose `pid` is NOT the `targetPid`.
@@ -68,7 +68,7 @@ export const useKernelState = create<KernelState>(
             return { runningProcesses: sparedProcesses } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         installProgram: (rawBinary: RawBinary): void => {
           set(({ installedPrograms }) => {
             // Extract optional properties so we can populate these fields manually a few lines down.
@@ -98,7 +98,7 @@ export const useKernelState = create<KernelState>(
             return { installedPrograms: [...installedPrograms, hashed] } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         uninstallProgram: ({ fileHash: targetHash }: Binary): void => {
           set(({ installedPrograms }) => {
             // We spare every program whose `fileName` is NOT the `targetFileName`.
@@ -107,7 +107,7 @@ export const useKernelState = create<KernelState>(
             return { installedPrograms: sparedPrograms } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
       } as const;
     },
   ),

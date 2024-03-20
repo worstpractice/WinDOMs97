@@ -1,7 +1,3 @@
-.vscode
+*.module.css
 node_modules
-public
-assets
-*.cjs
-*.mjs
-*.js
+vite.config.ts

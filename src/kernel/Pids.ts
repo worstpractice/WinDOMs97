@@ -4,7 +4,7 @@ import { rangeFrom } from 'src/utils/rangeFrom';
 import { ascending } from 'src/utils/sort/ascending';
 
 /** Inclusive. */
-const HIGHEST_PID = 16 as const;
+const HIGHEST_PID = 16;
 
 const BACKING_SET = new Set<Pid>(rangeFrom(0).to(HIGHEST_PID) as Pid[]);
 

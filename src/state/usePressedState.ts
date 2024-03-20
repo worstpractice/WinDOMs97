@@ -1,5 +1,5 @@
 import type { PressedState } from 'src/typings/state/PressedState';
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 
 export type Data = {
@@ -15,32 +15,40 @@ export type Actions = {
 export const usePressedState = create<PressedState>(
   combine<Data, Actions>(
     {
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
       isLmbPressed: false,
       isRmbPressed: false,
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
     } as const,
     (set) => {
       return {
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         setIsLmbPressed: (to: boolean): void => {
-          set((state) => {
-            // prettier-ignore
-            return state.isLmbPressed === to
-              ? state
-              : { isLmbPressed: to } as const;
+          set((data: Data): Data => {
+            const { isLmbPressed } = data;
+
+            if (isLmbPressed === to) return data;
+
+            return {
+              ...data,
+              isLmbPressed: to,
+            } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         setIsRmbPressed: (to: boolean): void => {
-          set((state) => {
-            // prettier-ignore
-            return state.isRmbPressed === to
-              ? state
-              : { isRmbPressed: to } as const;
+          set((data: Data): Data => {
+            const { isRmbPressed } = data;
+
+            if (isRmbPressed === to) return data;
+
+            return {
+              ...data,
+              isRmbPressed: to,
+            } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
       } as const;
     },
   ),

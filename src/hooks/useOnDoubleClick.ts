@@ -3,14 +3,14 @@ import type { OsRef } from 'src/typings/OsRef';
 import { onLmb } from 'src/utils/event-filters/onLmb';
 
 /** AT MOST this much time (in ms) may elapse BETWEEN clicks to double click successfully. */
-const MAX_DELAY = 250 as const;
+const MAX_DELAY = 250;
 
 /** Workaround for Chrome mysteriously swallowing events (that work flawlessly in FF). Think of this as regular `onDoubleClick`. */
 export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDoubleClick: () => void) => {
   const [lastTime, setLastTime] = useState(Number.POSITIVE_INFINITY);
   const [is2ndClick, setIs2ndClick] = useState(false);
 
-  ///////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   const handleConsecutiveClicks = (target: EventTarget) => {
     const { current } = ref;
 
@@ -33,7 +33,7 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
     setIs2ndClick(true);
   };
 
-  ///////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   const handleMouseDownCapture = onLmb<T>(({ target }) => {
     const { current } = ref;
 
@@ -52,6 +52,6 @@ export const useOnDoubleClick = <T extends HTMLElement>(ref: OsRef<T>, handleDou
     });
   });
 
-  ///////////////////////////////////////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////////////
   return handleMouseDownCapture;
 };

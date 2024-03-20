@@ -1,6 +1,6 @@
 import type { KeyPress } from 'src/typings/KeyboardCharacter';
 import type { KeyboardState } from 'src/typings/state/KeyboardState';
-import create from 'zustand';
+import { create } from 'zustand';
 import { combine } from 'zustand/middleware';
 
 export type Data = {
@@ -16,17 +16,17 @@ let ORDER_TALLY = 0;
 export const useKeyboardState = create<KeyboardState>(
   combine<Data, Actions>(
     {
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
       lastKeyPress: {
         button: '' as never,
         character: '' as never,
         order: ORDER_TALLY++,
       },
-      ///////////////////////////////////////////
+      ////////////////////////////////////////////////////////////////
     } as const,
     (set) => {
       return {
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
         setLastKeyPress: (to: string): void => {
           set((): Data => {
             const isCharacter = to.length === 1;
@@ -41,7 +41,7 @@ export const useKeyboardState = create<KeyboardState>(
             return { lastKeyPress: keyPress } as const;
           });
         },
-        /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////
       } as const;
     },
   ),
