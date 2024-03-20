@@ -40,37 +40,54 @@ export const useKernelState = create<KernelState>(
       return {
         ////////////////////////////////////////////////////////////////
         dangerouslyExecuteBinary: (binary: Binary, pid: Pid): void => {
-          set(({ runningProcesses }) => {
+          set(({ runningProcesses }: Data) => {
             const spawnedProcess: Process = {
               binaryImage: binary,
-              chromeAreaRef: { current: null },
+              chromeAreaRef: {
+                current: null,
+              },
               isMaximized: false,
               isMinimized: false,
-              notificationAreaItemRef: { current: null },
-              osWindowRef: { current: null },
+              notificationAreaItemRef: {
+                current: null,
+              },
+              osWindowRef: {
+                current: null,
+              },
               pid,
-              programRef: { current: null },
-              runningAreaItemRef: { current: null },
+              programRef: {
+                current: null,
+              },
+              runningAreaItemRef: {
+                current: null,
+              },
             } as const;
 
-            return { runningProcesses: [...runningProcesses, spawnedProcess] } as const;
+            return {
+              runningProcesses: [...runningProcesses, spawnedProcess],
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////
         endProcess: ({ pid: targetPid }: Process): void => {
-          set(({ runningProcesses }) => {
+          set(({ runningProcesses }: Data) => {
             // We spare every process whose `pid` is NOT the `targetPid`.
-            const sparedProcesses: readonly Process[] = runningProcesses.filter(({ pid }) => pid !== targetPid);
+            const sparedProcesses: readonly Process[] = runningProcesses //
+              .filter(({ pid }: Process): boolean => {
+                return pid !== targetPid;
+              });
 
             // Just like in C, thou shalt remember to free.
             Pids.free(targetPid);
 
-            return { runningProcesses: sparedProcesses } as const;
+            return {
+              runningProcesses: sparedProcesses,
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////
         installProgram: (rawBinary: RawBinary): void => {
-          set(({ installedPrograms }) => {
+          set(({ installedPrograms }: Data) => {
             // Extract optional properties so we can populate these fields manually a few lines down.
             const { isSingleInstanceOnly, startingDimensions } = rawBinary;
 
@@ -80,13 +97,22 @@ export const useKernelState = create<KernelState>(
 
             const unhashed: Unhashed<Binary> = {
               ...rawBinary,
-              desktopItemRef: { current: null },
+              desktopItemRef: {
+                current: null,
+              },
               isBeingRenamed: false,
               isFileExtensionRecognized: RECOGNIZED_FILE_EXTENSIONS.includes(fileExtension),
               isSingleInstanceOnly: isSingleInstanceOnly ?? false,
-              quickstartAreaItemRef: { current: null },
-              startingDimensions: startingDimensions ?? { x: MIN_HEIGHT, y: MIN_WIDTH },
-              startMenuItemRef: { current: null },
+              quickstartAreaItemRef: {
+                current: null,
+              },
+              startingDimensions: startingDimensions ?? {
+                x: MIN_HEIGHT,
+                y: MIN_WIDTH,
+              },
+              startMenuItemRef: {
+                current: null,
+              },
             } as const;
 
             // NOTE: Crucial step in which we hash the binary.
@@ -95,16 +121,22 @@ export const useKernelState = create<KernelState>(
               fileHash: ars256(unhashed),
             } as const;
 
-            return { installedPrograms: [...installedPrograms, hashed] } as const;
+            return {
+              installedPrograms: [...installedPrograms, hashed],
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////
         uninstallProgram: ({ fileHash: targetHash }: Binary): void => {
-          set(({ installedPrograms }) => {
+          set(({ installedPrograms }: Data) => {
             // We spare every program whose `fileName` is NOT the `targetFileName`.
-            const sparedPrograms: readonly Binary[] = installedPrograms.filter(({ fileHash }) => fileHash !== targetHash);
+            const sparedPrograms: readonly Binary[] = installedPrograms.filter(({ fileHash }: Binary): boolean => {
+              return fileHash !== targetHash;
+            });
 
-            return { installedPrograms: sparedPrograms } as const;
+            return {
+              installedPrograms: sparedPrograms,
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////

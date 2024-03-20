@@ -68,7 +68,7 @@ export const useMenuState = create<MenuState>(
         },
         ////////////////////////////////////////////////////////////////
         toggleStartMenu: (): void => {
-          set(({ isStartMenuOpen }) => {
+          set(({ isStartMenuOpen }: Data) => {
             return {
               isContextMenuOpen: false,
               isStartMenuOpen: !isStartMenuOpen,

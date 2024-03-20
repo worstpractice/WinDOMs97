@@ -38,7 +38,9 @@ export const useKeyboardState = create<KeyboardState>(
               order: ORDER_TALLY++,
             } as const;
 
-            return { lastKeyPress: keyPress } as const;
+            return {
+              lastKeyPress: keyPress,
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////

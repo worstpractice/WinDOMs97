@@ -27,7 +27,7 @@ export const useDragState = create<DragState>(
       return {
         ////////////////////////////////////////////////////////////////
         setDragRef: <T extends HTMLElement>({ current }: OsRef<T>): void => {
-          set(({ dragRef }) => {
+          set(({ dragRef }: Data) => {
             if (dragRef.current === current) return { dragRef } as const;
 
             console.groupCollapsed(`${++debugLogCounter}.  DragRef Changed `);
@@ -35,12 +35,16 @@ export const useDragState = create<DragState>(
             console.debug('TO:', current);
             console.groupEnd();
 
-            return { dragRef: { current } } as const;
+            return {
+              dragRef: {
+                current,
+              },
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////
         unsetDragRef: (): void => {
-          set(({ dragRef }) => {
+          set(({ dragRef }: Data) => {
             if (dragRef.current === null) return { dragRef } as const;
 
             console.groupCollapsed(`${++debugLogCounter}.  DragRef Changed `);
@@ -48,7 +52,9 @@ export const useDragState = create<DragState>(
             console.debug('TO:', null);
             console.groupEnd();
 
-            return { dragRef: nullRef } as const;
+            return {
+              dragRef: nullRef,
+            } as const;
           });
         },
         ////////////////////////////////////////////////////////////////
